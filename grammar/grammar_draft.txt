@@ -1,0 +1,43 @@
+// Base functions
+Succ -> "s", <Sig>
+Null -> "n", <Sig>
+Proj -> "u{", <Const>, ",", <Const>, "}", <Sig>
+
+// Primitive Recursion
+Pr -> <Base>, ";", <Rec>
+Base -> <Func>
+Rec -> <Id>, <PrSig>
+PrSig -> "(y", <ArgEnd>, ")"
+
+// Function stuff
+Func -> <Succ>|<Null>|<Proj>|<Pr>|<Id>, <Sig>
+Def -> <Id>, <Sig>, "=", <Func>
+Sig -> "(", <Args>, ")"
+Args -> "ε"|<Arg>, <ArgEnd>
+ArgEnd -> {",", <Arg>}
+Arg -> <Id>|<List>|<Const>|<OpExpr>
+
+// OpExpr stuff
+OpExpr -> Add|Sub|Mul|Div|Mod|Neg
+Add -> "+", <Sig>
+Sub -> "-", <Sig>
+Mul -> "*", <Sig>
+Div -> "/", <Sig>
+Mod -> "%", <Sig>
+Neg -> "!", <Sig>
+
+// List stuff
+Head -> "h", <List>
+Tail -> "t", <List>
+List -> "[", <Args>, "]"
+
+// Const stuff
+Id -> {("a"-"z")}
+Const -> "T"|"F"|<Number>|<String>
+String -> "'", {<Chars>}, "'"
+Chars -> any letter or digit
+Number -> {<Digit>}, [".", <Digit>], ["e"|"E, +|-|"ε", {<Digit>}]
+Digit -> ("0"-"9")
+
+// Other stuff
+Print -> "print(",<Call>,")"
