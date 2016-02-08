@@ -40,4 +40,4 @@ Number -> {<Digit>}, [".", <Digit>], ["e"|"E, +|-|"ε", {<Digit>}]
 Digit -> ("0"-"9")
 
 // Other stuff
-Print -> "print(",<Call>,")"
+Print -> "print(",<Func>,")"
