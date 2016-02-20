@@ -1,8 +1,7 @@
 // Primitive Recursion
 Pr -> <Base>, ";", <Rec>
-Base -> <Func>
-Rec -> <Id>, <PrCall>
-PrCall -> "(y", <ArgEnd>, ")"
+Base -> <BoolExpr>, ":", <Func>
+Rec -> <Func>
 
 // Function stuff
 Func -> <Pr>|<Id>, <Call>|<Head>|<Tail>|<Prepend>|<Append>
