@@ -23,12 +23,13 @@ t = 't';
 print = 'print';
 dollar = '$';
 caret = '^';
+colon = ':';
 
 
 comment = back_tick [[0..0xffff - back_tick] back_tick ;
 space = ' ' | 9 | newline;
 
-assign = '=';
+assign = ':=';
 compare = '==' | '<' | '>' | '<=' | '>=' | '!=';
 and = '&&';
 or = '||';
