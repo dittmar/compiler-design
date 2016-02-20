@@ -5,7 +5,7 @@ Rec -> <Id>, <PrCall>
 PrCall -> "(y", <ArgEnd>, ")"
 
 // Function stuff
-Func -> <Succ>|<Null>|<Proj>|<Pr>|<Id>, <Call>|<Head>|<Tail>|<Prepend>|<Append>
+Func -> <Pr>|<Id>, <Call>|<Head>|<Tail>|<Prepend>|<Append>
 Def -> <Id>, <Sig>, "=", <Func>
 Sig -> "(", [{<Id>}], ")"
 Call -> "(", <Args>, ")"
