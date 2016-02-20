@@ -14,27 +14,21 @@ underscore = '_';
 
 Tokens
 // keywords and characters
-s = 's';
-n = 'n';
-u = 'u';
-h = 'h';
-t = 't';
-r = 'r';
-x = 'x';
+head = 'h';
+tail = 't';
+reverse = 'r';
 true = 'T';
 false = 'F';
 print = 'print';
-def = 'def';
-return = 'return';
-at = '@';
-question = '?';
-dollar = '$';
-caret = '^';
+def = 'def' | '?';
+return = 'return' | '@';
+append = '$';
+prepend = '^';
 colon = ':';
-tilde  = '~';
+logical_not  = '~';
 
 
-comment = back_tick [[0..0xffff] - back_tick]* back_tick ;
+comment = back_tick [[0..0xffff] - back_tick]* back_tick;
 space = ' ' | 9 | newline;
 
 assign = ':=';
@@ -47,6 +41,7 @@ gte = '>=';
 and = '&';
 or = '|';
 not = '!';
+xor = 'x';
 
 plus = '+';
 minus = '-';
