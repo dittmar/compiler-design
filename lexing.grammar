@@ -21,6 +21,7 @@ y = 'y';
 h = 'h';
 t = 't';
 print = 'print';
+return = 'return';
 dollar = '$';
 caret = '^';
 colon = ':';
