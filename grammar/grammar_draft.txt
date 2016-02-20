@@ -11,7 +11,7 @@ Sig -> "(", [{<Id>}], ")"
 Call -> "(", <Args>, ")"
 Args -> "ε"|<Arg>, <ArgEnd>
 ArgEnd -> {",", <Arg>}
-Arg -> <Id>|<List>|<Const>|<OpExpr>
+Arg -> <Func>|<Id>|<List>|<Const>|<OpExpr>
 
 // OpExpr stuff
 OpExpr -> Add|Sub|Mul|Div|Mod|Neg
