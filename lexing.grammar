@@ -17,7 +17,6 @@ Tokens
 s = 's';
 n = 'n';
 u = 'u';
-y = 'y';
 h = 'h';
 t = 't';
 r = 'r';
@@ -35,7 +34,7 @@ colon = ':';
 tilde  = '~';
 
 
-comment = back_tick [[0..0xffff] - back_tick] back_tick ;
+comment = back_tick [[0..0xffff] - back_tick]* back_tick ;
 space = ' ' | 9 | newline;
 
 assign = ':=';
