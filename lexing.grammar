@@ -20,6 +20,7 @@ u = 'u';
 y = 'y';
 h = 'h';
 t = 't';
+r = 'r';
 print = 'print';
 at = '@';
 question = '?';
