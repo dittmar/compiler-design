@@ -24,6 +24,7 @@ print = 'print';
 dollar = '$';
 caret = '^';
 colon = ':';
+tilde  = '~';
 
 
 comment = back_tick [[0..0xffff - back_tick] back_tick ;
