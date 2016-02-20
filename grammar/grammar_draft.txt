@@ -1,43 +1,39 @@
-// Base functions
-Succ -> "s", <Sig>
-Null -> "n", <Sig>
-Proj -> "u{", <Const>, ",", <Const>, "}", <Sig>
-
 // Primitive Recursion
 Pr -> <Base>, ";", <Rec>
 Base -> <Func>
-Rec -> <Id>, <PrSig>
-PrSig -> "(y", <ArgEnd>, ")"
+Rec -> <Id>, <PrCall>
+PrCall -> "(y", <ArgEnd>, ")"
 
 // Function stuff
-Func -> <Succ>|<Null>|<Proj>|<Pr>|<Id>, <Sig>|<Head>|<Tail>|<Prepend>|<Append>
+Func -> <Succ>|<Null>|<Proj>|<Pr>|<Id>, <Call>|<Head>|<Tail>|<Prepend>|<Append>
 Def -> <Id>, <Sig>, "=", <Func>
-Sig -> "(", <Args>, ")"
+Sig -> "(", [{<Id>}], ")"
+Call -> "(", <Args>, ")"
 Args -> "ε"|<Arg>, <ArgEnd>
 ArgEnd -> {",", <Arg>}
 Arg -> <Id>|<List>|<Const>|<OpExpr>
 
 // OpExpr stuff
 OpExpr -> Add|Sub|Mul|Div|Mod|Neg
-Add -> "+", <Sig>
-Sub -> "-", <Sig>
-Mul -> "*", <Sig>
-Div -> "/", <Sig>
-Mod -> "%", <Sig>
-Neg -> "~", <Sig>
+Add -> "+", <Call>
+Sub -> "-", <Call>
+Mul -> "*", <Call>
+Div -> "/", <Call>
+Mod -> "%", <Call>
+Neg -> "~", <Call>
 
 // BoolExpr stuff
 BoolExpr -> Comp|And|Or|Not
 Comp -> LessThan | GreaterThan | Equals | NotEquals | LessThanEquals | GreaterThanEquals
-LessThan -> "<", <Sig>
-GreaterThan -> ">", <Sig>
-Equals -> "=", <Sig>
-NotEquals -> "!=", <Sig>
-LessThanEquals -> "<=", <Sig>
-GreaterThanEquals -> ">=", <Sig>
-And -> "&", <Sig>
-Or -> "|", <Sig>
-Not -> "!", <Sig>
+LessThan -> "<", <Call>
+GreaterThan -> ">", <Call>
+Equals -> "=", <Call>
+NotEquals -> "!=", <Call>
+LessThanEquals -> "<=", <Call>
+GreaterThanEquals -> ">=", <Call>
+And -> "&", <Call>
+Or -> "|", <Call>
+Not -> "!", <Call>
 
 
 
