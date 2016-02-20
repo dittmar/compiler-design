@@ -29,9 +29,9 @@ comment = back_tick [[0..0xffff - back_tick] back_tick ;
 space = ' ' | 9 | newline;
 
 assign = '=';
-//compare = '==' | '<' | '>' | '<=' | '>=' | '!=';
-//and = '&&';
-//or = '||';
+compare = '==' | '<' | '>' | '<=' | '>=' | '!=';
+and = '&&';
+or = '||';
 
 plus = '+';
 minus = '-';
