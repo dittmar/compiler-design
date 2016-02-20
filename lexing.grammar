@@ -11,6 +11,7 @@ exp = ['e'+'E'] ['+'+'-']? digits;
 newline = [10 + 13];
 single_quote = ''';
 back_tick = '`';
+underscore = '_';
 
 Tokens
 // keywords and characters
@@ -62,7 +63,6 @@ r_bracket = ']';
 dot = '.';
 comma = ',';
 semi = ';';
-underscore = '_';
 
 string = single_quote [[[0..0xffff] - single_quote] - newline]* single_quote;
 identifier = (lower_case+|underscore)+;
