@@ -1,4 +1,4 @@
-// Here's Bergmann's lexing.grammar file from last class, we might be able to pull bits from this or just use it as a base.
+// Lexing.grammar for our unnamed language.
 
 Package lexing;
 
