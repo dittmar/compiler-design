@@ -62,9 +62,10 @@ r_bracket = ']';
 dot = '.';
 comma = ',';
 semi = ';';
+underscore = '_';
 
 string = single_quote [[[0..0xffff] - single_quote] - newline]* single_quote;
-identifier = lower_case+;
+identifier = (lower_case+|underscore)+;
 int_number = digits;
 float_number = (digits '.'? digits? | '.' digits)exp?;
 misc = [0..0xffff]; // catch all for any garbage.
