@@ -24,7 +24,22 @@ Sub -> "-", <Sig>
 Mul -> "*", <Sig>
 Div -> "/", <Sig>
 Mod -> "%", <Sig>
-Neg -> "!", <Sig>
+Neg -> "~", <Sig>
+
+// BoolExpr stuff
+BoolExpr -> Comp|And|Or|Not
+Comp -> LessThan | GreaterThan | Equals | NotEquals | LessThanEquals | GreaterThanEquals
+LessThan -> "<", <Sig>
+GreaterThan -> ">", <Sig>
+Equals -> "=", <Sig>
+NotEquals -> "!=", <Sig>
+LessThanEquals -> "<=", <Sig>
+GreaterThanEquals -> ">=", <Sig>
+And -> "&", <Sig>
+Or -> "|", <Sig>
+Not -> "!", <Sig>
+
+
 
 // List stuff
 List -> "[", <Args> "]"
