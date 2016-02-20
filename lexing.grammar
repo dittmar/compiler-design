@@ -30,7 +30,7 @@ comment = back_tick [[0..0xffff - back_tick] back_tick ;
 space = ' ' | 9 | newline;
 
 assign = ':=';
-compare = '==' | '<' | '>' | '<=' | '>=' | '!=';
+compare = '=' | '<' | '>' | '<=' | '>=' | '!=';
 and = '&&';
 or = '||';
 
