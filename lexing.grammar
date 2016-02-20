@@ -27,14 +27,14 @@ colon = ':';
 tilde  = '~';
 
 
-comment = back_tick [[0..0xffff - back_tick] back_tick ;
+comment = back_tick [[0..0xffff] - back_tick] back_tick ;
 space = ' ' | 9 | newline;
 
 assign = ':=';
 equal = '=';
 lt = '<';
 gt = '>';
-not_equal = "!=";
+not_equal = '!=';
 lte = '<=';
 gte = '>=';
 and = '&&';
