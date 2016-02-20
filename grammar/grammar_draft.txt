@@ -45,12 +45,12 @@ Append -> "$(", <Args>, ",", <List>, ")"
 Prepend -> "^(", <Args>, ",", <List>, ")"
 
 // Const stuff
-Id -> {("a"-"z")}
+Id -> {"_" | "a" | "b" | "c" | ... | "z" | "A" | "B" | "C" | ... | "Z"}
 Const -> "T"|"F"|<Number>|<String>
 String -> "'", {<Chars>}, "'"
 Chars -> any letter or digit
 Number -> {<Digit>}, [".", <Digit>], ["e"|"E, +|-|"ε", {<Digit>}]
-Digit -> ("0"-"9")
+Digit -> "0"|"1"|"2"|...|"9"
 
 // Other stuff
 Print -> "print(", <Func>, ")"
