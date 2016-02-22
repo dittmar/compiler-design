@@ -1,19 +1,44 @@
-// Primitive Recursion
-Pr -> <Base>, ";", <Rec>
+// Branches and recursion
+Branch -> <Base>, ";", <Rec>
 Base -> <BoolExpr>, ":", <Func>
 Rec -> <Func>
 
 // Function stuff
-Func -> <Pr>|<Id>, <Call>|<Head>|<Tail>|<Prepend>|<Append>
+Func -> <Id>, <Call>
+        |<Branch>
+        |<Head>
+        |<Tail>
+        |<Reverse>
+        |<Prepend>
+        |<Append>
+        |<Map>
+        |<Length>
+        |<Foldl>
+        |<Foldr>
+        |<Print>
+        
 Def -> <Id>, <Sig>, "=", <Func>
-Sig -> "(", [{<Id>}], ")"
+Sig -> "(", SigArgs, ")"
+SigArgs -> "ε"|<Id>, <SigArgEnd>
+SigArgEnd -> {",", <Id>}
+
 Call -> "(", <Args>, ")"
 Args -> "ε"|<Arg>, <ArgEnd>
 ArgEnd -> {",", <Arg>}
-Arg -> <Func>|<Id>|<List>|<Const>|<OpExpr>
+Arg -> <Func>
+        |<Id>
+        |<List>
+        |<Const>
+        |<OpExpr>
+        |<BoolExpr
 
 // OpExpr stuff
-OpExpr -> Add|Sub|Mul|Div|Mod|Neg
+OpExpr -> Add
+          |Sub
+          |Mul
+          |Div
+          |Mod
+          |Neg
 Add -> "+", <Call>
 Sub -> "-", <Call>
 Mul -> "*", <Call>
@@ -22,35 +47,84 @@ Mod -> "%", <Call>
 Neg -> "~", <Call>
 
 // BoolExpr stuff
-BoolExpr -> Comp|And|Or|Not
-Comp -> LessThan | GreaterThan | Equals | NotEquals | LessThanEquals | GreaterThanEquals
+BoolExpr -> Comp | Rel
+
+// Relational operators
+Comp -> LessThan
+        |GreaterThan
+        |Equals
+        |NotEquals
+        |LessThanEquals
+        |GreaterThanEquals
+        
 LessThan -> "<", <Call>
 GreaterThan -> ">", <Call>
 Equals -> "=", <Call>
 NotEquals -> "!=", <Call>
 LessThanEquals -> "<=", <Call>
 GreaterThanEquals -> ">=", <Call>
+
+// Logical operators
+Rel ->  And
+        |Or
+        |Not
+        |Xor  
+        
 And -> "&", <Call>
 Or -> "|", <Call>
 Not -> "!", <Call>
+Xor -> "x", <Call<
 
 
-
-// List stuff
+// List helpers
 List -> "[", <Args> "]"
-Head -> "h", <List>
-Tail -> "t", <List>
-Append -> "$(", <Args>, ",", <List>, ")"
-Prepend -> "^(", <Args>, ",", <List>, ")"
+FoldBody -> "(", <Id>|<Lambda>|<BinaryOperator>, ",", <List>|<Id>, ")"
 
+// List functions that return an atomic value
+Head -> "h(", <List>|<Id>, ")"
+Length -> "#(", <List>|<Id>, ")"
+Foldl -> "{", <FoldBody>
+Foldr -> "}", <FoldBody>
+
+// List functions that return a list
+Tail -> "t(", <List>|<Id>, ")"
+Append -> "$(", <Args>, ",", <List>|<Id>, ")"
+Prepend -> "^(", <Args>, ",", <List>|<Id>, ")"
+Map -> ".(", <Id>|<Lambda>|<UnaryOperator>, ",", <List>|<Id>, ")"
+
+// Unary Operators
+UnaryOperator -> "!"
+                 |"~"
+                 |"h"
+                 |"t"
+                 |"r"
+                 |"#"
+
+// Binary Operators
+Binary Operators -> "+"
+                    |"-"
+                    |"*"
+                    |"/"
+                    |"%"
+                    |"&"
+                    |"|"
+                    |"x"
+                    
 // Const stuff
-Id -> {"_" | "a" | "b" | "c" | ... | "z" | "A" | "B" | "C" | ... | "Z"}
+Id -> IdChar {IdChar}
+IdChar -> {"_" | "a" | "b" | "c" | ... | "z" | "A" | "B" | "C" | ... | "Z"}
+
 Const -> "T"|"F"|<Number>|<String>
+
 String -> "'", {<Chars>}, "'"
 Chars -> any letter or digit
-Number -> {<Digit>}, [".", <Digit>], ["e"|"E, +|-|"ε", {<Digit>}]
+
+Integer -> <Digit> {<Digit>}
+Float -> (<FloatStartNum> | <FloatStartDot>), ["e"|"E", +|-|"ε", {<Digit>}]
+FloatStartNum -> <Digit>, {<Digit>}, ".", {<Digit>}
+FloatStartDot -> ".", <Digit>, {<Digits>}
 Digit -> "0"|"1"|"2"|...|"9"
 
 // Other stuff
 Print -> "print(", <Func>, ")"
-Prog -> [{<Def>}], <Func>
+Prog -> {<Def>}, <Func>
