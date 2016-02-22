@@ -1,0 +1,11 @@
+    Our programming language is currently named WOLF.  It is a free-form,
+functional programming language that ignores all whitespace characters and
+comments.  Comments are identified as all characters between a pair of
+backtick (`) characters.  Since it is a functional language, the language uses
+predefined and user-defined functions as the basis for programs written in
+WOLF.  The assignment statement binds a function definition to a name rather
+than a value to a name.  Hence, a program written in WOLF is a list of
+function definitions and then a function call.  This function call could be
+composed with other functions.
+    <LEXICAL ENTITY DESCRIPTIONS>
+    <PUT SAMPLE PROGRAMS HERE>
