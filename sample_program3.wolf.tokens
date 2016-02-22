@@ -1,15 +1,12 @@
 class wolf.node.TComment: `Sorts a list of numbers with insertion sort`
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
 class wolf.node.TComment: `
 insertion sort algorithm converted from Haskell from:
 http://en.literateprograms.org/Insertion_sort_%28Haskell%29
 `
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TDef: ?
@@ -23,7 +20,6 @@ class wolf.node.TRParen: )
 class wolf.node.TSpace:  
 class wolf.node.TAssign: :=
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
@@ -31,7 +27,7 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TEqual: =
 class wolf.node.TLParen: (
-class wolf.node.TMisc: #
+class wolf.node.TLength: #
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: list
 class wolf.node.TRParen: )
@@ -52,7 +48,6 @@ class wolf.node.TSpace:
 class wolf.node.TStartList: [
 class wolf.node.TEndList: ]
 class wolf.node.TRParen: )
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TSpace:  
@@ -84,7 +79,6 @@ class wolf.node.TSpace:
 class wolf.node.TIdentifier: list
 class wolf.node.TRParen: )
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
@@ -114,13 +108,11 @@ class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TDef: ?
@@ -133,7 +125,7 @@ class wolf.node.TAssign: :=
 class wolf.node.TSpace:  
 class wolf.node.TEqual: =
 class wolf.node.TLParen: (
-class wolf.node.TMisc: #
+class wolf.node.TLength: #
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: list
 class wolf.node.TComma: ,
@@ -166,16 +158,13 @@ class wolf.node.TIdentifier: list
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TIdentifier: sort
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: list
 class wolf.node.TRParen: )
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TComment: `Assuming sort is called with the argument [2,7,1,6], the

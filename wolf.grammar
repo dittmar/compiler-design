@@ -23,6 +23,7 @@ foldl = '{';
 foldr = '}';
 map = '.';
 lambda = '\';
+length = '#';
 
 print = 'print';
 

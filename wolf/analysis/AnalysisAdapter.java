@@ -123,6 +123,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTLength(TLength node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTPrint(TPrint node)
     {
         defaultCase(node);

@@ -20,6 +20,7 @@ public interface Analysis extends Switch
     void caseTFoldr(TFoldr node);
     void caseTMap(TMap node);
     void caseTLambda(TLambda node);
+    void caseTLength(TLength node);
     void caseTPrint(TPrint node);
     void caseTTrue(TTrue node);
     void caseTFalse(TFalse node);

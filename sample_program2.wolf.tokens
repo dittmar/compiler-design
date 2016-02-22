@@ -4,7 +4,6 @@ This program takes a list and modifies the list to contain
 the factorials of its original contents
 `
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
 class wolf.node.TDef: ?
 class wolf.node.TIdentifier: factorial
@@ -48,13 +47,11 @@ class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
 class wolf.node.TComment: `
 returns a list such that each element n becomes n!
 For example, the list [0,3,1,5] becomes [1,6,1,120]
 `
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TMap: .

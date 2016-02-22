@@ -1,6 +1,5 @@
 class wolf.node.TComment: `Demonstrating foldl ({) and foldr (})`
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
 class wolf.node.TComment: `
 {(+, [2,1,10,7]) = (((2 + 1) + 10) + 7)
@@ -16,7 +15,6 @@ class wolf.node.TComment: `
                    = (20 - (-202))
                    = 222
 `
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TFoldr: }
