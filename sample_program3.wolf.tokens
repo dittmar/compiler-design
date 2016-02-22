@@ -1,0 +1,199 @@
+class wolf.node.TComment: `Sorts a list of numbers with insertion sort`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TComment: `
+insertion sort algorithm converted from Haskell from:
+http://en.literateprograms.org/Insertion_sort_%28Haskell%29
+`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TDef: ?
+class wolf.node.TIdentifier: insert
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: n
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIdentifier: list
+class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TAssign: :=
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TEqual: =
+class wolf.node.TLParen: (
+class wolf.node.TMisc: #
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: list
+class wolf.node.TRParen: )
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIntNumber: 0
+class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TColon: :
+class wolf.node.TSpace:  
+class wolf.node.TReturn: @
+class wolf.node.TSpace:  
+class wolf.node.TAppend: $
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: n
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TStartList: [
+class wolf.node.TEndList: ]
+class wolf.node.TRParen: )
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSemi: ;
+class wolf.node.TSpace:  
+class wolf.node.TLte: <=
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: n
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.THead: h
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: list
+class wolf.node.TRParen: )
+class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TColon: :
+class wolf.node.TSpace:  
+class wolf.node.TReturn: @
+class wolf.node.TSpace:  
+class wolf.node.TPrepend: ^
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: n
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIdentifier: list
+class wolf.node.TRParen: )
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSemi: ;
+class wolf.node.TSpace:  
+class wolf.node.TReturn: @
+class wolf.node.TSpace:  
+class wolf.node.TPrepend: ^
+class wolf.node.TLParen: (
+class wolf.node.THead: h
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: list
+class wolf.node.TRParen: )
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIdentifier: insert
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: n
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TTail: t
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: list
+class wolf.node.TRParen: )
+class wolf.node.TRParen: )
+class wolf.node.TRParen: )
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TDef: ?
+class wolf.node.TIdentifier: sort
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: list
+class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TAssign: :=
+class wolf.node.TSpace:  
+class wolf.node.TEqual: =
+class wolf.node.TLParen: (
+class wolf.node.TMisc: #
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: list
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIntNumber: 0
+class wolf.node.TRParen: )
+class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TColon: :
+class wolf.node.TSpace:  
+class wolf.node.TReturn: @
+class wolf.node.TSpace:  
+class wolf.node.TIdentifier: list
+class wolf.node.TSpace:  
+class wolf.node.TSemi: ;
+class wolf.node.TSpace:  
+class wolf.node.TReturn: @
+class wolf.node.TSpace:  
+class wolf.node.TIdentifier: insert
+class wolf.node.TLParen: (
+class wolf.node.THead: h
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: list
+class wolf.node.TRParen: )
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TTail: t
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: list
+class wolf.node.TRParen: )
+class wolf.node.TRParen: )
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TIdentifier: sort
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: list
+class wolf.node.TRParen: )
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TComment: `Assuming sort is called with the argument [2,7,1,6], the
+trace would be the following:              
+sort([2,7,1,6]) = insert(2, sort([7,1,6]))
+                = insert(2, insert(7, sort([1,6])))
+                = insert(2, insert(7, insert(1, sort([6]))))
+                = insert(2, insert(7, insert(1, insert(6, sort([])))))
+                = insert(2, insert(7, insert(1, insert(6, []))))
+                = insert(2, insert(7, insert(1, [6])))
+                = insert(2, insert(7, [1,6]))
+                = insert(2, ^(1, insert(7, [6])))
+                = insert(2, ^(1, ^(6, insert(7, []))))
+                = insert(2, ^(1, ^(6, [7])))
+                = insert(2, ^(1, [6,7]))
+                = insert(2, [1,6,7])
+                = ^(1, insert(2, [6,7]))
+                = ^(1, [2,6,7])
+                = [1,2,6,7]
+`
+class wolf.node.EOF: 

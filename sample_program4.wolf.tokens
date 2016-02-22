@@ -1,0 +1,63 @@
+class wolf.node.TComment: `Demonstrating foldl ({) and foldr (})`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TComment: `
+{(+, [2,1,10,7]) = (((2 + 1) + 10) + 7)
+                 = ((3 + 10) + 7)
+                 = (13 + 7)
+                 = 20
+
+{(*, [5,6,4]) = ((5 * 6) * 7)
+              = (30 * 7)
+              = 210
+
+}(-, [20, 8, 210]) = (20 - (8 - 210))
+                   = (20 - (-202))
+                   = 222
+`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TFoldr: }
+class wolf.node.TLParen: (
+class wolf.node.TMinus: -
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TStartList: [
+class wolf.node.TFoldl: {
+class wolf.node.TLParen: (
+class wolf.node.TPlus: +
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TStartList: [
+class wolf.node.TIntNumber: 2
+class wolf.node.TComma: ,
+class wolf.node.TIntNumber: 1
+class wolf.node.TComma: ,
+class wolf.node.TIntNumber: 10
+class wolf.node.TComma: ,
+class wolf.node.TIntNumber: 7
+class wolf.node.TEndList: ]
+class wolf.node.TRParen: )
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIntNumber: 8
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TFoldl: {
+class wolf.node.TLParen: (
+class wolf.node.TMult: *
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TStartList: [
+class wolf.node.TIntNumber: 5
+class wolf.node.TComma: ,
+class wolf.node.TIntNumber: 6
+class wolf.node.TComma: ,
+class wolf.node.TIntNumber: 4
+class wolf.node.TEndList: ]
+class wolf.node.TRParen: )
+class wolf.node.TEndList: ]
+class wolf.node.TRParen: )
+class wolf.node.EOF: 

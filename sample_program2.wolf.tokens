@@ -1,0 +1,78 @@
+class wolf.node.TComment: `
+Example using map (.) and lambda (\).
+This program takes a list and modifies the list to contain
+the factorials of its original contents
+`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TDef: ?
+class wolf.node.TIdentifier: factorial
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: n
+class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TAssign: :=
+class wolf.node.TSpace:  
+class wolf.node.TEqual: =
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: n
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIntNumber: 0
+class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TColon: :
+class wolf.node.TSpace:  
+class wolf.node.TReturn: @
+class wolf.node.TIntNumber: 1
+class wolf.node.TSpace:  
+class wolf.node.TSemi: ;
+class wolf.node.TSpace:  
+class wolf.node.TReturn: @
+class wolf.node.TSpace:  
+class wolf.node.TMult: *
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: n
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIdentifier: factorial
+class wolf.node.TLParen: (
+class wolf.node.TMinus: -
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: n
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIntNumber: 1
+class wolf.node.TRParen: )
+class wolf.node.TRParen: )
+class wolf.node.TRParen: )
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TComment: `
+returns a list such that each element n becomes n!
+For example, the list [0,3,1,5] becomes [1,6,1,120]
+`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TMap: .
+class wolf.node.TLParen: (
+class wolf.node.TLambda: \
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: element
+class wolf.node.TSpace:  
+class wolf.node.TMinus: -
+class wolf.node.TGt: >
+class wolf.node.TSpace:  
+class wolf.node.TIdentifier: factorial
+class wolf.node.TLParen: (
+class wolf.node.TIdentifier: element
+class wolf.node.TRParen: )
+class wolf.node.TRParen: )
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIdentifier: list
+class wolf.node.TRParen: )
+class wolf.node.EOF: 

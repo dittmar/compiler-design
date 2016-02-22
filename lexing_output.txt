@@ -1,0 +1,140 @@
+class wolf.node.TComment: `This function adds up all elements in a list` 
+class wolf.node.TSpace: 
+ 
+class wolf.node.TDef: ? 
+class wolf.node.TIdentifier: sumList 
+class wolf.node.TLPar: ( 
+class wolf.node.TIdentifier: list 
+class wolf.node.TRPar: ) 
+class wolf.node.TSpace:   
+class wolf.node.TAssign: := 
+class wolf.node.TSpace:   
+class wolf.node.TEqual: = 
+class wolf.node.TLPar: ( 
+class wolf.node.TIdentifier: list 
+class wolf.node.TComma: , 
+class wolf.node.TSpace:   
+class wolf.node.TLBracket: [ 
+class wolf.node.TRBracket: ] 
+class wolf.node.TRPar: ) 
+class wolf.node.TSpace:   
+class wolf.node.TColon: : 
+class wolf.node.TSpace:   
+class wolf.node.TReturn: @ 
+class wolf.node.TSpace:   
+class wolf.node.TIntNumber: 0 
+class wolf.node.TSemi: ; 
+class wolf.node.TSpace:   
+class wolf.node.TReturn: @ 
+class wolf.node.TSpace:   
+class wolf.node.TPlus: + 
+class wolf.node.TLPar: ( 
+class wolf.node.THead: h 
+class wolf.node.TLPar: ( 
+class wolf.node.TIdentifier: list 
+class wolf.node.TRPar: ) 
+class wolf.node.TComma: , 
+class wolf.node.TSpace:   
+class wolf.node.TIdentifier: sumList 
+class wolf.node.TLPar: ( 
+class wolf.node.TTail: t 
+class wolf.node.TLPar: ( 
+class wolf.node.TIdentifier: list 
+class wolf.node.TRPar: ) 
+class wolf.node.TRPar: ) 
+class wolf.node.TRPar: ) 
+class wolf.node.TSpace: 
+ 
+class wolf.node.TComment: `This function gets the product
+of all elements in a list` 
+class wolf.node.TSpace: 
+ 
+class wolf.node.TDef: ? 
+class wolf.node.TIdentifier: prodList 
+class wolf.node.TLPar: ( 
+class wolf.node.TIdentifier: list 
+class wolf.node.TRPar: ) 
+class wolf.node.TSpace:   
+class wolf.node.TAssign: := 
+class wolf.node.TSpace:   
+class wolf.node.TEqual: = 
+class wolf.node.TLPar: ( 
+class wolf.node.TIdentifier: list 
+class wolf.node.TComma: , 
+class wolf.node.TSpace:   
+class wolf.node.TLBracket: [ 
+class wolf.node.TRBracket: ] 
+class wolf.node.TRPar: ) 
+class wolf.node.TSpace:   
+class wolf.node.TColon: : 
+class wolf.node.TSpace:   
+class wolf.node.TReturn: return 
+class wolf.node.TSpace:   
+class wolf.node.TIntNumber: 1 
+class wolf.node.TSemi: ; 
+class wolf.node.TSpace:   
+class wolf.node.TReturn: return 
+class wolf.node.TSpace:   
+class wolf.node.TMult: * 
+class wolf.node.TLPar: ( 
+class wolf.node.THead: h 
+class wolf.node.TLPar: ( 
+class wolf.node.TIdentifier: list 
+class wolf.node.TRPar: ) 
+class wolf.node.TComma: , 
+class wolf.node.TSpace:   
+class wolf.node.TIdentifier: prodList 
+class wolf.node.TLPar: ( 
+class wolf.node.TTail: t 
+class wolf.node.TLPar: ( 
+class wolf.node.TIdentifier: list 
+class wolf.node.TRPar: ) 
+class wolf.node.TRPar: ) 
+class wolf.node.TRPar: ) 
+class wolf.node.TSpace: 
+ 
+class wolf.node.TComment: `
+returns 76
+I'm a comment
+` 
+class wolf.node.TSpace: 
+ 
+class wolf.node.TIdentifier: sumList 
+class wolf.node.TLPar: ( 
+class wolf.node.TLBracket: [ 
+class wolf.node.TIdentifier: prodList 
+class wolf.node.TLPar: ( 
+class wolf.node.TLBracket: [ 
+class wolf.node.TIntNumber: 1 
+class wolf.node.TComma: , 
+class wolf.node.TIntNumber: 2 
+class wolf.node.TComma: , 
+class wolf.node.TIntNumber: 3 
+class wolf.node.TRBracket: ] 
+class wolf.node.TRPar: ) 
+class wolf.node.TComma: , 
+class wolf.node.TSpace:   
+class wolf.node.TIdentifier: prodList 
+class wolf.node.TLPar: ( 
+class wolf.node.TLBracket: [ 
+class wolf.node.TIntNumber: 5 
+class wolf.node.TComma: , 
+class wolf.node.TIntNumber: 7 
+class wolf.node.TComma: , 
+class wolf.node.TIntNumber: 2 
+class wolf.node.TRBracket: ] 
+class wolf.node.TRPar: ) 
+class wolf.node.TComma: , 
+class wolf.node.TSpace:   
+class wolf.node.TIdentifier: prodList 
+class wolf.node.TLPar: ( 
+class wolf.node.TLBracket: [ 
+class wolf.node.TIntNumber: 0 
+class wolf.node.TComma: , 
+class wolf.node.TIntNumber: 127 
+class wolf.node.TComma: , 
+class wolf.node.TIntNumber: 9 
+class wolf.node.TRBracket: ] 
+class wolf.node.TRPar: ) 
+class wolf.node.TRPar: ) 
+class wolf.node.EOF:  
