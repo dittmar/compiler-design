@@ -69,8 +69,8 @@ public interface Analysis extends Switch
     void caseTStartList(TStartList node);
     void caseTEndList(TEndList node);
     void caseTComma(TComma node);
-    void caseTColon(TColon node);
-    void caseTSemi(TSemi node);
+    void caseTTernaryQuestionMark(TTernaryQuestionMark node);
+    void caseTTernaryColon(TTernaryColon node);
     void caseTIdentifier(TIdentifier node);
     void caseTIntNumber(TIntNumber node);
     void caseTFloatNumber(TFloatNumber node);

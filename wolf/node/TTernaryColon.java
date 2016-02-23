@@ -5,16 +5,16 @@ package wolf.node;
 import wolf.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TDef extends Token
+public final class TTernaryColon extends Token
 {
-    public TDef()
+    public TTernaryColon()
     {
-        super.setText("def");
+        super.setText(":");
     }
 
-    public TDef(int line, int pos)
+    public TTernaryColon(int line, int pos)
     {
-        super.setText("def");
+        super.setText(":");
         setLine(line);
         setPos(pos);
     }
@@ -22,18 +22,18 @@ public final class TDef extends Token
     @Override
     public Object clone()
     {
-      return new TDef(getLine(), getPos());
+      return new TTernaryColon(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTDef(this);
+        ((Analysis) sw).caseTTernaryColon(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TDef text.");
+        throw new RuntimeException("Cannot change TTernaryColon text.");
     }
 }

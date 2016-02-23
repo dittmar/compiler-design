@@ -417,13 +417,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTColon(TColon node)
+    public void caseTTernaryQuestionMark(TTernaryQuestionMark node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSemi(TSemi node)
+    public void caseTTernaryColon(TTernaryColon node)
     {
         defaultCase(node);
     }

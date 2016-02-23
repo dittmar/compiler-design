@@ -6,11 +6,15 @@ and relational operators
 class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
 class wolf.node.TComment: `evaluates to 0 (0 is a false value 0, everything else is a true value 1)`
 class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
-class wolf.node.TDef: ?
+class wolf.node.TDef: def
+class wolf.node.TSpace:  
 class wolf.node.TIdentifier: logical
 class wolf.node.TLParen: (
 class wolf.node.TRParen: )
@@ -45,11 +49,15 @@ class wolf.node.TRParen: )
 class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
 class wolf.node.TComment: `evaluates to 0`
 class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
-class wolf.node.TDef: ?
+class wolf.node.TDef: def
+class wolf.node.TSpace:  
 class wolf.node.TIdentifier: relational
 class wolf.node.TLParen: (
 class wolf.node.TRParen: )

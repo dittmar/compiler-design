@@ -5,7 +5,13 @@ the factorials of its original contents
 `
 class wolf.node.TSpace: 
 
-class wolf.node.TDef: ?
+class wolf.node.TSpace: 
+
+class wolf.node.TComment: `return 1 if n = 0 because 0! is 1.  Otherwise, multiply n by (n-1)!`
+class wolf.node.TSpace: 
+
+class wolf.node.TDef: def
+class wolf.node.TSpace:  
 class wolf.node.TIdentifier: factorial
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: n
@@ -21,14 +27,14 @@ class wolf.node.TSpace:
 class wolf.node.TIntNumber: 0
 class wolf.node.TRParen: )
 class wolf.node.TSpace:  
-class wolf.node.TColon: :
+class wolf.node.TTernaryQuestionMark: ?
 class wolf.node.TSpace:  
 class wolf.node.TIdentity: @
 class wolf.node.TLParen: (
 class wolf.node.TIntNumber: 1
 class wolf.node.TRParen: )
 class wolf.node.TSpace:  
-class wolf.node.TSemi: ;
+class wolf.node.TTernaryColon: :
 class wolf.node.TSpace:  
 class wolf.node.TMult: *
 class wolf.node.TLParen: (
@@ -48,10 +54,15 @@ class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TSpace: 
 
+class wolf.node.TSpace: 
+
 class wolf.node.TComment: `
-returns a list such that each element n becomes n!
-For example, the list [0,3,1,5] becomes [1,6,1,120]
+returns a list such that each element n becomes n! + 1
+The map operator . gets a lambda function that calculates n! + 1
+For example, the list [0,3,1,5] becomes [2,7,2,121]
 `
+class wolf.node.TSpace: 
+
 class wolf.node.TSpace: 
 
 class wolf.node.TMap: .
@@ -64,9 +75,15 @@ class wolf.node.TRParen: )
 class wolf.node.TSpace:  
 class wolf.node.TLambdaArrow: ->
 class wolf.node.TSpace:  
+class wolf.node.TPlus: +
+class wolf.node.TLParen: (
 class wolf.node.TIdentifier: factorial
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: element
+class wolf.node.TRParen: )
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIntNumber: 1
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TComma: ,

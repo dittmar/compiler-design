@@ -19,10 +19,11 @@ class wolf.node.TStartList: [
 class wolf.node.TEndList: ]
 class wolf.node.TRParen: )
 class wolf.node.TSpace:  
-class wolf.node.TColon: :
+class wolf.node.TTernaryQuestionMark: ?
 class wolf.node.TSpace:  
 class wolf.node.TIntNumber: 0
-class wolf.node.TSemi: ;
+class wolf.node.TSpace:  
+class wolf.node.TTernaryColon: :
 class wolf.node.TSpace:  
 class wolf.node.TPlus: +
 class wolf.node.TLParen: (
@@ -77,7 +78,7 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
-class wolf.node.TColon: :
+class wolf.node.TTernaryQuestionMark: ?
 class wolf.node.TSpace:  
 class wolf.node.TIdentity: @
 class wolf.node.TLParen: (
@@ -89,7 +90,7 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
-class wolf.node.TSemi: ;
+class wolf.node.TTernaryColon: :
 class wolf.node.TSpace:  
 class wolf.node.TMult: *
 class wolf.node.TLParen: (

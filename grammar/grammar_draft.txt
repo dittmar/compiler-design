@@ -1,7 +1,7 @@
-// Branches and recursion
-Branch = Base ";" Rec
-Base = BoolExpr ":" Func
-Rec = Func
+// Ternary if/else condition
+Branch = If ":" Else
+If = BoolExpr "?" Func
+Else = Func
 
 // Function stuff
 Func = (id ArgList) // user-defined function
@@ -21,7 +21,7 @@ Func = (id ArgList) // user-defined function
 
 // Signatures (Sig) differ from Arguments (Args) in that
 // they only allow ids, not expressions or constants.
-Def = ("def" | "?") id Sig ":=" Func
+Def = "def" id Sig ":=" Func
 Sig = "(" SigArgs ")"
 SigArgs = (id SigArgEnd)?
 SigArgEnd = ("," id)*

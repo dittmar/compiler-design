@@ -9,7 +9,11 @@ class wolf.node.TSpace:
 
 class wolf.node.TSpace: 
 
-class wolf.node.TDef: ?
+class wolf.node.TComment: `Inserts an element where it should be within a sorted list`
+class wolf.node.TSpace: 
+
+class wolf.node.TDef: def
+class wolf.node.TSpace:  
 class wolf.node.TIdentifier: insert
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: n
@@ -36,7 +40,7 @@ class wolf.node.TSpace:
 class wolf.node.TIntNumber: 0
 class wolf.node.TRParen: )
 class wolf.node.TSpace:  
-class wolf.node.TColon: :
+class wolf.node.TTernaryQuestionMark: ?
 class wolf.node.TSpace:  
 class wolf.node.TAppend: $
 class wolf.node.TLParen: (
@@ -46,13 +50,26 @@ class wolf.node.TSpace:
 class wolf.node.TStartList: [
 class wolf.node.TEndList: ]
 class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TComment: `append the element to the empty list`
 class wolf.node.TSpace: 
 
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
-class wolf.node.TSemi: ;
+class wolf.node.TTernaryColon: :
 class wolf.node.TSpace:  
 class wolf.node.TLte: <=
 class wolf.node.TLParen: (
@@ -65,7 +82,7 @@ class wolf.node.TIdentifier: list
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TSpace:  
-class wolf.node.TColon: :
+class wolf.node.TTernaryQuestionMark: ?
 class wolf.node.TSpace:  
 class wolf.node.TPrepend: ^
 class wolf.node.TLParen: (
@@ -74,13 +91,21 @@ class wolf.node.TComma: ,
 class wolf.node.TSpace:  
 class wolf.node.TIdentifier: list
 class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TComment: `the element goes first in the sorted list`
 class wolf.node.TSpace: 
 
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
-class wolf.node.TSemi: ;
+class wolf.node.TTernaryColon: :
 class wolf.node.TSpace:  
 class wolf.node.TPrepend: ^
 class wolf.node.TLParen: (
@@ -101,15 +126,24 @@ class wolf.node.TIdentifier: list
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TComment: `the head of the list comes before the new element`
 class wolf.node.TSpace: 
 
-class wolf.node.TSpace:  
-class wolf.node.TSpace:  
-class wolf.node.TSpace:  
-class wolf.node.TSpace:  
 class wolf.node.TSpace: 
 
-class wolf.node.TDef: ?
+class wolf.node.TComment: `
+If the list is less than 2 elements long, it's already sorted.
+Otherwise, kick off sort by inserting the head of the list where it should
+go within the tail of the list.
+`
+class wolf.node.TSpace: 
+
+class wolf.node.TDef: def
+class wolf.node.TSpace:  
 class wolf.node.TIdentifier: sort
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: list
@@ -128,14 +162,14 @@ class wolf.node.TIntNumber: 2
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TSpace:  
-class wolf.node.TColon: :
+class wolf.node.TTernaryQuestionMark: ?
 class wolf.node.TSpace:  
 class wolf.node.TIdentity: @
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: list
 class wolf.node.TRParen: )
 class wolf.node.TSpace:  
-class wolf.node.TSemi: ;
+class wolf.node.TTernaryColon: :
 class wolf.node.TSpace:  
 class wolf.node.TIdentifier: insert
 class wolf.node.TLParen: (
@@ -145,9 +179,12 @@ class wolf.node.TIdentifier: list
 class wolf.node.TRParen: )
 class wolf.node.TComma: ,
 class wolf.node.TSpace:  
+class wolf.node.TIdentifier: sort
+class wolf.node.TLParen: (
 class wolf.node.TTail: t
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: list
+class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TSpace: 
@@ -165,16 +202,18 @@ trace would be the following:
 sort([2,7,1,6]) = insert(2, sort([7,1,6]))
                 = insert(2, insert(7, sort([1,6])))
                 = insert(2, insert(7, insert(1, sort([6]))))
-                = insert(2, insert(7, insert(1, insert(6, sort([])))))
-                = insert(2, insert(7, insert(1, insert(6, []))))
+                = insert(2, insert(7, insert(1, @([6]))))
                 = insert(2, insert(7, insert(1, [6])))
+                = insert(2, insert(7, ^(1, [6])))
                 = insert(2, insert(7, [1,6]))
                 = insert(2, ^(1, insert(7, [6])))
                 = insert(2, ^(1, ^(6, insert(7, []))))
+                = insert(2, ^(1, ^(6, $(7, []))))
                 = insert(2, ^(1, ^(6, [7])))
                 = insert(2, ^(1, [6,7]))
                 = insert(2, [1,6,7])
                 = ^(1, insert(2, [6,7]))
+                = ^(1, ^(2, [6,7]))
                 = ^(1, [2,6,7])
                 = [1,2,6,7]
 `

@@ -4,12 +4,18 @@ insertion sort algorithm converted from Haskell from:
 http://en.literateprograms.org/Insertion_sort_%28Haskell%29
 `
 
-?insert(n, list) :=
-    =(#(list), 0) : $(n, [])
-    ; <=(n, h(list)) : ^(n, list)
-    ; ^(h(list), insert(n, t(list)))
-    
-?sort(list) := <(#(list, 2)) : @(list) ; insert(h(list), t(list))
+`Inserts an element where it should be within a sorted list`
+def insert(n, list) :=
+    =(#(list), 0) ? $(n, [])            `append the element to the empty list`
+    : <=(n, h(list)) ? ^(n, list)       `the element goes first in the sorted list`
+    : ^(h(list), insert(n, t(list)))    `the head of the list comes before the new element`
+
+`
+If the list is less than 2 elements long, it's already sorted.
+Otherwise, kick off sort by inserting the head of the list where it should
+go within the tail of the list.
+`
+def sort(list) := <(#(list, 2)) ? @(list) : insert(h(list), sort(t(list)))
 
 sort(list)
 `Assuming sort is called with the argument [2,7,1,6], the
@@ -17,16 +23,18 @@ trace would be the following:
 sort([2,7,1,6]) = insert(2, sort([7,1,6]))
                 = insert(2, insert(7, sort([1,6])))
                 = insert(2, insert(7, insert(1, sort([6]))))
-                = insert(2, insert(7, insert(1, insert(6, sort([])))))
-                = insert(2, insert(7, insert(1, insert(6, []))))
+                = insert(2, insert(7, insert(1, @([6]))))
                 = insert(2, insert(7, insert(1, [6])))
+                = insert(2, insert(7, ^(1, [6])))
                 = insert(2, insert(7, [1,6]))
                 = insert(2, ^(1, insert(7, [6])))
                 = insert(2, ^(1, ^(6, insert(7, []))))
+                = insert(2, ^(1, ^(6, $(7, []))))
                 = insert(2, ^(1, ^(6, [7])))
                 = insert(2, ^(1, [6,7]))
                 = insert(2, [1,6,7])
                 = ^(1, insert(2, [6,7]))
+                = ^(1, ^(2, [6,7]))
                 = ^(1, [2,6,7])
                 = [1,2,6,7]
 `

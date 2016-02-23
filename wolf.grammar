@@ -59,7 +59,7 @@ lambda_start = '\';
 lambda_arrow = '->';
 identity = '@';
 print = 'print';
-def = 'def' | question_mark;
+def = 'def';
 
 comment = back_tick [[0..0xffff] - back_tick]* back_tick;
 space = ' ' | 9 | newline;
@@ -92,11 +92,10 @@ r_paren = ')';
 start_list = '[';
 end_list = ']';
 comma = ',';
-colon = ':';
-semi = ';';
+ternary_question_mark = question_mark;
+ternary_colon = ':';
 
 // constants
-//string = single_quote [[[0..0xffff] - single_quote] - newline]* single_quote;
 identifier = (letter|underscore)+;
 int_number = digits;
 float_number = (digits '.'? digits? | '.' digits)exp?;
