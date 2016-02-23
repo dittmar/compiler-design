@@ -1,0 +1,23 @@
+`Demonstrating foldl ({) and foldr (})`
+
+`foldl using + of first element (sublist) of list
+{(+, [2,1,10,7]) = (((2 + 1) + 10) + 7)
+                 = ((3 + 10) + 7)
+                 = (13 + 7)
+                 = 20
+`
+
+`foldl using * of third element (sublist) of list
+{(*, [5,6,4]) = ((5 * 6) * 7)
+              = (30 * 7)
+              = 210
+`
+
+`foldr using - of main list
+}(-, [20, 8, 210]) = (20 - (8 - 210))
+                   = (20 - (-202))
+                   = 222
+`
+
+`this is the statement that does the evaluations shown above`
+}(-, [{(+, [2,1,10,7]), 8, {(*, [5,6,4])])

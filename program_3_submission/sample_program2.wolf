@@ -1,0 +1,16 @@
+`
+Example using map (.) and lambda (\).
+This program takes a list and modifies the list to contain
+the factorials of its original contents
+`
+
+`return 1 if n = 0 because 0! is 1.  Otherwise, multiply n by (n-1)!`
+def factorial(n) := =(n, 0) ? @(1) : *(n, factorial(-(n, 1)))
+
+`
+returns a list such that each element n becomes n! + 1
+The map operator . gets a lambda function that calculates n! + 1
+For example, the list [0,3,1,5] becomes [2,7,2,121]
+`
+
+.(\((element) -> +(factorial(element), 1)), list)
