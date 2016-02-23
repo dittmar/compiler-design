@@ -4,14 +4,14 @@ Program = Def* Func
 // they only allow ids, not expressions or constants.
 Def = def id Sig := Func
 Sig = ()
-    = SigArgs
+    = (SigArgs)
 SigArgs = id SigArgRest*
 SigArgRest = , id
 
 Func = FuncName ArgList
-
+     = Branch
+     
 FuncName = id       // user-defined function identifier
-         = Branch   // branching and recursive structure
          = h        // head - get the first element of a list
          = t        // tail - get a list excluding first element of the list
          = r        // reverse - reverse the input list and return it
