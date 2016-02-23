@@ -1,126 +1,47 @@
-// Ternary if/else condition
-Branch = If ":" Else
-If = BoolExpr "?" Func
-Else = Func
-
-// Function stuff
-Func = (id ArgList) // user-defined function
-        |Branch     // branching and recursive structure
-        |Head       // get the first element of a list
-        |Tail       // get a list excluding the first element of the list
-        |Reverse    // reverse the input list and return it
-        |Prepend    // add an element to the beginning of the list
-        |Append     // add an element to the end of the list
-        |Map        // apply function to elements of list and return new list
-        |Length     // return size of list
-        |Foldl      // apply binary op to list elements left associative
-        |Foldr      // apply binary op to list elements right associative
-        |Flatten    // turn a list with nested lists into one flat list
-        |Identity   // return the argument provided
-        |Print      // print the argument to stdout and return the argument
+Program = Def* Func
 
 // Signatures (Sig) differ from Arguments (Args) in that
 // they only allow ids, not expressions or constants.
-Def = "def" id Sig ":=" Func
-Sig = "(" SigArgs ")"
-SigArgs = (id SigArgEnd)?
-SigArgEnd = ("," id)*
+Def = def id Sig := Func
+Sig = ()
+    = SigArgs
+SigArgs = id SigArgRest*
+SigArgRest = , id
 
-ArgList = "(" Args ")"
-Args = (Arg ArgEnd)?
-ArgEnd = ("," Arg)*
+Func = FuncName ArgList
+
+FuncName = id       // user-defined function
+         = Branch   // branching and recursive structure
+         = h        // head - get the first element of a list
+         = t        // tail - get a list excluding first element of the list
+         = r        // reverse - reverse the input list and return it
+         = ^        // prepend - add an element to the beginning of the list
+         = $        // append - add an element to the end of the list
+         = .        // map - apply function to list elements to make new list
+         = #        // length - get size of list
+         = {        // foldl - apply binary op to list elements left associative
+         = }        // foldr - apply binary op to list elements right associative
+         = _        // flatten - turn a list with nested lists into one flat list
+         = @        // identity - return the argument provided
+         = print    // print - print the argument to stdout and return the argument
+         = \        // anonymous function
+         = op       // operators like +, ~, >=, =, !, |, and x
+
+ArgList = ()
+        = (Args)        
+Args = Arg ArgRest*
+ArgRest = , Arg
+
 Arg = Func
-        |List
-        |ArithExpr
-        |BoolExpr
-        |float
-        |string
-        |int
-        |id
+    = List
+    = float_literal
+    = string_literal
+    = int_literal
+    = id
 
-// ArithExpr stuff
-ArithExpr = Add
-          |Sub
-          |Mul
-          |Div
-          |Mod
-          |Neg
+// Ternary if/else condition
+Branch = If : Else
+If = BoolExpr ? Func
+Else = Func
 
-Add = "+" ArgList
-Sub = "-" ArgList
-Mul = "*" ArgList
-Div = "/" ArgList
-Mod = "%" ArgList
-Neg = "~" ArgList
-
-// BoolExpr stuff
-BoolExpr = Relational | Logic
-
-// Relational operators
-Relational = LessThan
-        |GreaterThan
-        |Equals
-        |NotEquals
-        |LessThanEquals
-        |GreaterThanEquals
-        
-LessThan = "<" ArgList
-GreaterThan = ">" ArgList
-Equals = "=" ArgList
-NotEquals = "!=" ArgList
-LessThanEquals = "<=" ArgList
-GreaterThanEquals = ">=" ArgList
-
-// Logical operators
-Logic =  And
-        |Or
-        |Not
-        |Xor  
-        
-And = "&" ArgList
-Or = "|" ArgList
-Not = "!" ArgList
-Xor = "x" ArgList
-
-// List helpers
-List = "[" Args "]"
-FoldBody = "(" (id | Lambda | BinaryOperator) "," (List | id) ")"
-
-// List functions that return an atomic value
-Head = "h(" (List | id) ")"
-Length = "#(" (List | id) ")"
-Foldl = "{" FoldBody
-Foldr = "}" FoldBody
-
-// List functions that return a list
-Tail = "t(" (List | id) ")"
-Append = "$(" Arg "," (List | id) ")"
-Prepend = "^(" Arg "," (List | id) ")"
-Map = ".(" (id | Lambda | UnaryOperator) "," (List | id) ")"
-Flatten = "_(" (List | id) ")"
-
-// Unary Operators
-UnaryOperator = "!"
-                 |"~"
-                 |"h"
-                 |"t"
-                 |"r"
-                 |"#"
-                 |"@"
-                 |"_"
-
-// Binary Operators
-Binary Operators = "+"
-                    |"-"
-                    |"*"
-                    |"/"
-                    |"%"
-                    |"&"
-                    |"|"
-                    |"x"
-
-// Other stuff
-Print = "print(" Arg ")"
-Identity = "@(" Arg ")"
-Lambda = "\(" Sig "->" Func ")"
-Program = Def* Func
+List = [ Args ]

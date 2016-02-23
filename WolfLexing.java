@@ -1,5 +1,9 @@
-// This class starts the lexical phase from a main method.
-// William Ezekiel
+/** This class starts the lexical phase from a main method.
+  * @author(Joe Alacqua)
+  * @author(Kevin Dittmar
+  * @author(William Ezekiel)
+  * @version(2/23/2016)
+  */
 package wolf;
 import wolf.lexer.*;
 import wolf.node.*;

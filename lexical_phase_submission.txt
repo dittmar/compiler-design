@@ -7,5 +7,166 @@ WOLF.  The assignment statement binds a function definition to a name rather
 than a value to a name.  Hence, a program written in WOLF is a list of
 function definitions and then a function call.  This function call could be
 composed with other functions.
-    <LEXICAL ENTITY DESCRIPTIONS>
-    <PUT SAMPLE PROGRAMS HERE>
+    
+Lexical Entities:
+    string_start - a single quote that is the start of a string and causes
+    the lexer to enter the string state.
+    
+    string_escape - a backslash that takes the lexer into the escape state
+    escape_alarm - an "a" character that ends the escape sequence and
+    represents the alarm escape sequence.
+    
+    escape_backspace - a "b" character that ends the escape sequence and
+    represents the backspace escape sequence.
+    
+    escape_formfeed - an "f" character that ends the escape sequence and
+    represents the formfeed escape sequence.
+    
+    escape_carriage_return - an "r" character that ends the escape sequence
+    and represents the carriage return escape sequence.
+    
+    escape_newline - an "n" character that ends the escape sequence and
+    represents the newline escape sequence.
+    
+    escape_tab - a "t" character that ends the escape sequence and
+    represents the tab escape sequence.
+    
+    escape_vertical_tab - a "v" character that ends the escape sequence and
+    represents the vertical_tab escape sequence.
+    
+    escape_backslash - a "\" character that ends the escape sequence and
+    represents an escaped backslash character.
+    
+    escape_single_quote - a single quote character that ends the escape
+    sequence and represents an escaped single quote character.
+    
+    escape_double_quote - a double quote character that ends the escape
+    sequence and represents an escaped double quote character.
+    
+    escape_question_mark - a question mark character that ends the escape
+    sequence and represents an escaped question mark character.
+    
+    escape_octal_char - a three-digit number that ends the escape
+    sequence and represents an escaped octal code for an ASCII character.
+    
+    escape_hex_char - a two-digit number that ends the escape
+    sequence and represents an escaped hex code for an ASCII character.
+    
+    escape_unicode_char - a four-digit number that ends the escape
+    sequence and represents an escaped octal code for an unicode character.
+    
+    escape_default_char - any other character that ends the escape
+    sequence and represents an escaped version of that character.
+    
+    string_body - all of the characters in a string that aren't escape
+    characters.
+    
+    string_end - the single quote that ends a string.
+    
+    head - primitive function that returns first element of list
+    
+    tail - primitive function that returns all but first element of a list
+    as a new list.
+    
+    reverse - primitive function that reverses the order of the elements
+    in a list.
+    
+    append - primitive function that adds an element to the end of a list.
+    
+    prepend - primitive function that adds an element to the beginning of
+    a list.
+    
+    foldl - primitive function that aggregates a list using a binary
+    operator in a left associative manner.
+    
+    foldr - primitive function that aggregates a list using a binary
+    operator in a right associative manner.
+    
+    map - primitive function that applies a unary function to every
+    element of a list to make a new list.
+    
+    flatten - primitive function that turns a list with nested lists
+    into a flat list with no nested lists.
+    Ex:  flattening [1,[2,3],[4,[5,6]]] returns [1,2,3,4,5,6]
+    
+    length - primitive function that returns the size of the list.
+    
+    lambda_start - the operator that indicates the start of an anonymous
+    function.
+    
+    lambda arrow - the operator that indicates the end of the parameter list
+    of an anonymous function and the beginning of its definition.
+    
+    identity - a primitive function that returns its argument unchanged.
+    
+    print - a primitive function that returns its argument unchanged and
+    prints its argument out on stdout.
+    
+    def - the operator used for assigning user-defined functions to an
+    identifier.
+    
+    comment - comments are lines ignored by the compiler that start and
+    end with backtick (`) characters.
+    
+    space - whitespace characters that are ignored, including tabs, spaces,
+    and newlines.
+    
+    assign - the assignment operator used for defining user-defined functions.
+    
+    equal - the relational equality operator
+    
+    lt - the relational less than operator
+    
+    gt - the relational greater than operator
+    
+    not_equal - the relational not-equal-to operator
+    
+    lte - the relational less than or equal to operator
+    
+    gte - the relational greater than or equal to operator
+    
+    and - the logical and operator
+    
+    or - the logical or operator
+    
+    xor - the logical exclusive or operator
+    
+    logical_not - the logical negation operator
+    
+    plus - arithmetic addition operator
+    
+    minus - arithmetic subtraction operator
+    
+    mult - arithmetic multiplication operator
+    
+    div - arithmetic division operator
+    
+    mod - modulus operator
+    
+    neg - arithmetic negation operator.  Ex:  ~(5) = -5
+    
+    l_paren - left parenthesis that indicates the start of a function call.
+    
+    r_paren - right parenthesis that indicates the end of a function call.
+    
+    start_list - left bracket that indicates the start of a list.
+    
+    end_list - right bracket that indicates the end of a list.
+    
+    comma - delimiter between arguments in function calls
+    
+    ternary_question_mark - ?, which indicates the end of the condition
+    and the start of function executed if the condition is true.
+    
+    ternary_colon - :, which indicates the end of the function executed
+    if the condition is true and the start of function executed if the
+    condition is true.
+    
+    identifier - an identifier used to name a user-defined function.  It
+    can contain letters or underscores.
+    
+    int_number - an integer literal
+    
+    float_number - a floating point literal
+    
+    misc - garbage strings not recognized by the language
