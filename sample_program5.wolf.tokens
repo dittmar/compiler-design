@@ -1,6 +1,5 @@
 class wolf.node.TComment: `Testing escape strings`
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
 class wolf.node.TPrint: print
 class wolf.node.TLParen: (

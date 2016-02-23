@@ -4,13 +4,10 @@ logical,
 and relational operators
 `
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TComment: `evaluates to 0 (0 is a false value 0, everything else is a true value 1)`
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TDef: def
@@ -47,13 +44,10 @@ class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TComment: `evaluates to 0`
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TDef: def
@@ -65,9 +59,7 @@ class wolf.node.TSpace:
 class wolf.node.TAssign: :=
 class wolf.node.TSpace:  
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TOr: |
@@ -104,7 +96,6 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TComment: `1 | 0 = 1`
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
@@ -139,7 +130,6 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TComment: `1 & 1 = 1`
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
@@ -173,7 +163,6 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TComment: `1 xor 1 = 0`
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TSpace:  
@@ -213,7 +202,6 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
@@ -221,14 +209,11 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TRParen: )
 class wolf.node.TSpace: 
-class wolf.node.TSpace: 
 
 class wolf.node.TRParen: )
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TComment: `return [1, 0]`
-class wolf.node.TSpace: 
 class wolf.node.TSpace: 
 
 class wolf.node.TFlatten: _
