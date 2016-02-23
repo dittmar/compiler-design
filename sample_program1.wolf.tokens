@@ -1,7 +1,8 @@
 class wolf.node.TComment: `This function adds up all elements in a list`
 class wolf.node.TSpace: 
 
-class wolf.node.TDef: ?
+class wolf.node.TDef: def
+class wolf.node.TSpace:  
 class wolf.node.TIdentifier: sumList
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: list
@@ -20,12 +21,8 @@ class wolf.node.TRParen: )
 class wolf.node.TSpace:  
 class wolf.node.TColon: :
 class wolf.node.TSpace:  
-class wolf.node.TReturn: @
-class wolf.node.TSpace:  
 class wolf.node.TIntNumber: 0
 class wolf.node.TSemi: ;
-class wolf.node.TSpace:  
-class wolf.node.TReturn: @
 class wolf.node.TSpace:  
 class wolf.node.TPlus: +
 class wolf.node.TLParen: (
@@ -82,9 +79,10 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TColon: :
 class wolf.node.TSpace:  
-class wolf.node.TReturn: return
-class wolf.node.TSpace:  
+class wolf.node.TIdentity: @
+class wolf.node.TLParen: (
 class wolf.node.TIntNumber: 1
+class wolf.node.TRParen: )
 class wolf.node.TSpace: 
 
 class wolf.node.TSpace:  
@@ -92,8 +90,6 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSemi: ;
-class wolf.node.TSpace:  
-class wolf.node.TReturn: return
 class wolf.node.TSpace:  
 class wolf.node.TMult: *
 class wolf.node.TLParen: (

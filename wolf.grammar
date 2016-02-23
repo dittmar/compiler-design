@@ -9,10 +9,39 @@ digits = digit+;
 exp = ['e'+'E'] ['+'+'-']? digits;
 newline = [10 + 13];
 single_quote = ''';
+double_quote = '"';
 back_tick = '`';
 underscore = '_';
+backslash = '\';
+question_mark = '?';
+
+States
+initial, string, escape;
 
 Tokens
+{initial->string} string_start = single_quote;
+
+{string->escape} string_escape = backslash;
+{escape->string} escape_alarm = 'a';
+{escape->string} escape_backspace = 'b';
+{escape->string} escape_formfeed = 'f';
+{escape->string} escape_carriage_return = 'r';
+{escape->string} escape_newline = 'n';
+{escape->string} escape_tab = 't';
+{escape->string} escape_vertical_tab = 'v';
+{escape->string} escape_backslash = backslash;
+{escape->string} escape_single_quote = single_quote;
+{escape->string} escape_double_quote = double_quote;
+{escape->string} escape_question_mark = question_mark;
+{escape->string} escape_octal_char = digit digit digit;
+{escape->string} escape_hex_char = 'x' digit digit;
+{escape->string} escape_unicode_char = 'u' digit digit digit digit;
+{escape->string} escape_default = [0..0xffff];
+
+{string} string_body = [[[0..0xffff] - single_quote] - backslash]*;
+
+{string->initial} string_end = single_quote;
+
 // list operators
 head = 'h';
 tail = 't';
@@ -22,16 +51,15 @@ prepend = '^';
 foldl = '{';
 foldr = '}';
 map = '.';
-lambda = '\';
+flatten = underscore;
 length = '#';
 
+// other operators
+lambda_start = '\';
+lambda_arrow = '->';
+identity = '@';
 print = 'print';
-
-true = 'T';
-false = 'F';
-
-def = 'def' | '?';
-return = 'return' | '@';
+def = 'def' | question_mark;
 
 comment = back_tick [[0..0xffff] - back_tick]* back_tick;
 space = ' ' | 9 | newline;
@@ -68,7 +96,7 @@ colon = ':';
 semi = ';';
 
 // constants
-string = single_quote [[[0..0xffff] - single_quote] - newline]* single_quote;
+//string = single_quote [[[0..0xffff] - single_quote] - newline]* single_quote;
 identifier = (letter|underscore)+;
 int_number = digits;
 float_number = (digits '.'? digits? | '.' digits)exp?;

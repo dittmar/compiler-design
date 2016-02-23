@@ -1,0 +1,44 @@
+class wolf.node.TComment: `Testing escape strings`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TPrint: print
+class wolf.node.TLParen: (
+class wolf.node.TStringStart: '
+class wolf.node.TStringBody: I
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeSingleQuote: '
+class wolf.node.TStringBody: m an escape 
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeBackslash: \
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeAlarm: a
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeBackspace: b
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeVerticalTab: v
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeDefault: d
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeTab: t
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeCarriageReturn: r
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeNewline: n
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeHexChar: x33
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeOctalChar: 121
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeFormfeed: f
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeDoubleQuote: "
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeQuestionMark: ?
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeUnicodeChar: u2109
+class wolf.node.TStringEscape: \
+class wolf.node.TEscapeDefault: m
+class wolf.node.TStringEnd: '
+class wolf.node.TRParen: )
+class wolf.node.EOF: 

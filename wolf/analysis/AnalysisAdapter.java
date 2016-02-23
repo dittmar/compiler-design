@@ -69,6 +69,120 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTStringStart(TStringStart node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTStringEscape(TStringEscape node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeAlarm(TEscapeAlarm node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeBackspace(TEscapeBackspace node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeFormfeed(TEscapeFormfeed node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeCarriageReturn(TEscapeCarriageReturn node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeNewline(TEscapeNewline node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeTab(TEscapeTab node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeVerticalTab(TEscapeVerticalTab node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeBackslash(TEscapeBackslash node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeSingleQuote(TEscapeSingleQuote node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeDoubleQuote(TEscapeDoubleQuote node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeQuestionMark(TEscapeQuestionMark node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeOctalChar(TEscapeOctalChar node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeHexChar(TEscapeHexChar node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeUnicodeChar(TEscapeUnicodeChar node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTEscapeDefault(TEscapeDefault node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTStringBody(TStringBody node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTStringEnd(TStringEnd node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTHead(THead node)
     {
         defaultCase(node);
@@ -117,7 +231,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTLambda(TLambda node)
+    public void caseTFlatten(TFlatten node)
     {
         defaultCase(node);
     }
@@ -129,31 +243,31 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTLambdaStart(TLambdaStart node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTLambdaArrow(TLambdaArrow node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTIdentity(TIdentity node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTPrint(TPrint node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTTrue(TTrue node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTFalse(TFalse node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseTDef(TDef node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTReturn(TReturn node)
     {
         defaultCase(node);
     }
@@ -310,12 +424,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTSemi(TSemi node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTString(TString node)
     {
         defaultCase(node);
     }

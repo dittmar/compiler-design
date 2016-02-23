@@ -1,107 +1,116 @@
 // Branches and recursion
-Branch -> <Base>, ";", <Rec>
-Base -> <BoolExpr>, ":", <Func>
-Rec -> <Func>
+Branch = Base ";" Rec
+Base = BoolExpr ":" Func
+Rec = Func
 
 // Function stuff
-Func -> <Id>, <Call>
-        |<Branch>
-        |<Head>
-        |<Tail>
-        |<Reverse>
-        |<Prepend>
-        |<Append>
-        |<Map>
-        |<Length>
-        |<Foldl>
-        |<Foldr>
-        |<Print>
-        
-Def -> <Id>, <Sig>, "=", <Func>
-Sig -> "(", SigArgs, ")"
-SigArgs -> "ε"|<Id>, <SigArgEnd>
-SigArgEnd -> {",", <Id>}
+Func = (id ArgList) // user-defined function
+        |Branch     // branching and recursive structure
+        |Head       // get the first element of a list
+        |Tail       // get a list excluding the first element of the list
+        |Reverse    // reverse the input list and return it
+        |Prepend    // add an element to the beginning of the list
+        |Append     // add an element to the end of the list
+        |Map        // apply function to elements of list and return new list
+        |Length     // return size of list
+        |Foldl      // apply binary op to list elements left associative
+        |Foldr      // apply binary op to list elements right associative
+        |Flatten    // turn a list with nested lists into one flat list
+        |Identity   // return the argument provided
+        |Print      // print the argument to stdout and return the argument
 
-Call -> "(", <Args>, ")"
-Args -> "ε"|<Arg>, <ArgEnd>
-ArgEnd -> {",", <Arg>}
-Arg -> <Func>
-        |<Id>
-        |<List>
-        |<Const>
-        |<OpExpr>
-        |<BoolExpr
+// Signatures (Sig) differ from Arguments (Args) in that
+// they only allow ids, not expressions or constants.
+Def = ("def" | "?") id Sig ":=" Func
+Sig = "(" SigArgs ")"
+SigArgs = (id SigArgEnd)?
+SigArgEnd = ("," id)*
 
-// OpExpr stuff
-OpExpr -> Add
+ArgList = "(" Args ")"
+Args = (Arg ArgEnd)?
+ArgEnd = ("," Arg)*
+Arg = Func
+        |List
+        |ArithExpr
+        |BoolExpr
+        |float
+        |string
+        |int
+        |id
+
+// ArithExpr stuff
+ArithExpr = Add
           |Sub
           |Mul
           |Div
           |Mod
           |Neg
-Add -> "+", <Call>
-Sub -> "-", <Call>
-Mul -> "*", <Call>
-Div -> "/", <Call>
-Mod -> "%", <Call>
-Neg -> "~", <Call>
+
+Add = "+" ArgList
+Sub = "-" ArgList
+Mul = "*" ArgList
+Div = "/" ArgList
+Mod = "%" ArgList
+Neg = "~" ArgList
 
 // BoolExpr stuff
-BoolExpr -> Comp | Rel
+BoolExpr = Relational | Logic
 
 // Relational operators
-Comp -> LessThan
+Relational = LessThan
         |GreaterThan
         |Equals
         |NotEquals
         |LessThanEquals
         |GreaterThanEquals
         
-LessThan -> "<", <Call>
-GreaterThan -> ">", <Call>
-Equals -> "=", <Call>
-NotEquals -> "!=", <Call>
-LessThanEquals -> "<=", <Call>
-GreaterThanEquals -> ">=", <Call>
+LessThan = "<" ArgList
+GreaterThan = ">" ArgList
+Equals = "=" ArgList
+NotEquals = "!=" ArgList
+LessThanEquals = "<=" ArgList
+GreaterThanEquals = ">=" ArgList
 
 // Logical operators
-Rel ->  And
+Logic =  And
         |Or
         |Not
         |Xor  
         
-And -> "&", <Call>
-Or -> "|", <Call>
-Not -> "!", <Call>
-Xor -> "x", <Call<
-
+And = "&" ArgList
+Or = "|" ArgList
+Not = "!" ArgList
+Xor = "x" ArgList
 
 // List helpers
-List -> "[", <Args> "]"
-FoldBody -> "(", <Id>|<Lambda>|<BinaryOperator>, ",", <List>|<Id>, ")"
+List = "[" Args "]"
+FoldBody = "(" (id | Lambda | BinaryOperator) "," (List | id) ")"
 
 // List functions that return an atomic value
-Head -> "h(", <List>|<Id>, ")"
-Length -> "#(", <List>|<Id>, ")"
-Foldl -> "{", <FoldBody>
-Foldr -> "}", <FoldBody>
+Head = "h(" (List | id) ")"
+Length = "#(" (List | id) ")"
+Foldl = "{" FoldBody
+Foldr = "}" FoldBody
 
 // List functions that return a list
-Tail -> "t(", <List>|<Id>, ")"
-Append -> "$(", <Args>, ",", <List>|<Id>, ")"
-Prepend -> "^(", <Args>, ",", <List>|<Id>, ")"
-Map -> ".(", <Id>|<Lambda>|<UnaryOperator>, ",", <List>|<Id>, ")"
+Tail = "t(" (List | id) ")"
+Append = "$(" Arg "," (List | id) ")"
+Prepend = "^(" Arg "," (List | id) ")"
+Map = ".(" (id | Lambda | UnaryOperator) "," (List | id) ")"
+Flatten = "_(" (List | id) ")"
 
 // Unary Operators
-UnaryOperator -> "!"
+UnaryOperator = "!"
                  |"~"
                  |"h"
                  |"t"
                  |"r"
                  |"#"
+                 |"@"
+                 |"_"
 
 // Binary Operators
-Binary Operators -> "+"
+Binary Operators = "+"
                     |"-"
                     |"*"
                     |"/"
@@ -109,22 +118,9 @@ Binary Operators -> "+"
                     |"&"
                     |"|"
                     |"x"
-                    
-// Const stuff
-Id -> IdChar {IdChar}
-IdChar -> {"_" | "a" | "b" | "c" | ... | "z" | "A" | "B" | "C" | ... | "Z"}
-
-Const -> "T"|"F"|<Number>|<String>
-
-String -> "'", {<Chars>}, "'"
-Chars -> any letter or digit
-
-Integer -> <Digit> {<Digit>}
-Float -> (<FloatStartNum> | <FloatStartDot>), ["e"|"E", +|-|"ε", {<Digit>}]
-FloatStartNum -> <Digit>, {<Digit>}, ".", {<Digit>}
-FloatStartDot -> ".", <Digit>, {<Digits>}
-Digit -> "0"|"1"|"2"|...|"9"
 
 // Other stuff
-Print -> "print(", <Func>, ")"
-Prog -> {<Def>}, <Func>
+Print = "print(" Arg ")"
+Identity = "@(" Arg ")"
+Lambda = "\(" Sig "->" Func ")"
+Program = Def* Func

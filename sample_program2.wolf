@@ -3,9 +3,9 @@ Example using map (.) and lambda (\).
 This program takes a list and modifies the list to contain
 the factorials of its original contents
 `
-?factorial(n) := =(n, 0) : @1 ; @ *(n, factorial(-(n, 1)))
+?factorial(n) := =(n, 0) : @(1) ; *(n, factorial(-(n, 1)))
 `
 returns a list such that each element n becomes n!
 For example, the list [0,3,1,5] becomes [1,6,1,120]
 `
-.(\(element -> factorial(element)), list)
+.(\((element) -> factorial(element)), list)

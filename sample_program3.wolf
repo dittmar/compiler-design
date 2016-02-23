@@ -5,11 +5,11 @@ http://en.literateprograms.org/Insertion_sort_%28Haskell%29
 `
 
 ?insert(n, list) :=
-    =(#(list), 0) : @ $(n, [])
-    ; <=(n, h(list)) : @ ^(n, list)
-    ; @ ^(h(list), insert(n, t(list)))
+    =(#(list), 0) : $(n, [])
+    ; <=(n, h(list)) : ^(n, list)
+    ; ^(h(list), insert(n, t(list)))
     
-?sort(list) := =(#(list, 0)) : @ list ; @ insert(h(list), t(list))
+?sort(list) := <(#(list, 2)) : @(list) ; insert(h(list), t(list))
 
 sort(list)
 `Assuming sort is called with the argument [2,7,1,6], the

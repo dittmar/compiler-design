@@ -1,0 +1,246 @@
+class wolf.node.TComment: `Testing
+the arithmetic,
+logical,
+and relational operators
+`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TComment: `evaluates to 0 (0 is a false value 0, everything else is a true value 1)`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TDef: ?
+class wolf.node.TIdentifier: logical
+class wolf.node.TLParen: (
+class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TAssign: :=
+class wolf.node.TSpace:  
+class wolf.node.TLogicalNot: !
+class wolf.node.TLParen: (
+class wolf.node.TOr: |
+class wolf.node.TLParen: (
+class wolf.node.TAnd: &
+class wolf.node.TLParen: (
+class wolf.node.TXor: x
+class wolf.node.TLParen: (
+class wolf.node.TIntNumber: 1
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIntNumber: 0
+class wolf.node.TRParen: )
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIntNumber: 2
+class wolf.node.TRParen: )
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TNeg: ~
+class wolf.node.TLParen: (
+class wolf.node.TIntNumber: 8
+class wolf.node.TRParen: )
+class wolf.node.TRParen: )
+class wolf.node.TRParen: )
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TComment: `evaluates to 0`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TDef: ?
+class wolf.node.TIdentifier: relational
+class wolf.node.TLParen: (
+class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TAssign: :=
+class wolf.node.TSpace:  
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TOr: |
+class wolf.node.TLParen: (
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TComment: `1 | 0 = 1`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TAnd: &
+class wolf.node.TLParen: (
+class wolf.node.TGt: >
+class wolf.node.TLParen: (
+class wolf.node.TIntNumber: 5
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIntNumber: 2
+class wolf.node.TRParen: )
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TNotEqual: !=
+class wolf.node.TLParen: (
+class wolf.node.TIntNumber: 1
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIntNumber: 2
+class wolf.node.TRParen: )
+class wolf.node.TRParen: )
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TComment: `1 & 1 = 1`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TXor: x
+class wolf.node.TLParen: (
+class wolf.node.TGte: >=
+class wolf.node.TLParen: (
+class wolf.node.TIntNumber: 1
+class wolf.node.TComma: ,
+class wolf.node.TIntNumber: 0
+class wolf.node.TRParen: )
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TComment: `1 xor 1 = 0`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TLte: <=
+class wolf.node.TLParen: (
+class wolf.node.TMod: %
+class wolf.node.TLParen: (
+class wolf.node.TIntNumber: 5
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIntNumber: 2
+class wolf.node.TRParen: )
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TDiv: /
+class wolf.node.TLParen: (
+class wolf.node.TIntNumber: 6
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TIntNumber: 4
+class wolf.node.TRParen: )
+class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TComment: `1 <= 1 = 1`
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TRParen: )
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TRParen: )
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TComment: `return [1, 0]`
+class wolf.node.TSpace: 
+class wolf.node.TSpace: 
+
+class wolf.node.TFlatten: _
+class wolf.node.TLParen: (
+class wolf.node.TReverse: r
+class wolf.node.TLParen: (
+class wolf.node.TStartList: [
+class wolf.node.TStartList: [
+class wolf.node.TIdentifier: logical
+class wolf.node.TLParen: (
+class wolf.node.TRParen: )
+class wolf.node.TEndList: ]
+class wolf.node.TComma: ,
+class wolf.node.TSpace:  
+class wolf.node.TStartList: [
+class wolf.node.TIdentifier: relational
+class wolf.node.TLParen: (
+class wolf.node.TRParen: )
+class wolf.node.TEndList: ]
+class wolf.node.TEndList: ]
+class wolf.node.TRParen: )
+class wolf.node.TRParen: )
+class wolf.node.EOF: 

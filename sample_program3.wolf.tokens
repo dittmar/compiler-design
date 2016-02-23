@@ -38,8 +38,6 @@ class wolf.node.TRParen: )
 class wolf.node.TSpace:  
 class wolf.node.TColon: :
 class wolf.node.TSpace:  
-class wolf.node.TReturn: @
-class wolf.node.TSpace:  
 class wolf.node.TAppend: $
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: n
@@ -69,8 +67,6 @@ class wolf.node.TRParen: )
 class wolf.node.TSpace:  
 class wolf.node.TColon: :
 class wolf.node.TSpace:  
-class wolf.node.TReturn: @
-class wolf.node.TSpace:  
 class wolf.node.TPrepend: ^
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: n
@@ -85,8 +81,6 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSemi: ;
-class wolf.node.TSpace:  
-class wolf.node.TReturn: @
 class wolf.node.TSpace:  
 class wolf.node.TPrepend: ^
 class wolf.node.TLParen: (
@@ -123,26 +117,25 @@ class wolf.node.TRParen: )
 class wolf.node.TSpace:  
 class wolf.node.TAssign: :=
 class wolf.node.TSpace:  
-class wolf.node.TEqual: =
+class wolf.node.TLt: <
 class wolf.node.TLParen: (
 class wolf.node.TLength: #
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: list
 class wolf.node.TComma: ,
 class wolf.node.TSpace:  
-class wolf.node.TIntNumber: 0
+class wolf.node.TIntNumber: 2
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TSpace:  
 class wolf.node.TColon: :
 class wolf.node.TSpace:  
-class wolf.node.TReturn: @
-class wolf.node.TSpace:  
+class wolf.node.TIdentity: @
+class wolf.node.TLParen: (
 class wolf.node.TIdentifier: list
+class wolf.node.TRParen: )
 class wolf.node.TSpace:  
 class wolf.node.TSemi: ;
-class wolf.node.TSpace:  
-class wolf.node.TReturn: @
 class wolf.node.TSpace:  
 class wolf.node.TIdentifier: insert
 class wolf.node.TLParen: (

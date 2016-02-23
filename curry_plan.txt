@@ -1,0 +1,32 @@
+// Function stuff
+Func = (id ArgList) // user-defined function
+        |Branch     // branching and recursive structure
+        |Head       // get the first element of a list
+        |Tail       // get a list excluding the first element of the list
+        |Reverse    // reverse the input list and return it
+        |Prepend    // add an element to the beginning of the list
+        |Append     // add an element to the end of the list
+        |Map        // apply function to elements of list and return new list
+        |Length     // return size of list
+        |Foldl      // apply binary op to list elements left associative
+        |Foldr      // apply binary op to list elements right associative
+        |Flatten    // turn a list with nested lists into one flat list
+        |Identity   // return the argument provided
+        |Print      // print the argument to stdout and return the argument
+        
+Func = CurryFunction | NonCurryFunction
+CurryFunction = (Branch
+                 |Head
+                 |Identity
+                 |Print
+                 |Lambda) ArgList*
+
+NonCurryFunction = Tail
+                   |Reverse
+                   |Prepend
+                   |Append
+                   |Map
+                   |Length
+                   |Foldl
+                   |Foldr
+                   |Flatten
