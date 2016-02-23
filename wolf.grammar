@@ -19,6 +19,7 @@ States
 initial, string, escape;
 
 Tokens
+// Strings
 {initial->string} string_start = single_quote;
 
 {string->escape} string_escape = backslash;

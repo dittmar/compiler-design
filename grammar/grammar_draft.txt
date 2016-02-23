@@ -10,22 +10,24 @@ SigArgRest = , id
 
 Func = FuncName ArgList
 
-FuncName = id       // user-defined function
+FuncName = id       // user-defined function identifier
          = Branch   // branching and recursive structure
          = h        // head - get the first element of a list
          = t        // tail - get a list excluding first element of the list
          = r        // reverse - reverse the input list and return it
-         = ^        // prepend - add an element to the beginning of the list
-         = $        // append - add an element to the end of the list
-         = .        // map - apply function to list elements to make new list
+         = ^        // prepend - add an element to the start of the given list
+         = $        // append - add an element to the end of the given list
+         = .        // map - apply unary op to list elements to make new list
          = #        // length - get size of list
-         = {        // foldl - apply binary op to list elements left associative
-         = }        // foldr - apply binary op to list elements right associative
-         = _        // flatten - turn a list with nested lists into one flat list
+         = {        // foldl - apply binary op to list left associatively
+         = }        // foldr - apply binary op to list right associatively
+         = _        // flatten - turn list with nested lists into a flat list
          = @        // identity - return the argument provided
-         = print    // print - print the argument to stdout and return the argument
+         = print    // print - print the argument to stdout and return it
          = \        // anonymous function
-         = op       // operators like +, ~, >=, =, !, |, and x
+         = ~        // unary operator for arithmetic negation; Ex: ~(5) = -5
+         = !        // unary operator for logical negation
+         = op       // binary operators like +, >=, =, |, and x
 
 ArgList = ()
         = (Args)        
