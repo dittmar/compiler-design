@@ -1,4 +1,9 @@
 `
+  Kevin Dittmar
+  William Ezekiel
+  Joe Alacqua
+`
+`
 Example using map (.) and lambda (\).
 This program takes a list and modifies the list to contain
 the factorials of its original contents

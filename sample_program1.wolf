@@ -1,3 +1,8 @@
+`
+  Kevin Dittmar
+  William Ezekiel
+  Joe Alacqua
+`
 `This function adds up all elements in a list`
 def sumList(list) := =(list, []) ? 0 : +(h(list), sumList(t(list)))
 
