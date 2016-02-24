@@ -10,7 +10,7 @@ the factorials of its original contents
 `
 
 `return 1 if n = 0 because 0! is 1.  Otherwise, multiply n by (n-1)!`
-def factorial(n) := =(n, 0) ? @(1) : *(n, factorial(-(n, 1)))
+def factorial(n) := ; =(n, 0) ? @(1) : *(n, factorial(-(n, 1)))
 
 `
 returns a list such that each element n becomes n! + 1

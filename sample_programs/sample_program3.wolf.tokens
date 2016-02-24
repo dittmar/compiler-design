@@ -36,6 +36,7 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
+class wolf.node.TTernarySemi: ;
 class wolf.node.TEqual: =
 class wolf.node.TLParen: (
 class wolf.node.TLength: #
@@ -58,7 +59,7 @@ class wolf.node.TStartList: [
 class wolf.node.TEndList: ]
 class wolf.node.TRParen: )
 class wolf.node.TSpace:  
-class wolf.node.TSpace:  
+class wolf.node.TTernaryColon: :
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
@@ -76,8 +77,7 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
-class wolf.node.TTernaryColon: :
-class wolf.node.TSpace:  
+class wolf.node.TTernarySemi: ;
 class wolf.node.TLte: <=
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: n
@@ -99,6 +99,8 @@ class wolf.node.TSpace:
 class wolf.node.TIdentifier: list
 class wolf.node.TRParen: )
 class wolf.node.TSpace:  
+class wolf.node.TTernaryColon: :
+class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
@@ -111,8 +113,6 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
-class wolf.node.TSpace:  
-class wolf.node.TTernaryColon: :
 class wolf.node.TSpace:  
 class wolf.node.TPrepend: ^
 class wolf.node.TLParen: (
@@ -133,6 +133,9 @@ class wolf.node.TIdentifier: list
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
@@ -158,6 +161,7 @@ class wolf.node.TRParen: )
 class wolf.node.TSpace:  
 class wolf.node.TAssign: :=
 class wolf.node.TSpace:  
+class wolf.node.TTernarySemi: ;
 class wolf.node.TLt: <
 class wolf.node.TLParen: (
 class wolf.node.TLength: #

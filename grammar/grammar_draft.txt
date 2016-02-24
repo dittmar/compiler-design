@@ -46,7 +46,7 @@ Arg = Func
     = id
 
 // Ternary if/else condition
-Branch = If : Else
+Branch = ; If : Else
 If = BoolExpr ? Func
 Else = Func
 

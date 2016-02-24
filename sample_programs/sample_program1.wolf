@@ -4,12 +4,12 @@
   Joe Alacqua
 `
 `This function adds up all elements in a list`
-def sumList(list) := =(list, []) ? 0 : +(h(list), sumList(t(list)))
+def sumList(list) := ; =(list, []) ? 0 : +(h(list), sumList(t(list)))
 
 `This function gets the product
 of all elements in a list`
 def prodList(list) := 
-    =(list, [])
+    ; =(list, [])
     ? @(1)
     : *(h(list), prodList(t(list)))
 

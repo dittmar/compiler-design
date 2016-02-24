@@ -17,6 +17,8 @@ class wolf.node.TRParen: )
 class wolf.node.TSpace:  
 class wolf.node.TAssign: :=
 class wolf.node.TSpace:  
+class wolf.node.TTernarySemi: ;
+class wolf.node.TSpace:  
 class wolf.node.TEqual: =
 class wolf.node.TLParen: (
 class wolf.node.TIdentifier: list
@@ -70,6 +72,8 @@ class wolf.node.TSpace:
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
 class wolf.node.TSpace:  
+class wolf.node.TSpace:  
+class wolf.node.TTernarySemi: ;
 class wolf.node.TSpace:  
 class wolf.node.TEqual: =
 class wolf.node.TLParen: (
