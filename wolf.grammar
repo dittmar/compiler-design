@@ -1,3 +1,7 @@
+// Kevin Dittmar
+// William Ezekiel
+// Joe Alacqua
+
 // Lexer for WOL(F) - Write-Only Language (Functional)
 Package wolf;
 
