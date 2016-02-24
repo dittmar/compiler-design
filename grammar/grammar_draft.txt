@@ -47,7 +47,7 @@ Arg = Func
 
 // Ternary if/else condition
 Branch = ; If : Else
-If = BoolExpr ? Func
+If = Func ? Func
 Else = Func
 
 List = [ Args ]

@@ -77,15 +77,10 @@ public class Parser
         }
     }
     
-    void BoolExpr()
-    {
-        
-    }
-    
     void Branch()
     {
         eat(TTernarySemi.class);
-        BoolExpr();
+        Func();
         eat(TTernaryQuestionMark.class);
         Func();
         eat(TTernaryColon.class);
