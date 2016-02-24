@@ -1,4 +1,11 @@
 class wolf.node.TComment: `
+  Kevin Dittmar
+  William Ezekiel
+  Joe Alacqua
+`
+class wolf.node.TSpace: 
+
+class wolf.node.TComment: `
 Example using map (.) and lambda (\).
 This program takes a list and modifies the list to contain
 the factorials of its original contents
@@ -90,4 +97,6 @@ class wolf.node.TComma: ,
 class wolf.node.TSpace:  
 class wolf.node.TIdentifier: list
 class wolf.node.TRParen: )
+class wolf.node.TSpace: 
+
 class wolf.node.EOF: 

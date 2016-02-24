@@ -1,3 +1,10 @@
+class wolf.node.TComment: `
+  Kevin Dittmar
+  William Ezekiel
+  Joe Alacqua
+`
+class wolf.node.TSpace: 
+
 class wolf.node.TComment: `Sorts a list of numbers with insertion sort`
 class wolf.node.TSpace: 
 
@@ -217,4 +224,6 @@ sort([2,7,1,6]) = insert(2, sort([7,1,6]))
                 = ^(1, [2,6,7])
                 = [1,2,6,7]
 `
+class wolf.node.TSpace: 
+
 class wolf.node.EOF: 

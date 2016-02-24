@@ -1,3 +1,10 @@
+class wolf.node.TComment: `
+  Kevin Dittmar
+  William Ezekiel
+  Joe Alacqua
+`
+class wolf.node.TSpace: 
+
 class wolf.node.TComment: `This function adds up all elements in a list`
 class wolf.node.TSpace: 
 
@@ -156,4 +163,6 @@ class wolf.node.TIntNumber: 9
 class wolf.node.TEndList: ]
 class wolf.node.TRParen: )
 class wolf.node.TRParen: )
+class wolf.node.TSpace: 
+
 class wolf.node.EOF: 
