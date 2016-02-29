@@ -44,9 +44,7 @@ public class Parser
         }
         else if (token instanceof TStringStart)
         {
-            eat(TStringStart.class);
-            
-            eat(TStringEnd.class);
+            String();
         }
         else if (token instanceof TStartList)
         {
@@ -96,6 +94,61 @@ public class Parser
         Func();
     }
     
+    void Escape()
+    {
+        eat(TStringEscape.class);
+        switch(token.getClass().getName())
+        {
+            case "TEscapeAlarm":
+                eat(TEscapeAlarm.class);
+                break;
+            case "TEscapeBackslash":
+                eat(TEscapeBackslash.class);
+                break;
+            case "TEscapeBackspace":
+                eat(TEscapeBackspace.class);
+                break;
+            case "TEscapeCarriageReturn":
+                eat(TEscapeCarriageReturn.class);
+                break;
+            case "TEscapeDefault":
+                eat(TEscapeDefault.class);
+                break;
+            case "TEscapeDoubleQuote":
+                eat(TEscapeDoubleQuote.class);
+                break;
+            case "TEscapeFormfeed":
+                eat(TEscapeFormfeed.class);
+                break;
+            case "TEscapeHexChar":
+                eat(TEscapeHexChar.class);
+                break;
+            case "TEscapeNewline":
+                eat(TEscapeNewline.class);
+                break;
+            case "TEscapeOctalChar":
+                eat(TEscapeOctalChar.class);
+                break;
+            case "TEscapeQuestionMark":
+                eat(TEscapeQuestionMark.class);
+                break;
+            case "TEscapeSingleQuote":
+                eat(TEscapeSingleQuote.class);
+                break;
+            case "TEscapeTab":
+                eat(TEscapeTab.class);
+                break;
+            case "TEscapeUnicodeChar":
+                eat(TEscapeUnicodeChar.class);
+                break;
+            case "TEscapeVerticalTab":
+                eat(TEscapeVerticalTab.class);
+                break;
+            default:
+                // error
+        }
+    }
+    
     void Func()
     {
         if (token instanceof TTernarySemi)
@@ -115,7 +168,97 @@ public class Parser
     
     void FuncName()
     {
-        
+        switch(token.getClass().getName())
+        {
+            case "TIdentifier":
+                eat(TIdentifier.class);
+                break;
+            case "THead":
+                eat(THead.class);
+                break;
+            case "TTail":
+                eat(TTail.class);
+                break;
+            case "TReverse":
+                eat(TReverse.class);
+                break;
+            case "TPrepend":
+                eat(TPrepend.class);
+                break;
+            case "TAppend":
+                eat(TAppend.class);
+                break;
+            case "TMap":
+                eat(TMap.class);
+                break;
+            case "TLength":
+                eat(TLength.class);
+                break;
+            case "TFoldl":
+                eat(TFoldl.class);
+                break;
+            case "TFoldr":
+                eat(TFoldr.class);
+                break;
+            case "TFlatten":
+                eat(TFlatten.class);
+                break;
+            case "TIdentity":
+                eat(TIdentity.class);
+                break;
+            case "TPrint":
+                eat(TPrint.class);
+                break;
+            case "TLambdaStart":
+                eat(TLambdaStart.class);
+                break;
+            case "TNeg":
+                eat(TNeg.class);
+                break;
+            case "TEqual":
+                eat(TEqual.class);
+                break;
+            case "TNotEqual":
+                eat(TNotEqual.class);
+                break;
+            case "TGt":
+                eat(TGt.class);
+                break;
+            case "TGte":
+                eat(TGte.class);
+                break;
+            case "TLt":
+                eat(TLt.class);
+                break;
+            case "TLte":
+                eat(TLte.class);
+                break;
+            case "TPlus":
+                eat(TPlus.class);
+                break;
+            case "TMinus":
+                eat(TMinus.class);
+                break;
+            case "TMult":
+                eat(TMult.class);
+                break;
+            case "TDiv":
+                eat(TDiv.class);
+                break;
+            case "TOr":
+                eat(TOr.class);
+                break;
+            case "TAnd":
+                eat(TAnd.class);
+                break;
+            case "TXor":
+                break;
+            case "TLogicalNot":
+                eat(TLogicalNot.class);
+                break;
+            default:
+                // error
+        }
     }
     
     void List()
@@ -159,6 +302,23 @@ public class Parser
         {
             SigArgRest();
         }
+    }
+    
+    void String()
+    {
+        eat(TStringStart.class);
+        while (!(token instanceof TStringEnd))
+        {
+            if (token instanceof TStringEscape)
+            {
+                Escape();
+            }
+            else if (token instanceof TStringBody)
+            {
+                eat(TStringBody.class);
+            }
+        }
+        eat(TStringEnd.class);
     }
     
     void eat(Class klass)
