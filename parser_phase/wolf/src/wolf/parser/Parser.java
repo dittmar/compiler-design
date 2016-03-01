@@ -8,8 +8,27 @@ import wolf.node.*;
  */
 public class Parser 
 {
-    WolfLexing lexer = new WolfLexing();
-    Token token = lexer.getToken();
+    private WolfLexing lexer;
+    private Token token;
+    
+    public Parser()
+    {
+        
+    }
+    
+    public void parse()
+    {
+        lexer = new WolfLexing();
+        token = nextValidToken();
+        Program();
+    }
+    
+    public void parse(String filename)
+    {
+        lexer = new WolfLexing(filename);
+        token = nextValidToken();
+        Program();
+    }
     
     void ArgList()
     {
@@ -25,7 +44,7 @@ public class Parser
         }
         else
         {
-            
+            error();
         }
     }
     
@@ -57,7 +76,7 @@ public class Parser
         }
         else
         {
-            
+            error();
         }
     }
     
@@ -88,7 +107,6 @@ public class Parser
     
     void Def()
     {
-        eat(TDef.class);
         eat(TDef.class);
         Sig();
         eat(TAssign.class);
@@ -146,7 +164,7 @@ public class Parser
                 eat(TEscapeVerticalTab.class);
                 break;
             default:
-                // error
+                error();
         }
     }
     
@@ -163,7 +181,7 @@ public class Parser
         }
         else
         {
-            
+            error();
         }
     }
     
@@ -258,7 +276,7 @@ public class Parser
                 eat(TLogicalNot.class);
                 break;
             default:
-                // error
+                error();
         }
     }
     
@@ -271,13 +289,17 @@ public class Parser
     
     void Program()
     {
-        if (token instanceof TDef)
+        while (token instanceof TDef)
         {
             Def();
         }
-        else if (isFuncName())
+        if (isFuncName())
         {
-            FuncName();
+            Func();
+        }
+        else
+        {
+            error();
         }
     }
     
@@ -318,6 +340,10 @@ public class Parser
             {
                 eat(TStringBody.class);
             }
+            else
+            {
+                error();
+            }
         }
         eat(TStringEnd.class);
     }
@@ -326,12 +352,26 @@ public class Parser
     {
         if (token.getClass().getName().equals(klass.getClass().getName()))
         {
-            token = lexer.getToken();
+            token = nextValidToken();
         }
-        throw new IllegalArgumentException(
-                "Unexpected token type: " + token.getClass().getName());
+        else
+        {
+            error();
+        }
     }
     
+    void error()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Unexpected token type: ");
+        sb.append(token.getClass().getName());
+        sb.append("\nError at: ");
+        sb.append(token.getPos());
+        sb.append("\nError: ");
+        sb.append(token.getText());
+        throw new IllegalArgumentException(sb.toString());
+    }
+        
     boolean isFuncName()
     {
         return token instanceof TIdentifier ||
@@ -374,5 +414,31 @@ public class Parser
                token instanceof TStringStart ||
                token instanceof TStartList ||
                isFuncName();
+    }
+    
+    Token nextValidToken()
+    {
+        token = lexer.getToken();
+        while (token instanceof TSpace || token instanceof TComment)
+        {
+            token = lexer.getToken();
+        }
+        return token;
+    }
+    
+    public static void main(String args[])
+    {
+        if (args.length == 0)
+        {
+            new Parser().parse();
+        }
+        else
+        {
+            for (String filename : args)
+            {
+                System.out.println("Parsing " + filename);
+                new Parser().parse(filename);
+            }
+        }
     }
 }
