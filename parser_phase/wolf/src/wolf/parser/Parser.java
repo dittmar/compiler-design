@@ -4,6 +4,7 @@ import wolf.node.*;
 /**
  *
  * @author Kevin Dittmar
+ * @author William Ezekiel
  * @version Feb 23, 2016
  */
 public class Parser 
@@ -30,7 +31,7 @@ public class Parser
         Program();
     }
     
-    void ArgList()
+    private void ArgList()
     {
         eat(TLParen.class);
         if (token instanceof TRParen)
@@ -48,13 +49,14 @@ public class Parser
         }
     }
     
-    void Arg()
+    private void Arg()
     {
-        System.out.println("Looking at: " + token.getText());
+        // The identifier could be a literal or a function call
         if (token instanceof TIdentifier)
         {
             eat(TIdentifier.class);
-            // It's a function call, not a function input
+            // If it starts with a left parenthesis, it's a function call,
+            // not a literal (e.g. float, string, int)
             if (token instanceof TLParen)
             {
                 ArgList();
@@ -90,13 +92,13 @@ public class Parser
         }
     }
     
-    void ArgRest()
+    private void ArgRest()
     {
         eat(TComma.class);
         Arg();
     }
     
-    void Args()
+    private void Args()
     {
         Arg();
         while (token instanceof TComma)
@@ -105,7 +107,7 @@ public class Parser
         }
     }
     
-    void Branch()
+    private void Branch()
     {
         eat(TTernarySemi.class);
         Func();
@@ -115,7 +117,7 @@ public class Parser
         Func();
     }
     
-    void Def()
+    private void Def()
     {
         eat(TDef.class);
         eat(TIdentifier.class);
@@ -124,11 +126,10 @@ public class Parser
         Func();
     }
     
-    void Escape()
+    private void Escape()
     {
         eat(TStringEscape.class);
-        String[] token_name_parts = token.getClass().getName().split("\\.");
-        switch(token_name_parts[token_name_parts.length - 1])
+        switch(getTokenName())
         {
             case "TEscapeAlarm":
                 eat(TEscapeAlarm.class);
@@ -180,7 +181,7 @@ public class Parser
         }
     }
     
-    void FoldBody()
+    private void FoldBody()
     {
         eat(TLParen.class);
         FuncName();
@@ -204,7 +205,7 @@ public class Parser
         eat(TRParen.class);
     }
     
-    void Func()
+    private void Func()
     {
         if (token instanceof TTernarySemi)
         {
@@ -231,10 +232,9 @@ public class Parser
         }
     }
     
-    void FuncName()
+    private void FuncName()
     {
-        String[] token_name_parts = token.getClass().getName().split("\\.");
-        switch(token_name_parts[token_name_parts.length - 1])
+        switch(getTokenName())
         {
             case "TIdentifier":
                 eat(TIdentifier.class);
@@ -322,7 +322,7 @@ public class Parser
         }
     }
     
-    void Lambda()
+    private void Lambda()
     {
         eat(TLambdaStart.class);
         eat(TLParen.class);
@@ -332,7 +332,7 @@ public class Parser
         eat(TRParen.class);
     }
     
-    void List()
+    private void List()
     {
         eat(TStartList.class);
         if (isArg())
@@ -350,9 +350,8 @@ public class Parser
         }        
     }
     
-    void Program()
+    private void Program()
     {
-        System.out.println("Looking at: " + token.getText());
         while (token instanceof TDef)
         {
             Def();
@@ -367,7 +366,7 @@ public class Parser
         }
     }
     
-    void Sig()
+    private void Sig()
     {
         eat(TLParen.class);
         if (token instanceof TIdentifier) {
@@ -376,13 +375,13 @@ public class Parser
         eat(TRParen.class);
     }
     
-    void SigArgRest()
+    private void SigArgRest()
     {
         eat(TComma.class);
         eat(TIdentifier.class);
     }
     
-    void SigArgs()
+    private void SigArgs()
     {
         eat(TIdentifier.class);
         while (token instanceof TComma)
@@ -391,7 +390,7 @@ public class Parser
         }
     }
     
-    void String()
+    private void String()
     {
         eat(TStringStart.class);
         while (!(token instanceof TStringEnd))
@@ -412,10 +411,9 @@ public class Parser
         eat(TStringEnd.class);
     }
     
-    void eat(Class klass)
+    // Helper functions
+    private void eat(Class klass)
     {
-        System.out.println(token.getClass().getName());
-        System.out.println(klass.getName());
         if (token.getClass().getName().equals(klass.getName()))
         {
             token = nextValidToken();
@@ -426,19 +424,25 @@ public class Parser
         }
     }
     
-    void error()
+    private void error()
     {
         StringBuilder sb = new StringBuilder();
         sb.append("Unexpected token type: ");
         sb.append(token.getClass().getName());
-        sb.append("\nError at: ");
+        sb.append("\nError at column: ");
         sb.append(token.getPos());
-        sb.append("\nError: ");
+        sb.append("\nInvalid token: ");
         sb.append(token.getText());
         throw new IllegalArgumentException(sb.toString());
     }
     
-    boolean isFunc()
+    private String getTokenName()
+    {
+        String[] token_name_parts = token.getClass().getName().split("\\.");
+        return token_name_parts[token_name_parts.length - 1];
+    }
+    
+    private boolean isFunc()
     {
         return isFuncName() ||
                token instanceof TTernarySemi ||
@@ -446,7 +450,7 @@ public class Parser
                token instanceof TFoldr;
     }
     
-    boolean isFuncName()
+    private boolean isFuncName()
     {
         return token instanceof TIdentifier ||
                token instanceof THead ||
@@ -477,7 +481,7 @@ public class Parser
                token instanceof TXor;
     }
     
-    boolean isArg()
+    private boolean isArg()
     {
         return token instanceof TIdentifier ||
                token instanceof TIntNumber ||
@@ -488,7 +492,7 @@ public class Parser
                isFunc();
     }
     
-    Token nextValidToken()
+    private Token nextValidToken()
     {
         token = lexer.getToken();
         while (token instanceof TSpace || token instanceof TComment)
