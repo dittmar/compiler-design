@@ -54,6 +54,11 @@ public class Parser
         if (token instanceof TIdentifier)
         {
             eat(TIdentifier.class);
+            // It's a function call, not a function input
+            if (token instanceof TLParen)
+            {
+                ArgList();
+            }
         }
         else if (token instanceof TIntNumber)
         {
