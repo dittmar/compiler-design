@@ -76,7 +76,11 @@ public class Parser
         {
             List();
         }
-        else if (isFuncName())
+        else if (token instanceof TLambdaStart)
+        {
+            Lambda();
+        }
+        else if (isFunc())
         {
             Func();
         }
@@ -175,11 +179,45 @@ public class Parser
         }
     }
     
+    void FoldBody()
+    {
+        eat(TLParen.class);
+        FuncName();
+        eat(TComma.class);
+        if (token instanceof TStartList)
+        {
+            List();
+        }
+        else if (token instanceof TIdentifier)
+        {
+            eat(TIdentifier.class);
+        }
+        else if (isFunc())
+        {
+            Func();
+        }
+        else
+        {
+            error();
+        }
+        eat(TRParen.class);
+    }
+    
     void Func()
     {
         if (token instanceof TTernarySemi)
         {
             Branch();
+        }
+        else if (token instanceof TFoldl)
+        {
+            eat(TFoldl.class);
+            FoldBody();
+        }
+        else if (token instanceof TFoldr)
+        {
+            eat(TFoldr.class);
+            FoldBody();
         }
         else if (isFuncName())
         {
@@ -221,12 +259,6 @@ public class Parser
             case "TLength":
                 eat(TLength.class);
                 break;
-            case "TFoldl":
-                eat(TFoldl.class);
-                break;
-            case "TFoldr":
-                eat(TFoldr.class);
-                break;
             case "TFlatten":
                 eat(TFlatten.class);
                 break;
@@ -235,9 +267,6 @@ public class Parser
                 break;
             case "TPrint":
                 eat(TPrint.class);
-                break;
-            case "TLambdaStart":
-                eat(TLambdaStart.class);
                 break;
             case "TNeg":
                 eat(TNeg.class);
@@ -288,6 +317,16 @@ public class Parser
         }
     }
     
+    void Lambda()
+    {
+        eat(TLambdaStart.class);
+        eat(TLParen.class);
+        ArgList();
+        eat(TLambdaArrow.class);
+        Func();
+        eat(TRParen.class);
+    }
+    
     void List()
     {
         eat(TStartList.class);
@@ -313,7 +352,7 @@ public class Parser
         {
             Def();
         }
-        if (isFuncName())
+        if (isFunc())
         {
             Func();
         }
@@ -393,7 +432,15 @@ public class Parser
         sb.append(token.getText());
         throw new IllegalArgumentException(sb.toString());
     }
-        
+    
+    boolean isFunc()
+    {
+        return isFuncName() ||
+               token instanceof TTernarySemi ||
+               token instanceof TFoldl ||
+               token instanceof TFoldr;
+    }
+    
     boolean isFuncName()
     {
         return token instanceof TIdentifier ||
@@ -404,12 +451,9 @@ public class Parser
                token instanceof TAppend ||
                token instanceof TMap ||
                token instanceof TLength ||
-               token instanceof TFoldl ||
-               token instanceof TFoldr ||
                token instanceof TFlatten ||
                token instanceof TIdentity ||
                token instanceof TPrint ||
-               token instanceof TLambdaStart ||
                token instanceof TNeg ||
                token instanceof TLogicalNot ||
                token instanceof TPlus ||
@@ -435,7 +479,8 @@ public class Parser
                token instanceof TFloatNumber ||
                token instanceof TStringStart ||
                token instanceof TStartList ||
-               isFuncName();
+               token instanceof TLambdaStart ||
+               isFunc();
     }
     
     Token nextValidToken()

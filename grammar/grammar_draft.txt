@@ -14,6 +14,8 @@ SigArgRest = , id
 
 Func = FuncName ArgList
      = Branch
+     = Foldl
+     = Foldr
      
 FuncName = id       // user-defined function identifier
          = h        // head - get the first element of a list
@@ -23,15 +25,19 @@ FuncName = id       // user-defined function identifier
          = $        // append - add an element to the end of the given list
          = .        // map - apply unary op to list elements to make new list
          = #        // length - get size of list
-         = {        // foldl - apply binary op to list left associatively
-         = }        // foldr - apply binary op to list right associatively
          = _        // flatten - turn list with nested lists into a flat list
          = @        // identity - return the argument provided
          = print    // print - print the argument to stdout and return it
-         = \        // anonymous function
          = ~        // unary operator for arithmetic negation; Ex: ~(5) = -5
          = !        // unary operator for logical negation
          = op       // binary operators like +, >=, =, |, and x
+
+Foldl = { FoldBody  // foldl - apply binary op to list left associatively
+Foldr = } FoldBody  // foldr - apply binary op to list right associatively
+FoldBody = ( FuncName, FoldArg)
+FoldArg = List
+        = Func
+        = id
 
 ArgList = ()
         = (Args)        
@@ -39,6 +45,7 @@ Args = Arg ArgRest*
 ArgRest = , Arg
 
 Arg = Func
+    = Lambda
     = List
     = float_literal
     = string_literal
@@ -49,6 +56,8 @@ Arg = Func
 Branch = ; If : Else
 If = Func ? Func
 Else = Func
+
+Lambda = \(ArgList -> Func)
 
 List = [ Args ]
      = []
