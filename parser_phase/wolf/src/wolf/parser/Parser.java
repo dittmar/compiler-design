@@ -2,21 +2,28 @@ package wolf.parser;
 import wolf.*;
 import wolf.node.*;
 /**
- *
+ * A recursive descent Parser for the WOL(F) programming language.
  * @author Kevin Dittmar
  * @author William Ezekiel
- * @version Feb 23, 2016
+ * @author Joe Alacqua
+ * @version Mar 1, 2016
  */
 public class Parser 
 {
     private WolfLexing lexer;
     private Token token;
     
+    /**
+     * Empty constructor
+     */
     public Parser()
     {
         
     }
     
+    /**
+     * Parse a WOL(F) program from stdin.
+     */
     public void parse()
     {
         lexer = new WolfLexing();
@@ -24,6 +31,10 @@ public class Parser
         Program();
     }
     
+    /**
+     * Parse a WOL(F) program from a file.
+     * @param filename is the name of the file to parse as a WOL(F) program.
+     */
     public void parse(String filename)
     {
         lexer = new WolfLexing(filename);
@@ -31,6 +42,11 @@ public class Parser
         Program();
     }
     
+    /**
+     * Parse an ArgList
+     * ArgList = ()
+     *         = (Args) 
+     */
     private void ArgList()
     {
         eat(TLParen.class);
@@ -49,6 +65,16 @@ public class Parser
         }
     }
     
+    /**
+     * Parse an Arg.
+     * Arg = Func
+     *     = Lambda
+     *     = List
+     *     = float_literal
+     *     = string_literal
+     *     = int_literal
+     *     = id
+     */
     private void Arg()
     {
         // The identifier could be a literal or a function call
@@ -92,12 +118,20 @@ public class Parser
         }
     }
     
+    /**
+     * Parse an ArgRest.
+     * ArgRest = , Arg
+     */
     private void ArgRest()
     {
         eat(TComma.class);
         Arg();
     }
     
+    /**
+     * Parse Args.
+     * Args = Arg ArgRest*
+     */
     private void Args()
     {
         Arg();
@@ -107,6 +141,10 @@ public class Parser
         }
     }
     
+    /**
+     * Parse a Branch.
+     * Branch = ; If : Else
+     */
     private void Branch()
     {
         eat(TTernarySemi.class);
@@ -117,6 +155,10 @@ public class Parser
         Func();
     }
     
+    /**
+     * Parse a Def.
+     * Def = def id Sig := Func
+     */
     private void Def()
     {
         eat(TDef.class);
@@ -126,6 +168,10 @@ public class Parser
         Func();
     }
     
+    /**
+     * Parse a string escape sequence in the format:
+     * \<escape_chars>
+     */
     private void Escape()
     {
         eat(TStringEscape.class);
@@ -181,6 +227,10 @@ public class Parser
         }
     }
     
+    /**
+     * Parse a FoldBody.
+     * FoldBody = ( FuncName, FoldArg)
+     */
     private void FoldBody()
     {
         eat(TLParen.class);
@@ -205,6 +255,13 @@ public class Parser
         eat(TRParen.class);
     }
     
+    /**
+     * Parse a Func.
+     * Func = FuncName ArgList
+     *      = Branch
+     *      = Foldl
+     *      = Foldr
+     */
     private void Func()
     {
         if (token instanceof TTernarySemi)
@@ -232,6 +289,23 @@ public class Parser
         }
     }
     
+    /**
+     * Parse a FuncName.
+     * FuncName = id    user-defined function identifier
+     *          = h     head - get the first element of a list
+     *          = t     tail - get a list excluding first element of the list
+     *          = r     reverse - reverse the input list and return it
+     *          = ^     prepend - add an element to the start of the given list
+     *          = $     append - add an element to the end of the given list
+     *          = .     map - apply unary op to list elements to make new list
+     *          = #     length - get size of list
+     *          = _     flatten - turn list with nested lists into a flat list
+     *          = @     identity - return the argument provided
+     *          = print print - print the argument to stdout and return it
+     *          = ~     unary operator for arithmetic negation; Ex: ~(5) = -5
+     *          = !     unary operator for logical negation
+     *          = op    binary operators like +, >=, =, |, and x
+     */
     private void FuncName()
     {
         switch(getTokenName())
@@ -322,6 +396,10 @@ public class Parser
         }
     }
     
+    /**
+     * Parse a Lambda.
+     * Lambda = \(ArgList -> Func)
+     */
     private void Lambda()
     {
         eat(TLambdaStart.class);
@@ -332,6 +410,11 @@ public class Parser
         eat(TRParen.class);
     }
     
+    /**
+     * Parse a List.
+     * List = [ Args ]
+     *      = []
+     */
     private void List()
     {
         eat(TStartList.class);
@@ -350,6 +433,10 @@ public class Parser
         }        
     }
     
+    /**
+     * Parse a Program.
+     * Program = Def* Func
+     */
     private void Program()
     {
         while (token instanceof TDef)
@@ -366,6 +453,11 @@ public class Parser
         }
     }
     
+    /**
+     * Parse a Sig.
+     * Sig = ()
+     *     = (SigArgs)
+     */
     private void Sig()
     {
         eat(TLParen.class);
@@ -375,12 +467,20 @@ public class Parser
         eat(TRParen.class);
     }
     
+    /**
+     * Parse a SigArgRest.
+     * SigArgRest = , id
+     */
     private void SigArgRest()
     {
         eat(TComma.class);
         eat(TIdentifier.class);
     }
     
+    /**
+     * Parse SigArgs.
+     * SigArgs = id SigArgRest*
+     */
     private void SigArgs()
     {
         eat(TIdentifier.class);
@@ -390,6 +490,9 @@ public class Parser
         }
     }
     
+    /**
+     * Parse a string literal, which may include escape sequences.
+     */
     private void String()
     {
         eat(TStringStart.class);
@@ -412,6 +515,11 @@ public class Parser
     }
     
     // Helper functions
+    /**
+     * Eats a token based on its class.  If the current token's class doesn't
+     * match the given class, then an error is thrown.
+     * @param klass is the class of the token to be eaten.
+     */
     private void eat(Class klass)
     {
         if (token.getClass().getName().equals(klass.getName()))
@@ -424,6 +532,11 @@ public class Parser
         }
     }
     
+    /**
+     * Throw an IllegalArgumentException because the current token does
+     * not match the expected token.  Log the type of token, its position,
+     * and the token itself.
+     */
     private void error()
     {
         StringBuilder sb = new StringBuilder();
@@ -436,12 +549,23 @@ public class Parser
         throw new IllegalArgumentException(sb.toString());
     }
     
+    /**
+     * Get the name of a token from the extended class name.  Tokens
+     * are named wolf.node.<token_class>.  We want only the token_class for
+     * matching purposes.
+     * @return the name of the token's class.
+     */
     private String getTokenName()
     {
         String[] token_name_parts = token.getClass().getName().split("\\.");
         return token_name_parts[token_name_parts.length - 1];
     }
     
+    /**
+     * Decide if the current token indicates a Function.
+     * @return true if the current token is a token that can start a Function,
+     * false otherwise.
+     */
     private boolean isFunc()
     {
         return isFuncName() ||
@@ -450,6 +574,11 @@ public class Parser
                token instanceof TFoldr;
     }
     
+    /**
+     * Decide if the current token indicates a Function Name.
+     * @return true if the current token is a token that can start a Function
+     * Name, false otherwise.
+     */
     private boolean isFuncName()
     {
         return token instanceof TIdentifier ||
@@ -481,6 +610,11 @@ public class Parser
                token instanceof TXor;
     }
     
+    /**
+     * Decide if the current token indicates a Argument.
+     * @return true if the current token is a token that can start a Argument,
+     * false otherwise.
+     */
     private boolean isArg()
     {
         return token instanceof TIdentifier ||
@@ -492,6 +626,10 @@ public class Parser
                isFunc();
     }
     
+    /**
+     * Get the next valid token, skipping comments and whitespace.
+     * @return the next non-ignored token.
+     */
     private Token nextValidToken()
     {
         token = lexer.getToken();
@@ -502,6 +640,10 @@ public class Parser
         return token;
     }
     
+    /**
+     * Driver to test parser.
+     * @param args the names of all files to parse.
+     */
     public static void main(String args[])
     {
         if (args.length == 0)
