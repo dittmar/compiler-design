@@ -8,7 +8,8 @@ import wolf.node.*;
  */
 public class Parser 
 {
-    Token token = WolfLexing.getToken();
+    WolfLexing lexer = new WolfLexing();
+    Token token = lexer.getToken();
     
     void ArgList()
     {
@@ -325,7 +326,7 @@ public class Parser
     {
         if (token.getClass().getName().equals(klass.getClass().getName()))
         {
-            token = WolfLexing.getToken();
+            token = lexer.getToken();
         }
         throw new IllegalArgumentException(
                 "Unexpected token type: " + token.getClass().getName());

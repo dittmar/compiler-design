@@ -11,9 +11,33 @@ import java.io.*;
 
 public class WolfLexing 
 {
-    static Lexer lexer = new Lexer(new PushbackReader(
-            new InputStreamReader(System.in), 1024));
-    static Token token = null;
+    private Lexer lexer;
+    private Token token;
+    
+    public WolfLexing()
+    {
+        lexer = new Lexer(
+            new PushbackReader(
+                new InputStreamReader(System.in), 1024
+            )
+        );
+    }
+    
+    public WolfLexing(String filename)
+    {
+        try
+        {
+            lexer = new Lexer(
+                new PushbackReader(
+                    new FileReader(filename), 1024
+                )
+            );
+        }
+        catch (FileNotFoundException fnfe)
+        {
+            System.err.println(fnfe.getMessage());
+        }
+    }
     
     // Command line format: java wolf/WolfLexing file1 file2 file3 ...
     // If no file names are given, reads from stdin.
@@ -21,13 +45,15 @@ public class WolfLexing
     {
         if(args.length == 0)
         {
-            lexStdIn();
+            WolfLexing wl = new WolfLexing();
+            wl.lexStdIn();
         }
         else
         {
             for(String file : args)
             {
-                lexFile(file);
+                WolfLexing wl = new WolfLexing(file);
+                wl.lexFile(file);
             }
         }
     }
@@ -35,11 +61,8 @@ public class WolfLexing
     
     // Do the lexical phase for WOLF from stdin, and
     // send the token output to stdout.
-    private static void lexStdIn()
+    private void lexStdIn()
     {
-      token = null;
-      lexer = new Lexer(new PushbackReader(
-              new InputStreamReader(System.in), 1024));
       // Collect all of the tokens in a StringBuilder to write
       // to the file.
       while((token = getToken()) != null)
@@ -51,39 +74,34 @@ public class WolfLexing
 
     // Do the lexical phase for WOLF from a file,
     // save the output to a file of the same name with the .tokens extension.
-    private static void lexFile(String filename)
+    private void lexFile(String filename)
     {
       try
       {
-        lexer = new Lexer(
-          new PushbackReader(
-            new FileReader(filename), 1024
-          )
-      );
-      String outputFile = filename + ".tokens";
-      File file = new File(outputFile);
-      if(!file.exists())
-		  {
-        file.createNewFile();
-      }
+        String outputFile = filename + ".tokens";
+        File file = new File(outputFile);
+        if(!file.exists())
+        {
+            file.createNewFile();
+        }
 
-      FileWriter fw = new FileWriter(file.getAbsoluteFile());
-      BufferedWriter bw = new BufferedWriter(fw);
+        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        BufferedWriter bw = new BufferedWriter(fw);
 
-      StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
-      // Collect all of the tokens in a StringBuilder to write
-      // to the file.
-      while((token = getToken()) != null)
-      {
-        sb.append(token.getClass());
-        sb.append(": ");
-        sb.append(token.getText());
-        sb.append("\n");
-      }
+        // Collect all of the tokens in a StringBuilder to write
+        // to the file.
+        while((token = getToken()) != null)
+        {
+            sb.append(token.getClass());
+            sb.append(": ");
+            sb.append(token.getText());
+            sb.append("\n");
+        }
 
-      bw.write(sb.toString());
-      bw.close();
+        bw.write(sb.toString());
+        bw.close();
     }
     catch(FileNotFoundException fnfe)
     {
@@ -100,7 +118,7 @@ public class WolfLexing
    * @return a Token representing the next token in the input stream
    * or null if there are no more tokens.
    */
-  public static Token getToken()
+  public Token getToken()
   {
     if(token instanceof EOF)
     {
