@@ -3,6 +3,10 @@ import wolf.*;
 import wolf.node.*;
 /**
  * A recursive descent Parser for the WOL(F) programming language.
+ * Each non-helper function of the parser represents a non-terminal in the
+ * grammar.  The rules for that non-terminal are in the header documentation
+ * for its corresponding function.
+ * 
  * @author Kevin Dittmar
  * @author William Ezekiel
  * @author Joe Alacqua
