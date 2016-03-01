@@ -127,7 +127,8 @@ public class Parser
     void Escape()
     {
         eat(TStringEscape.class);
-        switch(token.getClass().getName())
+        String[] token_name_parts = token.getClass().getName().split("\\.");
+        switch(token_name_parts[token_name_parts.length - 1])
         {
             case "TEscapeAlarm":
                 eat(TEscapeAlarm.class);
@@ -301,6 +302,9 @@ public class Parser
             case "TDiv":
                 eat(TDiv.class);
                 break;
+            case "TMod":
+                eat(TMod.class);
+                break;
             case "TOr":
                 eat(TOr.class);
                 break;
@@ -308,6 +312,7 @@ public class Parser
                 eat(TAnd.class);
                 break;
             case "TXor":
+                eat(TXor.class);
                 break;
             case "TLogicalNot":
                 eat(TLogicalNot.class);
