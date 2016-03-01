@@ -659,7 +659,16 @@ public class Parser
             for (String filename : args)
             {
                 System.out.println("Parsing " + filename);
-                new Parser().parse(filename);
+                // Wrap parse in try catch so that it will continue parsing
+                // the rest of the files.
+                try
+                {
+                    new Parser().parse(filename);
+                }
+                catch(IllegalArgumentException iae)
+                {
+                    System.err.println(iae.getMessage());
+                }
             }
         }
     }
