@@ -51,3 +51,4 @@ If = Func ? Func
 Else = Func
 
 List = [ Args ]
+     = []

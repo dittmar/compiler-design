@@ -39,7 +39,7 @@ public class Parser
         }
         else if (isArg())
         {
-            Arg();
+            Args();
             eat(TRParen.class);
         }
         else
@@ -50,6 +50,7 @@ public class Parser
     
     void Arg()
     {
+        System.out.println("Looking at: " + token.getText());
         if (token instanceof TIdentifier)
         {
             eat(TIdentifier.class);
@@ -108,6 +109,7 @@ public class Parser
     void Def()
     {
         eat(TDef.class);
+        eat(TIdentifier.class);
         Sig();
         eat(TAssign.class);
         Func();
@@ -187,7 +189,8 @@ public class Parser
     
     void FuncName()
     {
-        switch(token.getClass().getName())
+        String[] token_name_parts = token.getClass().getName().split("\\.");
+        switch(token_name_parts[token_name_parts.length - 1])
         {
             case "TIdentifier":
                 eat(TIdentifier.class);
@@ -283,12 +286,24 @@ public class Parser
     void List()
     {
         eat(TStartList.class);
-        Args();
-        eat(TEndList.class);
+        if (isArg())
+        {
+            Args();
+            eat(TEndList.class);
+        } 
+        else if (token instanceof TEndList)
+        {
+            eat(TEndList.class);
+        }
+        else
+        {
+            error();
+        }        
     }
     
     void Program()
     {
+        System.out.println("Looking at: " + token.getText());
         while (token instanceof TDef)
         {
             Def();
@@ -350,7 +365,9 @@ public class Parser
     
     void eat(Class klass)
     {
-        if (token.getClass().getName().equals(klass.getClass().getName()))
+        System.out.println(token.getClass().getName());
+        System.out.println(klass.getName());
+        if (token.getClass().getName().equals(klass.getName()))
         {
             token = nextValidToken();
         }
