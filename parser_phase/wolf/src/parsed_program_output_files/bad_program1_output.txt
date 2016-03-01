@@ -1,0 +1,9 @@
+Parsing ../../../sample_programs/bad_program1.wolf
+Sig parsed successfully.
+FuncName parsed successfully.
+FuncName parsed successfully.
+ArgList parsed successfully.
+Func parsed successfully.
+Unexpected token type: wolf.node.TTernaryColon
+Error at column: 32
+Invalid token: :

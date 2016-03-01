@@ -1,0 +1,24 @@
+Parsing ../../../sample_programs/sample_program5.wolf
+FuncName parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+Escape sequence parsed successfully.
+String parsed successfully.
+Arg parsed successfully.
+Args parsed successfully.
+ArgList parsed successfully.
+Func parsed successfully.
+Program parsed successfully.

@@ -1,0 +1,4 @@
+Parsing ../../../sample_programs/bad_program2.wolf
+Unexpected token type: wolf.node.TLParen
+Error at column: 14
+Invalid token: (

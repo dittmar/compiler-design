@@ -1,0 +1,34 @@
+Parsing ../../../sample_programs/sample_program4.wolf
+FuncName parsed successfully.
+FuncName parsed successfully.
+Arg parsed successfully.
+Arg parsed successfully.
+ArgRest parsed successfully.
+Arg parsed successfully.
+ArgRest parsed successfully.
+Arg parsed successfully.
+ArgRest parsed successfully.
+Args parsed successfully.
+List parsed successfully.
+Fold function parsed successfully.
+Func parsed successfully.
+Arg parsed successfully.
+Arg parsed successfully.
+ArgRest parsed successfully.
+FuncName parsed successfully.
+Arg parsed successfully.
+Arg parsed successfully.
+ArgRest parsed successfully.
+Arg parsed successfully.
+ArgRest parsed successfully.
+Args parsed successfully.
+List parsed successfully.
+Fold function parsed successfully.
+Func parsed successfully.
+Arg parsed successfully.
+ArgRest parsed successfully.
+Args parsed successfully.
+List parsed successfully.
+Fold function parsed successfully.
+Func parsed successfully.
+Program parsed successfully.

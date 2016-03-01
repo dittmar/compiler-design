@@ -1,0 +1,10 @@
+Parsing ../../../sample_programs/bad_program3.wolf
+Sig parsed successfully.
+FuncName parsed successfully.
+Arg parsed successfully.
+Arg parsed successfully.
+ArgRest parsed successfully.
+Args parsed successfully.
+Unexpected token type: wolf.node.TIntNumber
+Error at column: 28
+Invalid token: 3

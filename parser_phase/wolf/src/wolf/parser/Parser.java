@@ -67,6 +67,7 @@ public class Parser
         {
             error();
         }
+        System.out.println("ArgList parsed successfully.");
     }
     
     /**
@@ -120,6 +121,7 @@ public class Parser
         {
             error();
         }
+        System.out.println("Arg parsed successfully.");
     }
     
     /**
@@ -130,6 +132,7 @@ public class Parser
     {
         eat(TComma.class);
         Arg();
+        System.out.println("ArgRest parsed successfully.");
     }
     
     /**
@@ -143,6 +146,7 @@ public class Parser
         {
             ArgRest();
         }
+        System.out.println("Args parsed successfully.");
     }
     
     /**
@@ -157,6 +161,7 @@ public class Parser
         Func();
         eat(TTernaryColon.class);
         Func();
+        System.out.println("Branch parsed successfully.");
     }
     
     /**
@@ -170,6 +175,7 @@ public class Parser
         Sig();
         eat(TAssign.class);
         Func();
+        System.out.println("Def parsed successfully.");
     }
     
     /**
@@ -229,6 +235,7 @@ public class Parser
             default:
                 error();
         }
+        System.out.println("Escape sequence parsed successfully.");
     }
     
     /**
@@ -257,6 +264,7 @@ public class Parser
             error();
         }
         eat(TRParen.class);
+        System.out.println("Fold function parsed successfully.");
     }
     
     /**
@@ -291,6 +299,7 @@ public class Parser
         {
             error();
         }
+        System.out.println("Func parsed successfully.");
     }
     
     /**
@@ -398,6 +407,7 @@ public class Parser
             default:
                 error();
         }
+        System.out.println("FuncName parsed successfully.");
     }
     
     /**
@@ -412,6 +422,7 @@ public class Parser
         eat(TLambdaArrow.class);
         Func();
         eat(TRParen.class);
+        System.out.println("Lambda parsed successfully.");
     }
     
     /**
@@ -434,7 +445,8 @@ public class Parser
         else
         {
             error();
-        }        
+        }
+        System.out.println("List parsed successfully.");
     }
     
     /**
@@ -455,6 +467,7 @@ public class Parser
         {
             error();
         }
+        System.out.println("Program parsed successfully.");
     }
     
     /**
@@ -469,6 +482,7 @@ public class Parser
             SigArgs();
         }
         eat(TRParen.class);
+        System.out.println("Sig parsed successfully.");
     }
     
     /**
@@ -479,6 +493,7 @@ public class Parser
     {
         eat(TComma.class);
         eat(TIdentifier.class);
+        System.out.println("SigArgRest parsed successfully.");
     }
     
     /**
@@ -492,6 +507,7 @@ public class Parser
         {
             SigArgRest();
         }
+        System.out.println("SigArgs parsed successfully.");
     }
     
     /**
@@ -516,6 +532,7 @@ public class Parser
             }
         }
         eat(TStringEnd.class);
+        System.out.println("String parsed successfully.");
     }
     
     // Helper functions
@@ -667,7 +684,8 @@ public class Parser
                 }
                 catch(IllegalArgumentException iae)
                 {
-                    System.err.println(iae.getMessage());
+                    // Make it easier to catch error output.
+                    System.out.println(iae.getMessage());
                 }
             }
         }
