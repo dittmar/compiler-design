@@ -1,0 +1,6 @@
+When creating this parser, we an issue with LL(k). 
+Our old grammar was technically LL(infinity). Our grammar had
+to be adjusted in order to make it at most LL(1 or 2).  One unsolved problem with our Parser 
+is displaying which tokens are expected. The parser can tell you an invalid Token, 
+but it doesn’t know which token(s) should be there. For example (identifier], the parser
+would tell you that ] is invalid, but not tell you to use ).  
