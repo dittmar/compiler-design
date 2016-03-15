@@ -1,4 +1,4 @@
-Program,Def,Func,Sig,SigArgs,SigArgRest,FuncName,ArgList,Args,ArgRest,Arg,Branch,If,Else,List;
+Program,Def,DefList,Func,Sig,SigArgList,SigArgs,SigArgRest,FuncName,ArgList,ArgRestList,Args,ArgRest,Arg,Branch,If,Else,List;
 
 # Still draft, all "commented out (#)" lines need to have their *'s split into two statements like Bergmann
 # did in class. Based on 'grammar_draft.txt' in the 'lr_parser_phase' directory. 
@@ -41,9 +41,9 @@ FuncName = op
 
 ArgList = ( )
 ArgList = ( Args )
-Args = Arg ArgList
-ArgList = ArgList ArgRest
-ArgList = ε
+Args = Arg ArgRestList
+ArgRestList = ArgRestList ArgRest
+ArgRestList = ε
 ArgRest = , Arg
 
 Arg = Func
