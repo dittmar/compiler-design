@@ -1,5 +1,3 @@
-S,V,E;
-
 S = V=E
 S = E
 E = V
