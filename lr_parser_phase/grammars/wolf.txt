@@ -1,9 +1,9 @@
 Program,Def,DefList,Func,Sig,SigArgList,SigArgs,SigArgRest,FuncName,ArgList,ArgRestList,Args,ArgRest,Arg,Branch,If,Else,List;
 
 # Still draft, all "commented out (#)" lines need to have their *'s split into two statements like Bergmann
-# did in class. Based on 'grammar_draft.txt' in the 'lr_parser_phase' directory. 
+# did in class. Based on 'grammar_draft.txt' in the 'lr_parser_phase' directory.
 
-#Program = DefList Func
+Program = DefList Func
 
 DefList = DefList Def
 DefList = ε
