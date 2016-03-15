@@ -3,12 +3,19 @@ Program,Def,Func,Sig,SigArgs,SigArgRest,FuncName,ArgList,Args,ArgRest,Arg,Branch
 # Still draft, all "commented out (#)" lines need to have their *'s split into two statements like Bergmann
 # did in class. Based on 'grammar_draft.txt' in the 'lr_parser_phase' directory. 
 
-#Program = Def* Func
+#Program = DefList Func
+
+DefList = DefList Def
+DefList = ε
 
 Def = def id Sig := Func
 Sig = ( )
 Sig = ( SigArgs)
-#SigArgs = id SigArgRest*
+SigArgs = id SigArgList
+
+SigArgList = SigArgList SigArgRest
+SigArgList = ε
+
 SigArgRest = , id
 
 Func = FuncName ArgList
@@ -34,7 +41,9 @@ FuncName = op
 
 ArgList = ( )
 ArgList = ( Args )
-#Args = Arg ArgRest*
+Args = Arg ArgList
+ArgList = ArgList ArgRest
+ArgList = ε
 ArgRest = , Arg
 
 Arg = Func
