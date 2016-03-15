@@ -1,16 +1,21 @@
-Program = Def* Func
+Program = DefList Func
+
+DefList = DefList Def
+DefList = ε
 
 // Signatures (Sig) differ from Arguments (Args) in that
 // they only allow ids, not expressions or constants.
 Def = def id Sig := Func
 Sig = ()
     = (SigArgs)
-SigArgs = id SigArgRest*
+SigArgs = id SigArgList
+SigArgList = SigArgList SigArgRest
+SigArgList = ε
 SigArgRest = , id
 
 Func = FuncName ArgList
      = Branch
-     
+
 FuncName = id       // user-defined function identifier
          = h        // head - get the first element of a list
          = t        // tail - get a list excluding first element of the list
@@ -30,8 +35,10 @@ FuncName = id       // user-defined function identifier
          = op       // binary operators like +, >=, =, |, and x
 
 ArgList = ()
-        = (Args)        
-Args = Arg ArgRest*
+        = (Args)
+Args = Arg ArgRestList
+ArgRestList = ArgRestList ArgRest
+ArgRestList = ε
 ArgRest = , Arg
 
 Arg = Func
