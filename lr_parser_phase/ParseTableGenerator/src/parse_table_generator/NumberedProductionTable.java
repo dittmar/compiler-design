@@ -1,4 +1,4 @@
-package parsetablegenerator;
+package parse_table_generator;
 
 /**
  *
@@ -11,4 +11,14 @@ import java.util.ArrayList;
 public class NumberedProductionTable 
 {
     ArrayList<Rule> production_list;
+    
+    public NumberedProductionTable()
+    {
+        production_list = new ArrayList<>();
+    }
+    
+    public void addRule(Rule r)
+    {
+        production_list.add(r);
+    }
 }

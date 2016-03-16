@@ -1,4 +1,4 @@
-package parsetablegenerator;
+package parse_table_generator;
 
 /**
  *

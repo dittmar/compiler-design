@@ -1,4 +1,4 @@
-package parsetablegenerator;
+package parse_table_generator;
 
 /**
  *
@@ -7,8 +7,9 @@ package parsetablegenerator;
  * @author William Ezekiel
  * @version Mar 14, 2016
  */
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Rule {
 
@@ -17,6 +18,12 @@ public class Rule {
 
     public Rule(Nonterminal lhs, Symbol... symbols) {
         rhs = Arrays.asList(symbols);
+        this.lhs = lhs;
+    }
+    
+    public Rule(Nonterminal lhs, List<Symbol> symbols)
+    {
+        rhs = new ArrayList<>(symbols);
         this.lhs = lhs;
     }
 
