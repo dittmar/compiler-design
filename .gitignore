@@ -1,1 +1,4 @@
 /lr_parser_phase/ParseTableGenerator/build/
+/lr_paraser_phase/ParseTableGenerator/nbproject/
+manifeset.mf
+build.xml
