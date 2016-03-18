@@ -12,4 +12,10 @@ public class Arc
     Symbol transition_symbol;
     State from;
     State to;
+    
+    public Arc(Symbol s, State from, State to) {
+        transition_symbol = s;
+        this.from = from;
+        this.to = to;
+    }
 }

@@ -37,7 +37,10 @@ public class GrammarParserTest {
         System.out.println("parse");
         //HashSet<Terminal> terminals = new HashSet<>();
         //HashSet<Nonterminal> nonterminals = new HashSet<>();
-        GrammarParser g_parser = new GrammarParser("test/parse_table_generator/resources/g3.1.txt");
+        // My File got sent somewhere else after setting it up.
+        String billFile = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/ParseTableGenerator/test/parse_table_generator/resources/g3.1.txt";
+        String kevFile = "test/parse_table_generator/resources/g3.1.txt";
+        GrammarParser g_parser = new GrammarParser(billFile);
         g_parser.parse();
         System.out.println("Terminals:");
         System.out.println(g_parser.terminals);
