@@ -65,7 +65,7 @@ public class Rule {
     public String quietToString() {
         StringBuilder sb = new StringBuilder();
         sb.append(lhs)
-          .append("\t -> \t");
+          .append(" -> ");
         sb.append(getRhsString());
         
         return sb.toString();

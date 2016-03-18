@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -25,15 +26,20 @@ public class GrammarParser
         nonterminal_rule_lookup_table = new NonterminalRuleLookupTable();
         production_table = new NumberedProductionTable();
         nonterminals = new HashSet<>();
+        terminals = new HashSet<>();
         this.filename = filename;
     }
     
     public void parse()
     {
-        makeNonterminalSet();
+        int lines_to_skip = makeTerminalAndNonterminalSets();
         try
         {
             Scanner scanner = new Scanner(new File(filename));
+            for (; lines_to_skip > 0; lines_to_skip--)
+            {
+                scanner.nextLine();
+            }
             while (scanner.hasNextLine())
             {
                 String next_line = scanner.nextLine();
@@ -46,11 +52,50 @@ public class GrammarParser
         }
     }
     
-    private void makeNonterminalSet()
+    /**
+     * 
+     * @return number of lines to skip to get to grammar
+     */
+    private int makeTerminalAndNonterminalSets()
     {
+        int lines_to_skip = 0;
         try
         {
             Scanner scanner = new Scanner(new File(filename));
+            /* Make terminal set from the list of terminals at start of the
+             * file.
+             */
+            boolean more_terminals = true;
+            StringBuilder terminals_sb = new StringBuilder();
+            try
+            {
+                while (more_terminals) {
+                    String next = scanner.nextLine();
+                    if (next.isEmpty() || next.matches("\\s+"))
+                    {
+                        more_terminals = false;
+                    }
+                    else
+                    {
+                        terminals_sb.append(next);
+                    }
+                    lines_to_skip++;
+                }
+            }
+            catch (NoSuchElementException e)
+            {
+                System.err.println(
+                    "Terminal list in " + filename + " never ended");
+                System.exit(1);
+            }
+            
+            // Add all of the terminals to the set.
+            for (String terminal : terminals_sb.toString().split("\\s"))
+            {
+                terminals.add(new Terminal(terminal));
+            }
+            
+            // Make nonterminal set from the rules
             while (scanner.hasNextLine())
             {
                 String next_nonterminal = scanner.nextLine().split("=", 2)[0];
@@ -61,6 +106,8 @@ public class GrammarParser
         {
             System.err.println(e.getMessage());
         }
+        
+        return lines_to_skip;
     }
     
     private void addProductionRule(String next_line)
@@ -68,29 +115,37 @@ public class GrammarParser
         String[] next = next_line.split("=", 2);
         Nonterminal rule_nt = new Nonterminal(next[0].trim());
         ArrayList<Symbol> rule_symbols = new ArrayList<>();
-        String rule_string = next[1].trim();
+        // Remove all whitespace
+        String rule_string = next[1].replaceAll("\\s+", "");
         START: while (!rule_string.isEmpty())
         {
-            for (Nonterminal nt : nonterminals)
+            if (rule_string.matches("[A-Z].*"))
             {
-                if (rule_string.startsWith(nt.getName()))
+                for (Nonterminal nt : nonterminals)
                 {
-                    rule_string = rule_string.replaceFirst(nt.getName(), "");
-                    rule_symbols.add(new Nonterminal(nt.getName()));
-                    continue START;
+                    if (rule_string.startsWith(nt.getName()))
+                    {
+                        rule_string = rule_string.replaceFirst(nt.getName(), "");
+                        rule_symbols.add(new Nonterminal(nt.getName()));
+                        continue START;
+                    }
                 }
             }
-            for (Terminal t : terminals)
+            else
             {
-                if (rule_string.startsWith(t.getName()))
+                for (Terminal t : terminals)
                 {
-                    rule_string = rule_string.replaceFirst(t.getName(), "");
-                    rule_symbols.add(new Terminal(t.getName()));
-                    continue START;
+                    if (rule_string.startsWith(t.getName()))
+                    {
+                        rule_string = rule_string.substring(t.getName().length());
+                        rule_symbols.add(new Terminal(t.getName()));
+                        continue START;
+                    }
                 }
             }
-            rule_symbols.add(new Terminal(rule_string.substring(0, 1)));
-            rule_string = rule_string.replaceFirst(".", "");
+            // Didn't match terminals or non-terminals.  Print error and exit.
+            System.err.println("Failed to parse:" + rule_string);
+            System.exit(1);
         }
 
         Rule rule = new Rule(rule_nt, rule_symbols);

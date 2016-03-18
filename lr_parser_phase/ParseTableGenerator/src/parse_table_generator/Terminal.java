@@ -15,7 +15,7 @@ public class Terminal implements Symbol {
         name = name.replaceAll("\\s", "");
         if (name.isEmpty() || name.matches("[A-Z].*")) {
             throw new IllegalArgumentException(
-                "Terminal: Terminal names must begin with a lowercase letter");
+                "Terminal: Terminal names cannot begin with a capital letter");
         } else {
             this.name = name;
         }

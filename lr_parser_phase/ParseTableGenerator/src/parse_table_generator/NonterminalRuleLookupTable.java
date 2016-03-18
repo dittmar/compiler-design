@@ -9,6 +9,7 @@ package parse_table_generator;
  */
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 public class NonterminalRuleLookupTable 
 {
@@ -31,5 +32,19 @@ public class NonterminalRuleLookupTable
             rules.add(rule);
             rule_table.put(nt, rules);
         }
+    }
+    
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Nonterminal, Set<Rule>> entry : rule_table.entrySet())
+        {
+            sb.append("Nonterminal: ");
+            sb.append(entry.getKey());
+            sb.append("\nRules:\n");
+            sb.append(entry.getValue());
+            sb.append("\n\n");
+        }
+        return sb.toString();
     }
 }

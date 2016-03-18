@@ -21,4 +21,18 @@ public class NumberedProductionTable
     {
         production_list.add(r);
     }
+    
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        int counter = 0;
+        for (Rule rule : production_list)
+        {
+            sb.append(counter++);
+            sb.append(") ");
+            sb.append(rule);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }

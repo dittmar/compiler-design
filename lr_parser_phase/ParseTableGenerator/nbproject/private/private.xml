@@ -3,19 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parsetablegenerator/Item.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parsetablegenerator/NumberedProductionTable.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parsetablegenerator/ParseTable.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parsetablegenerator/Nonterminal.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parsetablegenerator/Arc.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parsetablegenerator/Rule.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parsetablegenerator/NonterminalRuleLookupTable.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parsetablegenerator/ParseTableGenerator.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parsetablegenerator/Symbol.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parsetablegenerator/Grammar.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parsetablegenerator/Terminal.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parsetablegenerator/State.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parsetablegenerator/FSM.java</file>
+            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parse_table_generator/NonterminalRuleLookupTable.java</file>
+            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parse_table_generator/Rule.java</file>
+            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parse_table_generator/Nonterminal.java</file>
+            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/lr_parser_phase/ParseTableGenerator/src/parse_table_generator/GrammarParser.java</file>
         </group>
     </open-files>
 </project-private>
