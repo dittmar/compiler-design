@@ -18,6 +18,7 @@ public class GrammarParser
     String filename;
     Set<Nonterminal> nonterminals;
     Set<Terminal> terminals;
+    EndSymbol end_symbol;
     NonterminalRuleLookupTable nonterminal_rule_lookup_table;
     NumberedProductionTable production_table;
     
@@ -81,6 +82,9 @@ public class GrammarParser
                     }
                     lines_to_skip++;
                 }
+                // The end symbol is specified on the line after the terminals
+                end_symbol = new EndSymbol(scanner.nextLine().trim());
+                lines_to_skip++;
             }
             catch (NoSuchElementException e)
             {
@@ -119,7 +123,12 @@ public class GrammarParser
         String rule_string = next[1].replaceAll("\\s+", "");
         START: while (!rule_string.isEmpty())
         {
-            if (rule_string.matches("[A-Z].*"))
+            if (rule_string.equals(end_symbol.getName()))
+            {
+                rule_string = "";
+                rule_symbols.add(end_symbol);
+            }
+            else if (rule_string.matches("[A-Z].*"))
             {
                 for (Nonterminal nt : nonterminals)
                 {
@@ -127,25 +136,30 @@ public class GrammarParser
                     {
                         rule_string = rule_string.replaceFirst(nt.getName(), "");
                         rule_symbols.add(new Nonterminal(nt.getName()));
-                        continue START;
                     }
                 }
             }
             else
             {
+                boolean symbol_matched = false;
                 for (Terminal t : terminals)
                 {
                     if (rule_string.startsWith(t.getName()))
                     {
                         rule_string = rule_string.substring(t.getName().length());
                         rule_symbols.add(new Terminal(t.getName()));
-                        continue START;
+                        symbol_matched = true;
+                        break;
                     }
                 }
+                if (!symbol_matched)
+                {
+                    // Didn't match terminals or non-terminals.
+                    // Print error and exit.
+                    System.err.println("Failed to parse:" + rule_string);
+                    System.exit(1);
+                }
             }
-            // Didn't match terminals or non-terminals.  Print error and exit.
-            System.err.println("Failed to parse:" + rule_string);
-            System.exit(1);
         }
 
         Rule rule = new Rule(rule_nt, rule_symbols);

@@ -1,5 +1,6 @@
-id print num := ; ( ) , + $
+id print num := ; ( ) , +
 
+$
 S' = S$
 S = S;S
 S = id := E
