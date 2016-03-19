@@ -20,10 +20,14 @@ public class FSM
     Set<Arc> arcs;
     NonterminalRuleLookupTable nonterminal_Rule_lookup_table;
     NumberedProductionTable numbered_production_table;
+    EndSymbol end_symbol;
     
-    public FSM(NonterminalRuleLookupTable nrlt, NumberedProductionTable npt) {
+    public FSM(NonterminalRuleLookupTable nrlt, NumberedProductionTable npt,
+               EndSymbol es) 
+    {
         nonterminal_Rule_lookup_table = nrlt;
         numbered_production_table = npt;
+        end_symbol = es;
                 // Initialize T to {Closure({S' -> .S$})}
         states = new LinkedHashSet();
         Set<Item> initialItemSet = new LinkedHashSet();
@@ -78,9 +82,12 @@ public class FSM
             for(Item item: state.items){
                 if(!item.atEnd()) {
                     Symbol s = item.getCurrentSymbol();
-                    State j = goTo(state,s);
-                    if(newStates.add(j)) {
-                        j.id = newStates.size();
+                    if (!s.equals(end_symbol))
+                    {
+                        State j = goTo(state,s);
+                        if(newStates.add(j)) {
+                            j.id = newStates.size();
+                        }
                         arcs.add(new Arc(s,state,j));
                     }
                 }
@@ -90,10 +97,6 @@ public class FSM
             states = newStates;
             build();
         }
-        System.out.println(states);
-        System.out.println(states.size());
-        System.out.println(arcs);
-        System.out.println(arcs.size());
     }
     
     // never gonna give you up

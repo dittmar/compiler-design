@@ -19,6 +19,27 @@ public class Arc
         this.to = to;
     }
     
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof Arc))
+        {
+            return false;
+        }
+        Arc arc = (Arc) obj;
+        return arc.from.equals(from) && 
+               arc.to.equals(to) && 
+               arc.transition_symbol.equals(transition_symbol);
+    }
+    
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + from.hashCode();
+        result = 31 * result + to.hashCode();
+        result = 31 * result + transition_symbol.hashCode();
+        return result;
+    }
+    
     public String toString() {
         return from.id + " --"+ transition_symbol + "-> " + to.id;
     }
