@@ -25,7 +25,7 @@ public class ParseTableGenerator
      */
     public static void main(String[] args)
     {
-        String billFile = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/ParseTableGenerator/test/parse_table_generator/resources/g3.1.txt";
+        String billFile = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/ParseTableGenerator/test/parse_table_generator/resources/class.txt";
         //parse the grammar
         GrammarParser gp = new GrammarParser(billFile);
         gp.parse();

@@ -34,7 +34,14 @@ public class State {
     }
     
     public String toString() {
-        return items.toString();
+        StringBuilder sb = new StringBuilder();
+        //sb.append(id).append(".");
+        sb.append("{");
+        for(Item item: items) {
+            sb.append(item).append("\t");
+        }
+        sb.append("}").append("\n");
+        return sb.toString();
     }
     
         @Override
