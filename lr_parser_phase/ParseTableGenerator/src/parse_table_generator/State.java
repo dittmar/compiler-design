@@ -13,10 +13,14 @@ import java.util.List;
 import java.util.Set;
 public class State {
 
-    List<Rule> rules;
+    Set<Item> items;
     int id;
+    
+    public State(Set<Item> itemSet) {
+        items = itemSet;
+    }
 
-    private static int counter = 1;
+    /*private static int counter = 1;
     private Set<Item> state;
     private final Grammar grammar;
 
@@ -134,5 +138,5 @@ public class State {
 
         System.out.println(state);
 
-    }
+    }*/
 }

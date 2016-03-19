@@ -34,6 +34,10 @@ public class NonterminalRuleLookupTable
         }
     }
     
+    Set<Rule> getRuleSet(Nonterminal nt) {
+        return rule_table.get(nt);
+    }
+    
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
