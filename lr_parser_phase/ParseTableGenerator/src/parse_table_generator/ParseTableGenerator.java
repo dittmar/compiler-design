@@ -14,7 +14,11 @@ import java.util.Set;
  */
 public class ParseTableGenerator 
 {
-public static ParseTable generate(FSM fsm, Set<Terminal> terminals,Set<Nonterminal> nonterminals) {
+    public static ParseTable generate(
+        FSM fsm, 
+        Set<Terminal> terminals,
+        Set<Nonterminal> nonterminals) 
+    {
         ArrayList<LinkedHashMap<Symbol,TableCell>> table = new ArrayList();
         for(State state:fsm.states) {
             System.out.println("State: " + state.id);
@@ -43,12 +47,15 @@ public static ParseTable generate(FSM fsm, Set<Terminal> terminals,Set<Nontermin
             for(Item item: state.items) {
                 if(item.atEnd()) {
                     Rule rule = item.getRule();
-                    int rule_id = fsm.numbered_production_table.production_list.indexOf(rule);
+                    int rule_id = fsm.getProductions().indexOf(rule);
                     if(rule_id == -1) {
                         System.err.println("Unknown Rule: " + rule);
                         System.exit(1);
                     }
-                    TableCell tc = new TableCell(TableCell.Action.REDUCE,rule_id);
+                    TableCell tc = new TableCell(
+                        TableCell.Action.REDUCE,
+                        rule_id
+                    );
                     for(Symbol s : terminals) {
                         System.out.println();
                         if(row.get(s) == null){

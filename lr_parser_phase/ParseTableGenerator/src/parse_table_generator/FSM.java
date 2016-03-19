@@ -7,6 +7,7 @@ package parse_table_generator;
  * @author William Ezekiel
  * @version Mar 14, 2016
  */
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -39,43 +40,7 @@ public class FSM
         arcs = new LinkedHashSet();
     }
     
-    private State closure(Set<Item> itemSet) {
-        Set<Item> itemSet2 = new LinkedHashSet(itemSet);
-        for(Item item : itemSet) {
-            if(!item.atEnd()){
-                Symbol next = item.getCurrentSymbol();
-                if(next instanceof Nonterminal) {
-                    Nonterminal nt = (Nonterminal) next;
-                    Set<Rule> nonterminalRules = 
-                        nonterminal_rule_lookup_table.getRuleSet(nt);
-                    for(Rule rule: nonterminalRules) {
-                        itemSet2.add(new Item(rule,0));
-                    }
-                    if(!(itemSet.size() == itemSet2.size())) {
-                        return closure(itemSet2);
-                    }
-                }
-            } 
-        }
-        System.out.println(itemSet);
-        System.out.println(itemSet2);
-        return new State(itemSet);
-    }
-    
-    private State goTo(State i, Symbol x)
-    {
-        HashSet<Item> j = new HashSet<>();
-        for (Item a : i.items)
-        {   if(!a.atEnd()) {
-                if (a.getCurrentSymbol().equals(x)) {
-                    j.add(new Item(a.getRule(), a.getPosition() + 1));
-                }
-            }
-        }
-        return closure(j);
-    }
-    
-    public void build() {
+        public void build() {
         int arcCount = arcs.size();
         Set<State> newStates = new LinkedHashSet(states);
         for(State state : states) {
@@ -105,16 +70,6 @@ public class FSM
             build();
         }
     }
-    
-    private State findStateEqualTo(State s,Set<State> stateSet) {
-        for(State state: stateSet) {
-          if(s.equals(state)) {
-             return state; 
-          }  
-        }
-        return null;
-    }
-    
     public Set<Arc> findArcsWithFromState(State s) {
         Set<Arc> arcSet = new LinkedHashSet();
         for(Arc arc : arcs) {
@@ -133,5 +88,57 @@ public class FSM
             }
         }
         return arcSet;
+    }
+    
+    public ArrayList<Rule> getProductions()
+    {
+        return numbered_production_table.production_list;
+    }
+    
+    private State closure(Set<Item> itemSet) {
+        Set<Item> itemSet2 = new LinkedHashSet(itemSet);
+        for(Item item : itemSet) {
+            if(!item.atEnd()){
+                Symbol next = item.getCurrentSymbol();
+                if(next instanceof Nonterminal) {
+                    Nonterminal nt = (Nonterminal) next;
+                    Set<Rule> nonterminalRules = 
+                        nonterminal_rule_lookup_table.getRuleSet(nt);
+                    for(Rule rule: nonterminalRules) {
+                        itemSet2.add(new Item(rule,0));
+                    }
+                    if(!(itemSet.size() == itemSet2.size())) {
+                        return closure(itemSet2);
+                    }
+                }
+            } 
+        }
+        System.out.println(itemSet);
+        System.out.println(itemSet2);
+        return new State(itemSet);
+    }
+    
+    private State findStateEqualTo(State s,Set<State> stateSet) {
+        for(State state: stateSet) {
+          if(s.equals(state)) {
+             return state; 
+          }  
+        }
+        return null;
+    }
+    
+    private State goTo(State state, Symbol symbol)
+    {
+        HashSet<Item> newItems = new HashSet<>();
+        for (Item item : state.items)
+        {   if(!item.atEnd()) {
+                if (item.getCurrentSymbol().equals(symbol)) {
+                    newItems.add(
+                        new Item(item.getRule(), item.getPosition() + 1)
+                    );
+                }
+            }
+        }
+        return closure(newItems);
     }
 }
