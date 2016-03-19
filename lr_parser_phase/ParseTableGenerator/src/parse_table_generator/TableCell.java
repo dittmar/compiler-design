@@ -36,7 +36,7 @@ public class TableCell
             case ACCEPT:
                 return "a";
             default:
-                return " ";
+                return "     ";
         }
     }
 }

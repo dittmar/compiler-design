@@ -63,7 +63,7 @@ public static ParseTable generate(FSM fsm, Set<Terminal> terminals,Set<Nontermin
                         }
                     }
                 }
-                else if(item.getCurrentSymbol() instanceof EndSymbol) {
+                else if(item.getCurrentSymbol() instanceof StartSymbol) {
                     // accept
                     row.put(item.getCurrentSymbol(), new TableCell(TableCell.Action.ACCEPT,-1));
                 }

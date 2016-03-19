@@ -18,7 +18,8 @@ public class GrammarParser
     String filename;
     Set<Nonterminal> nonterminals;
     Set<Terminal> terminals;
-    EndSymbol end_symbol;
+    StartSymbol start_symbol;
+    StartSymbol end_symbol;
     NonterminalRuleLookupTable nonterminal_rule_lookup_table;
     NumberedProductionTable production_table;
     
@@ -82,8 +83,12 @@ public class GrammarParser
                     }
                     lines_to_skip++;
                 }
-                // The end symbol is specified on the line after the terminals
-                end_symbol = new EndSymbol(scanner.nextLine().trim());
+                // The start symbol is specified on the line after the 
+                // terminals
+                start_symbol = new StartSymbol(scanner.nextLine().trim());
+                // The end symbol is specified on the line after the start
+                // symbol
+                end_symbol = new StartSymbol(scanner.nextLine().trim());
                 lines_to_skip++;
             }
             catch (NoSuchElementException e)

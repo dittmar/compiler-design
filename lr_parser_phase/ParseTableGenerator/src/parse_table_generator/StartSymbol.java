@@ -5,8 +5,8 @@ package parse_table_generator;
  * @author Kevin Dittmar
  * @version Mar 19, 2016
  */
-public class EndSymbol extends Terminal {
-    public EndSymbol(String name) {
+public class StartSymbol extends Nonterminal {
+    public StartSymbol(String name) {
         super(name);
     }
 
@@ -19,11 +19,11 @@ public class EndSymbol extends Terminal {
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else if (!(o instanceof EndSymbol)) {
+        } else if (!(o instanceof StartSymbol)) {
             return false;
         } else {
-            EndSymbol es = (EndSymbol) o;
-            return this.getName().equals(es.getName());
+            StartSymbol ss = (StartSymbol) o;
+            return this.getName().equals(ss.getName());
         }
     }
 
@@ -45,6 +45,6 @@ public class EndSymbol extends Terminal {
     }
 
     public String verboseToString() {
-        return "EndSymbol[name=\"" + this.getName() + "\"]";
+        return "StartSymbol[name=\"" + this.getName() + "\"]";
     }
 }

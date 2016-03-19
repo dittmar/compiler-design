@@ -20,10 +20,10 @@ public class FSM
     Set<Arc> arcs;
     NonterminalRuleLookupTable nonterminal_Rule_lookup_table;
     NumberedProductionTable numbered_production_table;
-    EndSymbol end_symbol;
+    StartSymbol end_symbol;
     
     public FSM(NonterminalRuleLookupTable nrlt, NumberedProductionTable npt,
-               EndSymbol es) 
+               StartSymbol es) 
     {
         nonterminal_Rule_lookup_table = nrlt;
         numbered_production_table = npt;
