@@ -3,7 +3,7 @@ package parse_table_generator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Set;
@@ -19,7 +19,7 @@ public class GrammarParser
     Set<Nonterminal> nonterminals;
     Set<Terminal> terminals;
     StartSymbol start_symbol;
-    StartSymbol end_symbol;
+    EndSymbol end_symbol;
     NonterminalRuleLookupTable nonterminal_rule_lookup_table;
     NumberedProductionTable production_table;
     
@@ -27,8 +27,8 @@ public class GrammarParser
     {
         nonterminal_rule_lookup_table = new NonterminalRuleLookupTable();
         production_table = new NumberedProductionTable();
-        nonterminals = new HashSet<>();
-        terminals = new HashSet<>();
+        nonterminals = new LinkedHashSet<>();
+        terminals = new LinkedHashSet<>();
         this.filename = filename;
     }
     
@@ -81,14 +81,24 @@ public class GrammarParser
                     {
                         terminals_sb.append(next);
                     }
+                    // We don't want to read the terminals as part of the
+                    // grammar productions
                     lines_to_skip++;
                 }
                 // The start symbol is specified on the line after the 
-                // terminals
+                // terminals.
                 start_symbol = new StartSymbol(scanner.nextLine().trim());
+                // A start_symbol is a nonterminal, so add it to the list.
+                nonterminals.add(start_symbol);
+                // We don't want to read the start symbol as part of the
+                // grammar productions.
+                lines_to_skip++;
+                
                 // The end symbol is specified on the line after the start
                 // symbol
-                end_symbol = new StartSymbol(scanner.nextLine().trim());
+                end_symbol = new EndSymbol(scanner.nextLine().trim());
+                // We don't want to read the end symbol as part of the
+                // grammar productions.
                 lines_to_skip++;
             }
             catch (NoSuchElementException e)
@@ -103,7 +113,9 @@ public class GrammarParser
             {
                 terminals.add(new Terminal(terminal));
             }
-            
+            // Add the end symbol after all of the other terminals so that
+            // it appears at the end of the parse table later.
+            terminals.add(end_symbol);
             // Make nonterminal set from the rules
             while (scanner.hasNextLine())
             {

@@ -46,6 +46,7 @@ public class GrammarParserTest {
         System.out.println(g_parser.terminals);
         System.out.println("Nonterminals:");
         System.out.println(g_parser.nonterminals);
+        System.out.println("Start Symbol: " + g_parser.start_symbol);
         System.out.println("End Symbol: " + g_parser.end_symbol);
         System.out.println("Rule Lookup Table:");
         System.out.println(g_parser.nonterminal_rule_lookup_table);

@@ -16,8 +16,6 @@ public class ParseTableGenerator
 {
 public static ParseTable generate(FSM fsm, Set<Terminal> terminals,Set<Nonterminal> nonterminals) {
         ArrayList<LinkedHashMap<Symbol,TableCell>> table = new ArrayList();
-        Set<Symbol> shiftReduceColumnSymbols = new LinkedHashSet(terminals);
-        shiftReduceColumnSymbols.add(fsm.end_symbol);
         for(State state:fsm.states) {
             System.out.println("State: " + state.id);
             Set<Arc> arcSet = new LinkedHashSet<>(fsm.findArcsWithFromState(state));
@@ -51,7 +49,7 @@ public static ParseTable generate(FSM fsm, Set<Terminal> terminals,Set<Nontermin
                         System.exit(1);
                     }
                     TableCell tc = new TableCell(TableCell.Action.REDUCE,rule_id);
-                    for(Symbol s : shiftReduceColumnSymbols) {
+                    for(Symbol s : terminals) {
                         System.out.println();
                         if(row.get(s) == null){
                             row.put(s,tc);
@@ -70,8 +68,15 @@ public static ParseTable generate(FSM fsm, Set<Terminal> terminals,Set<Nontermin
             }
             table.add(row);
         }
-        shiftReduceColumnSymbols.addAll(nonterminals);
-        return new ParseTable(table,shiftReduceColumnSymbols);
+        
+        // We want all of the terminals to be in the table, including
+        // the end symbol
+        Set<Symbol> parse_table_symbols = new LinkedHashSet(terminals);
+        // We want all of the nonterminals to be in the table...
+        parse_table_symbols.addAll(nonterminals);
+        // ... but we don't want the start symbol to be in the table.
+        parse_table_symbols.remove(fsm.start_symbol);
+        return new ParseTable(table, parse_table_symbols);
     }
     
     /**
@@ -79,14 +84,15 @@ public static ParseTable generate(FSM fsm, Set<Terminal> terminals,Set<Nontermin
      */
     public static void main(String[] args) {
         String billFile = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/ParseTableGenerator/test/parse_table_generator/resources/class.txt";
-        String kevFile = "test/parse_table_generator/resources/class2.txt";
+        String kevFile = "test/parse_table_generator/resources/class.txt";
         //parse the grammar
-        GrammarParser gp = new GrammarParser(billFile);
+        GrammarParser gp = new GrammarParser(kevFile);
         gp.parse();
         
         FSM fsm = new FSM(
             gp.nonterminal_rule_lookup_table,
             gp.production_table,
+            gp.start_symbol,
             gp.end_symbol
         );
         

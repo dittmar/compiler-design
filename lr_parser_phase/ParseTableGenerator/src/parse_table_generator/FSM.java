@@ -7,28 +7,27 @@ package parse_table_generator;
  * @author William Ezekiel
  * @version Mar 14, 2016
  */
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 public class FSM
 {
     Set<State> states;
     Set<Arc> arcs;
-    NonterminalRuleLookupTable nonterminal_Rule_lookup_table;
+    NonterminalRuleLookupTable nonterminal_rule_lookup_table;
     NumberedProductionTable numbered_production_table;
-    StartSymbol end_symbol;
+    StartSymbol start_symbol;
+    EndSymbol end_symbol;
     
     public FSM(NonterminalRuleLookupTable nrlt, NumberedProductionTable npt,
-               StartSymbol es) 
+               StartSymbol ss, EndSymbol es) 
     {
-        nonterminal_Rule_lookup_table = nrlt;
+        nonterminal_rule_lookup_table = nrlt;
         numbered_production_table = npt;
+        start_symbol = ss;
         end_symbol = es;
-                // Initialize T to {Closure({S' -> .S$})}
+        // Initialize T to {Closure({S' -> .S$})}
         states = new LinkedHashSet();
         Set<Item> initialItemSet = new LinkedHashSet();
         initialItemSet.add(new Item(numbered_production_table.getRule(0),0));
@@ -40,14 +39,15 @@ public class FSM
         arcs = new LinkedHashSet();
     }
     
-    public State closure(Set<Item> itemSet) {
+    private State closure(Set<Item> itemSet) {
         Set<Item> itemSet2 = new LinkedHashSet(itemSet);
         for(Item item : itemSet) {
             if(!item.atEnd()){
                 Symbol next = item.getCurrentSymbol();
                 if(next instanceof Nonterminal) {
                     Nonterminal nt = (Nonterminal) next;
-                    Set<Rule> nonterminalRules = nonterminal_Rule_lookup_table.getRuleSet(nt);
+                    Set<Rule> nonterminalRules = 
+                        nonterminal_rule_lookup_table.getRuleSet(nt);
                     for(Rule rule: nonterminalRules) {
                         itemSet2.add(new Item(rule,0));
                     }
@@ -62,7 +62,7 @@ public class FSM
         return new State(itemSet);
     }
     
-    public State goTo(State i, Symbol x)
+    private State goTo(State i, Symbol x)
     {
         HashSet<Item> j = new HashSet<>();
         for (Item a : i.items)
