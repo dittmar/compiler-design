@@ -1,6 +1,5 @@
 package parse_table_generator;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -12,20 +11,18 @@ import java.util.Set;
  */
 public class ParseTableGenerator 
 {
-    public ParseTable generate()
-    {
-        //ParseTable parse_table = new ParseTable();
-        
-        //return parse_table;
+    public static ParseTable generate(FSM fsm, Set<Nonterminal> ntl, Set<Terminal> tl) {
+        for(State state:fsm.states) {
+            
+        }
         return null;
     }
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)
-    {
-        String billFile = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/ParseTableGenerator/test/parse_table_generator/resources/book(3.20).txt";
+    public static void main(String[] args) {
+        String billFile = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/ParseTableGenerator/test/parse_table_generator/resources/g3.1.txt";
         String kevFile = "test/parse_table_generator/resources/class.txt";
         //parse the grammar
         GrammarParser gp = new GrammarParser(billFile);
@@ -36,15 +33,15 @@ public class ParseTableGenerator
             gp.production_table,
             gp.end_symbol
         );
+        
         fsm.build();
-        System.out.println(fsm.states);
-        System.out.println(fsm.states.size());
-        System.out.println(fsm.arcs);
-        System.out.println(fsm.arcs.size());
-        //Testing closure.
-        //Set<Item> hs = new LinkedHashSet();
-        //hs.add(new Item(gp.production_table.getRule(0),0));
-        //fsm.closure(hs);
+        
+        //System.out.println(fsm.states);
+        //System.out.println(fsm.states.size());
+        //System.out.println(fsm.arcs);
+        //System.out.println(fsm.arcs.size());
+        
+        generate(fsm,gp.nonterminals,gp.terminals);
     }
     
 }

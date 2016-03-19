@@ -110,4 +110,24 @@ public class FSM
         }
         return null;
     }
+    
+    public Set<Arc> findArcsWithFromState(State s) {
+        Set<Arc> arcSet = new LinkedHashSet();
+        for(Arc arc : arcs) {
+            if(arc.from.equals(s)) {
+                arcSet.add(arc);
+            }
+        }
+        return arcs;
+    }
+    
+    public Set<Arc> findArcsWithToState(State s) {
+        Set<Arc> arcSet = new LinkedHashSet();
+        for(Arc arc : arcs) {
+            if(arc.to.equals(s)) {
+                arcSet.add(arc);
+            }
+        }
+        return arcs;
+    }
 }
