@@ -9,7 +9,7 @@ public class TableCell
 {
     public enum Action 
     {
-        SHIFT, REDUCE, GOTO
+        SHIFT, REDUCE, GOTO, ERROR
     }
     
     Action action;
