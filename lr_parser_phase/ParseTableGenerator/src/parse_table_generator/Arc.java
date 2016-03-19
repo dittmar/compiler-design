@@ -18,4 +18,8 @@ public class Arc
         this.from = from;
         this.to = to;
     }
+    
+    public String toString() {
+        return from.id + " --"+ transition_symbol + "-> " + to.id;
+    }
 }

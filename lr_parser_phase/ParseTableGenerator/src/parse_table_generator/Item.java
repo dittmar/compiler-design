@@ -36,7 +36,10 @@ public class Item {
     public int getPosition() {
         return position;
     }
-
+    
+    public Symbol getCurrentSymbol() {
+        return rule.getSymbolOnRight(position);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -73,6 +76,10 @@ public class Item {
         }
 
         return sb.toString();
+    }
+    
+    public boolean atEnd() {
+        return position == rule.getRhs().size();
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
 package parse_table_generator;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -31,8 +31,9 @@ public class ParseTableGenerator
         gp.parse();
         
         FSM fsm = new FSM(gp.nonterminal_rule_lookup_table,gp.production_table);
+        fsm.build();
         //Testing closure.
-        //Set<Item> hs = new HashSet();
+        //Set<Item> hs = new LinkedHashSet();
         //hs.add(new Item(gp.production_table.getRule(0),0));
         //fsm.closure(hs);
     }

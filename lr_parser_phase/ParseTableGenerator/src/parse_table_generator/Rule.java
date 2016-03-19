@@ -34,6 +34,10 @@ public class Rule {
     public List<Symbol> getRhs() {
         return rhs;
     }
+    
+    public Symbol getSymbolOnRight(int index) {
+        return rhs.get(index);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -52,7 +56,10 @@ public class Rule {
     public int hashCode() {
         int result = 17;
         result = 31 * result + lhs.hashCode();
-        result = 31 * result + rhs.hashCode();
+        for(Symbol s: rhs) {
+            result *= 31;
+            result += rhs.hashCode();
+        }
         return result;
     }
 

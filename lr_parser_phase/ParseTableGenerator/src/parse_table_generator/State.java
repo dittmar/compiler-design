@@ -19,6 +19,35 @@ public class State {
     public State(Set<Item> itemSet) {
         items = itemSet;
     }
+    
+    public State(Set<Item> itemSet, int id) {
+        items = itemSet;
+        this.id = id;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof State) {
+            return ((State) obj).items.equals(items);
+        }
+        return false;
+    }
+    
+    public String toString() {
+        return items.toString();
+    }
+    
+        @Override
+    public int hashCode() {
+        int result = 17;
+        for(Item item : items) {
+            result *= 31; 
+            result += item.hashCode();
+        }
+        return result;
+    }
+
+    
 
     /*private static int counter = 1;
     private Set<Item> state;
