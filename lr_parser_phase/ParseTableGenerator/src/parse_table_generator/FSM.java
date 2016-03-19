@@ -93,6 +93,10 @@ public class FSM
                         }
                         arcs.add(new Arc(s,state,j));
                     }
+                    else
+                    {
+                        state.setAcceptState();
+                    }
                 }
             }
         }
