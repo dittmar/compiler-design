@@ -22,6 +22,10 @@ public class NumberedProductionTable
         production_list.add(r);
     }
     
+    public Rule getRule(int index) {
+        return production_list.get(index);
+    }
+    
     public String toString()
     {
         StringBuilder sb = new StringBuilder();

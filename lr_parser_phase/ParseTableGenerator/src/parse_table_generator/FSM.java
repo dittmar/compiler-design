@@ -33,10 +33,11 @@ public class FSM
                 Nonterminal nt = (Nonterminal) next;
                 Set<Rule> nonterminalRules = nonterminal_Rule_lookup_table.getRuleSet(nt);
                 for(Rule rule: nonterminalRules) {
-                    sett.add(new Item(rule,0));
+                    itemSet.add(new Item(rule,0));
                 }
             }
         }
+        System.out.println(itemSet);
         return new State(itemSet);
     }
 }

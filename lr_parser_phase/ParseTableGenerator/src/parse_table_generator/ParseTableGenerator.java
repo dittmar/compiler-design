@@ -1,5 +1,8 @@
 package parse_table_generator;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author Joseph Alacqua
@@ -26,6 +29,12 @@ public class ParseTableGenerator
         //parse the grammar
         GrammarParser gp = new GrammarParser(billFile);
         gp.parse();
+        
+        FSM fsm = new FSM(gp.nonterminal_rule_lookup_table,gp.production_table);
+        //Testing closure.
+        //Set<Item> hs = new HashSet();
+        //hs.add(new Item(gp.production_table.getRule(0),0));
+        //fsm.closure(hs);
     }
     
 }
