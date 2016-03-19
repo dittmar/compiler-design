@@ -28,15 +28,15 @@ public class TableCell
     public String toString() {
         switch(action) {
             case SHIFT:
-                return "  s  " + state_id;
+                return "s" + state_id;
             case REDUCE:
-                return "  r  " + state_id;
+                return "r" + state_id;
             case GOTO:
-                return "  g  " + state_id;
+                return "g" + state_id;
             case ACCEPT:
-                return "  a  ";
+                return "a";
             default:
-                return "    ";
+                return " ";
         }
     }
 }

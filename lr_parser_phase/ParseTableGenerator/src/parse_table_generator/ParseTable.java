@@ -3,6 +3,7 @@ package parse_table_generator;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -14,24 +15,35 @@ import java.util.Map;
 public class ParseTable
 {
     ArrayList<LinkedHashMap<Symbol,TableCell>> table;
+    Set<Symbol> allSymbols; // all symbols in the grammar
     
-    public ParseTable(ArrayList<LinkedHashMap<Symbol,TableCell>> table) {
+    public ParseTable(ArrayList<LinkedHashMap<Symbol,TableCell>> table,
+            Set<Symbol> symbols) {
         this.table = table;
+        allSymbols = symbols;
     }
     
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int counter = 0;
+        sb.append("\t");
+        for(Symbol s : allSymbols) {
+            sb.append("|\t").append(s).append("\t|");
+        }
+        sb.append("\n");
         for(LinkedHashMap<Symbol,TableCell> row : table) {
-            sb.append(++counter);
-            for(Map.Entry<Symbol,TableCell> element : row.entrySet()) {
-                sb.append("< ").append(element.getKey()).append(",")
-                        .append(element.getValue()).append(" >").append("  |  ");
-            }
+            sb.append(++counter).append("\t");
+            for(Symbol s: allSymbols) {
+                TableCell tc = row.get(s);
+                if(tc == null) {
+                    sb.append("|\t  \t|");
+                }
+                else {
+                    sb.append("|\t").append(tc).append("\t|");
+                }
+
+            }  
             sb.append("\n");
-            //for(TableCell element : row.values()) {
-            //    sb.append(element);
-            //}
         }
         return sb.toString();
     }

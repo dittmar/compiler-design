@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class ParseTableGenerator 
 {
-public static ParseTable generate(FSM fsm, Set<Terminal> terminals) {
+public static ParseTable generate(FSM fsm, Set<Terminal> terminals,Set<Nonterminal> nonterminals) {
         ArrayList<LinkedHashMap<Symbol,TableCell>> table = new ArrayList();
         Set<Symbol> shiftReduceColumnSymbols = new LinkedHashSet(terminals);
         shiftReduceColumnSymbols.add(fsm.end_symbol);
@@ -70,8 +70,8 @@ public static ParseTable generate(FSM fsm, Set<Terminal> terminals) {
             }
             table.add(row);
         }
-        
-        return new ParseTable(table);
+        shiftReduceColumnSymbols.addAll(nonterminals);
+        return new ParseTable(table,shiftReduceColumnSymbols);
     }
     
     /**
@@ -97,7 +97,7 @@ public static ParseTable generate(FSM fsm, Set<Terminal> terminals) {
         System.out.println(fsm.arcs);
         System.out.println(fsm.arcs.size());
       
-        ParseTable pt = generate(fsm,gp.terminals);
+        ParseTable pt = generate(fsm,gp.terminals,gp.nonterminals);
         System.out.println(pt);
     }
     
