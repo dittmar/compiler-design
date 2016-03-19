@@ -9,7 +9,7 @@ public class TableCell
 {
     public enum Action 
     {
-        SHIFT, REDUCE, GOTO, ERROR
+        SHIFT, REDUCE, GOTO, ACCEPT, ERROR
     }
     
     Action action;
@@ -19,5 +19,24 @@ public class TableCell
     {
         this.action = action;
         this.state_id = state_id;
+    }
+    
+    public TableCell() {
+        this.action = Action.ERROR;
+    }
+    
+    public String toString() {
+        switch(action) {
+            case SHIFT:
+                return "  s  " + state_id;
+            case REDUCE:
+                return "  r  " + state_id;
+            case GOTO:
+                return "  g  " + state_id;
+            case ACCEPT:
+                return "  a  ";
+            default:
+                return "    ";
+        }
     }
 }

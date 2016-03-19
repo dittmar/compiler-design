@@ -26,7 +26,7 @@ public class State {
     
     public void setAcceptState()
     {
-        isAcceptState = true;
+        is_accept_state = true;
     }
     
     @Override

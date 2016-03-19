@@ -122,7 +122,7 @@ public class FSM
                 arcSet.add(arc);
             }
         }
-        return arcs;
+        return arcSet;
     }
     
     public Set<Arc> findArcsWithToState(State s) {
@@ -132,6 +132,6 @@ public class FSM
                 arcSet.add(arc);
             }
         }
-        return arcs;
+        return arcSet;
     }
 }
