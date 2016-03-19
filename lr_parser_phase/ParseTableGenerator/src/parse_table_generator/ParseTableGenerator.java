@@ -52,7 +52,7 @@ public static ParseTable generate(FSM fsm, Set<Terminal> terminals) {
                     }
                     TableCell tc = new TableCell(TableCell.Action.REDUCE,rule_id);
                     for(Symbol s : shiftReduceColumnSymbols) {
-                        System.out.println(s);
+                        System.out.println();
                         if(row.get(s) == null){
                             row.put(s,tc);
                         }
