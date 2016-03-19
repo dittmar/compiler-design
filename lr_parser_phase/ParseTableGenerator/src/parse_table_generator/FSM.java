@@ -88,6 +88,9 @@ public class FSM
                         if(newStates.add(j)) {
                             j.id = newStates.size();
                         }
+                        else{
+                            j = findStateEqualTo(j,newStates);
+                        }
                         arcs.add(new Arc(s,state,j));
                     }
                 }
@@ -99,8 +102,12 @@ public class FSM
         }
     }
     
-    // never gonna give you up
-    // never gonna let you down
-    // never gonna run around
-    // and desert you ;P
+    private State findStateEqualTo(State s,Set<State> stateSet) {
+        for(State state: stateSet) {
+          if(s.equals(state)) {
+             return state; 
+          }  
+        }
+        return null;
+    }
 }

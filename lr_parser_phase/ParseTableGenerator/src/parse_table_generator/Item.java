@@ -74,6 +74,9 @@ public class Item {
           }
           sb.append(rule.rhs.get(i).toString());  
         }
+        if(position>=rule.rhs.size()){
+            sb.append("*");
+        }
 
         return sb.toString();
     }
