@@ -40,4 +40,16 @@ public class FSM
         System.out.println(itemSet);
         return new State(itemSet);
     }
+    
+    public State goTo(State i, Symbol x)
+    {
+        HashSet<Item> j = new HashSet<>();
+        for (Item a : i.items)
+        {
+            if (a.getRule().getRhs().get(a.getPosition()).equals(x)) {
+                j.add(new Item(a.getRule(), a.getPosition() + 1));
+            }
+        }
+        return closure(j);
+    }
 }
