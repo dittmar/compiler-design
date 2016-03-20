@@ -38,6 +38,14 @@ public class NonterminalRuleLookupTable
         return rule_table.get(nt);
     }
     
+    Set<Item> getItemSet(Nonterminal nt) {
+        Set<Item> itemSet = new HashSet();
+        for(Rule rule: getRuleSet(nt)) {
+            itemSet.add(new Item(rule,0));
+        }
+        return itemSet;
+    }
+    
     public String toString()
     {
         StringBuilder sb = new StringBuilder();

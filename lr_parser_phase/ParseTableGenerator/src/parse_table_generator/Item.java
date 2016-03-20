@@ -16,7 +16,13 @@ public class Item {
     private final Rule rule;
     private final int position;
 
-    public Item(Rule rule, int position) {
+    /**
+     * Item with a lookahead symbol LR(1). 
+     * @param rule the production rule.
+     * @param position the position of the "cursor".
+     * @param lookahead the lookahead terminal symbol.
+     */
+    public Item(Rule rule, int position, Terminal lookahead) {
         if (position < 0 || position > rule.rhs.size()) {
             throw new IllegalArgumentException(
                 "Item: invalid rule position" + position);
@@ -27,6 +33,16 @@ public class Item {
             this.rule = rule;
             this.position = position;
         }
+        this.lookahead = lookahead;
+    }
+    
+    /**
+     * Item without a lookahead symbol LR(0).
+     * @param rule the production rule
+     * @param position the position of the "cursor".
+     */
+    public Item(Rule rule, int position){
+        this(rule,position,null);
     }
 
     public Rule getRule() {
@@ -40,6 +56,16 @@ public class Item {
     public Symbol getCurrentSymbol() {
         return rule.getSymbolOnRight(position);
     }
+    
+    /**
+     * @return the next symbol in the RHS of the rule or null if at the end.
+     */
+    public Symbol getNextSymbol() {
+        if(atEnd()) {
+            return null;
+        }
+        return rule.getSymbolOnRight(position+1);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -50,7 +76,8 @@ public class Item {
         } else {
             Item i = (Item) o;
             return this.rule.equals(i.getRule())
-                    && this.position == i.getPosition();
+                    && this.position == i.getPosition()
+                    && this.lookahead.equals(i.lookahead);
         }
     }
 
@@ -59,6 +86,7 @@ public class Item {
         int result = 17;
         result = 31 * result + rule.hashCode();
         result = 31 * result + position;
+        result = 31 * result + lookahead.hashCode();
         return result;
     }
 

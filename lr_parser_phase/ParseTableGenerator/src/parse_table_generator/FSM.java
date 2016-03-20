@@ -105,7 +105,13 @@ public class FSM
                     Set<Rule> nonterminalRules = 
                         nonterminal_rule_lookup_table.getRuleSet(nt);
                     for(Rule rule: nonterminalRules) {
-                        itemSet2.add(new Item(rule,0));
+                        //addition for LR(1)
+                        Set<Item> itemSetFirst = new HashSet();
+                        itemSetFirst.add(item);
+                        Set<Terminal> firsts = first(itemSetFirst);
+                        for(Terminal t: firsts) {
+                            itemSet2.add(new Item(rule,0,t));
+                        }
                     }
                     if(!(itemSet.size() == itemSet2.size())) {
                         return closure(itemSet2);
@@ -116,6 +122,30 @@ public class FSM
         System.out.println(itemSet);
         System.out.println(itemSet2);
         return new State(itemSet);
+    }
+    
+    // Assumes lhs of each rule is the same
+    private Set<Terminal> first(Set<Item> items) {
+        Set<Terminal> firstTerminals = new HashSet();
+        for(Item item : items) {
+            Symbol next = item.getNextSymbol();
+            if(next == null) { // nothing left, might interfere with $ however.
+                firstTerminals.add(item.lookahead);
+            }
+            else if(next instanceof Terminal) {
+                firstTerminals.add((Terminal) next);
+            }
+            else { //Nonterminal case
+                Set<Item> itemsProducedByNonterminal = 
+                        nonterminal_rule_lookup_table.getItemSet((Nonterminal) next);
+                Set<Terminal> firstOfNonTerminal = first(itemsProducedByNonterminal); 
+                for(Terminal t: firstOfNonTerminal) {
+                    firstTerminals.add(t);
+                }
+            }
+        }
+        return firstTerminals
+        
     }
     
     private State findStateEqualTo(State s,Set<State> stateSet) {
@@ -134,7 +164,7 @@ public class FSM
         {   if(!item.atEnd()) {
                 if (item.getCurrentSymbol().equals(symbol)) {
                     newItems.add(
-                        new Item(item.getRule(), item.getPosition() + 1)
+                        new Item(item.getRule(), item.getPosition() + 1, item.lookahead)
                     );
                 }
             }
