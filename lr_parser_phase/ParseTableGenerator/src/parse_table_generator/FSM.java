@@ -31,7 +31,7 @@ public class FSM
         // Initialize T to {Closure({S' -> .S$})}
         states = new LinkedHashSet();
         Set<Item> initialItemSet = new LinkedHashSet();
-        initialItemSet.add(new Item(numbered_production_table.getRule(0),0));
+        initialItemSet.add(new Item(numbered_production_table.getRule(0),0,new AnySymbol()));
         State initial = closure(initialItemSet);
         initial.id = 1;
         states.add(initial);
@@ -144,7 +144,7 @@ public class FSM
                 }
             }
         }
-        return firstTerminals
+        return firstTerminals;
         
     }
     

@@ -90,10 +90,10 @@ public class ParseTableGenerator
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String billFile = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/ParseTableGenerator/test/parse_table_generator/resources/class.txt";
+        String billFile = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/ParseTableGenerator/test/parse_table_generator/resources/class2.txt";
         String kevFile = "test/parse_table_generator/resources/class.txt";
         //parse the grammar
-        GrammarParser gp = new GrammarParser(kevFile);
+        GrammarParser gp = new GrammarParser(billFile);
         gp.parse();
         
         FSM fsm = new FSM(

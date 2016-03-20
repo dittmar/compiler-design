@@ -61,7 +61,7 @@ public class Item {
      * @return the next symbol in the RHS of the rule or null if at the end.
      */
     public Symbol getNextSymbol() {
-        if(atEnd()) {
+        if(position + 1 >= rule.rhs.size()) {
             return null;
         }
         return rule.getSymbolOnRight(position+1);
@@ -86,7 +86,9 @@ public class Item {
         int result = 17;
         result = 31 * result + rule.hashCode();
         result = 31 * result + position;
-        result = 31 * result + lookahead.hashCode();
+        if(lookahead != null) {
+            result = 31 * result + lookahead.hashCode();
+        }
         return result;
     }
 
@@ -105,12 +107,13 @@ public class Item {
         if(position>=rule.rhs.size()){
             sb.append("*");
         }
+        sb.append("\t").append(lookahead);
 
         return sb.toString();
     }
     
     public boolean atEnd() {
-        return position == rule.getRhs().size();
+        return position >= rule.getRhs().size();
     }
 
     public static void main(String[] args) {
