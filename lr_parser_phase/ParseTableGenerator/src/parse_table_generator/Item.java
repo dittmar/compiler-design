@@ -39,7 +39,7 @@ public class Item {
      * @param position the position of the "cursor".
      */
     public Item(Rule rule, int position){
-        this(rule,position,null);
+        this(rule,position, new AnySymbol());
     }
 
     public Rule getRule() {
@@ -74,8 +74,7 @@ public class Item {
             Item i = (Item) o;
             return this.rule.equals(i.getRule())
                     && this.position == i.getPosition()
-                    && ((this.lookahead == null && i.lookahead == null) ||
-                        (this.lookahead.equals(i.lookahead)));
+                    && (this.lookahead.equals(i.lookahead));
         }
     }
 

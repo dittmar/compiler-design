@@ -41,7 +41,7 @@ public class NonterminalRuleLookupTable
     Set<Item> getItemSet(Nonterminal nt) {
         Set<Item> itemSet = new HashSet();
         for(Rule rule: getRuleSet(nt)) {
-            itemSet.add(new Item(rule,0));
+            itemSet.add(new Item(rule, 0));
         }
         return itemSet;
     }

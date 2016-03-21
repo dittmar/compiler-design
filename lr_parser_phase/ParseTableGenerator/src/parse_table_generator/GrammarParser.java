@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Set;
@@ -24,7 +25,8 @@ public class GrammarParser
     NumberedProductionTable production_table;
     
     private int rule_number = 0;
-    
+    private List<Terminal> sorted_terminals;
+    private List<Nonterminal> sorted_nonterminals;
     public GrammarParser(String filename)
     {
         nonterminal_rule_lookup_table = new NonterminalRuleLookupTable();
@@ -45,6 +47,16 @@ public class GrammarParser
                 scanner.nextLine();
                 rule_number++;
             }
+            // Sort terminals and nonterminals by length to 
+            // prevent parsing errors
+            sorted_terminals = new ArrayList<>(terminals);
+            sorted_terminals.sort((Terminal t1, Terminal t2) -> 
+                t2.getName().length() - t1.getName().length());
+            
+            sorted_nonterminals = new ArrayList<>(nonterminals);
+            sorted_nonterminals.sort((Nonterminal nt1, Nonterminal nt2) ->
+                nt2.getName().length() - nt1.getName().length());
+            
             while (scanner.hasNextLine())
             {
                 String next_line = scanner.nextLine();
@@ -150,7 +162,7 @@ public class GrammarParser
             }
             else if (rule_string.matches("[A-Z].*"))
             {
-                for (Nonterminal nt : nonterminals)
+                for (Nonterminal nt : sorted_nonterminals)
                 {
                     if (rule_string.startsWith(nt.getName()))
                     {
@@ -163,7 +175,7 @@ public class GrammarParser
             }
             else
             {
-                for (Terminal t : terminals)
+                for (Terminal t : sorted_terminals)
                 {
                     if (rule_string.startsWith(t.getName()))
                     {
