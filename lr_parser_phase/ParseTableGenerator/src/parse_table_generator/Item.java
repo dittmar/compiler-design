@@ -8,9 +8,6 @@ package parse_table_generator;
  * @version Mar 14, 2016
  */
 public class Item {
-
-    //Rule rule;
-    //int position;
     Terminal lookahead;
 
     private final Rule rule;
@@ -77,7 +74,8 @@ public class Item {
             Item i = (Item) o;
             return this.rule.equals(i.getRule())
                     && this.position == i.getPosition()
-                    && this.lookahead.equals(i.lookahead);
+                    && ((this.lookahead == null && i.lookahead == null) ||
+                        (this.lookahead.equals(i.lookahead)));
         }
     }
 
