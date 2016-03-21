@@ -56,16 +56,15 @@ public class ParseTableGenerator
                         TableCell.Action.REDUCE,
                         rule_id
                     );
-                    for(Symbol s : terminals) {
-                        System.out.println();
-                        if(row.get(s) == null){
-                            row.put(s,tc);
-                        }
-                        else {
-                            System.out.println(s);
-                            System.err.print("Shift Reduce Conflict: " + tc + " vs " + row.get(s));
-                            //System.exit(1);
-                        }
+                    System.out.println();
+                    TableCell existingCell = row.get(item.lookahead);
+                    if(existingCell == null){
+                        row.put(item.lookahead,tc);
+                    }
+                    else if(!existingCell.equals(tc)){
+                        //System.out.println(s);
+                        System.err.print("Shift Reduce Conflict: " + tc + " vs " + row.get(item.lookahead));
+                        //System.exit(1);
                     }
                 }
                 else if(item.getCurrentSymbol() instanceof StartSymbol) {

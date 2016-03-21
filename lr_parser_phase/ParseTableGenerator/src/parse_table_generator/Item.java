@@ -107,7 +107,7 @@ public class Item {
         if(position>=rule.rhs.size()){
             sb.append("*");
         }
-        sb.append("\t").append(lookahead);
+        sb.append("\t la:").append(lookahead);
 
         return sb.toString();
     }

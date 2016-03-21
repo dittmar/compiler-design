@@ -7,7 +7,7 @@ package parse_table_generator;
  */
 public class AnySymbol extends Terminal {
     public AnySymbol() {
-        super("?");
+        super("?AnySymbol?");
     }
     
     @Override

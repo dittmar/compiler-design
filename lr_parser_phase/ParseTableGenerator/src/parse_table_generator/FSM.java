@@ -129,7 +129,7 @@ public class FSM
         Set<Terminal> firstTerminals = new HashSet();
         for(Item item : items) {
             Symbol next = item.getNextSymbol();
-            if(next == null) { // nothing left, might interfere with $ however.
+            if(next == null) {
                 firstTerminals.add(item.lookahead);
             }
             else if(next instanceof Terminal) {
