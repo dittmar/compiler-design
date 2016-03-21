@@ -1,7 +1,9 @@
 package parse_table_generator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -15,12 +17,16 @@ public class ParseTable
 {
     ArrayList<LinkedHashMap<Symbol,TableCell>> table;
     Set<Symbol> allSymbols; // all symbols in the grammar
+    private Map<String, Terminal> terminal_lookup_table;
     private int longest_symbol_length = 0;
     
-    public ParseTable(ArrayList<LinkedHashMap<Symbol,TableCell>> table,
-            Set<Symbol> symbols) {
+    public ParseTable(ArrayList<LinkedHashMap<Symbol, TableCell>> table,
+        Set<Symbol> symbols, Map<String, Terminal> terminal_lookup_table)
+    {
         this.table = table;
         allSymbols = symbols;
+        this.terminal_lookup_table = terminal_lookup_table;
+        
         for (Symbol s : allSymbols)
         {
             if (s.getName().length() > longest_symbol_length)

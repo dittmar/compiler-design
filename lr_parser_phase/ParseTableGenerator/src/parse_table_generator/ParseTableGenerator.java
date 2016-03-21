@@ -3,6 +3,7 @@ package parse_table_generator;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -17,9 +18,10 @@ public class ParseTableGenerator
     public static ParseTable generate(
         FSM fsm, 
         Set<Terminal> terminals,
-        Set<Nonterminal> nonterminals) 
+        Set<Nonterminal> nonterminals,
+        Map<String, Terminal> terminal_lookup_table)
     {
-        ArrayList<LinkedHashMap<Symbol,TableCell>> table = new ArrayList();
+        ArrayList<LinkedHashMap<Symbol,TableCell>> parse_table = new ArrayList();
         for(State state:fsm.states) {
             // System.out.println("State: " + state.id);
             Set<Arc> arcSet = new LinkedHashSet<>(fsm.findArcsWithFromState(state));
@@ -62,9 +64,9 @@ public class ParseTableGenerator
                         row.put(item.lookahead,tc);
                     }
                     else if(!existingCell.equals(tc)){
-                        //System.out.println(s);
-                        System.err.print("Shift Reduce Conflict: " + tc + " vs " + row.get(item.lookahead));
-                        //System.exit(1);
+                        System.err.println("Conflict: " + tc + " vs " + 
+                            row.get(item.lookahead));
+                        System.exit(1);
                     }
                 }
                 else if(item.getCurrentSymbol() instanceof EndSymbol) {
@@ -72,17 +74,21 @@ public class ParseTableGenerator
                     row.put(item.getCurrentSymbol(), new TableCell(TableCell.Action.ACCEPT,-1));
                 }
             }
-            table.add(row);
+            parse_table.add(row);
         }
         
-        // We want all of the terminals to be in the table, including
+        // We want all of the terminals to be in the parse_table, including
         // the end symbol
         Set<Symbol> parse_table_symbols = new LinkedHashSet(terminals);
-        // We want all of the nonterminals to be in the table...
+        // We want all of the nonterminals to be in the parse_table...
         parse_table_symbols.addAll(nonterminals);
-        // ... but we don't want the start symbol to be in the table.
+        // ... but we don't want the start symbol to be in the parse_table.
         parse_table_symbols.remove(fsm.start_symbol);
-        return new ParseTable(table, parse_table_symbols);
+        return new ParseTable(
+            parse_table,
+            parse_table_symbols,
+            terminal_lookup_table
+        );
     }
     
     /**
@@ -109,7 +115,12 @@ public class ParseTableGenerator
         //System.out.println(fsm.arcs);
         //System.out.println(fsm.arcs.size());
       
-        ParseTable pt = generate(fsm,gp.terminals,gp.nonterminals);
+        ParseTable pt = generate(
+            fsm,
+            gp.terminals,
+            gp.nonterminals,
+            gp.terminal_lookup_table
+        );
         System.out.println(pt);
     }
     
