@@ -2,7 +2,6 @@ package parse_table_generator;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,19 +15,34 @@ public class ParseTable
 {
     ArrayList<LinkedHashMap<Symbol,TableCell>> table;
     Set<Symbol> allSymbols; // all symbols in the grammar
+    private int longest_symbol_length = 0;
     
     public ParseTable(ArrayList<LinkedHashMap<Symbol,TableCell>> table,
             Set<Symbol> symbols) {
         this.table = table;
         allSymbols = symbols;
+        for (Symbol s : allSymbols)
+        {
+            if (s.getName().length() > longest_symbol_length)
+            {
+                longest_symbol_length = s.getName().length();
+            }
+        }
     }
     
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int counter = 0;
         sb.append("\t");
+        // Padding method found here:
+        /* http://stackoverflow.com/questions/15635273/\
+           can-we-use-string-format-to-pad-prefix-with-a-\
+           character-with-desired-length
+         */
         for(Symbol s : allSymbols) {
-            sb.append("|\t").append(s).append("\t|");
+            sb.append("|")
+              .append(paddedTableString(s.getName()))
+              .append("|");
         }
         sb.append("\n");
         for(LinkedHashMap<Symbol,TableCell> row : table) {
@@ -36,15 +50,32 @@ public class ParseTable
             for(Symbol s: allSymbols) {
                 TableCell tc = row.get(s);
                 if(tc == null) {
-                    sb.append("|\t  \t|");
+                    sb.append("|")
+                      .append(paddedTableString(" "))
+                      .append("|");
                 }
                 else {
-                    sb.append("|\t").append(tc).append("\t|");
+                    sb.append("|")
+                      .append(paddedTableString(tc.toString()))
+                      .append("|");
                 }
 
             }  
             sb.append("\n");
         }
         return sb.toString();
+    }
+    
+    private String paddedTableString(String string)
+    {
+        int left_num_spaces =
+            (longest_symbol_length - string.length()) / 2 + 1;
+        int right_num_spaces = left_num_spaces + (string.length() % 2);
+        return String.format(
+            "%" + left_num_spaces + "s" +   // left spaces
+            "%s" +                          // table contents
+            "%" + right_num_spaces + "s",   // right spaces
+            " ", string, " "
+        );
     }
 }
