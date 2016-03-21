@@ -1,0 +1,195 @@
+// Kevin Dittmar
+// William Ezekiel
+// Joe Alacqua
+
+// Lexer for WOL(F) - Write-Only Language (Functional)
+Package wolf;
+
+Helpers
+letter = ['a'..'z'] | ['A'..'Z'];
+digit = ['0'..'9'];
+// one or more digits
+digits = digit+;
+exp = ['e'+'E'] ['+'+'-']? digits;
+newline = [10 + 13];
+single_quote = ''';
+double_quote = '"';
+back_tick = '`';
+underscore = '_';
+backslash = '\';
+question_mark = '?';
+
+States
+initial, string, escape;
+
+Tokens
+// Strings
+{initial->string} string_start = single_quote;
+
+{string->escape} string_escape = backslash;
+{escape->string} escape_alarm = 'a';
+{escape->string} escape_backspace = 'b';
+{escape->string} escape_formfeed = 'f';
+{escape->string} escape_carriage_return = 'r';
+{escape->string} escape_newline = 'n';
+{escape->string} escape_tab = 't';
+{escape->string} escape_vertical_tab = 'v';
+{escape->string} escape_backslash = backslash;
+{escape->string} escape_single_quote = single_quote;
+{escape->string} escape_double_quote = double_quote;
+{escape->string} escape_question_mark = question_mark;
+{escape->string} escape_octal_char = digit digit digit;
+{escape->string} escape_hex_char = 'x' digit digit;
+{escape->string} escape_unicode_char = 'u' digit digit digit digit;
+{escape->string} escape_default = [0..0xffff];
+
+{string} string_body = [[[0..0xffff] - single_quote] - backslash]*;
+
+{string->initial} string_end = single_quote;
+
+// list operators
+head = 'h';
+tail = 't';
+reverse = 'r';
+append = '$';
+prepend = '^';
+foldl = '{';
+foldr = '}';
+map = '.';
+flatten = underscore;
+length = '#';
+
+// other operators
+lambda_start = '\';
+lambda_arrow = '->';
+identity = '@';
+print = 'print';
+def = 'def';
+
+comment = back_tick [[0..0xffff] - back_tick]* back_tick;
+space = ' ' | 9 | newline;
+
+assign = ':=';
+
+// relational operators
+equal = '=';
+lt = '<';
+gt = '>';
+not_equal = '!=';
+lte = '<=';
+gte = '>=';
+and = '&';
+or = '|';
+xor = 'x';
+logical_not  = '!';
+
+// arithmetic operators
+plus = '+';
+minus = '-';
+mult = '*';
+div = '/';
+mod = '%';
+neg = '~';
+
+// delimiter characters
+l_paren = '(';
+r_paren = ')';
+start_list = '[';
+end_list = ']';
+comma = ',';
+semi = ';';
+ternary_question_mark = question_mark;
+ternary_colon = ':';
+
+// constants
+identifier = (letter|underscore)+;
+int_number = digits;
+float_number = (digits '.'? digits? | '.' digits)exp?;
+
+misc = [0..0xffff]; // catch all for any garbage.
+
+Ignored Tokens
+comment, space;
+
+Productions
+program = {defs} def_list func
+        | {no_defs} func;
+def_list = {multi_def} def_list def_header
+         | {single_def} def_header;
+def_header = def identifier sig assign func;
+sig = {empty} l_paren r_paren
+    | {full} l_paren sig_args r_paren;
+sig_args = {more} sig_args sig_arg_rest
+         | {done} identifier;
+sig_arg_rest = comma identifier;
+func = {func} func_name arg_list
+     | {branch} branch;
+func_name = {id} identifier
+          | {head} head
+          | {tail} tail
+          | {reverse} reverse
+          | {prepend} prepend
+          | {append} append
+          | {map} map
+          | {length} length
+          | {foldl} foldl
+          | {foldr} foldr
+          | {flatten} flatten
+          | {identity} identity
+          | {print} print
+          | {lambda} lambda_start
+          | {neg} neg
+          | {not} logical_not
+          | {plus} plus
+          | {minus} minus
+          | {mult} mult
+          | {div} div
+          | {mod} mod
+          | {lt} lt
+          | {gt} gt
+          | {lte} lte
+          | {gte} gte
+          | {equal} equal
+          | {not_equal} not_equal
+          | {and} and
+          | {or} or
+          | {xor} xor;
+arg_list = {empty} l_paren r_paren
+         | {full} l_paren args r_paren;
+args = {done} identifier
+     | {more} args arg_list;
+arg_rest = comma arg;
+arg = {func} func
+    | {list} list
+    | {float} float_number
+    | {int} int_number
+    | {identifier} identifier
+    | {string} string;
+string = {empty} string_start string_end
+       | {full} string_start string_middle string_end;
+string_middle = {more_body} string_middle string_body
+              | {done_body} string_body
+              | {more_escape} string_middle string_escape_seq
+              | {done_escape} string_escape_seq;
+string_escape_seq = string_escape escape_char;
+escape_char = {a} escape_alarm
+            | {b} escape_backspace
+            | {f} escape_formfeed
+            | {r} escape_carriage_return
+            | {n} escape_newline
+            | {t} escape_tab
+            | {v} escape_vertical_tab
+            | {slash} escape_backslash
+            | {single} escape_single_quote
+            | {double} escape_double_quote
+            | {question} escape_question_mark
+            | {octal} escape_octal_char
+            | {hex} escape_hex_char
+            | {unicode} escape_unicode_char
+            | {default} escape_default;
+branch = semi cond ternary_question_mark if ternary_colon else;
+cond = func;
+if = func;
+else = func;
+list = {full} start_list args end_list
+     | {empty} start_list end_list;

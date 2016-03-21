@@ -1,0 +1,21 @@
+class three_point_one.node.TIdentifier: x
+class three_point_one.node.TSpace:  
+class three_point_one.node.TSpace:  
+class three_point_one.node.TAssign: :=
+class three_point_one.node.TSpace:  
+class three_point_one.node.TSpace:  
+class three_point_one.node.TLParen: (
+class three_point_one.node.TPrint: print
+class three_point_one.node.TLParen: (
+class three_point_one.node.TIdentifier: y
+class three_point_one.node.TRParen: )
+class three_point_one.node.TComma: ,
+class three_point_one.node.TSpace:  
+class three_point_one.node.TIntNumber: 2
+class three_point_one.node.TSpace:  
+class three_point_one.node.TPlus: +
+class three_point_one.node.TSpace:  
+class three_point_one.node.TIntNumber: 3
+class three_point_one.node.TRParen: )
+class three_point_one.node.TSpace:  
+class three_point_one.node.EOF: 

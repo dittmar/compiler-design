@@ -1,0 +1,79 @@
+program = {defs} def_list func
+        | {no_defs} func;
+def_list = {multi_def} def_list def_header
+         | {single_def} def_header;
+def_header = def identifier sig assign func;
+sig = {empty} l_paren r_paren
+    | {full} l_paren sig_args r_paren;
+sig_args = {more} sig_args sig_arg_rest
+         | {done} identifier;
+sig_arg_rest = comma identifier;
+func = {func} func_name arg_list
+     | {branch} branch;
+func_name = {id} identifier
+          | {head} head
+          | {tail} tail
+          | {reverse} reverse
+          | {prepend} prepend
+          | {append} append
+          | {map} map
+          | {length} length
+          | {foldl} foldl
+          | {foldr} foldr
+          | {flatten} flatten
+          | {identity} identity
+          | {print} print
+          | {lambda} lambda_start
+          | {neg} neg
+          | {not} logical_not
+          | {plus} plus
+          | {minus} minus
+          | {mult} mult
+          | {div} div
+          | {mod} mod
+          | {lt} lt
+          | {gt} gt
+          | {lte} lte
+          | {gte} gte
+          | {equal} equal
+          | {not_equal} not_equal
+          | {and} and
+          | {or} or
+          | {xor} xor;
+arg_list = {empty} l_paren r_paren
+         | {full} l_paren args r_paren;
+args = {done} identifier
+     | {more} args arg_list;
+arg_rest = comma arg;
+arg = {func} func
+    | {list} list
+    | {float} float_number
+    | {int} int_number
+    | {identifier} identifier
+    | {string} string;
+string = {empty} string_start string_end
+       | {full} start_start string_middle string_end;
+string_middle = {more_body} string_middle string_body
+              | {done_body} string_body
+              | {more_escape} string_middle string_escape_seq
+              | {done_escape} string_escape_seq;
+string_escape_seq = string_escape escape_char;
+escape_char = {a} escape_alarm
+            | {b} escape_backspace
+            | {f} escape_formfeed
+            | {r} escape_carriage_return
+            | {n} escape_newline
+            | {t} escape_tab
+            | {v} escape_vertical_tab
+            | {slash} escape_backslash
+            | {single} escape_single_quote
+            | {double} escape_double_quote
+            | {question} escape_question_mark
+            | {octal} escape_octal_char
+            | {hex} escape_hex_char
+            | {unicode} escape_unicode_char
+            | {default} escape_default;
+branch = if ternary_colon else;
+if = [f1]: func ternary_question_mark [f2]: func;
+else = func;
+list = start_list args end_list;

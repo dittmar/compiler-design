@@ -1,0 +1,46 @@
+// Kevin Dittmar
+// William Ezekiel
+// Joe Alacqua
+
+Package three_point_one;
+
+Helpers
+digit = ['0'..'9'];
+letter = ['a'..'z'] | ['A'..'Z'];
+// one or more digits
+digits = digit+;
+newline = [10 + 13];
+underscore = '_';
+
+
+Tokens
+print = 'print';
+space = ' ' | 9 | newline;
+plus = '+';
+l_paren = '(';
+r_paren = ')';
+assign = ':=';
+semi = ';';
+comma = ',';
+
+// constants
+id = letter (letter|underscore)*;
+num = digits;
+
+
+misc = [0..0xffff]; // catch all for any garbage.
+
+Ignored Tokens
+space;
+
+Productions
+
+s = {compound} [first]:s semi [second]:s
+  | {assign} id assign e
+  | {print} print l_paren l r_paren;
+e = {id} id
+  | {num} num
+  | {add} [first]:e plus [second]:e 
+  | {e_seq} l_paren s comma e r_paren;
+l = {e} e
+  | {l_seq} l comma e;
