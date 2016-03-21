@@ -35,12 +35,27 @@ space;
 
 Productions
 
-s = {compound} [first]:s semi [second]:s
-  | {assign} id assign e
-  | {print} print l_paren l r_paren;
+s = {compound} s semi c
+  | {assign} assign_stmt
+  | {print} print_stmt;
+
+c = {assign} assign_stmt
+  | {print} print_stmt;
+
+assign_stmt = id assign e;
+
+print_stmt = print l_paren l r_paren;
+
 e = {id} id
   | {num} num
-  | {add} [first]:e plus [second]:e 
-  | {e_seq} l_paren s comma e r_paren;
+  | {add} e plus term 
+  | {e_seq} e_seq;
+
+term = {id} id
+     | {num} num
+     | {e_seq} e_seq;
+
+e_seq = l_paren s comma e r_paren;
+
 l = {e} e
   | {l_seq} l comma e;

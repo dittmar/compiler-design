@@ -7,10 +7,7 @@ import three_point_one.analysis.*;
 @SuppressWarnings("nls")
 public final class APrintS extends PS
 {
-    private TPrint _print_;
-    private TLParen _lParen_;
-    private PL _l_;
-    private TRParen _rParen_;
+    private PPrintStmt _printStmt_;
 
     public APrintS()
     {
@@ -18,19 +15,10 @@ public final class APrintS extends PS
     }
 
     public APrintS(
-        @SuppressWarnings("hiding") TPrint _print_,
-        @SuppressWarnings("hiding") TLParen _lParen_,
-        @SuppressWarnings("hiding") PL _l_,
-        @SuppressWarnings("hiding") TRParen _rParen_)
+        @SuppressWarnings("hiding") PPrintStmt _printStmt_)
     {
         // Constructor
-        setPrint(_print_);
-
-        setLParen(_lParen_);
-
-        setL(_l_);
-
-        setRParen(_rParen_);
+        setPrintStmt(_printStmt_);
 
     }
 
@@ -38,10 +26,7 @@ public final class APrintS extends PS
     public Object clone()
     {
         return new APrintS(
-            cloneNode(this._print_),
-            cloneNode(this._lParen_),
-            cloneNode(this._l_),
-            cloneNode(this._rParen_));
+            cloneNode(this._printStmt_));
     }
 
     @Override
@@ -50,16 +35,16 @@ public final class APrintS extends PS
         ((Analysis) sw).caseAPrintS(this);
     }
 
-    public TPrint getPrint()
+    public PPrintStmt getPrintStmt()
     {
-        return this._print_;
+        return this._printStmt_;
     }
 
-    public void setPrint(TPrint node)
+    public void setPrintStmt(PPrintStmt node)
     {
-        if(this._print_ != null)
+        if(this._printStmt_ != null)
         {
-            this._print_.parent(null);
+            this._printStmt_.parent(null);
         }
 
         if(node != null)
@@ -72,119 +57,23 @@ public final class APrintS extends PS
             node.parent(this);
         }
 
-        this._print_ = node;
-    }
-
-    public TLParen getLParen()
-    {
-        return this._lParen_;
-    }
-
-    public void setLParen(TLParen node)
-    {
-        if(this._lParen_ != null)
-        {
-            this._lParen_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._lParen_ = node;
-    }
-
-    public PL getL()
-    {
-        return this._l_;
-    }
-
-    public void setL(PL node)
-    {
-        if(this._l_ != null)
-        {
-            this._l_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._l_ = node;
-    }
-
-    public TRParen getRParen()
-    {
-        return this._rParen_;
-    }
-
-    public void setRParen(TRParen node)
-    {
-        if(this._rParen_ != null)
-        {
-            this._rParen_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._rParen_ = node;
+        this._printStmt_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._print_)
-            + toString(this._lParen_)
-            + toString(this._l_)
-            + toString(this._rParen_);
+            + toString(this._printStmt_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._print_ == child)
+        if(this._printStmt_ == child)
         {
-            this._print_ = null;
-            return;
-        }
-
-        if(this._lParen_ == child)
-        {
-            this._lParen_ = null;
-            return;
-        }
-
-        if(this._l_ == child)
-        {
-            this._l_ = null;
-            return;
-        }
-
-        if(this._rParen_ == child)
-        {
-            this._rParen_ = null;
+            this._printStmt_ = null;
             return;
         }
 
@@ -195,27 +84,9 @@ public final class APrintS extends PS
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._print_ == oldChild)
+        if(this._printStmt_ == oldChild)
         {
-            setPrint((TPrint) newChild);
-            return;
-        }
-
-        if(this._lParen_ == oldChild)
-        {
-            setLParen((TLParen) newChild);
-            return;
-        }
-
-        if(this._l_ == oldChild)
-        {
-            setL((PL) newChild);
-            return;
-        }
-
-        if(this._rParen_ == oldChild)
-        {
-            setRParen((TRParen) newChild);
+            setPrintStmt((PPrintStmt) newChild);
             return;
         }
 

@@ -50,17 +50,17 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseACompoundS(ACompoundS node)
     {
         inACompoundS(node);
-        if(node.getFirst() != null)
+        if(node.getS() != null)
         {
-            node.getFirst().apply(this);
+            node.getS().apply(this);
         }
         if(node.getSemi() != null)
         {
             node.getSemi().apply(this);
         }
-        if(node.getSecond() != null)
+        if(node.getC() != null)
         {
-            node.getSecond().apply(this);
+            node.getC().apply(this);
         }
         outACompoundS(node);
     }
@@ -79,17 +79,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAAssignS(AAssignS node)
     {
         inAAssignS(node);
-        if(node.getId() != null)
+        if(node.getAssignStmt() != null)
         {
-            node.getId().apply(this);
-        }
-        if(node.getAssign() != null)
-        {
-            node.getAssign().apply(this);
-        }
-        if(node.getE() != null)
-        {
-            node.getE().apply(this);
+            node.getAssignStmt().apply(this);
         }
         outAAssignS(node);
     }
@@ -108,6 +100,98 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAPrintS(APrintS node)
     {
         inAPrintS(node);
+        if(node.getPrintStmt() != null)
+        {
+            node.getPrintStmt().apply(this);
+        }
+        outAPrintS(node);
+    }
+
+    public void inAAssignC(AAssignC node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAssignC(AAssignC node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAssignC(AAssignC node)
+    {
+        inAAssignC(node);
+        if(node.getAssignStmt() != null)
+        {
+            node.getAssignStmt().apply(this);
+        }
+        outAAssignC(node);
+    }
+
+    public void inAPrintC(APrintC node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAPrintC(APrintC node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAPrintC(APrintC node)
+    {
+        inAPrintC(node);
+        if(node.getPrintStmt() != null)
+        {
+            node.getPrintStmt().apply(this);
+        }
+        outAPrintC(node);
+    }
+
+    public void inAAssignStmt(AAssignStmt node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAssignStmt(AAssignStmt node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAssignStmt(AAssignStmt node)
+    {
+        inAAssignStmt(node);
+        if(node.getId() != null)
+        {
+            node.getId().apply(this);
+        }
+        if(node.getAssign() != null)
+        {
+            node.getAssign().apply(this);
+        }
+        if(node.getE() != null)
+        {
+            node.getE().apply(this);
+        }
+        outAAssignStmt(node);
+    }
+
+    public void inAPrintStmt(APrintStmt node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAPrintStmt(APrintStmt node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAPrintStmt(APrintStmt node)
+    {
+        inAPrintStmt(node);
         if(node.getPrint() != null)
         {
             node.getPrint().apply(this);
@@ -124,7 +208,7 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getRParen().apply(this);
         }
-        outAPrintS(node);
+        outAPrintStmt(node);
     }
 
     public void inAIdE(AIdE node)
@@ -183,17 +267,17 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAAddE(AAddE node)
     {
         inAAddE(node);
-        if(node.getFirst() != null)
+        if(node.getE() != null)
         {
-            node.getFirst().apply(this);
+            node.getE().apply(this);
         }
         if(node.getPlus() != null)
         {
             node.getPlus().apply(this);
         }
-        if(node.getSecond() != null)
+        if(node.getTerm() != null)
         {
-            node.getSecond().apply(this);
+            node.getTerm().apply(this);
         }
         outAAddE(node);
     }
@@ -212,6 +296,90 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAESeqE(AESeqE node)
     {
         inAESeqE(node);
+        if(node.getESeq() != null)
+        {
+            node.getESeq().apply(this);
+        }
+        outAESeqE(node);
+    }
+
+    public void inAIdTerm(AIdTerm node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAIdTerm(AIdTerm node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAIdTerm(AIdTerm node)
+    {
+        inAIdTerm(node);
+        if(node.getId() != null)
+        {
+            node.getId().apply(this);
+        }
+        outAIdTerm(node);
+    }
+
+    public void inANumTerm(ANumTerm node)
+    {
+        defaultIn(node);
+    }
+
+    public void outANumTerm(ANumTerm node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseANumTerm(ANumTerm node)
+    {
+        inANumTerm(node);
+        if(node.getNum() != null)
+        {
+            node.getNum().apply(this);
+        }
+        outANumTerm(node);
+    }
+
+    public void inAESeqTerm(AESeqTerm node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAESeqTerm(AESeqTerm node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAESeqTerm(AESeqTerm node)
+    {
+        inAESeqTerm(node);
+        if(node.getESeq() != null)
+        {
+            node.getESeq().apply(this);
+        }
+        outAESeqTerm(node);
+    }
+
+    public void inAESeq(AESeq node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAESeq(AESeq node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAESeq(AESeq node)
+    {
+        inAESeq(node);
         if(node.getLParen() != null)
         {
             node.getLParen().apply(this);
@@ -232,7 +400,7 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getRParen().apply(this);
         }
-        outAESeqE(node);
+        outAESeq(node);
     }
 
     public void inAEL(AEL node)

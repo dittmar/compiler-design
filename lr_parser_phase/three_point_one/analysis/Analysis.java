@@ -15,10 +15,18 @@ public interface Analysis extends Switch
     void caseACompoundS(ACompoundS node);
     void caseAAssignS(AAssignS node);
     void caseAPrintS(APrintS node);
+    void caseAAssignC(AAssignC node);
+    void caseAPrintC(APrintC node);
+    void caseAAssignStmt(AAssignStmt node);
+    void caseAPrintStmt(APrintStmt node);
     void caseAIdE(AIdE node);
     void caseANumE(ANumE node);
     void caseAAddE(AAddE node);
     void caseAESeqE(AESeqE node);
+    void caseAIdTerm(AIdTerm node);
+    void caseANumTerm(ANumTerm node);
+    void caseAESeqTerm(AESeqTerm node);
+    void caseAESeq(AESeq node);
     void caseAEL(AEL node);
     void caseALSeqL(ALSeqL node);
 

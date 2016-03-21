@@ -5,16 +5,16 @@ package three_point_one.node;
 import three_point_one.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAssignS extends PS
+public final class AAssignC extends PC
 {
     private PAssignStmt _assignStmt_;
 
-    public AAssignS()
+    public AAssignC()
     {
         // Constructor
     }
 
-    public AAssignS(
+    public AAssignC(
         @SuppressWarnings("hiding") PAssignStmt _assignStmt_)
     {
         // Constructor
@@ -25,14 +25,14 @@ public final class AAssignS extends PS
     @Override
     public Object clone()
     {
-        return new AAssignS(
+        return new AAssignC(
             cloneNode(this._assignStmt_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAssignS(this);
+        ((Analysis) sw).caseAAssignC(this);
     }
 
     public PAssignStmt getAssignStmt()

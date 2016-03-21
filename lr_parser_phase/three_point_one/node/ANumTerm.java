@@ -5,46 +5,46 @@ package three_point_one.node;
 import three_point_one.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAssignS extends PS
+public final class ANumTerm extends PTerm
 {
-    private PAssignStmt _assignStmt_;
+    private TNum _num_;
 
-    public AAssignS()
+    public ANumTerm()
     {
         // Constructor
     }
 
-    public AAssignS(
-        @SuppressWarnings("hiding") PAssignStmt _assignStmt_)
+    public ANumTerm(
+        @SuppressWarnings("hiding") TNum _num_)
     {
         // Constructor
-        setAssignStmt(_assignStmt_);
+        setNum(_num_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AAssignS(
-            cloneNode(this._assignStmt_));
+        return new ANumTerm(
+            cloneNode(this._num_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAssignS(this);
+        ((Analysis) sw).caseANumTerm(this);
     }
 
-    public PAssignStmt getAssignStmt()
+    public TNum getNum()
     {
-        return this._assignStmt_;
+        return this._num_;
     }
 
-    public void setAssignStmt(PAssignStmt node)
+    public void setNum(TNum node)
     {
-        if(this._assignStmt_ != null)
+        if(this._num_ != null)
         {
-            this._assignStmt_.parent(null);
+            this._num_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AAssignS extends PS
             node.parent(this);
         }
 
-        this._assignStmt_ = node;
+        this._num_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._assignStmt_);
+            + toString(this._num_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._assignStmt_ == child)
+        if(this._num_ == child)
         {
-            this._assignStmt_ = null;
+            this._num_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AAssignS extends PS
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._assignStmt_ == oldChild)
+        if(this._num_ == oldChild)
         {
-            setAssignStmt((PAssignStmt) newChild);
+            setNum((TNum) newChild);
             return;
         }
 

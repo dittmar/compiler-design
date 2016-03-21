@@ -93,6 +93,30 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAAssignC(AAssignC node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAPrintC(APrintC node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAssignStmt(AAssignStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAPrintStmt(APrintStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAIdE(AIdE node)
     {
         defaultCase(node);
@@ -112,6 +136,30 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAESeqE(AESeqE node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIdTerm(AIdTerm node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANumTerm(ANumTerm node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAESeqTerm(AESeqTerm node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAESeq(AESeq node)
     {
         defaultCase(node);
     }

@@ -5,46 +5,46 @@ package three_point_one.node;
 import three_point_one.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAssignS extends PS
+public final class APrintC extends PC
 {
-    private PAssignStmt _assignStmt_;
+    private PPrintStmt _printStmt_;
 
-    public AAssignS()
+    public APrintC()
     {
         // Constructor
     }
 
-    public AAssignS(
-        @SuppressWarnings("hiding") PAssignStmt _assignStmt_)
+    public APrintC(
+        @SuppressWarnings("hiding") PPrintStmt _printStmt_)
     {
         // Constructor
-        setAssignStmt(_assignStmt_);
+        setPrintStmt(_printStmt_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AAssignS(
-            cloneNode(this._assignStmt_));
+        return new APrintC(
+            cloneNode(this._printStmt_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAssignS(this);
+        ((Analysis) sw).caseAPrintC(this);
     }
 
-    public PAssignStmt getAssignStmt()
+    public PPrintStmt getPrintStmt()
     {
-        return this._assignStmt_;
+        return this._printStmt_;
     }
 
-    public void setAssignStmt(PAssignStmt node)
+    public void setPrintStmt(PPrintStmt node)
     {
-        if(this._assignStmt_ != null)
+        if(this._printStmt_ != null)
         {
-            this._assignStmt_.parent(null);
+            this._printStmt_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AAssignS extends PS
             node.parent(this);
         }
 
-        this._assignStmt_ = node;
+        this._printStmt_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._assignStmt_);
+            + toString(this._printStmt_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._assignStmt_ == child)
+        if(this._printStmt_ == child)
         {
-            this._assignStmt_ = null;
+            this._printStmt_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AAssignS extends PS
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._assignStmt_ == oldChild)
+        if(this._printStmt_ == oldChild)
         {
-            setAssignStmt((PAssignStmt) newChild);
+            setPrintStmt((PPrintStmt) newChild);
             return;
         }
 

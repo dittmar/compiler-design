@@ -7,9 +7,9 @@ import three_point_one.analysis.*;
 @SuppressWarnings("nls")
 public final class ACompoundS extends PS
 {
-    private PS _first_;
+    private PS _s_;
     private TSemi _semi_;
-    private PS _second_;
+    private PC _c_;
 
     public ACompoundS()
     {
@@ -17,16 +17,16 @@ public final class ACompoundS extends PS
     }
 
     public ACompoundS(
-        @SuppressWarnings("hiding") PS _first_,
+        @SuppressWarnings("hiding") PS _s_,
         @SuppressWarnings("hiding") TSemi _semi_,
-        @SuppressWarnings("hiding") PS _second_)
+        @SuppressWarnings("hiding") PC _c_)
     {
         // Constructor
-        setFirst(_first_);
+        setS(_s_);
 
         setSemi(_semi_);
 
-        setSecond(_second_);
+        setC(_c_);
 
     }
 
@@ -34,9 +34,9 @@ public final class ACompoundS extends PS
     public Object clone()
     {
         return new ACompoundS(
-            cloneNode(this._first_),
+            cloneNode(this._s_),
             cloneNode(this._semi_),
-            cloneNode(this._second_));
+            cloneNode(this._c_));
     }
 
     @Override
@@ -45,16 +45,16 @@ public final class ACompoundS extends PS
         ((Analysis) sw).caseACompoundS(this);
     }
 
-    public PS getFirst()
+    public PS getS()
     {
-        return this._first_;
+        return this._s_;
     }
 
-    public void setFirst(PS node)
+    public void setS(PS node)
     {
-        if(this._first_ != null)
+        if(this._s_ != null)
         {
-            this._first_.parent(null);
+            this._s_.parent(null);
         }
 
         if(node != null)
@@ -67,7 +67,7 @@ public final class ACompoundS extends PS
             node.parent(this);
         }
 
-        this._first_ = node;
+        this._s_ = node;
     }
 
     public TSemi getSemi()
@@ -95,16 +95,16 @@ public final class ACompoundS extends PS
         this._semi_ = node;
     }
 
-    public PS getSecond()
+    public PC getC()
     {
-        return this._second_;
+        return this._c_;
     }
 
-    public void setSecond(PS node)
+    public void setC(PC node)
     {
-        if(this._second_ != null)
+        if(this._c_ != null)
         {
-            this._second_.parent(null);
+            this._c_.parent(null);
         }
 
         if(node != null)
@@ -117,25 +117,25 @@ public final class ACompoundS extends PS
             node.parent(this);
         }
 
-        this._second_ = node;
+        this._c_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._first_)
+            + toString(this._s_)
             + toString(this._semi_)
-            + toString(this._second_);
+            + toString(this._c_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._first_ == child)
+        if(this._s_ == child)
         {
-            this._first_ = null;
+            this._s_ = null;
             return;
         }
 
@@ -145,9 +145,9 @@ public final class ACompoundS extends PS
             return;
         }
 
-        if(this._second_ == child)
+        if(this._c_ == child)
         {
-            this._second_ = null;
+            this._c_ = null;
             return;
         }
 
@@ -158,9 +158,9 @@ public final class ACompoundS extends PS
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._first_ == oldChild)
+        if(this._s_ == oldChild)
         {
-            setFirst((PS) newChild);
+            setS((PS) newChild);
             return;
         }
 
@@ -170,9 +170,9 @@ public final class ACompoundS extends PS
             return;
         }
 
-        if(this._second_ == oldChild)
+        if(this._c_ == oldChild)
         {
-            setSecond((PS) newChild);
+            setC((PC) newChild);
             return;
         }
 
