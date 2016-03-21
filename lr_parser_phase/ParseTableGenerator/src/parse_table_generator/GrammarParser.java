@@ -23,6 +23,8 @@ public class GrammarParser
     NonterminalRuleLookupTable nonterminal_rule_lookup_table;
     NumberedProductionTable production_table;
     
+    private int rule_number = 0;
+    
     public GrammarParser(String filename)
     {
         nonterminal_rule_lookup_table = new NonterminalRuleLookupTable();
@@ -41,6 +43,7 @@ public class GrammarParser
             for (; lines_to_skip > 0; lines_to_skip--)
             {
                 scanner.nextLine();
+                rule_number++;
             }
             while (scanner.hasNextLine())
             {
@@ -153,34 +156,40 @@ public class GrammarParser
                     {
                         rule_string = rule_string.replaceFirst(nt.getName(), "");
                         rule_symbols.add(new Nonterminal(nt.getName()));
+                        continue START;
                     }
                 }
+                failedToParse(rule_string);
             }
             else
             {
-                boolean symbol_matched = false;
                 for (Terminal t : terminals)
                 {
                     if (rule_string.startsWith(t.getName()))
                     {
                         rule_string = rule_string.substring(t.getName().length());
                         rule_symbols.add(new Terminal(t.getName()));
-                        symbol_matched = true;
-                        break;
+                        continue START;
                     }
                 }
-                if (!symbol_matched)
-                {
-                    // Didn't match terminals or non-terminals.
-                    // Print error and exit.
-                    System.err.println("Failed to parse:" + rule_string);
-                    System.exit(1);
-                }
+                failedToParse(rule_string);
             }
         }
 
         Rule rule = new Rule(rule_nt, rule_symbols);
         production_table.addRule(rule);
         nonterminal_rule_lookup_table.add(rule_nt, rule);
+        rule_number++;
+    }
+    
+    // Didn't match terminals or non-terminals.
+    // Print error and exit.
+    private void failedToParse(String rule_string)
+    {
+        System.err.println(
+            "Failed to parse " + rule_number + 
+            ":" + rule_string + " remaining"
+        );
+        System.exit(1);  
     }
 }
