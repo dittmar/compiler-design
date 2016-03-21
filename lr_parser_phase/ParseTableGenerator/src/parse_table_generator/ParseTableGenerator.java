@@ -67,7 +67,7 @@ public class ParseTableGenerator
                         //System.exit(1);
                     }
                 }
-                else if(item.getCurrentSymbol() instanceof StartSymbol) {
+                else if(item.getCurrentSymbol() instanceof EndSymbol) {
                     // accept
                     row.put(item.getCurrentSymbol(), new TableCell(TableCell.Action.ACCEPT,-1));
                 }
@@ -89,7 +89,7 @@ public class ParseTableGenerator
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String billFile = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/ParseTableGenerator/test/parse_table_generator/resources/class2.txt";
+        String billFile = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/ParseTableGenerator/test/parse_table_generator/resources/class.txt";
         String kevFile = "test/parse_table_generator/resources/class.txt";
         //parse the grammar
         GrammarParser gp = new GrammarParser(billFile);
