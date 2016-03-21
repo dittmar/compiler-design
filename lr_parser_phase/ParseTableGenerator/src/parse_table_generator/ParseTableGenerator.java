@@ -122,6 +122,9 @@ public class ParseTableGenerator
             gp.terminal_lookup_table
         );
         System.out.println(pt);
+        
+        LRParser parser = new LRParser(pt);
+        parser.parse("x  :=  (print(y), 2 + 3)$");
     }
     
 }

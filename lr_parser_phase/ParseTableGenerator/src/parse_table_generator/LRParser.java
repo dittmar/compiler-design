@@ -14,17 +14,26 @@ import java.util.Stack;
 public class LRParser {
     ParseTable parse_table;
     int currentState;
+    Stack<Symbol> stack;
     
     public LRParser(ParseTable pt) {
         parse_table = pt;
         currentState = 1;
     }
     
-    public void parse(String input, Stack<Symbol> stack) {
-        Symbol symbol = eat(input);
+    public void parse(String input) {
+        // lex it
+        List<Token> tokens = lexInput(input);
+        // parse it
+        
+        
+        // bop it
     }
     
-    public Symbol eat(String input) {
-        return null;
+    public List<Token> lexInput(String input) {
+        List<Token> tokens = new ArrayList();
+        // Lexer magic, parseTable has token to symbol magic. 
+        
+        return tokens;
     }
 }
