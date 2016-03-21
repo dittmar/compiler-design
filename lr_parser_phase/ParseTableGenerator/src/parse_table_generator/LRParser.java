@@ -15,25 +15,50 @@ public class LRParser {
     ParseTable parse_table;
     int currentState;
     Stack<Symbol> stack;
+    private Token token;
+    private ThreePointOneLexing lexer;
     
     public LRParser(ParseTable pt) {
         parse_table = pt;
         currentState = 1;
+        lexer = new WolfLexing(filename);
     }
     
     public void parse(String input) {
         // lex it
-        List<Token> tokens = lexInput(input);
-        // parse it
-        
-        
-        // bop it
+        Terminal next_terminal = tokenToTerminal(nextValidToken());
+        while (next_terminal != null)
+        {
+            /* do parse stuff
+                TODO
+            */
+            
+            // Get next terminal
+            next_terminal = tokenToTerminal(nextValidToken());
+        }
     }
     
-    public List<Token> lexInput(String input) {
-        List<Token> tokens = new ArrayList();
-        // Lexer magic, parseTable has token to symbol magic. 
-        
-        return tokens;
+    /**
+     * Get the next valid token, skipping comments and whitespace.
+     * @return the next non-ignored token.
+     */
+    private Token nextValidToken()
+    {
+        token = lexer.getToken();
+        while (token instanceof TSpace || token instanceof TComment)
+        {
+            token = lexer.getToken();
+        }
+        return token;
+    }
+    
+    /**
+     * 
+     * @param t is the token whose terminal should be found
+     * @return the Terminal corresponding to Token t.
+     */
+    private Terminal tokenToTerminal(Token t)
+    {
+        return parse_table.getTerminalLookupTable().get(t.getText());
     }
 }

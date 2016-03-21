@@ -36,11 +36,6 @@ public class ParseTable
         }
     }
     
-    public Map<String, Terminal> getTerminalLookupTable()
-    {
-        return terminal_lookup_table;
-    }
-    
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int counter = 0;
