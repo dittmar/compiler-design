@@ -79,7 +79,7 @@ public class GrammarParser
                     }
                     else
                     {
-                        terminals_sb.append(next);
+                        terminals_sb.append(" ").append(next);
                     }
                     // We don't want to read the terminals as part of the
                     // grammar productions
@@ -109,7 +109,7 @@ public class GrammarParser
             }
             
             // Add all of the terminals to the set.
-            for (String terminal : terminals_sb.toString().split("\\s"))
+            for (String terminal : terminals_sb.toString().trim().split("\\s"))
             {
                 terminals.add(new Terminal(terminal));
             }

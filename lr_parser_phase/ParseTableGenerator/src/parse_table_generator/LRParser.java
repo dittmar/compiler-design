@@ -25,6 +25,6 @@ public class LRParser {
     }
     
     public Symbol eat(String input) {
-        
+        return null;
     }
 }

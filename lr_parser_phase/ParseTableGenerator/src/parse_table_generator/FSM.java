@@ -119,8 +119,8 @@ public class FSM
                 }
             } 
         }
-        System.out.println(itemSet);
-        System.out.println(itemSet2);
+        // System.out.println(itemSet);
+        // System.out.println(itemSet2);
         return new State(itemSet);
     }
     

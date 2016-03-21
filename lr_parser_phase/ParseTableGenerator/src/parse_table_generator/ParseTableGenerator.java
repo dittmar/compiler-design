@@ -21,7 +21,7 @@ public class ParseTableGenerator
     {
         ArrayList<LinkedHashMap<Symbol,TableCell>> table = new ArrayList();
         for(State state:fsm.states) {
-            System.out.println("State: " + state.id);
+            // System.out.println("State: " + state.id);
             Set<Arc> arcSet = new LinkedHashSet<>(fsm.findArcsWithFromState(state));
             LinkedHashMap<Symbol,TableCell> row = new LinkedHashMap();
             // shifts and gotos
@@ -56,7 +56,7 @@ public class ParseTableGenerator
                         TableCell.Action.REDUCE,
                         rule_id
                     );
-                    System.out.println();
+                    
                     TableCell existingCell = row.get(item.lookahead);
                     if(existingCell == null){
                         row.put(item.lookahead,tc);
@@ -90,9 +90,9 @@ public class ParseTableGenerator
      */
     public static void main(String[] args) {
         String billFile = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/ParseTableGenerator/test/parse_table_generator/resources/class.txt";
-        String kevFile = "test/parse_table_generator/resources/class.txt";
+        String kevFile = "test/parse_table_generator/resources/wolf.txt";
         //parse the grammar
-        GrammarParser gp = new GrammarParser(billFile);
+        GrammarParser gp = new GrammarParser(kevFile);
         gp.parse();
         
         FSM fsm = new FSM(
@@ -104,10 +104,10 @@ public class ParseTableGenerator
         
         fsm.build();
         
-        System.out.println(fsm.states);
-        System.out.println(fsm.states.size());
-        System.out.println(fsm.arcs);
-        System.out.println(fsm.arcs.size());
+        //System.out.println(fsm.states);
+        //System.out.println(fsm.states.size());
+        //System.out.println(fsm.arcs);
+        //System.out.println(fsm.arcs.size());
       
         ParseTable pt = generate(fsm,gp.terminals,gp.nonterminals);
         System.out.println(pt);
