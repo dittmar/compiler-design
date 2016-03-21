@@ -123,7 +123,7 @@ public class ParseTableGenerator
         );
         System.out.println(pt);
         
-        LRParser parser = new LRParser(pt);
+        LRParser parser = new LRParser(pt,gp.production_table);
         parser.parse("x  :=  (print(y), 2 + 3)$");
     }
     

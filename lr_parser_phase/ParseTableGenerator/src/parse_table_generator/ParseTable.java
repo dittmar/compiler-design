@@ -77,6 +77,10 @@ public class ParseTable
         return sb.toString();
     }
     
+    public TableCell getTableCellAt(Symbol symbol, int state_id) {
+        return table.get(state_id).get(symbol);
+    }
+    
     private String paddedTableString(String string)
     {
         int left_num_spaces =
