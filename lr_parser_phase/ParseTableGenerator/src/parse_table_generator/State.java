@@ -32,9 +32,14 @@ public class State {
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof State) {
-            return ((State) obj).items.equals(items);
+            State state = (State) obj;
+            return hasSameItems(state) && state.id == id ;
         }
         return false;
+    }
+    
+    public boolean hasSameItems(State state) {
+        return state.items.equals(items);
     }
     
     public String toString() {
