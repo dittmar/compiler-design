@@ -35,4 +35,13 @@ public class EndSymbol extends Terminal {
             return this.getName().equals(es.getName());
         }
     }
+
+    /**
+     * @return the hash code for EndSymbol, which is the same as a
+     * Terminal's hash code function.
+     */
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

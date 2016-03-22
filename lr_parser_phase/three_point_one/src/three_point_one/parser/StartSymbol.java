@@ -34,4 +34,13 @@ public class StartSymbol extends Nonterminal {
             return this.getName().equals(ss.getName());
         }
     }
+
+    /**
+     * @return a hash code for StartSymbol, which is the same as
+     * the hash code for a Nonterminal.
+     */
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

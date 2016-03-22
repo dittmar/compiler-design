@@ -7,45 +7,46 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
+ * Generates a parse table
  * @author Joseph Alacqua
  * @author Kevin Dittmar
  * @author William Ezekiel
  * @version Mar 14, 2016
  */
-public class ParseTableGenerator 
-{
+public class ParseTableGenerator  {
     /**
      * Generate a parse table.
      * @param fsm a finite state machine
      * @param terminals a set of terminals
      * @param nonterminals a set of nonterminals
-     * @param terminal_lookup_table the terminal lookup table.
+     * @param terminalLookupTable the terminal lookup table.
      * @return the generated parse table.
      */
     public ParseTable generate(
         FSM fsm, 
         Set<Terminal> terminals,
         Set<Nonterminal> nonterminals,
-        Map<String, Terminal> terminal_lookup_table)
-    {
-        ArrayList<LinkedHashMap<Symbol,TableCell>> parse_table = new ArrayList();
+        Map<String, Terminal> terminalLookupTable) {
+        ArrayList<LinkedHashMap<Symbol,TableCell>> parse_table =
+            new ArrayList();
         for(State state:fsm.states) {
-            Set<Arc> arcSet = new LinkedHashSet<>(fsm.findArcsWithFromState(state));
+            Set<Arc> arcSet = new LinkedHashSet<>(
+                fsm.findArcsWithFromState(state)
+            );
             LinkedHashMap<Symbol,TableCell> row = new LinkedHashMap();
             // shifts and gotos
             
             for(Arc arc :arcSet) {
                 TableCell tc = new TableCell();
-                if(arc.transition_symbol instanceof Nonterminal) {
+                if(arc.transitionSymbol instanceof Nonterminal) {
                     tc.action = TableCell.Action.GOTO;
-                    tc.id_number = arc.to.id;
-                    row.put(arc.transition_symbol,tc);
+                    tc.idNumber = arc.to.id;
+                    row.put(arc.transitionSymbol,tc);
                 }
-                else if(arc.transition_symbol instanceof Terminal) {
+                else if(arc.transitionSymbol instanceof Terminal) {
                     tc.action = TableCell.Action.SHIFT;
-                    tc.id_number = arc.to.id;
-                    row.put(arc.transition_symbol,tc);
+                    tc.idNumber = arc.to.id;
+                    row.put(arc.transitionSymbol,tc);
                 }
                 else{
                     //error just pretend okay
@@ -56,14 +57,14 @@ public class ParseTableGenerator
             for(Item item: state.items) {
                 if(item.atEnd()) {
                     Rule rule = item.getRule();
-                    int rule_id = fsm.getProductions().indexOf(rule);
-                    if(rule_id == -1) {
+                    int ruleId = fsm.getProductions().indexOf(rule);
+                    if(ruleId == -1) {
                         System.err.println("Unknown Rule: " + rule);
                         System.exit(1);
                     }
                     TableCell tc = new TableCell(
                         TableCell.Action.REDUCE,
-                        rule_id
+                        ruleId
                     );
                     
                     TableCell existingCell = row.get(item.lookahead);
@@ -78,7 +79,10 @@ public class ParseTableGenerator
                 }
                 else if(item.getCurrentSymbol() instanceof EndSymbol) {
                     // accept
-                    row.put(item.getCurrentSymbol(), new TableCell(TableCell.Action.ACCEPT,-1));
+                    row.put(
+                        item.getCurrentSymbol(), 
+                        new TableCell(TableCell.Action.ACCEPT,-1)
+                    );
                 }
             }
             parse_table.add(row);
@@ -90,11 +94,11 @@ public class ParseTableGenerator
         // We want all of the nonterminals to be in the parse_table...
         parse_table_symbols.addAll(nonterminals);
         // ... but we don't want the start symbol to be in the parse_table.
-        parse_table_symbols.remove(fsm.start_symbol);
+        parse_table_symbols.remove(fsm.startSymbol);
         return new ParseTable(
             parse_table,
             parse_table_symbols,
-            terminal_lookup_table
+            terminalLookupTable
         );
     }
 }

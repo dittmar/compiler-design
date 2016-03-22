@@ -10,23 +10,21 @@ public class TableCell
     /**
      * Action enums for possible table cell actions. 
      */
-    public enum Action 
-    {
+    public enum Action  {
         SHIFT, REDUCE, GOTO, ACCEPT, ERROR
     }
     
     Action action;
-    int id_number;
+    int idNumber;
     
     /**
      * Create a table cell with the specified action and identification number
      * @param action
      * @param state_id 
      */
-    public TableCell(Action action, int state_id)
-    {
+    public TableCell(Action action, int state_id) {
         this.action = action;
-        this.id_number = state_id;
+        this.idNumber = state_id;
     }
     
     /**
@@ -44,11 +42,11 @@ public class TableCell
     public String toString() {
         switch(action) {
             case SHIFT:
-                return "s" + id_number;
+                return "s" + idNumber;
             case REDUCE:
-                return "r" + id_number;
+                return "r" + idNumber;
             case GOTO:
-                return "g" + id_number;
+                return "g" + idNumber;
             case ACCEPT:
                 return "a";
             default:

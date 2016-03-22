@@ -8,7 +8,6 @@ package three_point_one.parser;
  * @version Mar 14, 2016
  */
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Rule {
@@ -21,8 +20,7 @@ public class Rule {
      * @param lhs a nonterminal left hand side.
      * @param symbols a list of symbols representing the right hand side.
      */
-    public Rule(Nonterminal lhs, List<Symbol> symbols)
-    {
+    public Rule(Nonterminal lhs, List<Symbol> symbols) {
         rhs = new ArrayList<>(symbols);
         this.lhs = lhs;
     }
@@ -98,8 +96,7 @@ public class Rule {
     /**
      * @return the string representation of the right hand side of this rule.
      */
-    public String getRhsString()
-    {
+    public String getRhsString() {
         StringBuilder sb = new StringBuilder();
         for (Symbol s : rhs)
         {

@@ -8,28 +8,25 @@ package three_point_one.parser;
  * @author William Ezekiel
  * @version Mar 21, 2016
  */
-public class ParserStackItem 
-{
+public class ParserStackItem  {
     Symbol symbol;
-    int id_number;
+    int idNumber;
     
     /**
      * Create a ParserStackItem
      * @param symbol the symbol
-     * @param id_number an id number.
+     * @param idNumber an id number.
      */
-    public ParserStackItem(Symbol symbol, int id_number)
-    {
+    public ParserStackItem(Symbol symbol, int idNumber) {
         this.symbol = symbol;
-        this.id_number = id_number;
+        this.idNumber = idNumber;
     }
     
     /**
      * @return the string implementation of this parser stack item.
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         if (symbol == null)
         {
@@ -39,6 +36,6 @@ public class ParserStackItem
         {
             sb.append(symbol.toString()).append("_");
         }
-        return sb.append(id_number).toString();
+        return sb.append(idNumber).toString();
     }
 }

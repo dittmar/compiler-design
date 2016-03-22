@@ -25,4 +25,12 @@ public class AnySymbol extends Terminal {
     public boolean equals(Object o) {
         return o instanceof AnySymbol;
     }
+    
+    /**
+     * @return the integer hash code of this AnySymbol
+     */
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

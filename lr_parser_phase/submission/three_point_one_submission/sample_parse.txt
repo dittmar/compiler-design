@@ -1,0 +1,109 @@
+Parsing resources/3-1programs/program1.txt:
+
+start [1  
+
+Terminal: id
+SHIFT: s6
+start [1  id_6  
+
+Terminal: assign
+SHIFT: s9
+start [1  id_6  assign_9  
+
+Terminal: l_paren
+SHIFT: s23
+start [1  id_6  assign_9  l_paren_23  
+
+Terminal: print
+SHIFT: s30
+start [1  id_6  assign_9  l_paren_23  print_30  
+
+Terminal: l_paren
+SHIFT: s41
+start [1  id_6  assign_9  l_paren_23  print_30  l_paren_41  
+
+Terminal: id
+SHIFT: s16
+start [1  id_6  assign_9  l_paren_23  print_30  l_paren_41  id_16  
+
+Terminal: r_paren
+REDUCE: r8
+GOTO: 14
+start [1  id_6  assign_9  l_paren_23  print_30  l_paren_41  E_14  
+
+Terminal: r_paren
+REDUCE: r16
+GOTO: 57
+start [1  id_6  assign_9  l_paren_23  print_30  l_paren_41  L_57  
+
+Terminal: r_paren
+SHIFT: s67
+start [1  id_6  assign_9  l_paren_23  print_30  l_paren_41  L_57  r_paren_67  
+
+Terminal: comma
+REDUCE: r7
+GOTO: 28
+start [1  id_6  assign_9  l_paren_23  Print_28  
+
+Terminal: comma
+REDUCE: r3
+GOTO: 33
+start [1  id_6  assign_9  l_paren_23  S_33  
+
+Terminal: comma
+SHIFT: s48
+start [1  id_6  assign_9  l_paren_23  S_33  comma_48  
+
+Terminal: num
+SHIFT: s50
+start [1  id_6  assign_9  l_paren_23  S_33  comma_48  num_50  
+
+Terminal: plus
+REDUCE: r9
+GOTO: 63
+start [1  id_6  assign_9  l_paren_23  S_33  comma_48  E_63  
+
+Terminal: plus
+SHIFT: s65
+start [1  id_6  assign_9  l_paren_23  S_33  comma_48  E_63  plus_65  
+
+Terminal: num
+SHIFT: s74
+start [1  id_6  assign_9  l_paren_23  S_33  comma_48  E_63  plus_65  num_74  
+
+Terminal: r_paren
+REDUCE: r13
+GOTO: 71
+start [1  id_6  assign_9  l_paren_23  S_33  comma_48  E_63  plus_65  Term_71  
+
+Terminal: r_paren
+REDUCE: r10
+GOTO: 63
+start [1  id_6  assign_9  l_paren_23  S_33  comma_48  E_63  
+
+Terminal: r_paren
+SHIFT: s70
+start [1  id_6  assign_9  l_paren_23  S_33  comma_48  E_63  r_paren_70  
+
+Terminal: $
+REDUCE: r15
+GOTO: 22
+start [1  id_6  assign_9  ESeq_22  
+
+Terminal: $
+REDUCE: r11
+GOTO: 19
+start [1  id_6  assign_9  E_19  
+
+Terminal: $
+REDUCE: r6
+GOTO: 4
+start [1  Assign_4  
+
+Terminal: $
+REDUCE: r2
+GOTO: 2
+start [1  S_2  
+
+Terminal: $
+ACCEPT
