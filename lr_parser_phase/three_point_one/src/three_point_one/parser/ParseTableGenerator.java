@@ -95,10 +95,9 @@ public class ParseTableGenerator
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String billFile = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/ParseTableGenerator/test/parse_table_generator/resources/class.txt";
-        String kevFile = "resources/wolf.txt";
+        String filename = "resources/g3.1.txt";
         //parse the grammar
-        GrammarParser gp = new GrammarParser(kevFile);
+        GrammarParser gp = new GrammarParser(filename);
         gp.parse();
         
         FSM fsm = new FSM(
@@ -122,9 +121,10 @@ public class ParseTableGenerator
             gp.terminal_lookup_table
         );
         System.out.println(pt);
-        
-        LRParser parser = new LRParser(pt, gp.production_table, kevFile);
-        parser.parse("x  :=  (print(y), 2 + 3)$");
+        String billFileParseMe  = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/3-1programs/program1.txt";
+        LRParser parser = new LRParser(pt, gp.production_table, billFileParseMe);
+        parser.parse();
+        System.out.println("Joe pls");
     }
     
 }

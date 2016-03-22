@@ -148,7 +148,9 @@ public class GrammarParser
                 Terminal t = new Terminal(terminal);
                 terminals.add(t);
                 // Build the name-to-token lookup table.
-                terminal_lookup_table.put(terminal, t);
+                // SableCC Lexer terminal Tokens begin with a t and have no
+                // underscores.
+                terminal_lookup_table.put("t"+terminal.replaceAll("_", ""), t);
             }
             // Add the end symbol after all of the other terminals so that
             // it appears at the end of the parse table later.

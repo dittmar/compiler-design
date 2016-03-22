@@ -25,7 +25,7 @@ public class LRParser {
         this.grammar = grammar;
     }
     
-    public void parse(String input) {
+    public void parse() {
         // lex it & setup
         Terminal next_terminal = tokenToTerminal(nextValidToken());
         symbolStack = new Stack();
@@ -35,12 +35,14 @@ public class LRParser {
             // parse it
             symbolStack.add(next_terminal);
             TableCell cell = parse_table.getTableCellAt(
-                next_terminal, stateIdStack.peek());
+                next_terminal, stateIdStack.peek()-1);
             
             switch(cell.action) {
                 case ACCEPT:
+                    System.out.println("ACCEPT");
                     return;
                 case REDUCE:
+                    System.out.println("REDUCE");
                     int ruleNum = cell.state_id;
                     Rule rule = grammar.getRule(ruleNum);
                     for(int j = 0; j < rule.rhs.size(); j++) {
@@ -55,14 +57,19 @@ public class LRParser {
                     stateIdStack.push(goToCell.state_id);
                     break;
                 case SHIFT:
+                    System.out.println("SHIFT");
                     stateIdStack.push(cell.state_id);
                     // Get next terminal
                     next_terminal = tokenToTerminal(nextValidToken());
                     break;
                 case GOTO:
+                    System.out.println("GOTO");
                     stateIdStack.push(cell.state_id);
                     // DO NOT GET NEXT TOKEN.
                     break;
+                default:
+                    System.err.println("WTF U DOIN M8");
+                    System.exit(1);
             }
             printCurrentStack();
         }
@@ -89,7 +96,9 @@ public class LRParser {
      */
     private Terminal tokenToTerminal(Token t)
     {
-        return parse_table.getTerminalLookupTable().get(t.getText());
+        String[] splitToken = t.getClass().getName().split("\\.");
+        String tokenName = splitToken[splitToken.length -1].toLowerCase();
+        return parse_table.getTerminalLookupTable().get(tokenName);
     }
         
     public void printCurrentStack() {
