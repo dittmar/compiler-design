@@ -33,7 +33,6 @@ public class LRParser {
         stateIdStack.push(1);
         while (next_terminal != null) {
             // parse it
-            symbolStack.add(next_terminal);
             TableCell cell = parse_table.getTableCellAt(
                 next_terminal, stateIdStack.peek()-1);
             
@@ -52,12 +51,13 @@ public class LRParser {
                     symbolStack.push(rule.lhs);
                     // Nonterminal and previous state 
                     TableCell goToCell = parse_table.getTableCellAt(
-                        symbolStack.peek(), stateIdStack.peek());
+                        symbolStack.peek(), stateIdStack.peek()-1);
                     
                     stateIdStack.push(goToCell.state_id);
                     break;
                 case SHIFT:
                     System.out.println("SHIFT");
+                    symbolStack.add(next_terminal);
                     stateIdStack.push(cell.state_id);
                     // Get next terminal
                     next_terminal = tokenToTerminal(nextValidToken());
@@ -73,6 +73,7 @@ public class LRParser {
             }
             printCurrentStack();
         }
+        System.err.println("ERROR: ENDED EARLY");
     }
     
     /**
