@@ -63,7 +63,7 @@ public class Rule {
         result = 31 * result + lhs.hashCode();
         for(Symbol s: rhs) {
             result *= 31;
-            result += rhs.hashCode();
+            result += s.hashCode();
         }
         return result;
     }

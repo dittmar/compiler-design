@@ -33,7 +33,7 @@ public class State {
     public boolean equals(Object obj) {
         if(obj instanceof State) {
             State state = (State) obj;
-            return hasSameItems(state) && state.id == id ;
+            return hasSameItems(state);
         }
         return false;
     }

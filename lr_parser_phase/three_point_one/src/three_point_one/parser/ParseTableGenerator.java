@@ -123,8 +123,8 @@ public class ParseTableGenerator
         );
         System.out.println(pt);
         
-        //LRParser parser = new LRParser(pt, gp.production_table, kevFile);
-        //parser.parse("x  :=  (print(y), 2 + 3)$");
+        LRParser parser = new LRParser(pt, gp.production_table, kevFile);
+        parser.parse("x  :=  (print(y), 2 + 3)$");
     }
     
 }
