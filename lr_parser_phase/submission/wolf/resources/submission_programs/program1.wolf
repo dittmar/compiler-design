@@ -1,0 +1,2 @@
+def threeFunc(n, y, z) := +(n, y, z)
+threeFunc(1,2,'I\'m a string')
