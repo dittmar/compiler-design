@@ -1,0 +1,2 @@
+def threeAdd(n, y, z) := +(n, y, z)
+threeAdd(1,2,3)

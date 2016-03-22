@@ -1,6 +1,6 @@
 l_paren r_paren comma semi ternary_colon ternary_question_mark
 def head tail reverse append prepend foldl foldr map flatten length
-lambda_start plus minus mult div identity print neg logical_not
+lambda_start lambda_arrow plus minus mult div identity print neg logical_not
 mod lt gt lte gte equal not_equal and or xor
 float_number int_number
 identifier string_start string_end string_body string_escape
@@ -19,16 +19,16 @@ DefList = DefList DefHeader
 DefList = DefHeader
 DefHeader = def identifier Sig assign Func
 Sig = l_paren r_paren
-Sig = l_paren identifier r_paren
 Sig = l_paren SigArgs r_paren
-SigArgs = SigArg SigArgRest
-SigArg = identifier
-SigArgRest = comma identifier
+SigArgs = identifier SigArgRest
+SigArgs = identifier
+SigArgRest = comma SigArgs
 Func = FuncName ArgList
 Func = Branch
 Func = identifier ArgList
 Func = foldl FoldBody
 Func = foldr FoldBody
+Func = lambda_start l_paren Sig lambda_arrow Func r_paren
 FoldBody = l_paren BinOp comma FoldList r_paren
 FoldList = List
 FoldList = identifier
@@ -57,7 +57,6 @@ FuncName = length
 FuncName = flatten
 FuncName = identity
 FuncName = print
-FuncName = lambda_start
 FuncName = neg
 FuncName = logical_not
 FuncName = plus

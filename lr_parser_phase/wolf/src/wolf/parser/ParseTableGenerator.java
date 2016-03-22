@@ -15,6 +15,14 @@ import java.util.Set;
  */
 public class ParseTableGenerator 
 {
+    /**
+     * Generate a parse table.
+     * @param fsm a finite state machine
+     * @param terminals a set of terminals
+     * @param nonterminals a set of nonterminals
+     * @param terminal_lookup_table the terminal lookup table.
+     * @return the generated parse table.
+     */
     public static ParseTable generate(
         FSM fsm, 
         Set<Terminal> terminals,
@@ -91,9 +99,11 @@ public class ParseTableGenerator
     }
     
     /**
+     * Main function. 
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // filename, change where needed.
         String filename = "resources/wolf.txt";
         //parse the grammar
         GrammarParser gp = new GrammarParser(filename);
@@ -117,7 +127,7 @@ public class ParseTableGenerator
             gp.terminal_lookup_table
         );
         System.out.println(pt);
-        String billFileParseMe  = "resources/sample_programs/sample_program7.wolf";
+        String billFileParseMe  = "resources/sample_programs/sample_program2.wolf";
         LRParser parser = new LRParser(pt, gp.production_table, billFileParseMe);
         parser.parse();
     }
