@@ -1,0 +1,25 @@
+`
+  Kevin Dittmar
+  William Ezekiel
+  Joe Alacqua
+`
+`Testing
+the arithmetic,
+logical,
+and relational operators
+`
+
+`evaluates to 0 (0 is a false value 0, everything else is a true value 1)`
+def logical() := !(|(&(x(1, 0), 2), ~(8)))
+
+`evaluates to 0`
+def relational() := 
+
+|(                              `1 | 0 = 1`
+    &(>(5, 2), !=(1, 2)),       `1 & 1 = 1`
+    x(>=(1,0),                  `1 xor 1 = 0`
+        <=(%(5, 2), /(6, 4))    `1 <= 1 = 1`    
+    )
+)
+`return [1, 0]`
+_(r([[logical()], [relational()]]))
