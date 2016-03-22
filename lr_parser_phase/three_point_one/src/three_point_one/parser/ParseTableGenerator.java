@@ -121,7 +121,7 @@ public class ParseTableGenerator
             gp.terminal_lookup_table
         );
         System.out.println(pt);
-        String billFileParseMe  = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/3-1programs/program1.txt";
+        String billFileParseMe  = "resources/3-1programs/program1.txt";
         LRParser parser = new LRParser(pt, gp.production_table, billFileParseMe);
         parser.parse();
     }
