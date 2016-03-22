@@ -6,8 +6,8 @@ import wolf.Lexing;
 import wolf.node.*;
 
 /**
- *
- * @author williamezekiel
+ * @author Kevin Dittmar
+ * @author William Ezekiel
  */
 public class LRParser {
     ParseTable parse_table;
@@ -33,18 +33,15 @@ public class LRParser {
         
         printCurrentStack();
         
-        while (next_terminal != null) {
+        while (next_terminal != null) 
+        {
             System.out.println("Terminal: "+next_terminal);
             // Parse table to look at comes from the next terminal on the
             // stack and our current state.
             TableCell cell = parse_table.getTableCellAt(
                 next_terminal, parser_stack.peek().id_number);
             if(cell == null) {
-                System.out.println(
-                    "REJECT: No Action for Terminal " + next_terminal + 
-                    " at state " + parser_stack.peek().id_number
-                );
-                System.exit(1);
+                badShift(next_terminal);
             }
             
             switch(cell.action) {
@@ -84,13 +81,9 @@ public class LRParser {
                         go_to_item.id_number
                     );
                     
-                    if(goToCell == null) {
-                        System.out.println(
-                            "REJECT: No Action for Nonterminal " + 
-                            parser_stack.peek().symbol + " at state " + 
-                            parser_stack.peek().id_number
-                        );
-                        System.exit(1);
+                    if(goToCell == null)
+                    {
+                        badReduce();
                     }
                     
                     // The nonterminal item on the stack has the goto cell
@@ -125,6 +118,7 @@ public class LRParser {
             }
             printCurrentStack();
         }
+        System.err.println("Unrecognized token: " + token.getText());
     }
     
     /**
@@ -134,7 +128,7 @@ public class LRParser {
     private Token nextValidToken()
     {
         token = lexer.getToken();
-        while (token instanceof TSpace || token instanceof TComment)
+        while (token instanceof TSpace)
         {
             token = lexer.getToken();
         }
@@ -162,5 +156,33 @@ public class LRParser {
             System.out.print(item.toString() + "  ");
         }
         System.out.println("\n");
+    }
+    
+    private void badShift(Terminal next_terminal)
+    {
+        System.out.println(
+            "REJECT: No Action for Terminal " + next_terminal + 
+            " at state " + parser_stack.peek().id_number
+        );
+        parserDie();
+    }
+    
+    private void badReduce()
+    {
+        System.out.println(
+            "REJECT: No Action for Nonterminal " + 
+            parser_stack.peek().symbol + " at state " + 
+            parser_stack.peek().id_number
+        );
+        parserDie();
+    }
+    
+    private void parserDie()
+    {
+        System.err.println(
+            "Unexpected token: " + parser_stack.peek().symbol +
+            " at position " + token.getPos()
+        );
+        System.exit(1);
     }
 }

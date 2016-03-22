@@ -116,7 +116,7 @@ public class ParseTableGenerator
             gp.terminal_lookup_table
         );
         System.out.println(pt);
-        String billFileParseMe  = "resources/3-1programs/program1fail.txt";
+        String billFileParseMe  = "resources/3-1programs/program4.txt";
         LRParser parser = new LRParser(pt, gp.production_table, billFileParseMe);
         parser.parse();
     }
