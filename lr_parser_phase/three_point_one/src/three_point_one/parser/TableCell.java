@@ -13,12 +13,12 @@ public class TableCell
     }
     
     Action action;
-    int state_id;
+    int id_number;
     
     public TableCell(Action action, int state_id)
     {
         this.action = action;
-        this.state_id = state_id;
+        this.id_number = state_id;
     }
     
     public TableCell() {
@@ -28,11 +28,11 @@ public class TableCell
     public String toString() {
         switch(action) {
             case SHIFT:
-                return "s" + state_id;
+                return "s" + id_number;
             case REDUCE:
-                return "r" + state_id;
+                return "r" + id_number;
             case GOTO:
-                return "g" + state_id;
+                return "g" + id_number;
             case ACCEPT:
                 return "a";
             default:

@@ -32,12 +32,12 @@ public class ParseTableGenerator
                 TableCell tc = new TableCell();
                 if(arc.transition_symbol instanceof Nonterminal) {
                     tc.action = TableCell.Action.GOTO;
-                    tc.state_id = arc.to.id;
+                    tc.id_number = arc.to.id;
                     row.put(arc.transition_symbol,tc);
                 }
                 else if(arc.transition_symbol instanceof Terminal) {
                     tc.action = TableCell.Action.SHIFT;
-                    tc.state_id = arc.to.id;
+                    tc.id_number = arc.to.id;
                     row.put(arc.transition_symbol,tc);
                 }
                 else{
@@ -108,11 +108,6 @@ public class ParseTableGenerator
         );
         
         fsm.build();
-        
-        //System.out.println(fsm.states);
-        //System.out.println(fsm.states.size());
-        //System.out.println(fsm.arcs);
-        //System.out.println(fsm.arcs.size());
       
         ParseTable pt = generate(
             fsm,

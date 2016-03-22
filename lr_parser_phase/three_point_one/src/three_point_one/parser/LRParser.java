@@ -1,5 +1,6 @@
 package three_point_one.parser;
 
+import java.util.ArrayList;
 import java.util.Stack;
 import three_point_one.Lexing;
 import three_point_one.node.*;
@@ -13,8 +14,7 @@ public class LRParser {
     int currentState;
     private Token token;
     private Lexing lexer;
-    Stack<Symbol> symbolStack;
-    Stack<Integer> stateIdStack;
+    Stack<ParserStackItem> parser_stack;
     NumberedProductionTable grammar;
     
     public LRParser(ParseTable pt, NumberedProductionTable grammar, 
@@ -28,17 +28,22 @@ public class LRParser {
     public void parse() {
         // lex it & setup
         Terminal next_terminal = tokenToTerminal(nextValidToken());
-        symbolStack = new Stack();
-        stateIdStack = new Stack();
-        stateIdStack.push(1);
+        parser_stack = new Stack();
+        parser_stack.push(new ParserStackItem(null, 1));
+        
+        printCurrentStack();
+        
         while (next_terminal != null) {
             System.out.println("Terminal: "+next_terminal);
-            // parse it
+            // Parse table to look at comes from the next terminal on the
+            // stack and our current state.
             TableCell cell = parse_table.getTableCellAt(
-                next_terminal, stateIdStack.peek());
+                next_terminal, parser_stack.peek().id_number);
             if(cell == null) {
-                System.out.println("REJECT: No Action for Terminal " + 
-                        next_terminal + " at state " + (stateIdStack.peek()));
+                System.out.println(
+                    "REJECT: No Action for Terminal " + next_terminal + 
+                    " at state " + parser_stack.peek().id_number
+                );
                 System.exit(1);
             }
             
@@ -48,35 +53,70 @@ public class LRParser {
                     return;
                 case REDUCE:
                     System.out.println("REDUCE: " + cell);
-                    int ruleNum = cell.state_id;
+                    // The rule we're looking for is the number in our table
+                    // cell since this is a reduce action.
+                    int ruleNum = cell.id_number;
                     Rule rule = grammar.getRule(ruleNum);
+                    
+                    // Pop the terminals for the rule off the stack.
+                    ArrayList<Symbol> popped_symbols = new ArrayList<>();
                     for(int j = 0; j < rule.rhs.size(); j++) {
-                        symbolStack.pop();
-                        stateIdStack.pop();
+                        popped_symbols.add(0, parser_stack.pop().symbol);
                     }
-                    symbolStack.push(rule.lhs);
-                    // Nonterminal and previous state 
+                    
+                    // Make sure popped symbols match the right side 
+                    // of the rule.
+                    if (!popped_symbols.equals(rule.rhs))
+                    {
+                        System.err.println("Bad Reduce: " + 
+                            popped_symbols.toString() + " doesn't match rule" +
+                            rule.rhs.toString()
+                        );
+                    }
+                    // This is the item on the parser stack that will have
+                    // the state number for the new nonterminal that will be
+                    // pushed on the stack.
+                    ParserStackItem go_to_item = parser_stack.pop();
+                    // We need the goto number for the table cell that
+                    // matches the nonterminal.
                     TableCell goToCell = parse_table.getTableCellAt(
-                        symbolStack.peek(), stateIdStack.peek());
+                        rule.lhs,
+                        go_to_item.id_number
+                    );
+                    
                     if(goToCell == null) {
-                        System.out.println("REJECT: No Action for Nonterminal " + 
-                            symbolStack.peek() + " at state " + 
-                            (stateIdStack.peek()));
+                        System.out.println(
+                            "REJECT: No Action for Nonterminal " + 
+                            parser_stack.peek().symbol + " at state " + 
+                            parser_stack.peek().id_number
+                        );
                         System.exit(1);
                     }
                     
-                    stateIdStack.push(goToCell.state_id);
+                    // The nonterminal item on the stack has the goto cell
+                    // number of the previous item as its state number.
+                    ParserStackItem new_nonterminal_item = new ParserStackItem(
+                        rule.lhs, goToCell.id_number
+                    );
+                    // Put the goto item back on the stack
+                    parser_stack.push(go_to_item);
+                    // Push the new nonterminal onto the stack
+                    parser_stack.push(new_nonterminal_item);
+                    System.out.println("GOTO: " + goToCell.id_number);
                     break;
                 case SHIFT:
                     System.out.println("SHIFT: " + cell);
-                    symbolStack.add(next_terminal);
-                    stateIdStack.push(cell.state_id);
+                    parser_stack.add(
+                        new ParserStackItem(next_terminal, cell.id_number)
+                    );
                     // Get next terminal
                     next_terminal = tokenToTerminal(nextValidToken());
                     break;
                 case GOTO:
                     System.out.println("GOTO: " + cell);
-                    stateIdStack.push(cell.state_id);
+                    ParserStackItem item = parser_stack.pop();
+                    item.id_number = cell.id_number;
+                    parser_stack.push(item);
                     // DO NOT GET NEXT TOKEN.
                     break;
                 default:
@@ -84,7 +124,6 @@ public class LRParser {
                     System.exit(1);
             }
             printCurrentStack();
-            System.out.println();
         }
     }
     
@@ -118,13 +157,10 @@ public class LRParser {
         
     public void printCurrentStack() {
         // symbol stack should always be one shorter than stateIdStack
-        StringBuilder sb = new StringBuilder();
-        sb.append("start [");
-        for(int i = 0; i < symbolStack.size(); i++){
-            sb.append("_").append(stateIdStack.get(i))
-                    .append(symbolStack.get(i)).append(", ");
+        System.out.print("start [");
+        for(ParserStackItem item : parser_stack){
+            System.out.print(item.toString() + "  ");
         }
-        sb.append("_").append(stateIdStack.peek()).append("]");
-        System.out.println(sb.toString());
+        System.out.println("\n");
     }
 }
