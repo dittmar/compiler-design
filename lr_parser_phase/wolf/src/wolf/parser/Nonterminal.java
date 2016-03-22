@@ -1,7 +1,8 @@
 package wolf.parser;
 
 /**
- *
+ * A nonterminal is a symbol in the grammar that is used to generate other 
+ * symbols in the grammar.
  * @author Joseph Alacqua
  * @author Kevin Dittmar
  * @author William Ezekiel
@@ -10,6 +11,10 @@ package wolf.parser;
 public class Nonterminal implements Symbol {
     private final String name;
 
+    /**
+     * Create a nonterminal
+     * @param name the name of this nonterminal.
+     */
     public Nonterminal(String name) {
         if (name.isEmpty() || !name.matches("[A-Z].*")) {
             throw new IllegalArgumentException("Nonterminal: Nonterminal "
@@ -19,11 +24,20 @@ public class Nonterminal implements Symbol {
         }
     }
 
+    /**
+     * @return the name of this terminal
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * Check if this nonterminal equals another object. Two nonterminals are
+     * equal if they have the same name.
+     * @param o an object.
+     * @return true if this nonterminal equals the given object.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -36,6 +50,9 @@ public class Nonterminal implements Symbol {
         }
     }
 
+    /**
+     * @return the integer hash code.
+     */
     @Override
     public int hashCode() {
         int result = 17;
@@ -43,33 +60,11 @@ public class Nonterminal implements Symbol {
         return result;
     }
 
+    /**
+     * @return the string representation of this nonterminal
+     */
     @Override
     public String toString() {
-        return quietToString();
-        //return verboseToString();
-    }
-
-    public String quietToString() {
         return name;
-    }
-
-    public String verboseToString() {
-        return "Nonterminal[name=\"" + name + "\"]";
-    }
-
-    public static void main(String[] args) {
-        Nonterminal S = new Nonterminal("S");
-        Nonterminal X = new Nonterminal("X");
-        Nonterminal S2 = new Nonterminal("S");
-
-        System.out.println("S = " + S + " = " + S.verboseToString());
-        System.out.println("X = " + X + " = " + X.verboseToString());
-        System.out.println("S2 = " + S2 + " = " + S2.verboseToString());
-
-        System.out.println("S = X? " + S.equals(X));
-        System.out.println("S = S2? " + S.equals(S2));
-
-        assert !S.equals(X);
-        assert S.equals(S2);
     }
 }

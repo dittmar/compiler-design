@@ -6,8 +6,11 @@ import wolf.Lexing;
 import wolf.node.*;
 
 /**
+ * An LRParser parses a input and determines if said input is accepted 
+ * in a specified grammar using a parse table.
  * @author Kevin Dittmar
  * @author William Ezekiel
+ * @version Mar 19, 2016
  */
 public class LRParser {
     ParseTable parse_table;
@@ -17,14 +20,22 @@ public class LRParser {
     Stack<ParserStackItem> parser_stack;
     NumberedProductionTable grammar;
     
+    /**
+     * Create an LRParser
+     * @param pt a parse table
+     * @param grammar a grammar
+     * @param filename the name of the file
+     */
     public LRParser(ParseTable pt, NumberedProductionTable grammar, 
-        String filename) 
-    {
+        String filename) {
         parse_table = pt;
         lexer = new Lexing(filename);
         this.grammar = grammar;
     }
     
+    /**
+     * Parse the input. Throws errors if rejected.
+     */
     public void parse() {
         // lex it & setup
         Terminal next_terminal = tokenToTerminal(nextValidToken());
@@ -125,23 +136,20 @@ public class LRParser {
      * Get the next valid token, skipping comments and whitespace.
      * @return the next non-ignored token.
      */
-    private Token nextValidToken()
-    {
+    private Token nextValidToken(){
         token = lexer.getToken();
-        while (token instanceof TSpace || token instanceof TComment)
-        {
+        while (token instanceof TSpace || token instanceof TComment) {
             token = lexer.getToken();
         }
         return token;
     }
     
     /**
-     * 
      * @param t is the token whose terminal should be found
      * @return the Terminal corresponding to Token t.
      */
-    private Terminal tokenToTerminal(Token t)
-    {   if(token instanceof EOF) {
+    private Terminal tokenToTerminal(Token t) {   
+        if(token instanceof EOF) {
             return new EndSymbol("$");
         }
         String[] splitToken = t.getClass().getName().split("\\.");
@@ -149,6 +157,9 @@ public class LRParser {
         return parse_table.getTerminalLookupTable().get(tokenName);
     }
         
+    /**
+     * Print the current stack.
+     */
     public void printCurrentStack() {
         // symbol stack should always be one shorter than stateIdStack
         System.out.print("start [");
@@ -158,8 +169,11 @@ public class LRParser {
         System.out.println("\n");
     }
     
-    private void badShift(Terminal next_terminal)
-    {
+    /**
+     * Print an error message if an error occurs during a shift action.
+     * @param next_terminal  a terminal
+     */
+    private void badShift(Terminal next_terminal) {
         System.out.println(
             "REJECT: No Action for Terminal " + next_terminal + 
             " at state " + parser_stack.peek().id_number
@@ -167,8 +181,11 @@ public class LRParser {
         parserDie();
     }
     
-    private void badReduce()
-    {
+    /**
+     * Print an error message if an error occurs during a reduce action.
+     * @param next_terminal  a terminal
+     */
+    private void badReduce() {
         System.out.println(
             "REJECT: No Action for Nonterminal " + 
             parser_stack.peek().symbol + " at state " + 
@@ -177,8 +194,10 @@ public class LRParser {
         parserDie();
     }
     
-    private void parserDie()
-    {
+    /**
+     * Kill the parser.
+     */
+    private void parserDie() {
         System.err.println(
             "Unexpected token: " + parser_stack.peek().symbol +
             " at position " + token.getPos()

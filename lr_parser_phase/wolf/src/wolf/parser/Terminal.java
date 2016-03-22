@@ -1,7 +1,7 @@
 package wolf.parser;
 
 /**
- *
+ * A terminal is a symbol in the language.
  * @author Joseph Alacqua
  * @author Kevin Dittmar
  * @author William Ezekiel
@@ -21,11 +21,20 @@ public class Terminal implements Symbol {
         }
     }
 
+    /**
+     * @return the name of this terminal
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * Check if this terminal is equal to another object. Two terminals are 
+     * equal if they have equal names.
+     * @param o an object
+     * @return true if this terminal equals the given object.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -38,6 +47,9 @@ public class Terminal implements Symbol {
         }
     }
 
+    /**
+     * @return the integer hash code of this terminl.
+     */
     @Override
     public int hashCode() {
         int result = 17;
@@ -45,33 +57,11 @@ public class Terminal implements Symbol {
         return result;
     }
 
+    /**
+     * @return the string representation of this terminal
+     */
     @Override
     public String toString() {
-        return quietToString();
-        //return verboseToString();
-    }
-
-    public String quietToString() {
         return name;
-    }
-
-    public String verboseToString() {
-        return "Terminal[name=\"" + name + "\"]";
-    }
-
-    public static void main(String[] args) {
-        Terminal s = new Terminal("s");
-        Terminal x = new Terminal("x");
-        Terminal s2 = new Terminal("s");
-
-        System.out.println("s = " + s + " = " + s.verboseToString());
-        System.out.println("x = " + x + " = " + x.verboseToString());
-        System.out.println("s2 = " + s2 + " = " + s2.verboseToString());
-
-        System.out.println("s = x? " + s.equals(x));
-        System.out.println("s = s2? " + s.equals(s2));
-
-        assert !s.equals(x);
-        assert s.equals(s2);
     }
 }

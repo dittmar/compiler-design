@@ -82,13 +82,11 @@ public class Rule {
         return result;
     }
 
+    /**
+     * @return the string version of this rule.
+     */
     @Override
     public String toString() {
-        return quietToString();
-        //return verboseToString();
-    }
-
-    public String quietToString() {
         StringBuilder sb = new StringBuilder();
         sb.append(lhs)
           .append(" -> ");
@@ -96,15 +94,10 @@ public class Rule {
         
         return sb.toString();
     }
-
-    public String verboseToString() {
-        return "Production[source=\"" + 
-                lhs + 
-                "\", product=\"" + 
-                getRhsString() + 
-                "\"]";
-    }
     
+    /**
+     * @return the string representation of the right hand side of this rule.
+     */
     public String getRhsString()
     {
         StringBuilder sb = new StringBuilder();

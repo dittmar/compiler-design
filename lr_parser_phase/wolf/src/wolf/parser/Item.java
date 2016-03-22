@@ -1,7 +1,7 @@
 package wolf.parser;
 
 /**
- *
+ * An item is a rule with the current position marked.
  * @author Joseph Alacqua
  * @author Kevin Dittmar
  * @author William Ezekiel
