@@ -4,3 +4,4 @@ manifest.mf
 build.xml
 /lr_parser_phase/three_point_one/build/
 /lr_parser_phase/wolf/build/
+/lr_parser_phase/wolf/dist/

@@ -23,7 +23,6 @@ public class ParseTableGenerator
     {
         ArrayList<LinkedHashMap<Symbol,TableCell>> parse_table = new ArrayList();
         for(State state:fsm.states) {
-            // System.out.println("State: " + state.id);
             Set<Arc> arcSet = new LinkedHashSet<>(fsm.findArcsWithFromState(state));
             LinkedHashMap<Symbol,TableCell> row = new LinkedHashMap();
             // shifts and gotos
@@ -116,7 +115,7 @@ public class ParseTableGenerator
             gp.terminal_lookup_table
         );
         System.out.println(pt);
-        String billFileParseMe  = "resources/sample_programs/sample_program1.wolf";
+        String billFileParseMe  = "resources/sample_programs/sample_program7.wolf";
         LRParser parser = new LRParser(pt, gp.production_table, billFileParseMe);
         parser.parse();
     }
