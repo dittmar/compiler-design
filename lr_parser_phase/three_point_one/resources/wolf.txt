@@ -1,0 +1,96 @@
+l_paren r_paren comma semi ternary_colon ternary_question_mark
+def head tail reverse append prepend foldl foldr map flatten length
+lambda_start plus minus mult div identity print neg logical_not
+mod lt gt lte gte equal not_equal and or xor
+float_number int_number
+identifier string_start string_end string_body string_escape
+escape_alarm escape_backspace escape_formfeed escape_carriage_return
+escape_newline escape_tab escape_vertical_tab escape_backslash
+escape_single_quote escape_double_quote escape_question_mark
+escape_octal_char escape_hex_char escape_unicode_char escape_default
+start_list end_list assign
+
+Program'
+$
+Program' = Program $
+Program = DefList Func
+Program = Func
+DefList = DefList DefHeader
+DefList = DefHeader
+DefHeader = def identifier Sig assign Func
+Sig = l_paren r_paren
+Sig = l_paren SigArgs r_paren
+SigArgs = SigArgs SigArgsRest
+SigArgs = identifier
+SigArgsRest = comma identifier
+Func = FuncName ArgList
+Func = Branch
+Func = identifier ArgList
+FuncName = head
+FuncName = tail
+FuncName = reverse
+FuncName = prepend
+FuncName = append
+FuncName = map
+FuncName = length
+FuncName = foldl
+FuncName = foldr
+FuncName = flatten
+FuncName = identity
+FuncName = print
+FuncName = lambda_start
+FuncName = neg
+FuncName = logical_not
+FuncName = plus
+FuncName = minus
+FuncName = mult
+FuncName = div
+FuncName = mod
+FuncName = lt
+FuncName = gt
+FuncName = lte
+FuncName = gte
+FuncName = equal
+FuncName = not_equal
+FuncName = and
+FuncName = or
+FuncName = xor
+ArgList = l_paren l_paren
+ArgList = l_paren Args r_paren
+Args = identifier
+Args = Args ARest
+ARest = comma Arg
+Arg = Func
+Arg = List
+Arg = float_number
+Arg = int_number
+Arg = identifier
+Arg = String
+String = string_start string_end
+String = string_start StringMiddle string_end
+StringMiddle = StringMiddle string_body
+StringMiddle = string_body
+StringMiddle = StringMiddle StringEscapeSeq
+StringMiddle = StringEscapeSeq
+StringEscapeSeq = string_escape EscapeChar
+EscapeChar = escape_alarm
+EscapeChar = escape_backspace
+EscapeChar = escape_formfeed
+EscapeChar = escape_carriage_return
+EscapeChar = escape_newline
+EscapeChar = escape_tab
+EscapeChar = escape_vertical_tab
+EscapeChar = escape_backslash
+EscapeChar = escape_single_quote
+EscapeChar = escape_double_quote
+EscapeChar = escape_question_mark
+EscapeChar = escape_octal_char
+EscapeChar = escape_hex_char
+EscapeChar = escape_unicode_char
+EscapeChar = escape_default
+Branch = semi Cond ternary_question_mark If ternary_colon Else
+Cond = Func
+If = Func
+Else = Func
+List = start_list Args end_list
+List = start_list end_list

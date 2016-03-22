@@ -96,7 +96,7 @@ public class ParseTableGenerator
      */
     public static void main(String[] args) {
         String billFile = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/ParseTableGenerator/test/parse_table_generator/resources/class.txt";
-        String kevFile = "test/parse_table_generator/resources/g3.1.txt";
+        String kevFile = "resources/wolf.txt";
         //parse the grammar
         GrammarParser gp = new GrammarParser(kevFile);
         gp.parse();
@@ -123,7 +123,7 @@ public class ParseTableGenerator
         );
         System.out.println(pt);
         
-        LRParser parser = new LRParser(pt, gp.production_table, kevFile);
+        //LRParser parser = new LRParser(pt, gp.production_table, kevFile);
         //parser.parse("x  :=  (print(y), 2 + 3)$");
     }
     

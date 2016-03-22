@@ -1,0 +1,22 @@
+id print num := ; ( ) , +
+
+S'
+$
+S' = S$
+S = S;Compound
+S = Assign
+S = Print
+Compound = Assign
+Compound = Print
+Assign = id := E
+Print = print ( L )
+E = id
+E = num
+E = E + Term
+E = ESeq
+Term = id
+Term = num
+Term = ESeq
+ESeq = ( S , E )
+L = E
+L = L , E

@@ -7,9 +7,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
+ * A parse table. Consists or rows representing states and columns representing
+ * Symbols. Used to determine actions of an LRParser.
  * @author Joseph Alacqua
- * @author Kevin Dittmar
+ * @author Kevines Dittmar
  * @author William Ezekiel
  * @version Mar 14, 2016
  */
@@ -20,6 +21,13 @@ public class ParseTable
     private Map<String, Terminal> terminal_lookup_table;
     private int longest_symbol_length = 0;
     
+    /**
+     * Create a parse table
+     * @param table the list of maps representing the table.
+     * @param symbols a set of symbols
+     * @param terminal_lookup_table the terminal lookup table used by the 
+     *      LRParser.
+     */
     public ParseTable(ArrayList<LinkedHashMap<Symbol, TableCell>> table,
         Set<Symbol> symbols, Map<String, Terminal> terminal_lookup_table)
     {
@@ -36,11 +44,18 @@ public class ParseTable
         }
     }
     
+    /**
+     * @return the terminal lookup table.
+     */
     public Map<String, Terminal> getTerminalLookupTable()
     {
         return terminal_lookup_table;
     }
     
+    /**
+     * @return the string representation of this parse table.
+     */
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int counter = 0;
@@ -77,10 +92,19 @@ public class ParseTable
         return sb.toString();
     }
     
+    /**
+     * @param symbol a symbol.
+     * @param state_id an id
+     * @return the table cell for the given state at the given symbol.
+     */
     public TableCell getTableCellAt(Symbol symbol, int state_id) {
         return table.get(state_id).get(symbol);
     }
     
+    /**
+     * @param string a string
+     * @return a padded string for the string representation of this parse table.
+     */
     private String paddedTableString(String string)
     {
         int left_num_spaces =

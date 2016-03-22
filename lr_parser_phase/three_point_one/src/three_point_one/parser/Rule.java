@@ -1,7 +1,7 @@
 package three_point_one.parser;
 
 /**
- *
+ * A grammar rule.
  * @author Joseph Alacqua
  * @author Kevin Dittmar
  * @author William Ezekiel
@@ -16,6 +16,11 @@ public class Rule {
     Nonterminal lhs;
     List<Symbol> rhs;
 
+    /**
+     * Create a rule
+     * @param lhs
+     * @param symbols 
+     */
     public Rule(Nonterminal lhs, Symbol... symbols) {
         rhs = Arrays.asList(symbols);
         this.lhs = lhs;
