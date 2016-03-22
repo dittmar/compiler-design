@@ -8,8 +8,7 @@ package wolf.parser;
  * @author William Ezekiel
  * @version Mar 14, 2016
  */
-public class Arc 
-{
+public class Arc {
     Symbol transition_symbol;
     State from;
     State to;
@@ -34,10 +33,8 @@ public class Arc
      * @return true if this arc is equal to the object.
      */
     @Override
-    public boolean equals(Object obj)
-    {
-        if (!(obj instanceof Arc))
-        {
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Arc)){
             return false;
         }
         Arc arc = (Arc) obj;

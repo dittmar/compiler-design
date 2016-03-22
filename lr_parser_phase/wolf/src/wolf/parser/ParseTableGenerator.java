@@ -7,14 +7,13 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
+ * Generates a parse table
  * @author Joseph Alacqua
  * @author Kevin Dittmar
  * @author William Ezekiel
  * @version Mar 14, 2016
  */
-public class ParseTableGenerator 
-{
+public class ParseTableGenerator  {
     /**
      * Generate a parse table.
      * @param fsm a finite state machine
@@ -27,8 +26,7 @@ public class ParseTableGenerator
         FSM fsm, 
         Set<Terminal> terminals,
         Set<Nonterminal> nonterminals,
-        Map<String, Terminal> terminal_lookup_table)
-    {
+        Map<String, Terminal> terminal_lookup_table) {
         ArrayList<LinkedHashMap<Symbol,TableCell>> parse_table = new ArrayList();
         for(State state:fsm.states) {
             Set<Arc> arcSet = new LinkedHashSet<>(fsm.findArcsWithFromState(state));
@@ -131,5 +129,4 @@ public class ParseTableGenerator
         LRParser parser = new LRParser(pt, gp.production_table, billFileParseMe);
         parser.parse();
     }
-    
 }

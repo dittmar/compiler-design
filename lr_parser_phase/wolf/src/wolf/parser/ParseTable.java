@@ -13,8 +13,7 @@ import java.util.Set;
  * @author William Ezekiel
  * @version Mar 14, 2016
  */
-public class ParseTable
-{
+public class ParseTable {
     ArrayList<LinkedHashMap<Symbol,TableCell>> table;
     Set<Symbol> allSymbols; // all symbols in the grammar
     private Map<String, Terminal> terminal_lookup_table;
@@ -28,16 +27,13 @@ public class ParseTable
      *      LRParser.
      */
     public ParseTable(ArrayList<LinkedHashMap<Symbol, TableCell>> table,
-        Set<Symbol> symbols, Map<String, Terminal> terminal_lookup_table)
-    {
+        Set<Symbol> symbols, Map<String, Terminal> terminal_lookup_table) {
         this.table = table;
         allSymbols = symbols;
         this.terminal_lookup_table = terminal_lookup_table;
         
-        for (Symbol s : allSymbols)
-        {
-            if (s.getName().length() > longest_symbol_length)
-            {
+        for (Symbol s : allSymbols) {
+            if (s.getName().length() > longest_symbol_length) {
                 longest_symbol_length = s.getName().length();
             }
         }
@@ -46,8 +42,7 @@ public class ParseTable
     /**
      * @return the terminal lookup table.
      */
-    public Map<String, Terminal> getTerminalLookupTable()
-    {
+    public Map<String, Terminal> getTerminalLookupTable() {
         return terminal_lookup_table;
     }
     
@@ -106,8 +101,7 @@ public class ParseTable
      * @param string a string
      * @return a padded string for the string representation of this parse table.
      */
-    private String paddedTableString(String string)
-    {
+    private String paddedTableString(String string) {
         int left_num_spaces =
             (longest_symbol_length - string.length()) / 2 + 1;
         int right_num_spaces = left_num_spaces + (string.length() % 2);

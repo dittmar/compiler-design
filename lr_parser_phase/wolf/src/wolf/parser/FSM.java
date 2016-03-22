@@ -13,8 +13,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class FSM
-{
+public class FSM {
     Set<State> states;
     Set<Arc> arcs;
     NonterminalRuleLookupTable nonterminal_rule_lookup_table;
@@ -175,6 +174,13 @@ public class FSM
         
     }
     
+    /**
+     * Given a set of rules, find the set of terminal characters that 
+     * start each rule
+     * Assume: Each rules has the same left hand side
+     * @param rules a set of rules
+     * @return the set of terminal characters that follow the nonterminal.
+     */
     public Set<Terminal> firstRecursive(Set<Rule> rules) {
         Set<Terminal> firstTerminals = new HashSet();
         for(Rule r: rules) {
@@ -215,11 +221,10 @@ public class FSM
      * @param symbol a Symbol
      * @return a state where the dot is moved passed the given symbol.
      */
-    private State goTo(State state, Symbol symbol)
-    {
+    private State goTo(State state, Symbol symbol) {
         HashSet<Item> newItems = new HashSet<>();
-        for (Item item : state.items)
-        {   if(!item.atEnd()) {
+        for (Item item : state.items){   
+            if(!item.atEnd()) {
                 if (item.getCurrentSymbol().equals(symbol)) {
                     newItems.add(
                         new Item(item.getRule(), item.getPosition() + 1, item.lookahead)

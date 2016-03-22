@@ -8,15 +8,13 @@ package wolf.parser;
  * @version Mar 14, 2016
  */
 import java.util.ArrayList;
-public class NumberedProductionTable 
-{
+public class NumberedProductionTable  {
     ArrayList<Rule> production_list;
     
     /**
      * Create a numbered production table.
      */
-    public NumberedProductionTable()
-    {
+    public NumberedProductionTable() {
         production_list = new ArrayList<>();
     }
     
@@ -24,8 +22,7 @@ public class NumberedProductionTable
      * Add a rule to the table
      * @param r a rule.
      */
-    public void addRule(Rule r)
-    {
+    public void addRule(Rule r) {
         production_list.add(r);
     }
     
@@ -41,12 +38,10 @@ public class NumberedProductionTable
      * @return the string representation of this numbered production table. 
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         int counter = 0;
-        for (Rule rule : production_list)
-        {
+        for (Rule rule : production_list) {
             sb.append(counter++);
             sb.append(") ");
             sb.append(rule);
