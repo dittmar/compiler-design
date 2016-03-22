@@ -1,0 +1,310 @@
+Parsing resources/submission_programs/program1.wolf:
+
+start [1  
+
+Terminal: def
+SHIFT: s12
+start [1  def_12  
+
+Terminal: identifier
+SHIFT: s50
+start [1  def_12  identifier_50  
+
+Terminal: l_paren
+SHIFT: s97
+start [1  def_12  identifier_50  l_paren_97  
+
+Terminal: identifier
+SHIFT: s111
+start [1  def_12  identifier_50  l_paren_97  identifier_111  
+
+Terminal: comma
+SHIFT: s176
+start [1  def_12  identifier_50  l_paren_97  identifier_111  comma_176  
+
+Terminal: identifier
+SHIFT: s111
+start [1  def_12  identifier_50  l_paren_97  identifier_111  comma_176  identifier_111  
+
+Terminal: comma
+SHIFT: s176
+start [1  def_12  identifier_50  l_paren_97  identifier_111  comma_176  identifier_111  comma_176  
+
+Terminal: identifier
+SHIFT: s111
+start [1  def_12  identifier_50  l_paren_97  identifier_111  comma_176  identifier_111  comma_176  identifier_111  
+
+Terminal: r_paren
+REDUCE: r9
+GOTO: 251
+start [1  def_12  identifier_50  l_paren_97  identifier_111  comma_176  identifier_111  comma_176  SigArgs_251  
+
+Terminal: r_paren
+REDUCE: r10
+GOTO: 175
+start [1  def_12  identifier_50  l_paren_97  identifier_111  comma_176  identifier_111  SigArgRest_175  
+
+Terminal: r_paren
+REDUCE: r8
+GOTO: 251
+start [1  def_12  identifier_50  l_paren_97  identifier_111  comma_176  SigArgs_251  
+
+Terminal: r_paren
+REDUCE: r10
+GOTO: 175
+start [1  def_12  identifier_50  l_paren_97  identifier_111  SigArgRest_175  
+
+Terminal: r_paren
+REDUCE: r8
+GOTO: 147
+start [1  def_12  identifier_50  l_paren_97  SigArgs_147  
+
+Terminal: r_paren
+SHIFT: s225
+start [1  def_12  identifier_50  l_paren_97  SigArgs_147  r_paren_225  
+
+Terminal: assign
+REDUCE: r7
+GOTO: 96
+start [1  def_12  identifier_50  Sig_96  
+
+Terminal: assign
+SHIFT: s145
+start [1  def_12  identifier_50  Sig_96  assign_145  
+
+Terminal: plus
+SHIFT: s21
+start [1  def_12  identifier_50  Sig_96  assign_145  plus_21  
+
+Terminal: l_paren
+REDUCE: r47
+GOTO: 223
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  
+
+Terminal: l_paren
+SHIFT: s270
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  
+
+Terminal: identifier
+SHIFT: s83
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  identifier_83  
+
+Terminal: comma
+REDUCE: r70
+GOTO: 81
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  
+
+Terminal: comma
+SHIFT: s114
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  comma_114  
+
+Terminal: identifier
+SHIFT: s83
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  comma_114  identifier_83  
+
+Terminal: comma
+REDUCE: r70
+GOTO: 81
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  comma_114  Arg_81  
+
+Terminal: comma
+SHIFT: s114
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  comma_114  Arg_81  comma_114  
+
+Terminal: identifier
+SHIFT: s83
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  comma_114  Arg_81  comma_114  identifier_83  
+
+Terminal: r_paren
+REDUCE: r70
+GOTO: 81
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  comma_114  Arg_81  comma_114  Arg_81  
+
+Terminal: r_paren
+REDUCE: r64
+GOTO: 177
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  comma_114  Arg_81  comma_114  Args_177  
+
+Terminal: r_paren
+REDUCE: r65
+GOTO: 113
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  comma_114  Arg_81  ArgRest_113  
+
+Terminal: r_paren
+REDUCE: r63
+GOTO: 177
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  comma_114  Args_177  
+
+Terminal: r_paren
+REDUCE: r65
+GOTO: 113
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  ArgRest_113  
+
+Terminal: r_paren
+REDUCE: r63
+GOTO: 300
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Args_300  
+
+Terminal: r_paren
+SHIFT: s327
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Args_300  r_paren_327  
+
+Terminal: identifier
+REDUCE: r62
+GOTO: 271
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  ArgList_271  
+
+Terminal: identifier
+REDUCE: r11
+GOTO: 217
+start [1  def_12  identifier_50  Sig_96  assign_145  Func_217  
+
+Terminal: identifier
+REDUCE: r5
+GOTO: 5
+start [1  DefHeader_5  
+
+Terminal: identifier
+REDUCE: r4
+GOTO: 3
+start [1  DefList_3  
+
+Terminal: identifier
+SHIFT: s10
+start [1  DefList_3  identifier_10  
+
+Terminal: l_paren
+SHIFT: s48
+start [1  DefList_3  identifier_10  l_paren_48  
+
+Terminal: int_number
+SHIFT: s85
+start [1  DefList_3  identifier_10  l_paren_48  int_number_85  
+
+Terminal: comma
+REDUCE: r69
+GOTO: 81
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  
+
+Terminal: comma
+SHIFT: s114
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  
+
+Terminal: int_number
+SHIFT: s85
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  int_number_85  
+
+Terminal: comma
+REDUCE: r69
+GOTO: 81
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  
+
+Terminal: comma
+SHIFT: s114
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  
+
+Terminal: string_start
+SHIFT: s94
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  string_start_94  
+
+Terminal: string_body
+SHIFT: s141
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  string_start_94  string_body_141  
+
+Terminal: string_escape
+REDUCE: r75
+GOTO: 139
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  string_start_94  StringMiddle_139  
+
+Terminal: string_escape
+SHIFT: s143
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  string_start_94  StringMiddle_139  string_escape_143  
+
+Terminal: escape_single_quote
+SHIFT: s210
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  string_start_94  StringMiddle_139  string_escape_143  escape_single_quote_210  
+
+Terminal: string_body
+REDUCE: r87
+GOTO: 200
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  string_start_94  StringMiddle_139  string_escape_143  EscapeChar_200  
+
+Terminal: string_body
+REDUCE: r78
+GOTO: 197
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  string_start_94  StringMiddle_139  StringEscapeSeq_197  
+
+Terminal: string_body
+REDUCE: r76
+GOTO: 139
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  string_start_94  StringMiddle_139  
+
+Terminal: string_body
+SHIFT: s198
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  string_start_94  StringMiddle_139  string_body_198  
+
+Terminal: string_end
+REDUCE: r74
+GOTO: 139
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  string_start_94  StringMiddle_139  
+
+Terminal: string_end
+SHIFT: s199
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  string_start_94  StringMiddle_139  string_end_199  
+
+Terminal: r_paren
+REDUCE: r73
+GOTO: 87
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  String_87  
+
+Terminal: r_paren
+REDUCE: r71
+GOTO: 81
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  Arg_81  
+
+Terminal: r_paren
+REDUCE: r64
+GOTO: 177
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  Args_177  
+
+Terminal: r_paren
+REDUCE: r65
+GOTO: 113
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Arg_81  ArgRest_113  
+
+Terminal: r_paren
+REDUCE: r63
+GOTO: 177
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  comma_114  Args_177  
+
+Terminal: r_paren
+REDUCE: r65
+GOTO: 113
+start [1  DefList_3  identifier_10  l_paren_48  Arg_81  ArgRest_113  
+
+Terminal: r_paren
+REDUCE: r63
+GOTO: 79
+start [1  DefList_3  identifier_10  l_paren_48  Args_79  
+
+Terminal: r_paren
+SHIFT: s112
+start [1  DefList_3  identifier_10  l_paren_48  Args_79  r_paren_112  
+
+Terminal: $
+REDUCE: r62
+GOTO: 47
+start [1  DefList_3  identifier_10  ArgList_47  
+
+Terminal: $
+REDUCE: r13
+GOTO: 41
+start [1  DefList_3  Func_41  
+
+Terminal: $
+REDUCE: r1
+GOTO: 2
+start [1  Program_2  
+
+Terminal: $
+ACCEPT

@@ -1,0 +1,264 @@
+Parsing resources/submission_programs/program2.wolf:
+
+start [1  
+
+Terminal: plus
+SHIFT: s21
+start [1  plus_21  
+
+Terminal: l_paren
+REDUCE: r47
+GOTO: 11
+start [1  FuncName_11  
+
+Terminal: l_paren
+SHIFT: s48
+start [1  FuncName_11  l_paren_48  
+
+Terminal: int_number
+SHIFT: s85
+start [1  FuncName_11  l_paren_48  int_number_85  
+
+Terminal: comma
+REDUCE: r69
+GOTO: 81
+start [1  FuncName_11  l_paren_48  Arg_81  
+
+Terminal: comma
+SHIFT: s114
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  
+
+Terminal: int_number
+SHIFT: s85
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  int_number_85  
+
+Terminal: comma
+REDUCE: r69
+GOTO: 81
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  
+
+Terminal: comma
+SHIFT: s114
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  
+
+Terminal: minus
+SHIFT: s24
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  minus_24  
+
+Terminal: l_paren
+REDUCE: r48
+GOTO: 93
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  
+
+Terminal: l_paren
+SHIFT: s116
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  
+
+Terminal: int_number
+SHIFT: s85
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  int_number_85  
+
+Terminal: comma
+REDUCE: r69
+GOTO: 81
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  
+
+Terminal: comma
+SHIFT: s114
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  
+
+Terminal: int_number
+SHIFT: s85
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  int_number_85  
+
+Terminal: comma
+REDUCE: r69
+GOTO: 81
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  
+
+Terminal: comma
+SHIFT: s114
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  
+
+Terminal: int_number
+SHIFT: s85
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  int_number_85  
+
+Terminal: comma
+REDUCE: r69
+GOTO: 81
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  
+
+Terminal: comma
+SHIFT: s114
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  
+
+Terminal: mult
+SHIFT: s28
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  mult_28  
+
+Terminal: l_paren
+REDUCE: r49
+GOTO: 93
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  
+
+Terminal: l_paren
+SHIFT: s116
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  
+
+Terminal: int_number
+SHIFT: s85
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  int_number_85  
+
+Terminal: comma
+REDUCE: r69
+GOTO: 81
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  
+
+Terminal: comma
+SHIFT: s114
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  
+
+Terminal: int_number
+SHIFT: s85
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  int_number_85  
+
+Terminal: r_paren
+REDUCE: r69
+GOTO: 81
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  
+
+Terminal: r_paren
+REDUCE: r64
+GOTO: 177
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Args_177  
+
+Terminal: r_paren
+REDUCE: r65
+GOTO: 113
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  ArgRest_113  
+
+Terminal: r_paren
+REDUCE: r63
+GOTO: 179
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Args_179  
+
+Terminal: r_paren
+SHIFT: s252
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Args_179  r_paren_252  
+
+Terminal: r_paren
+REDUCE: r62
+GOTO: 138
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  ArgList_138  
+
+Terminal: r_paren
+REDUCE: r11
+GOTO: 86
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  Func_86  
+
+Terminal: r_paren
+REDUCE: r66
+GOTO: 81
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  Arg_81  
+
+Terminal: r_paren
+REDUCE: r64
+GOTO: 177
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  comma_114  Args_177  
+
+Terminal: r_paren
+REDUCE: r65
+GOTO: 113
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Arg_81  ArgRest_113  
+
+Terminal: r_paren
+REDUCE: r63
+GOTO: 177
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  comma_114  Args_177  
+
+Terminal: r_paren
+REDUCE: r65
+GOTO: 113
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Arg_81  ArgRest_113  
+
+Terminal: r_paren
+REDUCE: r63
+GOTO: 177
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  comma_114  Args_177  
+
+Terminal: r_paren
+REDUCE: r65
+GOTO: 113
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Arg_81  ArgRest_113  
+
+Terminal: r_paren
+REDUCE: r63
+GOTO: 179
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Args_179  
+
+Terminal: r_paren
+SHIFT: s252
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  l_paren_116  Args_179  r_paren_252  
+
+Terminal: r_paren
+REDUCE: r62
+GOTO: 138
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  FuncName_93  ArgList_138  
+
+Terminal: r_paren
+REDUCE: r11
+GOTO: 86
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  Func_86  
+
+Terminal: r_paren
+REDUCE: r66
+GOTO: 81
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  Arg_81  
+
+Terminal: r_paren
+REDUCE: r64
+GOTO: 177
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  comma_114  Args_177  
+
+Terminal: r_paren
+REDUCE: r65
+GOTO: 113
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Arg_81  ArgRest_113  
+
+Terminal: r_paren
+REDUCE: r63
+GOTO: 177
+start [1  FuncName_11  l_paren_48  Arg_81  comma_114  Args_177  
+
+Terminal: r_paren
+REDUCE: r65
+GOTO: 113
+start [1  FuncName_11  l_paren_48  Arg_81  ArgRest_113  
+
+Terminal: r_paren
+REDUCE: r63
+GOTO: 79
+start [1  FuncName_11  l_paren_48  Args_79  
+
+Terminal: r_paren
+SHIFT: s112
+start [1  FuncName_11  l_paren_48  Args_79  r_paren_112  
+
+Terminal: $
+REDUCE: r62
+GOTO: 49
+start [1  FuncName_11  ArgList_49  
+
+Terminal: $
+REDUCE: r11
+GOTO: 4
+start [1  Func_4  
+
+Terminal: $
+REDUCE: r2
+GOTO: 2
+start [1  Program_2  
+
+Terminal: $
+ACCEPT

@@ -1,0 +1,2 @@
+def badDef() = +(1, 2)
+badDef()

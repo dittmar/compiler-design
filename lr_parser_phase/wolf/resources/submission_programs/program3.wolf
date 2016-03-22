@@ -1,0 +1,2 @@
+def branchFunc(n, y) := ; >(n, y) ? +(n, 7) : -(y, 2)
+branchFunc(7, 8)

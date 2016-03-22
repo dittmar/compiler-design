@@ -160,12 +160,15 @@ public class LRParser {
         );
         System.out.println(pt);
         for (String programFile : args) {
+            System.out.println("********************************************");
+            System.out.println("Parsing " + programFile + ":\n");
             LRParser parser = new LRParser(
                 pt,
                 gp.productionTable,
                 programFile
             );
             parser.parse();
+            System.out.println("********************************************");
         }
     }
     
@@ -215,7 +218,7 @@ public class LRParser {
             "REJECT: No Action for Terminal " + next_terminal + 
             " at state " + parserStack.peek().idNumber
         );
-        parserDie();
+        parserDie(next_terminal);
     }
     
     /**
@@ -228,7 +231,7 @@ public class LRParser {
             parserStack.peek().symbol + " at state " + 
             parserStack.peek().idNumber
         );
-        parserDie();
+        parserDie(parserStack.peek().symbol);
     }
     
     /**
@@ -236,9 +239,9 @@ public class LRParser {
      * Print the token that it failed on and the column of the character
      * that made the parser fail.
      */
-    private void parserDie() {
+    private void parserDie(Symbol symbol) {
         System.err.println(
-            "Unexpected token: " + parserStack.peek().symbol +
+            "Unexpected token: " + symbol +
             " at position " + token.getPos()
         );
         System.exit(1);

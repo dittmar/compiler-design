@@ -1,0 +1,116 @@
+Parsing resources/submission_programs/bad_program2.wolf:
+
+start [1  
+
+Terminal: def
+SHIFT: s12
+start [1  def_12  
+
+Terminal: identifier
+SHIFT: s50
+start [1  def_12  identifier_50  
+
+Terminal: l_paren
+SHIFT: s97
+start [1  def_12  identifier_50  l_paren_97  
+
+Terminal: identifier
+SHIFT: s111
+start [1  def_12  identifier_50  l_paren_97  identifier_111  
+
+Terminal: comma
+SHIFT: s176
+start [1  def_12  identifier_50  l_paren_97  identifier_111  comma_176  
+
+Terminal: identifier
+SHIFT: s111
+start [1  def_12  identifier_50  l_paren_97  identifier_111  comma_176  identifier_111  
+
+Terminal: r_paren
+REDUCE: r9
+GOTO: 251
+start [1  def_12  identifier_50  l_paren_97  identifier_111  comma_176  SigArgs_251  
+
+Terminal: r_paren
+REDUCE: r10
+GOTO: 175
+start [1  def_12  identifier_50  l_paren_97  identifier_111  SigArgRest_175  
+
+Terminal: r_paren
+REDUCE: r8
+GOTO: 147
+start [1  def_12  identifier_50  l_paren_97  SigArgs_147  
+
+Terminal: r_paren
+SHIFT: s225
+start [1  def_12  identifier_50  l_paren_97  SigArgs_147  r_paren_225  
+
+Terminal: assign
+REDUCE: r7
+GOTO: 96
+start [1  def_12  identifier_50  Sig_96  
+
+Terminal: assign
+SHIFT: s145
+start [1  def_12  identifier_50  Sig_96  assign_145  
+
+Terminal: xor
+SHIFT: s37
+start [1  def_12  identifier_50  Sig_96  assign_145  xor_37  
+
+Terminal: l_paren
+REDUCE: r60
+GOTO: 223
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  
+
+Terminal: l_paren
+SHIFT: s270
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  
+
+Terminal: identifier
+SHIFT: s83
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  identifier_83  
+
+Terminal: comma
+REDUCE: r70
+GOTO: 81
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  
+
+Terminal: comma
+SHIFT: s114
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  comma_114  
+
+Terminal: identifier
+SHIFT: s83
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  comma_114  identifier_83  
+
+Terminal: r_paren
+REDUCE: r70
+GOTO: 81
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  comma_114  Arg_81  
+
+Terminal: r_paren
+REDUCE: r64
+GOTO: 177
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  comma_114  Args_177  
+
+Terminal: r_paren
+REDUCE: r65
+GOTO: 113
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Arg_81  ArgRest_113  
+
+Terminal: r_paren
+REDUCE: r63
+GOTO: 300
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Args_300  
+
+Terminal: r_paren
+SHIFT: s327
+start [1  def_12  identifier_50  Sig_96  assign_145  FuncName_223  l_paren_270  Args_300  r_paren_327  
+
+Terminal: $
+REJECT: No Action for Terminal $ at state 327
+Unexpected token: $ at position 35
+
+Explanation for failure:  The program parse ended early because there is no function call, only
+definitions.  A program is defined as a list of definitions followed by a function call.

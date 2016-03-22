@@ -1,0 +1,26 @@
+Parsing resources/submission_programs/bad_program.wolf:
+
+start [1  
+
+Terminal: def
+SHIFT: s12
+start [1  def_12  
+
+Terminal: identifier
+SHIFT: s50
+start [1  def_12  identifier_50  
+
+Terminal: l_paren
+SHIFT: s97
+start [1  def_12  identifier_50  l_paren_97  
+
+Terminal: r_paren
+SHIFT: s146
+start [1  def_12  identifier_50  l_paren_97  r_paren_146  
+
+Terminal: equal
+REJECT: No Action for Terminal equal at state 146
+Unexpected token: equal at position 14
+
+Explanation for failure:  This program failed because program definitions use := as
+the assignment operator, not =.
