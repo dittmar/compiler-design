@@ -9,13 +9,13 @@ package wolf.parser;
  */
 import java.util.ArrayList;
 public class NumberedProductionTable  {
-    ArrayList<Rule> production_list;
+    ArrayList<Rule> productionList;
     
     /**
      * Create a numbered production table.
      */
     public NumberedProductionTable() {
-        production_list = new ArrayList<>();
+        productionList = new ArrayList<>();
     }
     
     /**
@@ -23,7 +23,7 @@ public class NumberedProductionTable  {
      * @param r a rule.
      */
     public void addRule(Rule r) {
-        production_list.add(r);
+        productionList.add(r);
     }
     
     /**
@@ -31,7 +31,7 @@ public class NumberedProductionTable  {
      * @return the rule with the current index.
      */
     public Rule getRule(int index) {
-        return production_list.get(index);
+        return productionList.get(index);
     }
     
     /**
@@ -41,7 +41,7 @@ public class NumberedProductionTable  {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int counter = 0;
-        for (Rule rule : production_list) {
+        for (Rule rule : productionList) {
             sb.append(counter++);
             sb.append(") ");
             sb.append(rule);

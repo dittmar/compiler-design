@@ -8,7 +8,6 @@ package wolf.parser;
  * @version Mar 14, 2016
  */
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Rule {

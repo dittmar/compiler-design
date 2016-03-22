@@ -9,7 +9,7 @@ package wolf.parser;
  * @version Mar 14, 2016
  */
 public class Arc {
-    Symbol transition_symbol;
+    Symbol transitionSymbol;
     State from;
     State to;
     
@@ -20,7 +20,7 @@ public class Arc {
      * @param to the new state, transition to this state.
      */
     public Arc(Symbol s, State from, State to) {
-        transition_symbol = s;
+        transitionSymbol = s;
         this.from = from;
         this.to = to;
     }
@@ -40,7 +40,7 @@ public class Arc {
         Arc arc = (Arc) obj;
         return arc.from.equals(from) && 
                arc.to.equals(to) && 
-               arc.transition_symbol.equals(transition_symbol);
+               arc.transitionSymbol.equals(transitionSymbol);
     }
     
     /**
@@ -51,7 +51,7 @@ public class Arc {
         int result = 17;
         result = 31 * result + from.hashCode();
         result = 31 * result + to.hashCode();
-        result = 31 * result + transition_symbol.hashCode();
+        result = 31 * result + transitionSymbol.hashCode();
         return result;
     }
     
@@ -60,6 +60,6 @@ public class Arc {
      */
     @Override
     public String toString() {
-        return from.id + " --"+ transition_symbol + "-> " + to.id;
+        return from.id + " --"+ transitionSymbol + "-> " + to.id;
     }
 }

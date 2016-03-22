@@ -13,13 +13,13 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 public class NonterminalRuleLookupTable {
-    HashMap<Nonterminal, Set<Rule>> rule_table;
+    HashMap<Nonterminal, Set<Rule>> ruleTable;
     
     /**
      * Create a nonterminal rule lookup table.
      */
     public NonterminalRuleLookupTable() {
-        rule_table = new HashMap<>();
+        ruleTable = new HashMap<>();
     }
     
     /**
@@ -29,13 +29,13 @@ public class NonterminalRuleLookupTable {
      * @param rule  a rule
      */
     void add(Nonterminal nt, Rule rule) {
-        if (rule_table.containsKey(nt)) {
-            rule_table.get(nt).add(rule);
+        if (ruleTable.containsKey(nt)) {
+            ruleTable.get(nt).add(rule);
         }
         else {
             HashSet<Rule> rules = new HashSet<>();
             rules.add(rule);
-            rule_table.put(nt, rules);
+            ruleTable.put(nt, rules);
         }
     }
     
@@ -44,7 +44,7 @@ public class NonterminalRuleLookupTable {
      * @return the set of rules mapped to the nonterminal.
      */
     Set<Rule> getRuleSet(Nonterminal nt) {
-        return rule_table.get(nt);
+        return ruleTable.get(nt);
     }
     
     /**
@@ -65,7 +65,7 @@ public class NonterminalRuleLookupTable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<Nonterminal, Set<Rule>> entry : rule_table.entrySet()) {
+        for (Map.Entry<Nonterminal, Set<Rule>> entry : ruleTable.entrySet()) {
             sb.append("Nonterminal: ");
             sb.append(entry.getKey());
             sb.append("\nRules:\n");

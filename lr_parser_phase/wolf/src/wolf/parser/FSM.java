@@ -16,10 +16,10 @@ import java.util.Set;
 public class FSM {
     Set<State> states;
     Set<Arc> arcs;
-    NonterminalRuleLookupTable nonterminal_rule_lookup_table;
-    NumberedProductionTable numbered_production_table;
-    StartSymbol start_symbol;
-    EndSymbol end_symbol;
+    NonterminalRuleLookupTable nonterminalRuleLookupTable;
+    NumberedProductionTable numberedProductionTable;
+    StartSymbol startSymbol;
+    EndSymbol endSymbol;
     
     /**
      * Create a fsm object.
@@ -30,14 +30,16 @@ public class FSM {
      */
     public FSM(NonterminalRuleLookupTable nrlt, NumberedProductionTable npt,
                StartSymbol ss, EndSymbol es) {
-        nonterminal_rule_lookup_table = nrlt;
-        numbered_production_table = npt;
-        start_symbol = ss;
-        end_symbol = es;
+        nonterminalRuleLookupTable = nrlt;
+        numberedProductionTable = npt;
+        startSymbol = ss;
+        endSymbol = es;
         // Initialize T to {Closure({S' -> .S$})}
         states = new LinkedHashSet();
         Set<Item> initialItemSet = new LinkedHashSet();
-        initialItemSet.add(new Item(numbered_production_table.getRule(0),0,new AnySymbol()));
+        initialItemSet.add(
+            new Item(numberedProductionTable.getRule(0),0,new AnySymbol())
+        );
         State initial = closure(initialItemSet);
         initial.id = 1;
         states.add(initial);
@@ -57,7 +59,7 @@ public class FSM {
             for(Item item: state.items){
                 if(!item.atEnd()) {
                     Symbol s = item.getCurrentSymbol();
-                    if (!s.equals(end_symbol))
+                    if (!s.equals(endSymbol))
                     {
                         State j = goTo(state,s);
                         if(newStates.add(j)) {
@@ -111,7 +113,7 @@ public class FSM {
      * @return get the list of productions from the numbered production table
      */
     public ArrayList<Rule> getProductions() {
-        return numbered_production_table.production_list;
+        return numberedProductionTable.productionList;
     }
     
     /**
@@ -128,7 +130,7 @@ public class FSM {
                 if(next instanceof Nonterminal) {
                     Nonterminal nt = (Nonterminal) next;
                     Set<Rule> nonterminalRules = 
-                        nonterminal_rule_lookup_table.getRuleSet(nt);
+                        nonterminalRuleLookupTable.getRuleSet(nt);
                     for(Rule rule: nonterminalRules) {
                         //addition for LR(1)
                         Set<Item> itemSetFirst = new HashSet();
@@ -166,8 +168,10 @@ public class FSM {
             }
             else { //Nonterminal case
                 Set<Rule> rulesProducedByNonterminal = 
-                        nonterminal_rule_lookup_table.getRuleSet((Nonterminal) next);
-                firstTerminals.addAll(firstRecursive(rulesProducedByNonterminal));
+                    nonterminalRuleLookupTable.getRuleSet((Nonterminal) next);
+                firstTerminals.addAll(
+                    firstRecursive(rulesProducedByNonterminal)
+                );
             }
         }
         return firstTerminals;
@@ -190,7 +194,7 @@ public class FSM {
             }
             else if(s instanceof Nonterminal) {
                 Set<Rule> rulesProducedByNonterminal = 
-                    nonterminal_rule_lookup_table.getRuleSet((Nonterminal) s);
+                    nonterminalRuleLookupTable.getRuleSet((Nonterminal) s);
                 firstTerminals.addAll(firstRecursive(rulesProducedByNonterminal));
             }
         }
@@ -198,12 +202,12 @@ public class FSM {
     }
     
     /**
-     * Given a state and state set, find the state (that already has an id) that 
-     * has the same items as a state in the state set.
+     * Given a state and state set, find the state (that already has an id)
+     * that has the same items as a state in the state set.
      * @param s a state
      * @param stateSet a state set
-     * @return the state in the state set that has the same items or null if there
-     *      is none.
+     * @return the state in the state set that has the same items or null 
+     * if there is none.
      */
     private State findStateEqualTo(State s,Set<State> stateSet) {
         for(State state: stateSet) {
@@ -227,7 +231,11 @@ public class FSM {
             if(!item.atEnd()) {
                 if (item.getCurrentSymbol().equals(symbol)) {
                     newItems.add(
-                        new Item(item.getRule(), item.getPosition() + 1, item.lookahead)
+                        new Item(
+                            item.getRule(),
+                            item.getPosition() + 1,
+                            item.lookahead
+                        )
                     );
                 }
             }

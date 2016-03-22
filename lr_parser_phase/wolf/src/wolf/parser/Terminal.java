@@ -48,7 +48,7 @@ public class Terminal implements Symbol {
     }
 
     /**
-     * @return the integer hash code of this terminl.
+     * @return the integer hash code of this terminal.
      */
     @Override
     public int hashCode() {

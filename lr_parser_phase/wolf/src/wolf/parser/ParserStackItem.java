@@ -10,16 +10,16 @@ package wolf.parser;
  */
 public class ParserStackItem  {
     Symbol symbol;
-    int id_number;
+    int idNumber;
     
     /**
      * Create a ParserStackItem
      * @param symbol the symbol
-     * @param id_number an id number.
+     * @param idNumber an id number.
      */
-    public ParserStackItem(Symbol symbol, int id_number) {
+    public ParserStackItem(Symbol symbol, int idNumber) {
         this.symbol = symbol;
-        this.id_number = id_number;
+        this.idNumber = idNumber;
     }
     
     /**
@@ -36,6 +36,6 @@ public class ParserStackItem  {
         {
             sb.append(symbol.toString()).append("_");
         }
-        return sb.append(id_number).toString();
+        return sb.append(idNumber).toString();
     }
 }
