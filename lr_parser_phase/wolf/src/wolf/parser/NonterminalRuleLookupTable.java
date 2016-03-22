@@ -12,15 +12,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-public class NonterminalRuleLookupTable 
-{
+public class NonterminalRuleLookupTable {
     HashMap<Nonterminal, Set<Rule>> rule_table;
     
     /**
      * Create a nonterminal rule lookup table.
      */
-    public NonterminalRuleLookupTable()
-    {
+    public NonterminalRuleLookupTable() {
         rule_table = new HashMap<>();
     }
     
@@ -30,14 +28,11 @@ public class NonterminalRuleLookupTable
      * @param nt a nonterminal.
      * @param rule  a rule
      */
-    void add(Nonterminal nt, Rule rule)
-    {
-        if (rule_table.containsKey(nt))
-        {
+    void add(Nonterminal nt, Rule rule) {
+        if (rule_table.containsKey(nt)) {
             rule_table.get(nt).add(rule);
         }
-        else
-        {
+        else {
             HashSet<Rule> rules = new HashSet<>();
             rules.add(rule);
             rule_table.put(nt, rules);
@@ -68,11 +63,9 @@ public class NonterminalRuleLookupTable
      * @return the string representation of this nonterminal rule lookup table.
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<Nonterminal, Set<Rule>> entry : rule_table.entrySet())
-        {
+        for (Map.Entry<Nonterminal, Set<Rule>> entry : rule_table.entrySet()) {
             sb.append("Nonterminal: ");
             sb.append(entry.getKey());
             sb.append("\nRules:\n");

@@ -10,8 +10,7 @@ public class TableCell
     /**
      * Action enums for possible table cell actions. 
      */
-    public enum Action 
-    {
+    public enum Action  {
         SHIFT, REDUCE, GOTO, ACCEPT, ERROR
     }
     
@@ -23,8 +22,7 @@ public class TableCell
      * @param action
      * @param state_id 
      */
-    public TableCell(Action action, int state_id)
-    {
+    public TableCell(Action action, int state_id) {
         this.action = action;
         this.id_number = state_id;
     }

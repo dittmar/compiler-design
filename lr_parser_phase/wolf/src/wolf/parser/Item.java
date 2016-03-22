@@ -38,18 +38,27 @@ public class Item {
      * @param rule the production rule
      * @param position the position of the "cursor".
      */
-    public Item(Rule rule, int position){
+    public Item(Rule rule, int position) {
         this(rule,position, new AnySymbol());
     }
 
+    /**
+     * @return this items rule
+     */
     public Rule getRule() {
         return rule;
     }
 
+    /**
+     * @return the position of this item
+     */
     public int getPosition() {
         return position;
     }
     
+    /**
+     * @return the lookahead symbol of this item
+     */
     public Symbol getCurrentSymbol() {
         return rule.getSymbolOnRight(position);
     }
@@ -64,6 +73,12 @@ public class Item {
         return rule.getSymbolOnRight(position+1);
     }
 
+    /**
+     * Check if this item equals another object. Two items are equal if they
+     * have the same set of rules, position, and lookahead symbol.
+     * @param o an object
+     * @return true if this item equals the given object.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -78,6 +93,9 @@ public class Item {
         }
     }
 
+    /**
+     * @return the hash code of this item
+     */
     @Override
     public int hashCode() {
         int result = 17;
@@ -89,19 +107,21 @@ public class Item {
         return result;
     }
 
+    /**
+     * @return the string representation of this item
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(rule.lhs.toString())
           .append("\t -> \t");
-        for (int i = 0; i < rule.rhs.size(); i++)
-        {
+        for (int i = 0; i < rule.rhs.size(); i++) {
           if (position == i) {
               sb.append("*");
           }
           sb.append(rule.rhs.get(i).toString());  
         }
-        if(position>=rule.rhs.size()){
+        if(position>=rule.rhs.size()) {
             sb.append("*");
         }
         sb.append("\t la:").append(lookahead);
@@ -109,6 +129,10 @@ public class Item {
         return sb.toString();
     }
     
+    /**
+     * @return true if the position (cursor) is at the end of the right hand
+     * side
+     */
     public boolean atEnd() {
         return position >= rule.getRhs().size();
     }

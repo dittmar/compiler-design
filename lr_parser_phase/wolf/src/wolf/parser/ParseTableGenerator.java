@@ -7,14 +7,13 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
+ * Generates a parse table
  * @author Joseph Alacqua
  * @author Kevin Dittmar
  * @author William Ezekiel
  * @version Mar 14, 2016
  */
-public class ParseTableGenerator 
-{
+public class ParseTableGenerator  {
     /**
      * Generate a parse table.
      * @param fsm a finite state machine
@@ -27,8 +26,7 @@ public class ParseTableGenerator
         FSM fsm, 
         Set<Terminal> terminals,
         Set<Nonterminal> nonterminals,
-        Map<String, Terminal> terminal_lookup_table)
-    {
+        Map<String, Terminal> terminal_lookup_table) {
         ArrayList<LinkedHashMap<Symbol,TableCell>> parse_table = new ArrayList();
         for(State state:fsm.states) {
             Set<Arc> arcSet = new LinkedHashSet<>(fsm.findArcsWithFromState(state));
@@ -96,5 +94,39 @@ public class ParseTableGenerator
             parse_table_symbols,
             terminal_lookup_table
         );
+    }
+    
+    /**
+     * Main function. 
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // filename, change where needed.
+        String filename = "resources/wolf.txt";
+        //parse the grammar
+        GrammarParser gp = new GrammarParser(filename);
+        gp.parse();
+        
+        FSM fsm = new FSM(
+            gp.nonterminal_rule_lookup_table,
+            gp.production_table,
+            gp.start_symbol,
+            gp.end_symbol
+        );
+        
+        fsm.build();
+        //System.out.println(fsm.states);
+        //System.out.println(fsm.arcs);
+      
+        ParseTable pt = generate(
+            fsm,
+            gp.terminals,
+            gp.nonterminals,
+            gp.terminal_lookup_table
+        );
+        System.out.println(pt);
+        String billFileParseMe  = "resources/sample_programs/sample_program2.wolf";
+        LRParser parser = new LRParser(pt, gp.production_table, billFileParseMe);
+        parser.parse();
     }
 }
