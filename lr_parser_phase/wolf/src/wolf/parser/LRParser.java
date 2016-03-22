@@ -128,7 +128,7 @@ public class LRParser {
     private Token nextValidToken()
     {
         token = lexer.getToken();
-        while (token instanceof TSpace)
+        while (token instanceof TSpace || token instanceof TComment)
         {
             token = lexer.getToken();
         }

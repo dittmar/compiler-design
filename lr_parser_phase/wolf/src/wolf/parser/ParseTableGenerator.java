@@ -107,6 +107,8 @@ public class ParseTableGenerator
         );
         
         fsm.build();
+        //System.out.println(fsm.states);
+        //System.out.println(fsm.arcs);
       
         ParseTable pt = generate(
             fsm,
@@ -115,7 +117,7 @@ public class ParseTableGenerator
             gp.terminal_lookup_table
         );
         System.out.println(pt);
-        String billFileParseMe  = "resources/sample_programs/sample_program7.wolf";
+        String billFileParseMe  = "resources/sample_programs/sample_program1.wolf";
         LRParser parser = new LRParser(pt, gp.production_table, billFileParseMe);
         parser.parse();
     }
