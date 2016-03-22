@@ -6,8 +6,11 @@ import java.util.Stack;
 import jdk.nashorn.internal.parser.Token;
 
 /**
- *
- * @author williamezekiel
+ * The LRParser
+ * @author Joseph Alacqua
+ * @author Kevin Dittmar
+ * @author William Ezekiel
+ * @version Mar 14, 2016
  */
 public class LRParser {
     ParseTable parse_table;
@@ -18,13 +21,21 @@ public class LRParser {
     Stack<Integer> stateIdStack;
     NumberedProductionTable grammar;
     
+    /**
+     * Create an LR Parser
+     * @param pt the parse table
+     * @param grammar the grammar. 
+     */
     public LRParser(ParseTable pt, NumberedProductionTable grammar) {
         parse_table = pt;
         lexer = new WolfLexing(filename);
         this.grammar = grammar;
     }
     
-    public void parse(String input) {
+    /**
+     * Parse the input file.
+     */
+    public void parse() {
         // lex it & setup
         Terminal next_terminal = tokenToTerminal(nextValidToken());
         symbolStack = new Stack();
@@ -78,7 +89,6 @@ public class LRParser {
     }
     
     /**
-     * 
      * @param t is the token whose terminal should be found
      * @return the Terminal corresponding to Token t.
      */
@@ -87,6 +97,9 @@ public class LRParser {
         return parse_table.getTerminalLookupTable().get(t.getText());
     }
         
+    /**
+     * Print the current stack containing state numbers and symbols.
+     */
     public void printCurrentStack() {
         // symbol stack should always be one shorter than stateIdStack
         StringBuilder sb = new StringBuilder();

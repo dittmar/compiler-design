@@ -12,8 +12,10 @@ import java.util.Scanner;
 import java.util.Set;
 
 /**
- *
+ * Parses a grammar from file.
+ * @author Joseph Alacqua
  * @author Kevin Dittmar
+ * @author William Ezekiel
  * @version Mar 15, 2016
  */
 public class GrammarParser 
@@ -33,8 +35,12 @@ public class GrammarParser
     private int rule_number = 0;
     private List<Terminal> sorted_terminals;
     private List<Nonterminal> sorted_nonterminals;
-    public GrammarParser(String filename)
-    {
+    
+    /**
+     * Create a Grammar Parser.
+     * @param filename the name of the file.
+     */
+    public GrammarParser(String filename) {
         nonterminal_rule_lookup_table = new NonterminalRuleLookupTable();
         production_table = new NumberedProductionTable();
         nonterminals = new LinkedHashSet<>();
@@ -43,8 +49,12 @@ public class GrammarParser
         this.filename = filename;
     }
     
-    public void parse()
-    {
+    /**
+     * Parse the file and create a Start Symbol, End Symbol, set of terminals,
+     * set of nonterminals, a non terminal lookup table, a terminal lookup 
+     * table, and a numbered production table. 
+     */
+    public void parse() {
         int lines_to_skip = makeTerminalAndNonterminalSets();
         try
         {
@@ -77,11 +87,10 @@ public class GrammarParser
     }
     
     /**
-     * 
+     * Determine the set of terminals and nonterminals for the grammar.
      * @return number of lines to skip to get to grammar
      */
-    private int makeTerminalAndNonterminalSets()
-    {
+    private int makeTerminalAndNonterminalSets(){
         int lines_to_skip = 0;
         try
         {
@@ -156,8 +165,11 @@ public class GrammarParser
         return lines_to_skip;
     }
     
-    private void addProductionRule(String next_line)
-    {
+    /**
+     * Add a production (rule) to the production table.
+     * @param next_line a line of String input.
+     */
+    private void addProductionRule(String next_line){
         String[] next = next_line.split("=", 2);
         Nonterminal rule_nt = new Nonterminal(next[0].trim());
         ArrayList<Symbol> rule_symbols = new ArrayList<>();
@@ -204,8 +216,10 @@ public class GrammarParser
         rule_number++;
     }
     
-    // Didn't match terminals or non-terminals.
-    // Print error and exit.
+    /**
+     * Failure to parse occurred due to error.
+     * @param rule_string string representation of the rule being parsed.
+     */
     private void failedToParse(String rule_string)
     {
         System.err.println(

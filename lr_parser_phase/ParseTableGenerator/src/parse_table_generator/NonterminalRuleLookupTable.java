@@ -1,7 +1,8 @@
 package parse_table_generator;
 
 /**
- *
+ * A Nonterminal rule lookup table. Keeps a map of nonterminals and any 
+ * productions they create in the grammar.
  * @author Joseph Alacqua
  * @author Kevin Dittmar
  * @author William Ezekiel
@@ -15,13 +16,20 @@ public class NonterminalRuleLookupTable
 {
     HashMap<Nonterminal, Set<Rule>> rule_table;
     
-    public NonterminalRuleLookupTable()
-    {
+    /**
+     * Create a nonterminal rule lookup table.
+     */
+    public NonterminalRuleLookupTable(){
         rule_table = new HashMap<>();
     }
     
-    void add(Nonterminal nt, Rule rule)
-    {
+    /**
+     * Add a nonterminal and rule to the map. If the nonterminal is already
+     * added, but the rule is different, add the rule. 
+     * @param nt a nonterminal.
+     * @param rule a rule.
+     */
+    void add(Nonterminal nt, Rule rule) {
         if (rule_table.containsKey(nt))
         {
             rule_table.get(nt).add(rule);

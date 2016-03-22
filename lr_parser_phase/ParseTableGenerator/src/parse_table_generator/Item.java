@@ -1,7 +1,7 @@
 package parse_table_generator;
 
 /**
- *
+ * An item consists of a rule and a pointer/cursor/index/position (the .).
  * @author Joseph Alacqua
  * @author Kevin Dittmar
  * @author William Ezekiel
@@ -34,7 +34,7 @@ public class Item {
     }
     
     /**
-     * Item without a lookahead symbol LR(0).
+     * Item with AnySymbol as the lookahead.
      * @param rule the production rule
      * @param position the position of the "cursor".
      */
@@ -42,14 +42,23 @@ public class Item {
         this(rule,position, new AnySymbol());
     }
 
+    /**
+     * @return this item's rule.
+     */
     public Rule getRule() {
         return rule;
     }
 
+    /**
+     * @return this items position.
+     */
     public int getPosition() {
         return position;
     }
     
+    /**
+     * @return the symbol followed by the cursor.
+     */
     public Symbol getCurrentSymbol() {
         return rule.getSymbolOnRight(position);
     }
@@ -63,7 +72,20 @@ public class Item {
         }
         return rule.getSymbolOnRight(position+1);
     }
+    
+    /**
+     * @return true if the cursor cannot advance
+     */
+    public boolean atEnd() {
+        return position >= rule.getRhs().size();
+    }
 
+    /**
+     * Check if this Item equals the given object. Two items are equal if they 
+     * have the same rule, position, and lookahead symbol.
+     * @param o an object
+     * @return true if this Item equals the given object.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -78,6 +100,9 @@ public class Item {
         }
     }
 
+    /**
+     * @return the hash code of this item.
+     */
     @Override
     public int hashCode() {
         int result = 17;
@@ -89,6 +114,9 @@ public class Item {
         return result;
     }
 
+    /**
+     * @return the String representation of this item.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -105,63 +133,6 @@ public class Item {
             sb.append("*");
         }
         sb.append("\t la:").append(lookahead);
-
         return sb.toString();
-    }
-    
-    public boolean atEnd() {
-        return position >= rule.getRhs().size();
-    }
-
-    public static void main(String[] args) {
-        Nonterminal S = new Nonterminal("S");
-        Nonterminal A = new Nonterminal("A");
-        Nonterminal B = new Nonterminal("B");
-        Terminal a = new Terminal("a");
-        Terminal b = new Terminal("b");
-
-        Rule p1 = new Rule(S, A, B, b);
-        Rule p2 = new Rule(A, a);
-        Rule p3 = new Rule(A, Symbol.Epsilon.EPSILON);
-        Rule p4 = new Rule(B, b);
-        Rule p5 = new Rule(B, Symbol.Epsilon.EPSILON);
-        Rule p1_prime = new Rule(S, A, B, b);
-        Rule p3_prime = new Rule(A, Symbol.Epsilon.EPSILON);
-
-        Item i1 = new Item(p1, 0);
-        Item i2 = new Item(p1, 1);
-        Item i3 = new Item(p1, 2);
-        Item i4 = new Item(p1, 3);
-//		Item i5 = new Item(p1, 4);
-//		Item i6 = new Item(p1, 5);
-
-        Item i7 = new Item(p2, 0);
-        Item i8 = new Item(p3, 0);
-        Item i9 = new Item(p4, 0);
-        Item i10 = new Item(p5, 0);
-
-        Item i11 = new Item(p1_prime, 0);
-        Item i12 = new Item(p3_prime, 0);
-
-        System.out.println("i1 = " + i1);
-        System.out.println("i2 = " + i2);
-        System.out.println("i3 = " + i3);
-        System.out.println("i4 = " + i4);
-//		System.out.println("i5 = " + i5);
-//		System.out.println("i6 = " + i6);
-        System.out.println("i7 = " + i7);
-        System.out.println("i8 = " + i8);
-        System.out.println("i9 = " + i9);
-        System.out.println("i10 = " + i10);
-        System.out.println("i11 = " + i11);
-        System.out.println("i12 = " + i12);
-
-        System.out.println("i1 = i2? " + i1.equals(i2));
-        System.out.println("i1 = i11? " + i1.equals(i11));
-        System.out.println("i8 = i9? " + i8.equals(i9));
-        System.out.println("i8 = i10? " + i8.equals(i10));
-        System.out.println("i8 = i11? " + i8.equals(i11));
-        System.out.println("i8 = i12? " + i8.equals(i12));
-    }
-
+    } 
 }
