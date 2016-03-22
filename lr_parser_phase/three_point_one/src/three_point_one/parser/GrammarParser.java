@@ -3,6 +3,8 @@ package three_point_one.parser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -57,12 +59,22 @@ public class GrammarParser
             // Sort terminals and nonterminals by length to 
             // prevent parsing errors
             sorted_terminals = new ArrayList<>(terminals);
-            sorted_terminals.sort((Terminal t1, Terminal t2) -> 
-                t2.getName().length() - t1.getName().length());
+            Collections.sort(sorted_terminals, new Comparator<Terminal>()
+            {
+                @Override
+                public int compare(Terminal t1, Terminal t2) {
+                    return t2.getName().length() - t1.getName().length();
+                }
+            });
             
             sorted_nonterminals = new ArrayList<>(nonterminals);
-            sorted_nonterminals.sort((Nonterminal nt1, Nonterminal nt2) ->
-                nt2.getName().length() - nt1.getName().length());
+            Collections.sort(sorted_nonterminals, new Comparator<Nonterminal>()
+            {
+                @Override
+                public int compare(Nonterminal nt1, Nonterminal nt2) {
+                    return nt2.getName().length() - nt1.getName().length();
+                }
+            });
             
             while (scanner.hasNextLine())
             {
