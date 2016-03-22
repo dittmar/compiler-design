@@ -6,8 +6,11 @@ import three_point_one.Lexing;
 import three_point_one.node.*;
 
 /**
+ * An LRParser parses a input and determines if said input is accepted 
+ * in a specified grammar using a parse table.
  * @author Kevin Dittmar
  * @author William Ezekiel
+ * @version Mar 19, 2016
  */
 public class LRParser {
     ParseTable parse_table;
@@ -17,14 +20,22 @@ public class LRParser {
     Stack<ParserStackItem> parser_stack;
     NumberedProductionTable grammar;
     
+    /**
+     * Create an LRParser
+     * @param pt a parse table
+     * @param grammar a grammar in a NumberedProductionTable
+     * @param filename the name of the file
+     */
     public LRParser(ParseTable pt, NumberedProductionTable grammar, 
-        String filename) 
-    {
+        String filename) {
         parse_table = pt;
         lexer = new Lexing(filename);
         this.grammar = grammar;
     }
     
+    /**
+     * Parse the input. Throws errors if rejected.
+     */
     public void parse() {
         // lex it & setup
         Terminal next_terminal = tokenToTerminal(nextValidToken());
@@ -122,26 +133,60 @@ public class LRParser {
     }
     
     /**
+     * Main function. 
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // Grammar file for the language
+        String grammarFilename = "resources/g3.1.txt";
+        //parse the grammar
+        GrammarParser gp = new GrammarParser(grammarFilename);
+        gp.parse();
+        
+        FSM fsm = new FSM(
+            gp.nonterminal_rule_lookup_table,
+            gp.production_table,
+            gp.start_symbol,
+            gp.end_symbol
+        );
+        
+        fsm.build();
+      
+        ParseTable pt = new ParseTableGenerator().generate(
+            fsm,
+            gp.terminals,
+            gp.nonterminals,
+            gp.terminal_lookup_table
+        );
+        System.out.println(pt);
+        for (String programFile : args) {
+            LRParser parser = new LRParser(
+                pt,
+                gp.production_table,
+                programFile
+            );
+            parser.parse();
+        }
+    }
+    
+    /**
      * Get the next valid token, skipping comments and whitespace.
      * @return the next non-ignored token.
      */
-    private Token nextValidToken()
-    {
+    private Token nextValidToken(){
         token = lexer.getToken();
-        while (token instanceof TSpace)
-        {
+        while (token instanceof TSpace) {
             token = lexer.getToken();
         }
         return token;
     }
     
     /**
-     * 
      * @param t is the token whose terminal should be found
      * @return the Terminal corresponding to Token t.
      */
-    private Terminal tokenToTerminal(Token t)
-    {   if(token instanceof EOF) {
+    private Terminal tokenToTerminal(Token t) {   
+        if(token instanceof EOF) {
             return new EndSymbol("$");
         }
         String[] splitToken = t.getClass().getName().split("\\.");
@@ -149,7 +194,10 @@ public class LRParser {
         return parse_table.getTerminalLookupTable().get(tokenName);
     }
         
-    public void printCurrentStack() {
+    /**
+     * Print the current stack.
+     */
+    private void printCurrentStack() {
         // symbol stack should always be one shorter than stateIdStack
         System.out.print("start [");
         for(ParserStackItem item : parser_stack){
@@ -158,8 +206,11 @@ public class LRParser {
         System.out.println("\n");
     }
     
-    private void badShift(Terminal next_terminal)
-    {
+    /**
+     * Print an error message if an error occurs during a shift action.
+     * @param next_terminal  a terminal
+     */
+    private void badShift(Terminal next_terminal) {
         System.out.println(
             "REJECT: No Action for Terminal " + next_terminal + 
             " at state " + parser_stack.peek().id_number
@@ -167,8 +218,11 @@ public class LRParser {
         parserDie();
     }
     
-    private void badReduce()
-    {
+    /**
+     * Print an error message if an error occurs during a reduce action.
+     * @param next_terminal  a terminal
+     */
+    private void badReduce() {
         System.out.println(
             "REJECT: No Action for Nonterminal " + 
             parser_stack.peek().symbol + " at state " + 
@@ -177,8 +231,12 @@ public class LRParser {
         parserDie();
     }
     
-    private void parserDie()
-    {
+    /**
+     * The program given to the LR Parser is not in the language.
+     * Print the token that it failed on and the column of the character
+     * that made the parser fail.
+     */
+    private void parserDie() {
         System.err.println(
             "Unexpected token: " + parser_stack.peek().symbol +
             " at position " + token.getPos()

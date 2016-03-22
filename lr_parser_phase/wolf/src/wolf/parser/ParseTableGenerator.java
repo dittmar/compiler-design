@@ -23,7 +23,7 @@ public class ParseTableGenerator
      * @param terminal_lookup_table the terminal lookup table.
      * @return the generated parse table.
      */
-    public static ParseTable generate(
+    public ParseTable generate(
         FSM fsm, 
         Set<Terminal> terminals,
         Set<Nonterminal> nonterminals,
@@ -97,39 +97,4 @@ public class ParseTableGenerator
             terminal_lookup_table
         );
     }
-    
-    /**
-     * Main function. 
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // filename, change where needed.
-        String filename = "resources/wolf.txt";
-        //parse the grammar
-        GrammarParser gp = new GrammarParser(filename);
-        gp.parse();
-        
-        FSM fsm = new FSM(
-            gp.nonterminal_rule_lookup_table,
-            gp.production_table,
-            gp.start_symbol,
-            gp.end_symbol
-        );
-        
-        fsm.build();
-        //System.out.println(fsm.states);
-        //System.out.println(fsm.arcs);
-      
-        ParseTable pt = generate(
-            fsm,
-            gp.terminals,
-            gp.nonterminals,
-            gp.terminal_lookup_table
-        );
-        System.out.println(pt);
-        String billFileParseMe  = "resources/sample_programs/sample_program2.wolf";
-        LRParser parser = new LRParser(pt, gp.production_table, billFileParseMe);
-        parser.parse();
-    }
-    
 }

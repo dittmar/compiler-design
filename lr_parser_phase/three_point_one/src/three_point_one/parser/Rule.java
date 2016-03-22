@@ -15,35 +15,46 @@ public class Rule {
 
     Nonterminal lhs;
     List<Symbol> rhs;
-
+    
     /**
      * Create a rule
-     * @param lhs
-     * @param symbols 
+     * @param lhs a nonterminal left hand side.
+     * @param symbols a list of symbols representing the right hand side.
      */
-    public Rule(Nonterminal lhs, Symbol... symbols) {
-        rhs = Arrays.asList(symbols);
-        this.lhs = lhs;
-    }
-    
     public Rule(Nonterminal lhs, List<Symbol> symbols)
     {
         rhs = new ArrayList<>(symbols);
         this.lhs = lhs;
     }
 
+    /**
+     * @return the left hand side of this rule.
+     */
     public Nonterminal getLhs() {
         return lhs;
     }
 
+    /**
+     * @return the right hand side of the rule.
+     */
     public List<Symbol> getRhs() {
         return rhs;
     }
     
+    /**
+     * @param index an integer index
+     * @return get the symbol on the right hand side with the given index.
+     */
     public Symbol getSymbolOnRight(int index) {
         return rhs.get(index);
     }
 
+    /**
+     * Check if this rule equals another object. Two rules are equal if their
+     * left and right hand sides are equal.
+     * @param o an object.
+     * @return true if this rule equals the given object.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -57,6 +68,9 @@ public class Rule {
         }
     }
 
+    /**
+     * @return the integer hash code.
+     */
     @Override
     public int hashCode() {
         int result = 17;
@@ -68,13 +82,11 @@ public class Rule {
         return result;
     }
 
+    /**
+     * @return the string version of this rule.
+     */
     @Override
     public String toString() {
-        return quietToString();
-        //return verboseToString();
-    }
-
-    public String quietToString() {
         StringBuilder sb = new StringBuilder();
         sb.append(lhs)
           .append(" -> ");
@@ -82,44 +94,10 @@ public class Rule {
         
         return sb.toString();
     }
-
-    public String verboseToString() {
-        return "Production[source=\"" + 
-                lhs + 
-                "\", product=\"" + 
-                getRhsString() + 
-                "\"]";
-    }
-
-    public static void main(String[] args) {
-        Nonterminal S = new Nonterminal("S");
-        Nonterminal A = new Nonterminal("A");
-        Nonterminal B = new Nonterminal("B");
-        Terminal a = new Terminal("a");
-        Terminal b = new Terminal("b");
-
-        Rule p1 = new Rule(S, A, B, b);
-        Rule p2 = new Rule(A, a);
-        Rule p3 = new Rule(A, Symbol.Epsilon.EPSILON);
-        Rule p4 = new Rule(B, b);
-        Rule p5 = new Rule(B, Symbol.Epsilon.EPSILON);
-        Rule p1_prime = new Rule(S, A, B, b);
-        Rule p3_prime = new Rule(A, Symbol.Epsilon.EPSILON);
-
-        System.out.println("p1 = " + p1 + " = " + p1.verboseToString());
-        System.out.println("p2 = " + p2 + " = " + p2.verboseToString());
-        System.out.println("p3 = " + p3 + " = " + p3.verboseToString());
-        System.out.println("p4 = " + p4 + " = " + p4.verboseToString());
-        System.out.println("p5 = " + p5 + " = " + p5.verboseToString());
-        System.out.println("p1_prime = " + p1_prime + " = " + p1_prime.verboseToString());
-        System.out.println("p3_prime = " + p3_prime + " = " + p3_prime.verboseToString());
-
-        System.out.println("p1 = p2? " + p1.equals(p3));
-        System.out.println("p1 = p1_prime? " + p1.equals(p1_prime));
-        System.out.println("p3 = p4? " + p3.equals(p4));
-        System.out.println("p3 = p3_prime? " + p3.equals(p3_prime));
-    }
     
+    /**
+     * @return the string representation of the right hand side of this rule.
+     */
     public String getRhsString()
     {
         StringBuilder sb = new StringBuilder();

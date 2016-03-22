@@ -69,10 +69,6 @@ public class FSM
                         }
                         arcs.add(new Arc(s,state,j));
                     }
-                    else
-                    {
-                        state.setAcceptState();
-                    }
                 }
             }
         }
@@ -170,16 +166,29 @@ public class FSM
                 firstTerminals.add((Terminal) next);
             }
             else { //Nonterminal case
-                Set<Item> itemsProducedByNonterminal = 
-                        nonterminal_rule_lookup_table.getItemSet((Nonterminal) next);
-                Set<Terminal> firstOfNonTerminal = first(itemsProducedByNonterminal); 
-                for(Terminal t: firstOfNonTerminal) {
-                    firstTerminals.add(t);
-                }
+                Set<Rule> rulesProducedByNonterminal = 
+                        nonterminal_rule_lookup_table.getRuleSet((Nonterminal) next);
+                firstTerminals.addAll(firstRecursive(rulesProducedByNonterminal));
             }
         }
         return firstTerminals;
         
+    }
+    
+    public Set<Terminal> firstRecursive(Set<Rule> rules) {
+        Set<Terminal> firstTerminals = new HashSet();
+        for(Rule r: rules) {
+            Symbol s = r.rhs.get(0);
+            if(s instanceof Terminal) {
+                firstTerminals.add((Terminal) s);
+            }
+            else if(s instanceof Nonterminal) {
+                Set<Rule> rulesProducedByNonterminal = 
+                    nonterminal_rule_lookup_table.getRuleSet((Nonterminal) s);
+                firstTerminals.addAll(firstRecursive(rulesProducedByNonterminal));
+            }
+        }
+        return firstTerminals;
     }
     
     /**

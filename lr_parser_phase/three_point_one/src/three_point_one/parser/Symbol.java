@@ -1,7 +1,7 @@
 package three_point_one.parser;
 
 /**
- *
+ * A symbol in a language.
  * @author Joseph Alacqua
  * @author Kevin Dittmar
  * @author William Ezekiel
@@ -9,17 +9,4 @@ package three_point_one.parser;
  */
 public interface Symbol {
     public abstract String getName();
-
-    public enum Epsilon implements Symbol {
-
-        EPSILON;
-
-        public String getName() {
-            return "";
-        }
-        
-        public String toString() {
-            return "";
-        }
-    }
 }

@@ -23,7 +23,7 @@ public class LRParser {
     /**
      * Create an LRParser
      * @param pt a parse table
-     * @param grammar a grammar
+     * @param grammar a grammar in a NumberedProductionTable
      * @param filename the name of the file
      */
     public LRParser(ParseTable pt, NumberedProductionTable grammar, 
@@ -133,6 +133,43 @@ public class LRParser {
     }
     
     /**
+     * Main function. 
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // Grammar file for the language
+        String grammarFilename = "resources/wolf.txt";
+        //parse the grammar
+        GrammarParser gp = new GrammarParser(grammarFilename);
+        gp.parse();
+        
+        FSM fsm = new FSM(
+            gp.nonterminal_rule_lookup_table,
+            gp.production_table,
+            gp.start_symbol,
+            gp.end_symbol
+        );
+        
+        fsm.build();
+      
+        ParseTable pt = new ParseTableGenerator().generate(
+            fsm,
+            gp.terminals,
+            gp.nonterminals,
+            gp.terminal_lookup_table
+        );
+        System.out.println(pt);
+        for (String programFile : args) {
+            LRParser parser = new LRParser(
+                pt,
+                gp.production_table,
+                programFile
+            );
+            parser.parse();
+        }
+    }
+    
+    /**
      * Get the next valid token, skipping comments and whitespace.
      * @return the next non-ignored token.
      */
@@ -160,7 +197,7 @@ public class LRParser {
     /**
      * Print the current stack.
      */
-    public void printCurrentStack() {
+    private void printCurrentStack() {
         // symbol stack should always be one shorter than stateIdStack
         System.out.print("start [");
         for(ParserStackItem item : parser_stack){
@@ -195,7 +232,9 @@ public class LRParser {
     }
     
     /**
-     * Kill the parser.
+     * The program given to the LR Parser is not in the language.
+     * Print the token that it failed on and the column of the character
+     * that made the parser fail.
      */
     private void parserDie() {
         System.err.println(

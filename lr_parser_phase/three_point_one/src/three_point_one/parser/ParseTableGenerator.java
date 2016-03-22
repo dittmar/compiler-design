@@ -15,7 +15,15 @@ import java.util.Set;
  */
 public class ParseTableGenerator 
 {
-    public static ParseTable generate(
+    /**
+     * Generate a parse table.
+     * @param fsm a finite state machine
+     * @param terminals a set of terminals
+     * @param nonterminals a set of nonterminals
+     * @param terminal_lookup_table the terminal lookup table.
+     * @return the generated parse table.
+     */
+    public ParseTable generate(
         FSM fsm, 
         Set<Terminal> terminals,
         Set<Nonterminal> nonterminals,
@@ -23,7 +31,6 @@ public class ParseTableGenerator
     {
         ArrayList<LinkedHashMap<Symbol,TableCell>> parse_table = new ArrayList();
         for(State state:fsm.states) {
-            // System.out.println("State: " + state.id);
             Set<Arc> arcSet = new LinkedHashSet<>(fsm.findArcsWithFromState(state));
             LinkedHashMap<Symbol,TableCell> row = new LinkedHashMap();
             // shifts and gotos
@@ -90,35 +97,4 @@ public class ParseTableGenerator
             terminal_lookup_table
         );
     }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        String filename = "resources/g3.1.txt";
-        //parse the grammar
-        GrammarParser gp = new GrammarParser(filename);
-        gp.parse();
-        
-        FSM fsm = new FSM(
-            gp.nonterminal_rule_lookup_table,
-            gp.production_table,
-            gp.start_symbol,
-            gp.end_symbol
-        );
-        
-        fsm.build();
-      
-        ParseTable pt = generate(
-            fsm,
-            gp.terminals,
-            gp.nonterminals,
-            gp.terminal_lookup_table
-        );
-        System.out.println(pt);
-        String billFileParseMe  = "resources/3-1programs/program4.txt";
-        LRParser parser = new LRParser(pt, gp.production_table, billFileParseMe);
-        parser.parse();
-    }
-    
 }
