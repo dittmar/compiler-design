@@ -32,16 +32,22 @@ public class LRParser {
         stateIdStack = new Stack();
         stateIdStack.push(1);
         while (next_terminal != null) {
+            System.out.println("Terminal: "+next_terminal);
             // parse it
             TableCell cell = parse_table.getTableCellAt(
-                next_terminal, stateIdStack.peek()-1);
+                next_terminal, stateIdStack.peek());
+            if(cell == null) {
+                System.out.println("REJECT: No Action for Terminal " + 
+                        next_terminal + " at state " + (stateIdStack.peek()));
+                System.exit(1);
+            }
             
             switch(cell.action) {
                 case ACCEPT:
                     System.out.println("ACCEPT");
                     return;
                 case REDUCE:
-                    System.out.println("REDUCE");
+                    System.out.println("REDUCE: " + cell);
                     int ruleNum = cell.state_id;
                     Rule rule = grammar.getRule(ruleNum);
                     for(int j = 0; j < rule.rhs.size(); j++) {
@@ -51,29 +57,35 @@ public class LRParser {
                     symbolStack.push(rule.lhs);
                     // Nonterminal and previous state 
                     TableCell goToCell = parse_table.getTableCellAt(
-                        symbolStack.peek(), stateIdStack.peek()-1);
+                        symbolStack.peek(), stateIdStack.peek());
+                    if(goToCell == null) {
+                        System.out.println("REJECT: No Action for Nonterminal " + 
+                            symbolStack.peek() + " at state " + 
+                            (stateIdStack.peek()));
+                        System.exit(1);
+                    }
                     
                     stateIdStack.push(goToCell.state_id);
                     break;
                 case SHIFT:
-                    System.out.println("SHIFT");
+                    System.out.println("SHIFT: " + cell);
                     symbolStack.add(next_terminal);
                     stateIdStack.push(cell.state_id);
                     // Get next terminal
                     next_terminal = tokenToTerminal(nextValidToken());
                     break;
                 case GOTO:
-                    System.out.println("GOTO");
+                    System.out.println("GOTO: " + cell);
                     stateIdStack.push(cell.state_id);
                     // DO NOT GET NEXT TOKEN.
                     break;
                 default:
-                    System.err.println("WTF U DOIN M8");
+                    System.err.println("Error: Unknown Action!");
                     System.exit(1);
             }
             printCurrentStack();
+            System.out.println();
         }
-        System.err.println("ERROR: ENDED EARLY");
     }
     
     /**
@@ -96,7 +108,9 @@ public class LRParser {
      * @return the Terminal corresponding to Token t.
      */
     private Terminal tokenToTerminal(Token t)
-    {
+    {   if(token instanceof EOF) {
+            return new EndSymbol("$");
+        }
         String[] splitToken = t.getClass().getName().split("\\.");
         String tokenName = splitToken[splitToken.length -1].toLowerCase();
         return parse_table.getTerminalLookupTable().get(tokenName);
@@ -105,11 +119,12 @@ public class LRParser {
     public void printCurrentStack() {
         // symbol stack should always be one shorter than stateIdStack
         StringBuilder sb = new StringBuilder();
-        sb.append("start |");
+        sb.append("start [");
         for(int i = 0; i < symbolStack.size(); i++){
-            sb.append("_").append(stateIdStack.get(i)).append(symbolStack.get(i));
+            sb.append("_").append(stateIdStack.get(i))
+                    .append(symbolStack.get(i)).append(", ");
         }
-        sb.append("_").append(stateIdStack.peek());
+        sb.append("_").append(stateIdStack.peek()).append("]");
         System.out.println(sb.toString());
     }
 }

@@ -94,11 +94,13 @@ public class ParseTable
     
     /**
      * @param symbol a symbol.
-     * @param state_id an id
+     * @param state_id an id. 
+     * Note: state_id - 1 is used because the list starts at 0, but state
+     *       numbering starts at 1.
      * @return the table cell for the given state at the given symbol.
      */
     public TableCell getTableCellAt(Symbol symbol, int state_id) {
-        return table.get(state_id).get(symbol);
+        return table.get(state_id-1).get(symbol);
     }
     
     /**

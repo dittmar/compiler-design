@@ -124,7 +124,6 @@ public class ParseTableGenerator
         String billFileParseMe  = "/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/lr_parser_phase/3-1programs/program1.txt";
         LRParser parser = new LRParser(pt, gp.production_table, billFileParseMe);
         parser.parse();
-        System.out.println("Joe pls");
     }
     
 }
