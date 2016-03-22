@@ -1,0 +1,22 @@
+id print num assign semi l_paren r_paren comma plus
+
+S'
+$
+S' = S$
+S = S semi Compound
+S = Assign
+S = Print
+Compound = Assign
+Compound = Print
+Assign = id assign E
+Print = print l_paren L r_paren
+E = id
+E = num
+E = E plus Term
+E = ESeq
+Term = id
+Term = num
+Term = ESeq
+ESeq = l_paren S comma E r_paren
+L = E
+L = L comma E
