@@ -1,0 +1,31 @@
+MiniJava Abstract Syntax
+
+Program(MainClass m, ClassDeclList classes)
+MainClass(Identifier name, Identifier args, Stmt s)
+abstract class ClassDecl
+  ClassDeclSimple(Identifier name, VarDeclList fields, MethodDeclList methods)
+  ClassDeclExtends(Identifier name, VarDeclList fields, MethodDeclList methods)
+abstract class Type
+  IntArrayType()
+  BooleanType()
+  IntegerType()
+  Identifier(String className)
+abstract class Stmt
+  Block(StmtList stmts)
+  If(Exp cond, Stmt t, Stmt f)
+  While(Exp cond, Stmt s)
+  Assign(Identifier target, Exp source))
+  ArrayAssign(Identifier target, Exp subscript, Exp source)
+
+These are essentially constructor functions.  Program will have a MainClass
+and a ClassDeclList as fields.
+
+Examples of "list nonterminals"
+
+public class StmtList<Stmt> extends java.util.LinkedList {
+  
+}
+
+public class VarDeclList<stmt> extends java.util.LinkedList {
+
+}
