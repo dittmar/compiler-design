@@ -7,3 +7,8 @@ build.xml
 /lr_parser_phase/wolf/dist/
 /lr_parser_phase/wolf/nbproject/
 /lr_parser_phase/three_point_one/nbproject/
+/nbproject/private/
+/sablecc/sablecc/nbproject/private/
+/sablecc/wolf/nbproject/private/
+/sablecc/wolf/build/
+/sablecc/wolf/nbproject/

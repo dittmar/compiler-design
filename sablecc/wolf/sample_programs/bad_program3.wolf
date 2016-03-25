@@ -1,0 +1,2 @@
+` The list in this function is messed up`
+def randomFunc() := h([1,2 3,4])
