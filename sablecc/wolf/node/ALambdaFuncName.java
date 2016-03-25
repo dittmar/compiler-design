@@ -7,7 +7,7 @@ import wolf.analysis.*;
 @SuppressWarnings("nls")
 public final class ALambdaFuncName extends PFuncName
 {
-    private TLambdaStart _lambdaStart_;
+    private PLambda _lambda_;
 
     public ALambdaFuncName()
     {
@@ -15,10 +15,10 @@ public final class ALambdaFuncName extends PFuncName
     }
 
     public ALambdaFuncName(
-        @SuppressWarnings("hiding") TLambdaStart _lambdaStart_)
+        @SuppressWarnings("hiding") PLambda _lambda_)
     {
         // Constructor
-        setLambdaStart(_lambdaStart_);
+        setLambda(_lambda_);
 
     }
 
@@ -26,7 +26,7 @@ public final class ALambdaFuncName extends PFuncName
     public Object clone()
     {
         return new ALambdaFuncName(
-            cloneNode(this._lambdaStart_));
+            cloneNode(this._lambda_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class ALambdaFuncName extends PFuncName
         ((Analysis) sw).caseALambdaFuncName(this);
     }
 
-    public TLambdaStart getLambdaStart()
+    public PLambda getLambda()
     {
-        return this._lambdaStart_;
+        return this._lambda_;
     }
 
-    public void setLambdaStart(TLambdaStart node)
+    public void setLambda(PLambda node)
     {
-        if(this._lambdaStart_ != null)
+        if(this._lambda_ != null)
         {
-            this._lambdaStart_.parent(null);
+            this._lambda_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ALambdaFuncName extends PFuncName
             node.parent(this);
         }
 
-        this._lambdaStart_ = node;
+        this._lambda_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._lambdaStart_);
+            + toString(this._lambda_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._lambdaStart_ == child)
+        if(this._lambda_ == child)
         {
-            this._lambdaStart_ = null;
+            this._lambda_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ALambdaFuncName extends PFuncName
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._lambdaStart_ == oldChild)
+        if(this._lambda_ == oldChild)
         {
-            setLambdaStart((TLambdaStart) newChild);
+            setLambda((PLambda) newChild);
             return;
         }
 

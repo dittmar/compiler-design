@@ -8,7 +8,7 @@ import wolf.analysis.*;
 public final class AArgRest extends PArgRest
 {
     private TComma _comma_;
-    private PArg _arg_;
+    private PArgs _args_;
 
     public AArgRest()
     {
@@ -17,12 +17,12 @@ public final class AArgRest extends PArgRest
 
     public AArgRest(
         @SuppressWarnings("hiding") TComma _comma_,
-        @SuppressWarnings("hiding") PArg _arg_)
+        @SuppressWarnings("hiding") PArgs _args_)
     {
         // Constructor
         setComma(_comma_);
 
-        setArg(_arg_);
+        setArgs(_args_);
 
     }
 
@@ -31,7 +31,7 @@ public final class AArgRest extends PArgRest
     {
         return new AArgRest(
             cloneNode(this._comma_),
-            cloneNode(this._arg_));
+            cloneNode(this._args_));
     }
 
     @Override
@@ -65,16 +65,16 @@ public final class AArgRest extends PArgRest
         this._comma_ = node;
     }
 
-    public PArg getArg()
+    public PArgs getArgs()
     {
-        return this._arg_;
+        return this._args_;
     }
 
-    public void setArg(PArg node)
+    public void setArgs(PArgs node)
     {
-        if(this._arg_ != null)
+        if(this._args_ != null)
         {
-            this._arg_.parent(null);
+            this._args_.parent(null);
         }
 
         if(node != null)
@@ -87,7 +87,7 @@ public final class AArgRest extends PArgRest
             node.parent(this);
         }
 
-        this._arg_ = node;
+        this._args_ = node;
     }
 
     @Override
@@ -95,7 +95,7 @@ public final class AArgRest extends PArgRest
     {
         return ""
             + toString(this._comma_)
-            + toString(this._arg_);
+            + toString(this._args_);
     }
 
     @Override
@@ -108,9 +108,9 @@ public final class AArgRest extends PArgRest
             return;
         }
 
-        if(this._arg_ == child)
+        if(this._args_ == child)
         {
-            this._arg_ = null;
+            this._args_ = null;
             return;
         }
 
@@ -127,9 +127,9 @@ public final class AArgRest extends PArgRest
             return;
         }
 
-        if(this._arg_ == oldChild)
+        if(this._args_ == oldChild)
         {
-            setArg((PArg) newChild);
+            setArgs((PArgs) newChild);
             return;
         }
 

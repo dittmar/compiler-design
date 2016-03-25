@@ -7,7 +7,7 @@ import wolf.analysis.*;
 @SuppressWarnings("nls")
 public final class ANoDefsProgram extends PProgram
 {
-    private PFunc _func_;
+    private PFunction _function_;
 
     public ANoDefsProgram()
     {
@@ -15,10 +15,10 @@ public final class ANoDefsProgram extends PProgram
     }
 
     public ANoDefsProgram(
-        @SuppressWarnings("hiding") PFunc _func_)
+        @SuppressWarnings("hiding") PFunction _function_)
     {
         // Constructor
-        setFunc(_func_);
+        setFunction(_function_);
 
     }
 
@@ -26,7 +26,7 @@ public final class ANoDefsProgram extends PProgram
     public Object clone()
     {
         return new ANoDefsProgram(
-            cloneNode(this._func_));
+            cloneNode(this._function_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class ANoDefsProgram extends PProgram
         ((Analysis) sw).caseANoDefsProgram(this);
     }
 
-    public PFunc getFunc()
+    public PFunction getFunction()
     {
-        return this._func_;
+        return this._function_;
     }
 
-    public void setFunc(PFunc node)
+    public void setFunction(PFunction node)
     {
-        if(this._func_ != null)
+        if(this._function_ != null)
         {
-            this._func_.parent(null);
+            this._function_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ANoDefsProgram extends PProgram
             node.parent(this);
         }
 
-        this._func_ = node;
+        this._function_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._func_);
+            + toString(this._function_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._func_ == child)
+        if(this._function_ == child)
         {
-            this._func_ = null;
+            this._function_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ANoDefsProgram extends PProgram
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._func_ == oldChild)
+        if(this._function_ == oldChild)
         {
-            setFunc((PFunc) newChild);
+            setFunction((PFunction) newChild);
             return;
         }
 

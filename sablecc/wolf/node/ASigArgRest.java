@@ -8,7 +8,7 @@ import wolf.analysis.*;
 public final class ASigArgRest extends PSigArgRest
 {
     private TComma _comma_;
-    private TIdentifier _identifier_;
+    private PSigArgs _sigArgs_;
 
     public ASigArgRest()
     {
@@ -17,12 +17,12 @@ public final class ASigArgRest extends PSigArgRest
 
     public ASigArgRest(
         @SuppressWarnings("hiding") TComma _comma_,
-        @SuppressWarnings("hiding") TIdentifier _identifier_)
+        @SuppressWarnings("hiding") PSigArgs _sigArgs_)
     {
         // Constructor
         setComma(_comma_);
 
-        setIdentifier(_identifier_);
+        setSigArgs(_sigArgs_);
 
     }
 
@@ -31,7 +31,7 @@ public final class ASigArgRest extends PSigArgRest
     {
         return new ASigArgRest(
             cloneNode(this._comma_),
-            cloneNode(this._identifier_));
+            cloneNode(this._sigArgs_));
     }
 
     @Override
@@ -65,16 +65,16 @@ public final class ASigArgRest extends PSigArgRest
         this._comma_ = node;
     }
 
-    public TIdentifier getIdentifier()
+    public PSigArgs getSigArgs()
     {
-        return this._identifier_;
+        return this._sigArgs_;
     }
 
-    public void setIdentifier(TIdentifier node)
+    public void setSigArgs(PSigArgs node)
     {
-        if(this._identifier_ != null)
+        if(this._sigArgs_ != null)
         {
-            this._identifier_.parent(null);
+            this._sigArgs_.parent(null);
         }
 
         if(node != null)
@@ -87,7 +87,7 @@ public final class ASigArgRest extends PSigArgRest
             node.parent(this);
         }
 
-        this._identifier_ = node;
+        this._sigArgs_ = node;
     }
 
     @Override
@@ -95,7 +95,7 @@ public final class ASigArgRest extends PSigArgRest
     {
         return ""
             + toString(this._comma_)
-            + toString(this._identifier_);
+            + toString(this._sigArgs_);
     }
 
     @Override
@@ -108,9 +108,9 @@ public final class ASigArgRest extends PSigArgRest
             return;
         }
 
-        if(this._identifier_ == child)
+        if(this._sigArgs_ == child)
         {
-            this._identifier_ = null;
+            this._sigArgs_ = null;
             return;
         }
 
@@ -127,9 +127,9 @@ public final class ASigArgRest extends PSigArgRest
             return;
         }
 
-        if(this._identifier_ == oldChild)
+        if(this._sigArgs_ == oldChild)
         {
-            setIdentifier((TIdentifier) newChild);
+            setSigArgs((PSigArgs) newChild);
             return;
         }
 

@@ -11,7 +11,7 @@ public final class ADefHeader extends PDefHeader
     private TIdentifier _identifier_;
     private PSig _sig_;
     private TAssign _assign_;
-    private PFunc _func_;
+    private PFunction _function_;
 
     public ADefHeader()
     {
@@ -23,7 +23,7 @@ public final class ADefHeader extends PDefHeader
         @SuppressWarnings("hiding") TIdentifier _identifier_,
         @SuppressWarnings("hiding") PSig _sig_,
         @SuppressWarnings("hiding") TAssign _assign_,
-        @SuppressWarnings("hiding") PFunc _func_)
+        @SuppressWarnings("hiding") PFunction _function_)
     {
         // Constructor
         setDef(_def_);
@@ -34,7 +34,7 @@ public final class ADefHeader extends PDefHeader
 
         setAssign(_assign_);
 
-        setFunc(_func_);
+        setFunction(_function_);
 
     }
 
@@ -46,7 +46,7 @@ public final class ADefHeader extends PDefHeader
             cloneNode(this._identifier_),
             cloneNode(this._sig_),
             cloneNode(this._assign_),
-            cloneNode(this._func_));
+            cloneNode(this._function_));
     }
 
     @Override
@@ -155,16 +155,16 @@ public final class ADefHeader extends PDefHeader
         this._assign_ = node;
     }
 
-    public PFunc getFunc()
+    public PFunction getFunction()
     {
-        return this._func_;
+        return this._function_;
     }
 
-    public void setFunc(PFunc node)
+    public void setFunction(PFunction node)
     {
-        if(this._func_ != null)
+        if(this._function_ != null)
         {
-            this._func_.parent(null);
+            this._function_.parent(null);
         }
 
         if(node != null)
@@ -177,7 +177,7 @@ public final class ADefHeader extends PDefHeader
             node.parent(this);
         }
 
-        this._func_ = node;
+        this._function_ = node;
     }
 
     @Override
@@ -188,7 +188,7 @@ public final class ADefHeader extends PDefHeader
             + toString(this._identifier_)
             + toString(this._sig_)
             + toString(this._assign_)
-            + toString(this._func_);
+            + toString(this._function_);
     }
 
     @Override
@@ -219,9 +219,9 @@ public final class ADefHeader extends PDefHeader
             return;
         }
 
-        if(this._func_ == child)
+        if(this._function_ == child)
         {
-            this._func_ = null;
+            this._function_ = null;
             return;
         }
 
@@ -256,9 +256,9 @@ public final class ADefHeader extends PDefHeader
             return;
         }
 
-        if(this._func_ == oldChild)
+        if(this._function_ == oldChild)
         {
-            setFunc((PFunc) newChild);
+            setFunction((PFunction) newChild);
             return;
         }
 

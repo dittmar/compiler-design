@@ -8,11 +8,11 @@ import wolf.analysis.*;
 public final class ABranch extends PBranch
 {
     private TSemi _semi_;
-    private PCond _cond_;
+    private PFunction _cond_;
     private TTernaryQuestionMark _ternaryQuestionMark_;
-    private PIf _if_;
+    private PFunction _if_;
     private TTernaryColon _ternaryColon_;
-    private PElse _else_;
+    private PFunction _else_;
 
     public ABranch()
     {
@@ -21,11 +21,11 @@ public final class ABranch extends PBranch
 
     public ABranch(
         @SuppressWarnings("hiding") TSemi _semi_,
-        @SuppressWarnings("hiding") PCond _cond_,
+        @SuppressWarnings("hiding") PFunction _cond_,
         @SuppressWarnings("hiding") TTernaryQuestionMark _ternaryQuestionMark_,
-        @SuppressWarnings("hiding") PIf _if_,
+        @SuppressWarnings("hiding") PFunction _if_,
         @SuppressWarnings("hiding") TTernaryColon _ternaryColon_,
-        @SuppressWarnings("hiding") PElse _else_)
+        @SuppressWarnings("hiding") PFunction _else_)
     {
         // Constructor
         setSemi(_semi_);
@@ -85,12 +85,12 @@ public final class ABranch extends PBranch
         this._semi_ = node;
     }
 
-    public PCond getCond()
+    public PFunction getCond()
     {
         return this._cond_;
     }
 
-    public void setCond(PCond node)
+    public void setCond(PFunction node)
     {
         if(this._cond_ != null)
         {
@@ -135,12 +135,12 @@ public final class ABranch extends PBranch
         this._ternaryQuestionMark_ = node;
     }
 
-    public PIf getIf()
+    public PFunction getIf()
     {
         return this._if_;
     }
 
-    public void setIf(PIf node)
+    public void setIf(PFunction node)
     {
         if(this._if_ != null)
         {
@@ -185,12 +185,12 @@ public final class ABranch extends PBranch
         this._ternaryColon_ = node;
     }
 
-    public PElse getElse()
+    public PFunction getElse()
     {
         return this._else_;
     }
 
-    public void setElse(PElse node)
+    public void setElse(PFunction node)
     {
         if(this._else_ != null)
         {
@@ -277,7 +277,7 @@ public final class ABranch extends PBranch
 
         if(this._cond_ == oldChild)
         {
-            setCond((PCond) newChild);
+            setCond((PFunction) newChild);
             return;
         }
 
@@ -289,7 +289,7 @@ public final class ABranch extends PBranch
 
         if(this._if_ == oldChild)
         {
-            setIf((PIf) newChild);
+            setIf((PFunction) newChild);
             return;
         }
 
@@ -301,7 +301,7 @@ public final class ABranch extends PBranch
 
         if(this._else_ == oldChild)
         {
-            setElse((PElse) newChild);
+            setElse((PFunction) newChild);
             return;
         }
 
