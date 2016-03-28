@@ -1,0 +1,47 @@
+Parsed AMinusNativeBinOp: - 
+Parsed ANativeBinOp: - 
+Parsed APlusNativeBinOp: + 
+Parsed ANativeBinOp: + 
+Parsed AIntArg: 2 
+Parsed AIntArg: 1 
+Parsed AIntArg: 10 
+Parsed AIntArg: 7 
+Parsed ALastArgArgs: 7 
+Parsed AArgRest: , 7 
+Parsed AMoreArgsArgs: 10 , 7 
+Parsed AArgRest: , 10 , 7 
+Parsed AMoreArgsArgs: 1 , 10 , 7 
+Parsed AArgRest: , 1 , 10 , 7 
+Parsed AMoreArgsArgs: 2 , 1 , 10 , 7 
+Parsed AListList: [ 2 , 1 , 10 , 7 ] 
+Parsed ALiteralListArgument: [ 2 , 1 , 10 , 7 ] 
+Parsed AFoldBody: ( + , [ 2 , 1 , 10 , 7 ] ) 
+Parsed AFoldlFunction: { ( + , [ 2 , 1 , 10 , 7 ] ) 
+Parsed AFunctionArg: { ( + , [ 2 , 1 , 10 , 7 ] ) 
+Parsed AIntArg: 8 
+Parsed AMultNativeBinOp: * 
+Parsed ANativeBinOp: * 
+Parsed AIntArg: 5 
+Parsed AIntArg: 6 
+Parsed AIntArg: 4 
+Parsed ALastArgArgs: 4 
+Parsed AArgRest: , 4 
+Parsed AMoreArgsArgs: 6 , 4 
+Parsed AArgRest: , 6 , 4 
+Parsed AMoreArgsArgs: 5 , 6 , 4 
+Parsed AListList: [ 5 , 6 , 4 ] 
+Parsed ALiteralListArgument: [ 5 , 6 , 4 ] 
+Parsed AFoldBody: ( * , [ 5 , 6 , 4 ] ) 
+Parsed AFoldlFunction: { ( * , [ 5 , 6 , 4 ] ) 
+Parsed AFunctionArg: { ( * , [ 5 , 6 , 4 ] ) 
+Parsed ALastArgArgs: { ( * , [ 5 , 6 , 4 ] ) 
+Parsed AArgRest: , { ( * , [ 5 , 6 , 4 ] ) 
+Parsed AMoreArgsArgs: 8 , { ( * , [ 5 , 6 , 4 ] ) 
+Parsed AArgRest: , 8 , { ( * , [ 5 , 6 , 4 ] ) 
+Parsed AMoreArgsArgs: { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) 
+Parsed AListList: [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] 
+Parsed ALiteralListArgument: [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] 
+Parsed AFoldBody: ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] ) 
+Parsed AFoldrFunction: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] ) 
+Parsed ANoDefsProgram: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] ) 
+Parsed Start: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] )  

@@ -1,0 +1,93 @@
+Parsed ALastIdSigArgs: list 
+Parsed ASigArgRest: , list 
+Parsed AMoreIdsSigArgs: n , list 
+Parsed AArgumentsSig: ( n , list ) 
+Parsed AEqualNativeBinOp: = 
+Parsed ALengthNativeUnaryOp: # 
+Parsed AIdentifierArg: list 
+Parsed AUnaryNativeFunction: # ( list ) 
+Parsed AFunctionArg: # ( list ) 
+Parsed AIntArg: 0 
+Parsed ABinNativeFunction: = ( # ( list ) , 0 ) 
+Parsed AAppendNativeBinOp: $ 
+Parsed AIdentifierArg: n 
+Parsed AEmptyListList: [ ] 
+Parsed AListArg: [ ] 
+Parsed ABinNativeFunction: $ ( n , [ ] ) 
+Parsed ALessEqualNativeBinOp: <= 
+Parsed AIdentifierArg: n 
+Parsed AHeadNativeUnaryOp: h 
+Parsed AIdentifierArg: list 
+Parsed AUnaryNativeFunction: h ( list ) 
+Parsed AFunctionArg: h ( list ) 
+Parsed ABinNativeFunction: <= ( n , h ( list ) ) 
+Parsed APrependNativeBinOp: ^ 
+Parsed AIdentifierArg: n 
+Parsed AIdentifierArg: list 
+Parsed ABinNativeFunction: ^ ( n , list ) 
+Parsed APrependNativeBinOp: ^ 
+Parsed AHeadNativeUnaryOp: h 
+Parsed AIdentifierArg: list 
+Parsed AUnaryNativeFunction: h ( list ) 
+Parsed AFunctionArg: h ( list ) 
+Parsed AUserDefinedUserFunc: insert 
+Parsed AIdentifierArg: n 
+Parsed ATailNativeUnaryOp: t 
+Parsed AIdentifierArg: list 
+Parsed AUnaryNativeFunction: t ( list ) 
+Parsed AFunctionArg: t ( list ) 
+Parsed ALastArgArgs: t ( list ) 
+Parsed AArgRest: , t ( list ) 
+Parsed AMoreArgsArgs: n , t ( list ) 
+Parsed AHasArgsArgList: ( n , t ( list ) ) 
+Parsed AUserDefinedFunction: insert ( n , t ( list ) ) 
+Parsed AFunctionArg: insert ( n , t ( list ) ) 
+Parsed ABinNativeFunction: ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Parsed ABranch: ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Parsed AIfElseFunction: ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Parsed ABranch: ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Parsed AIfElseFunction: ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Parsed ADefHeader: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Parsed AOneDefDefList: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Parsed ALastIdSigArgs: list 
+Parsed AArgumentsSig: ( list ) 
+Parsed ALessNativeBinOp: < 
+Parsed ALengthNativeUnaryOp: # 
+Parsed AIdentifierArg: list 
+Parsed AUnaryNativeFunction: # ( list ) 
+Parsed AFunctionArg: # ( list ) 
+Parsed AIntArg: 2 
+Parsed ABinNativeFunction: < ( # ( list ) , 2 ) 
+Parsed AIdentityNativeUnaryOp: @ 
+Parsed AIdentifierArg: list 
+Parsed AUnaryNativeFunction: @ ( list ) 
+Parsed AUserDefinedUserFunc: insert 
+Parsed AHeadNativeUnaryOp: h 
+Parsed AIdentifierArg: list 
+Parsed AUnaryNativeFunction: h ( list ) 
+Parsed AFunctionArg: h ( list ) 
+Parsed AUserDefinedUserFunc: sort 
+Parsed ATailNativeUnaryOp: t 
+Parsed AIdentifierArg: list 
+Parsed AUnaryNativeFunction: t ( list ) 
+Parsed AFunctionArg: t ( list ) 
+Parsed ALastArgArgs: t ( list ) 
+Parsed AHasArgsArgList: ( t ( list ) ) 
+Parsed AUserDefinedFunction: sort ( t ( list ) ) 
+Parsed AFunctionArg: sort ( t ( list ) ) 
+Parsed ALastArgArgs: sort ( t ( list ) ) 
+Parsed AArgRest: , sort ( t ( list ) ) 
+Parsed AMoreArgsArgs: h ( list ) , sort ( t ( list ) ) 
+Parsed AHasArgsArgList: ( h ( list ) , sort ( t ( list ) ) ) 
+Parsed AUserDefinedFunction: insert ( h ( list ) , sort ( t ( list ) ) ) 
+Parsed ABranch: ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) 
+Parsed AIfElseFunction: ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) 
+Parsed ADefHeader: def sort ( list ) := ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) 
+Parsed AMultipleDefsDefList: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) def sort ( list ) := ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) 
+Parsed AUserDefinedUserFunc: sort 
+Parsed AIdentifierArg: list 
+Parsed ALastArgArgs: list 
+Parsed AHasArgsArgList: ( list ) 
+Parsed AUserDefinedFunction: sort ( list ) 
+Parsed AUserDefsProgram: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) def sort ( list ) := ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) sort ( list ) 
+Parsed Start: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) def sort ( list ) := ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) sort ( list )  

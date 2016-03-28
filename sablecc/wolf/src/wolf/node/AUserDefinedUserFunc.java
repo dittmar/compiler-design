@@ -5,16 +5,16 @@ package wolf.node;
 import wolf.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AUserDefinedFuncName extends PFuncName
+public final class AUserDefinedUserFunc extends PUserFunc
 {
     private TIdentifier _identifier_;
 
-    public AUserDefinedFuncName()
+    public AUserDefinedUserFunc()
     {
         // Constructor
     }
 
-    public AUserDefinedFuncName(
+    public AUserDefinedUserFunc(
         @SuppressWarnings("hiding") TIdentifier _identifier_)
     {
         // Constructor
@@ -25,14 +25,14 @@ public final class AUserDefinedFuncName extends PFuncName
     @Override
     public Object clone()
     {
-        return new AUserDefinedFuncName(
+        return new AUserDefinedUserFunc(
             cloneNode(this._identifier_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAUserDefinedFuncName(this);
+        ((Analysis) sw).caseAUserDefinedUserFunc(this);
     }
 
     public TIdentifier getIdentifier()

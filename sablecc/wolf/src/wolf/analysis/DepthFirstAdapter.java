@@ -290,29 +290,103 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outASigArgRest(node);
     }
 
-    public void inANativeFunction(ANativeFunction node)
+    public void inAUserDefinedFunction(AUserDefinedFunction node)
     {
         defaultIn(node);
     }
 
-    public void outANativeFunction(ANativeFunction node)
+    public void outAUserDefinedFunction(AUserDefinedFunction node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseANativeFunction(ANativeFunction node)
+    public void caseAUserDefinedFunction(AUserDefinedFunction node)
     {
-        inANativeFunction(node);
-        if(node.getFuncName() != null)
+        inAUserDefinedFunction(node);
+        if(node.getUserFunc() != null)
         {
-            node.getFuncName().apply(this);
+            node.getUserFunc().apply(this);
         }
         if(node.getArgList() != null)
         {
             node.getArgList().apply(this);
         }
-        outANativeFunction(node);
+        outAUserDefinedFunction(node);
+    }
+
+    public void inAUnaryNativeFunction(AUnaryNativeFunction node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAUnaryNativeFunction(AUnaryNativeFunction node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAUnaryNativeFunction(AUnaryNativeFunction node)
+    {
+        inAUnaryNativeFunction(node);
+        if(node.getNativeUnaryOp() != null)
+        {
+            node.getNativeUnaryOp().apply(this);
+        }
+        if(node.getLParen() != null)
+        {
+            node.getLParen().apply(this);
+        }
+        if(node.getArg() != null)
+        {
+            node.getArg().apply(this);
+        }
+        if(node.getRParen() != null)
+        {
+            node.getRParen().apply(this);
+        }
+        outAUnaryNativeFunction(node);
+    }
+
+    public void inABinNativeFunction(ABinNativeFunction node)
+    {
+        defaultIn(node);
+    }
+
+    public void outABinNativeFunction(ABinNativeFunction node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseABinNativeFunction(ABinNativeFunction node)
+    {
+        inABinNativeFunction(node);
+        if(node.getNativeBinOp() != null)
+        {
+            node.getNativeBinOp().apply(this);
+        }
+        if(node.getLParen() != null)
+        {
+            node.getLParen().apply(this);
+        }
+        if(node.getA() != null)
+        {
+            node.getA().apply(this);
+        }
+        if(node.getComma() != null)
+        {
+            node.getComma().apply(this);
+        }
+        if(node.getB() != null)
+        {
+            node.getB().apply(this);
+        }
+        if(node.getRParen() != null)
+        {
+            node.getRParen().apply(this);
+        }
+        outABinNativeFunction(node);
     }
 
     public void inAIfElseFunction(AIfElseFunction node)
@@ -545,6 +619,27 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getIdentifier().apply(this);
         }
         outAUserDefinedListArgument(node);
+    }
+
+    public void inAReturnedListListArgument(AReturnedListListArgument node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAReturnedListListArgument(AReturnedListListArgument node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAReturnedListListArgument(AReturnedListListArgument node)
+    {
+        inAReturnedListListArgument(node);
+        if(node.getFunction() != null)
+        {
+            node.getFunction().apply(this);
+        }
+        outAReturnedListListArgument(node);
     }
 
     public void inANativeBinOp(ANativeBinOp node)
@@ -1198,88 +1293,46 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outALengthNativeUnaryOp(node);
     }
 
-    public void inAUserDefinedFuncName(AUserDefinedFuncName node)
+    public void inAUserDefinedUserFunc(AUserDefinedUserFunc node)
     {
         defaultIn(node);
     }
 
-    public void outAUserDefinedFuncName(AUserDefinedFuncName node)
+    public void outAUserDefinedUserFunc(AUserDefinedUserFunc node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAUserDefinedFuncName(AUserDefinedFuncName node)
+    public void caseAUserDefinedUserFunc(AUserDefinedUserFunc node)
     {
-        inAUserDefinedFuncName(node);
+        inAUserDefinedUserFunc(node);
         if(node.getIdentifier() != null)
         {
             node.getIdentifier().apply(this);
         }
-        outAUserDefinedFuncName(node);
+        outAUserDefinedUserFunc(node);
     }
 
-    public void inABinaryFuncName(ABinaryFuncName node)
+    public void inALambdaUserFunc(ALambdaUserFunc node)
     {
         defaultIn(node);
     }
 
-    public void outABinaryFuncName(ABinaryFuncName node)
+    public void outALambdaUserFunc(ALambdaUserFunc node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseABinaryFuncName(ABinaryFuncName node)
+    public void caseALambdaUserFunc(ALambdaUserFunc node)
     {
-        inABinaryFuncName(node);
-        if(node.getNativeBinOp() != null)
-        {
-            node.getNativeBinOp().apply(this);
-        }
-        outABinaryFuncName(node);
-    }
-
-    public void inAUnaryFuncName(AUnaryFuncName node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAUnaryFuncName(AUnaryFuncName node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAUnaryFuncName(AUnaryFuncName node)
-    {
-        inAUnaryFuncName(node);
-        if(node.getNativeUnaryOp() != null)
-        {
-            node.getNativeUnaryOp().apply(this);
-        }
-        outAUnaryFuncName(node);
-    }
-
-    public void inALambdaFuncName(ALambdaFuncName node)
-    {
-        defaultIn(node);
-    }
-
-    public void outALambdaFuncName(ALambdaFuncName node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseALambdaFuncName(ALambdaFuncName node)
-    {
-        inALambdaFuncName(node);
+        inALambdaUserFunc(node);
         if(node.getLambda() != null)
         {
             node.getLambda().apply(this);
         }
-        outALambdaFuncName(node);
+        outALambdaUserFunc(node);
     }
 
     public void inANoArgsArgList(ANoArgsArgList node)

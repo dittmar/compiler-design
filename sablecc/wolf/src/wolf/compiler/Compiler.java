@@ -3,7 +3,6 @@ package wolf.compiler;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PushbackReader;
 import wolf.lexer.Lexer;
 import wolf.lexer.LexerException;
@@ -16,6 +15,7 @@ public class Compiler {
         for (String filename : args)
         {
             File file = new File(filename);
+            Translation translation = new Translation(filename + ".parse");
             try {
                 Parser p = new Parser(
                     new Lexer(
@@ -23,9 +23,12 @@ public class Compiler {
                     )
                 );
                 Start tree = p.parse();
-                tree.apply(new Translation());
+                tree.apply(translation);
+                System.out.println(filename + " parsed successfully.");
             } catch (ParserException | LexerException | IOException e) {
-                System.err.println(e.getMessage());
+                System.err.println("Error parsing " + filename + ": " +
+                    e.getMessage());
+                translation.die();
             }
         }
     }   

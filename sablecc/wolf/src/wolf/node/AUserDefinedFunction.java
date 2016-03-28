@@ -5,22 +5,22 @@ package wolf.node;
 import wolf.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ANativeFunction extends PFunction
+public final class AUserDefinedFunction extends PFunction
 {
-    private PFuncName _funcName_;
+    private PUserFunc _userFunc_;
     private PArgList _argList_;
 
-    public ANativeFunction()
+    public AUserDefinedFunction()
     {
         // Constructor
     }
 
-    public ANativeFunction(
-        @SuppressWarnings("hiding") PFuncName _funcName_,
+    public AUserDefinedFunction(
+        @SuppressWarnings("hiding") PUserFunc _userFunc_,
         @SuppressWarnings("hiding") PArgList _argList_)
     {
         // Constructor
-        setFuncName(_funcName_);
+        setUserFunc(_userFunc_);
 
         setArgList(_argList_);
 
@@ -29,27 +29,27 @@ public final class ANativeFunction extends PFunction
     @Override
     public Object clone()
     {
-        return new ANativeFunction(
-            cloneNode(this._funcName_),
+        return new AUserDefinedFunction(
+            cloneNode(this._userFunc_),
             cloneNode(this._argList_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseANativeFunction(this);
+        ((Analysis) sw).caseAUserDefinedFunction(this);
     }
 
-    public PFuncName getFuncName()
+    public PUserFunc getUserFunc()
     {
-        return this._funcName_;
+        return this._userFunc_;
     }
 
-    public void setFuncName(PFuncName node)
+    public void setUserFunc(PUserFunc node)
     {
-        if(this._funcName_ != null)
+        if(this._userFunc_ != null)
         {
-            this._funcName_.parent(null);
+            this._userFunc_.parent(null);
         }
 
         if(node != null)
@@ -62,7 +62,7 @@ public final class ANativeFunction extends PFunction
             node.parent(this);
         }
 
-        this._funcName_ = node;
+        this._userFunc_ = node;
     }
 
     public PArgList getArgList()
@@ -94,7 +94,7 @@ public final class ANativeFunction extends PFunction
     public String toString()
     {
         return ""
-            + toString(this._funcName_)
+            + toString(this._userFunc_)
             + toString(this._argList_);
     }
 
@@ -102,9 +102,9 @@ public final class ANativeFunction extends PFunction
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._funcName_ == child)
+        if(this._userFunc_ == child)
         {
-            this._funcName_ = null;
+            this._userFunc_ = null;
             return;
         }
 
@@ -121,9 +121,9 @@ public final class ANativeFunction extends PFunction
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._funcName_ == oldChild)
+        if(this._userFunc_ == oldChild)
         {
-            setFuncName((PFuncName) newChild);
+            setUserFunc((PUserFunc) newChild);
             return;
         }
 

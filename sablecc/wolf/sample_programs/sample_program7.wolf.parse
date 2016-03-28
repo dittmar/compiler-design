@@ -1,0 +1,23 @@
+Parsed ALastIdSigArgs: y 
+Parsed ASigArgRest: , y 
+Parsed AMoreIdsSigArgs: n , y 
+Parsed AArgumentsSig: ( n , y ) 
+Parsed APlusNativeBinOp: + 
+Parsed AMultNativeBinOp: * 
+Parsed AIdentifierArg: n 
+Parsed AIdentifierArg: y 
+Parsed ABinNativeFunction: * ( n , y ) 
+Parsed AFunctionArg: * ( n , y ) 
+Parsed AIdentifierArg: y 
+Parsed ABinNativeFunction: + ( * ( n , y ) , y ) 
+Parsed ALambda: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) 
+Parsed ALambdaUserFunc: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) 
+Parsed AIntArg: 2 
+Parsed AIntArg: 7 
+Parsed ALastArgArgs: 7 
+Parsed AArgRest: , 7 
+Parsed AMoreArgsArgs: 2 , 7 
+Parsed AHasArgsArgList: ( 2 , 7 ) 
+Parsed AUserDefinedFunction: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) ( 2 , 7 ) 
+Parsed ANoDefsProgram: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) ( 2 , 7 ) 
+Parsed Start: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) ( 2 , 7 )  

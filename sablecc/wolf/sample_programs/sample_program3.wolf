@@ -20,7 +20,7 @@ If the list is less than 2 elements long, it's already sorted.
 Otherwise, kick off sort by inserting the head of the list where it should
 go within the tail of the list.
 `
-def sort(list) := ;<(#(list, 2)) ? @(list) : insert(h(list), sort(t(list)))
+def sort(list) := ; <(#(list), 2) ? @(list) : insert(h(list), sort(t(list)))
 
 sort(list)
 `Assuming sort is called with the argument [2,7,1,6], the

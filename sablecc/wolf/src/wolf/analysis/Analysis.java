@@ -22,7 +22,9 @@ public interface Analysis extends Switch
     void caseAMoreIdsSigArgs(AMoreIdsSigArgs node);
     void caseALastIdSigArgs(ALastIdSigArgs node);
     void caseASigArgRest(ASigArgRest node);
-    void caseANativeFunction(ANativeFunction node);
+    void caseAUserDefinedFunction(AUserDefinedFunction node);
+    void caseAUnaryNativeFunction(AUnaryNativeFunction node);
+    void caseABinNativeFunction(ABinNativeFunction node);
     void caseAIfElseFunction(AIfElseFunction node);
     void caseAFoldlFunction(AFoldlFunction node);
     void caseAFoldrFunction(AFoldrFunction node);
@@ -31,6 +33,7 @@ public interface Analysis extends Switch
     void caseAFoldBody(AFoldBody node);
     void caseALiteralListArgument(ALiteralListArgument node);
     void caseAUserDefinedListArgument(AUserDefinedListArgument node);
+    void caseAReturnedListListArgument(AReturnedListListArgument node);
     void caseANativeBinOp(ANativeBinOp node);
     void caseAUserDefinedBinOp(AUserDefinedBinOp node);
     void caseALambdaBinOp(ALambdaBinOp node);
@@ -62,10 +65,8 @@ public interface Analysis extends Switch
     void caseAIdentityNativeUnaryOp(AIdentityNativeUnaryOp node);
     void caseAPrintNativeUnaryOp(APrintNativeUnaryOp node);
     void caseALengthNativeUnaryOp(ALengthNativeUnaryOp node);
-    void caseAUserDefinedFuncName(AUserDefinedFuncName node);
-    void caseABinaryFuncName(ABinaryFuncName node);
-    void caseAUnaryFuncName(AUnaryFuncName node);
-    void caseALambdaFuncName(ALambdaFuncName node);
+    void caseAUserDefinedUserFunc(AUserDefinedUserFunc node);
+    void caseALambdaUserFunc(ALambdaUserFunc node);
     void caseANoArgsArgList(ANoArgsArgList node);
     void caseAHasArgsArgList(AHasArgsArgList node);
     void caseAMoreArgsArgs(AMoreArgsArgs node);

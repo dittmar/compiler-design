@@ -5,46 +5,46 @@ package wolf.node;
 import wolf.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AUnaryFuncName extends PFuncName
+public final class AReturnedListListArgument extends PListArgument
 {
-    private PNativeUnaryOp _nativeUnaryOp_;
+    private PFunction _function_;
 
-    public AUnaryFuncName()
+    public AReturnedListListArgument()
     {
         // Constructor
     }
 
-    public AUnaryFuncName(
-        @SuppressWarnings("hiding") PNativeUnaryOp _nativeUnaryOp_)
+    public AReturnedListListArgument(
+        @SuppressWarnings("hiding") PFunction _function_)
     {
         // Constructor
-        setNativeUnaryOp(_nativeUnaryOp_);
+        setFunction(_function_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AUnaryFuncName(
-            cloneNode(this._nativeUnaryOp_));
+        return new AReturnedListListArgument(
+            cloneNode(this._function_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAUnaryFuncName(this);
+        ((Analysis) sw).caseAReturnedListListArgument(this);
     }
 
-    public PNativeUnaryOp getNativeUnaryOp()
+    public PFunction getFunction()
     {
-        return this._nativeUnaryOp_;
+        return this._function_;
     }
 
-    public void setNativeUnaryOp(PNativeUnaryOp node)
+    public void setFunction(PFunction node)
     {
-        if(this._nativeUnaryOp_ != null)
+        if(this._function_ != null)
         {
-            this._nativeUnaryOp_.parent(null);
+            this._function_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AUnaryFuncName extends PFuncName
             node.parent(this);
         }
 
-        this._nativeUnaryOp_ = node;
+        this._function_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._nativeUnaryOp_);
+            + toString(this._function_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._nativeUnaryOp_ == child)
+        if(this._function_ == child)
         {
-            this._nativeUnaryOp_ = null;
+            this._function_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AUnaryFuncName extends PFuncName
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._nativeUnaryOp_ == oldChild)
+        if(this._function_ == oldChild)
         {
-            setNativeUnaryOp((PNativeUnaryOp) newChild);
+            setFunction((PFunction) newChild);
             return;
         }
 

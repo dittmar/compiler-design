@@ -5,16 +5,16 @@ package wolf.node;
 import wolf.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ALambdaFuncName extends PFuncName
+public final class ALambdaUserFunc extends PUserFunc
 {
     private PLambda _lambda_;
 
-    public ALambdaFuncName()
+    public ALambdaUserFunc()
     {
         // Constructor
     }
 
-    public ALambdaFuncName(
+    public ALambdaUserFunc(
         @SuppressWarnings("hiding") PLambda _lambda_)
     {
         // Constructor
@@ -25,14 +25,14 @@ public final class ALambdaFuncName extends PFuncName
     @Override
     public Object clone()
     {
-        return new ALambdaFuncName(
+        return new ALambdaUserFunc(
             cloneNode(this._lambda_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseALambdaFuncName(this);
+        ((Analysis) sw).caseALambdaUserFunc(this);
     }
 
     public PLambda getLambda()

@@ -1,0 +1,38 @@
+Parsed ALastIdSigArgs: b 
+Parsed ASigArgRest: , b 
+Parsed AMoreIdsSigArgs: a , b 
+Parsed AArgumentsSig: ( a , b ) 
+Parsed ADivNativeBinOp: / 
+Parsed AMinusNativeBinOp: - 
+Parsed AIdentifierArg: a 
+Parsed AIdentifierArg: b 
+Parsed ABinNativeFunction: - ( a , b ) 
+Parsed AFunctionArg: - ( a , b ) 
+Parsed AIntArg: 2 
+Parsed ABinNativeFunction: / ( - ( a , b ) , 2 ) 
+Parsed ALambda: \ ( ( a , b ) -> / ( - ( a , b ) , 2 ) ) 
+Parsed ALambdaBinOp: \ ( ( a , b ) -> / ( - ( a , b ) , 2 ) ) 
+Parsed AArithmeticNotNativeUnaryOp: ~ 
+Parsed ANativeUnaryOp: ~ 
+Parsed AIntArg: 1 
+Parsed AIntArg: 2 
+Parsed AArithmeticNotNativeUnaryOp: ~ 
+Parsed AIntArg: 3 
+Parsed AUnaryNativeFunction: ~ ( 3 ) 
+Parsed AFunctionArg: ~ ( 3 ) 
+Parsed AIntArg: 5 
+Parsed ALastArgArgs: 5 
+Parsed AArgRest: , 5 
+Parsed AMoreArgsArgs: ~ ( 3 ) , 5 
+Parsed AArgRest: , ~ ( 3 ) , 5 
+Parsed AMoreArgsArgs: 2 , ~ ( 3 ) , 5 
+Parsed AArgRest: , 2 , ~ ( 3 ) , 5 
+Parsed AMoreArgsArgs: 1 , 2 , ~ ( 3 ) , 5 
+Parsed AListList: [ 1 , 2 , ~ ( 3 ) , 5 ] 
+Parsed ALiteralListArgument: [ 1 , 2 , ~ ( 3 ) , 5 ] 
+Parsed AMapFunction: . ( ~ , [ 1 , 2 , ~ ( 3 ) , 5 ] ) 
+Parsed AReturnedListListArgument: . ( ~ , [ 1 , 2 , ~ ( 3 ) , 5 ] ) 
+Parsed AFoldBody: ( \ ( ( a , b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) , 5 ] ) ) 
+Parsed AFoldlFunction: { ( \ ( ( a , b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) , 5 ] ) ) 
+Parsed ANoDefsProgram: { ( \ ( ( a , b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) , 5 ] ) ) 
+Parsed Start: { ( \ ( ( a , b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) , 5 ] ) )  

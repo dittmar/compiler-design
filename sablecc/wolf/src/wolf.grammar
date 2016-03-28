@@ -128,7 +128,9 @@ sig_args = {more_ids} identifier sig_arg_rest
 
 sig_arg_rest = comma sig_args;
 
-function = {native} func_name arg_list
+function = {user_defined} user_func arg_list
+         | {unary_native} native_unary_op l_paren arg r_paren
+         | {bin_native} native_bin_op l_paren [a]: arg comma [b]: arg r_paren
          | {if_else} branch
          | {foldl} foldl fold_body
          | {foldr} foldr fold_body
@@ -139,7 +141,8 @@ lambda = lambda_start l_paren sig lambda_arrow function r_paren;
 fold_body = l_paren bin_op comma list_argument r_paren;
 
 list_argument = {literal} list
-              | {user_defined} identifier;
+              | {user_defined} identifier
+              | {returned_list} function;
 
 bin_op = {native} native_bin_op
        | {user_defined} identifier
@@ -176,9 +179,7 @@ native_unary_op = {arithmetic_not} neg
                 | {print} print
                 | {length} length;
                 
-func_name = {user_defined} identifier
-          | {binary} native_bin_op
-          | {unary} native_unary_op
+user_func = {user_defined} identifier
           | {lambda} lambda;
           
 arg_list = {no_args} l_paren r_paren

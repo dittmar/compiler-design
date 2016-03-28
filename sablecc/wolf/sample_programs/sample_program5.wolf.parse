@@ -1,0 +1,56 @@
+Parsed APrintNativeUnaryOp: print 
+Parsed ALastBodyStringMiddle: I 
+Parsed ASingleQuoteEscapeChar: ' 
+Parsed AStringEscapeSeq: \ ' 
+Parsed AMoreEscapeStringMiddle: I \ ' 
+Parsed AMoreBodyStringMiddle: I \ ' m an escape  
+Parsed ABackslashEscapeChar: \ 
+Parsed AStringEscapeSeq: \ \ 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ 
+Parsed AAlarmEscapeChar: a 
+Parsed AStringEscapeSeq: \ a 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a 
+Parsed ABackspaceEscapeChar: b 
+Parsed AStringEscapeSeq: \ b 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a \ b 
+Parsed AVerticalTabEscapeChar: v 
+Parsed AStringEscapeSeq: \ v 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a \ b \ v 
+Parsed ADefaultEscapeChar: d 
+Parsed AStringEscapeSeq: \ d 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a \ b \ v \ d 
+Parsed ATabEscapeChar: t 
+Parsed AStringEscapeSeq: \ t 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a \ b \ v \ d \ t 
+Parsed ACrEscapeChar: r 
+Parsed AStringEscapeSeq: \ r 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r 
+Parsed ANewlineEscapeChar: n 
+Parsed AStringEscapeSeq: \ n 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n 
+Parsed AHexEscapeChar: x33 
+Parsed AStringEscapeSeq: \ x33 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 
+Parsed AOctalEscapeChar: 121 
+Parsed AStringEscapeSeq: \ 121 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 
+Parsed AFormfeedEscapeChar: f 
+Parsed AStringEscapeSeq: \ f 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f 
+Parsed ADoubleQuoteEscapeChar: " 
+Parsed AStringEscapeSeq: \ " 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " 
+Parsed AQuestionMarkEscapeChar: ? 
+Parsed AStringEscapeSeq: \ ? 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? 
+Parsed AUnicodeEscapeChar: u2109 
+Parsed AStringEscapeSeq: \ u2109 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 
+Parsed ADefaultEscapeChar: m 
+Parsed AStringEscapeSeq: \ m 
+Parsed AMoreEscapeStringMiddle: I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m 
+Parsed AStringString: ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' 
+Parsed AStringArg: ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' 
+Parsed AUnaryNativeFunction: print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' ) 
+Parsed ANoDefsProgram: print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' ) 
+Parsed Start: print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' )  

@@ -1,0 +1,86 @@
+Parsed AEmptySig: ( ) 
+Parsed ALogicalNotNativeUnaryOp: ! 
+Parsed AOrNativeBinOp: | 
+Parsed AAndNativeBinOp: & 
+Parsed AXorNativeBinOp: x 
+Parsed AIntArg: 1 
+Parsed AIntArg: 0 
+Parsed ABinNativeFunction: x ( 1 , 0 ) 
+Parsed AFunctionArg: x ( 1 , 0 ) 
+Parsed AIntArg: 2 
+Parsed ABinNativeFunction: & ( x ( 1 , 0 ) , 2 ) 
+Parsed AFunctionArg: & ( x ( 1 , 0 ) , 2 ) 
+Parsed AArithmeticNotNativeUnaryOp: ~ 
+Parsed AIntArg: 8 
+Parsed AUnaryNativeFunction: ~ ( 8 ) 
+Parsed AFunctionArg: ~ ( 8 ) 
+Parsed ABinNativeFunction: | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) 
+Parsed AFunctionArg: | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) 
+Parsed AUnaryNativeFunction: ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) 
+Parsed ADefHeader: def logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) 
+Parsed AOneDefDefList: def logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) 
+Parsed AEmptySig: ( ) 
+Parsed AOrNativeBinOp: | 
+Parsed AAndNativeBinOp: & 
+Parsed AGreaterNativeBinOp: > 
+Parsed AIntArg: 5 
+Parsed AIntArg: 2 
+Parsed ABinNativeFunction: > ( 5 , 2 ) 
+Parsed AFunctionArg: > ( 5 , 2 ) 
+Parsed ANotEqualNativeBinOp: != 
+Parsed AIntArg: 1 
+Parsed AIntArg: 2 
+Parsed ABinNativeFunction: != ( 1 , 2 ) 
+Parsed AFunctionArg: != ( 1 , 2 ) 
+Parsed ABinNativeFunction: & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) 
+Parsed AFunctionArg: & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) 
+Parsed AXorNativeBinOp: x 
+Parsed AGreaterEqualNativeBinOp: >= 
+Parsed AIntArg: 1 
+Parsed AIntArg: 0 
+Parsed ABinNativeFunction: >= ( 1 , 0 ) 
+Parsed AFunctionArg: >= ( 1 , 0 ) 
+Parsed ALessEqualNativeBinOp: <= 
+Parsed AModNativeBinOp: % 
+Parsed AIntArg: 5 
+Parsed AIntArg: 2 
+Parsed ABinNativeFunction: % ( 5 , 2 ) 
+Parsed AFunctionArg: % ( 5 , 2 ) 
+Parsed ADivNativeBinOp: / 
+Parsed AIntArg: 6 
+Parsed AIntArg: 4 
+Parsed ABinNativeFunction: / ( 6 , 4 ) 
+Parsed AFunctionArg: / ( 6 , 4 ) 
+Parsed ABinNativeFunction: <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) 
+Parsed AFunctionArg: <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) 
+Parsed ABinNativeFunction: x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) 
+Parsed AFunctionArg: x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) 
+Parsed ABinNativeFunction: | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) 
+Parsed ADefHeader: def relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) 
+Parsed AMultipleDefsDefList: def logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) 
+Parsed AFlattenNativeUnaryOp: _ 
+Parsed AReverseNativeUnaryOp: r 
+Parsed AUserDefinedUserFunc: logical 
+Parsed ANoArgsArgList: ( ) 
+Parsed AUserDefinedFunction: logical ( ) 
+Parsed AFunctionArg: logical ( ) 
+Parsed ALastArgArgs: logical ( ) 
+Parsed AListList: [ logical ( ) ] 
+Parsed AListArg: [ logical ( ) ] 
+Parsed AUserDefinedUserFunc: relational 
+Parsed ANoArgsArgList: ( ) 
+Parsed AUserDefinedFunction: relational ( ) 
+Parsed AFunctionArg: relational ( ) 
+Parsed ALastArgArgs: relational ( ) 
+Parsed AListList: [ relational ( ) ] 
+Parsed AListArg: [ relational ( ) ] 
+Parsed ALastArgArgs: [ relational ( ) ] 
+Parsed AArgRest: , [ relational ( ) ] 
+Parsed AMoreArgsArgs: [ logical ( ) ] , [ relational ( ) ] 
+Parsed AListList: [ [ logical ( ) ] , [ relational ( ) ] ] 
+Parsed AListArg: [ [ logical ( ) ] , [ relational ( ) ] ] 
+Parsed AUnaryNativeFunction: r ( [ [ logical ( ) ] , [ relational ( ) ] ] ) 
+Parsed AFunctionArg: r ( [ [ logical ( ) ] , [ relational ( ) ] ] ) 
+Parsed AUnaryNativeFunction: _ ( r ( [ [ logical ( ) ] , [ relational ( ) ] ] ) ) 
+Parsed AUserDefsProgram: def logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) _ ( r ( [ [ logical ( ) ] , [ relational ( ) ] ] ) ) 
+Parsed Start: def logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) _ ( r ( [ [ logical ( ) ] , [ relational ( ) ] ] ) )  

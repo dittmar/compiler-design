@@ -135,7 +135,19 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseANativeFunction(ANativeFunction node)
+    public void caseAUserDefinedFunction(AUserDefinedFunction node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAUnaryNativeFunction(AUnaryNativeFunction node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseABinNativeFunction(ABinNativeFunction node)
     {
         defaultCase(node);
     }
@@ -184,6 +196,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAUserDefinedListArgument(AUserDefinedListArgument node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAReturnedListListArgument(AReturnedListListArgument node)
     {
         defaultCase(node);
     }
@@ -375,25 +393,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAUserDefinedFuncName(AUserDefinedFuncName node)
+    public void caseAUserDefinedUserFunc(AUserDefinedUserFunc node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABinaryFuncName(ABinaryFuncName node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAUnaryFuncName(AUnaryFuncName node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseALambdaFuncName(ALambdaFuncName node)
+    public void caseALambdaUserFunc(ALambdaUserFunc node)
     {
         defaultCase(node);
     }

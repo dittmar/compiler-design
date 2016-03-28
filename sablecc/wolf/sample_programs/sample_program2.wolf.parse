@@ -1,0 +1,43 @@
+Parsed ALastIdSigArgs: n 
+Parsed AArgumentsSig: ( n ) 
+Parsed AEqualNativeBinOp: = 
+Parsed AIdentifierArg: n 
+Parsed AIntArg: 0 
+Parsed ABinNativeFunction: = ( n , 0 ) 
+Parsed AIdentityNativeUnaryOp: @ 
+Parsed AIntArg: 1 
+Parsed AUnaryNativeFunction: @ ( 1 ) 
+Parsed AMultNativeBinOp: * 
+Parsed AIdentifierArg: n 
+Parsed AUserDefinedUserFunc: factorial 
+Parsed AMinusNativeBinOp: - 
+Parsed AIdentifierArg: n 
+Parsed AIntArg: 1 
+Parsed ABinNativeFunction: - ( n , 1 ) 
+Parsed AFunctionArg: - ( n , 1 ) 
+Parsed ALastArgArgs: - ( n , 1 ) 
+Parsed AHasArgsArgList: ( - ( n , 1 ) ) 
+Parsed AUserDefinedFunction: factorial ( - ( n , 1 ) ) 
+Parsed AFunctionArg: factorial ( - ( n , 1 ) ) 
+Parsed ABinNativeFunction: * ( n , factorial ( - ( n , 1 ) ) ) 
+Parsed ABranch: ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) 
+Parsed AIfElseFunction: ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) 
+Parsed ADefHeader: def factorial ( n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) 
+Parsed AOneDefDefList: def factorial ( n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) 
+Parsed ALastIdSigArgs: element 
+Parsed AArgumentsSig: ( element ) 
+Parsed APlusNativeBinOp: + 
+Parsed AUserDefinedUserFunc: factorial 
+Parsed AIdentifierArg: element 
+Parsed ALastArgArgs: element 
+Parsed AHasArgsArgList: ( element ) 
+Parsed AUserDefinedFunction: factorial ( element ) 
+Parsed AFunctionArg: factorial ( element ) 
+Parsed AIntArg: 1 
+Parsed ABinNativeFunction: + ( factorial ( element ) , 1 ) 
+Parsed ALambda: \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) 
+Parsed ALambdaUnaryOp: \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) 
+Parsed AUserDefinedListArgument: list 
+Parsed AMapFunction: . ( \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) , list ) 
+Parsed AUserDefsProgram: def factorial ( n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) , list ) 
+Parsed Start: def factorial ( n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) , list )  

@@ -1,0 +1,116 @@
+Parsed ALastIdSigArgs: list 
+Parsed AArgumentsSig: ( list ) 
+Parsed AEqualNativeBinOp: = 
+Parsed AIdentifierArg: list 
+Parsed AEmptyListList: [ ] 
+Parsed AListArg: [ ] 
+Parsed ABinNativeFunction: = ( list , [ ] ) 
+Parsed AIdentityNativeUnaryOp: @ 
+Parsed AIntArg: 0 
+Parsed AUnaryNativeFunction: @ ( 0 ) 
+Parsed APlusNativeBinOp: + 
+Parsed AHeadNativeUnaryOp: h 
+Parsed AIdentifierArg: list 
+Parsed AUnaryNativeFunction: h ( list ) 
+Parsed AFunctionArg: h ( list ) 
+Parsed AUserDefinedUserFunc: sumList 
+Parsed ATailNativeUnaryOp: t 
+Parsed AIdentifierArg: list 
+Parsed AUnaryNativeFunction: t ( list ) 
+Parsed AFunctionArg: t ( list ) 
+Parsed ALastArgArgs: t ( list ) 
+Parsed AHasArgsArgList: ( t ( list ) ) 
+Parsed AUserDefinedFunction: sumList ( t ( list ) ) 
+Parsed AFunctionArg: sumList ( t ( list ) ) 
+Parsed ABinNativeFunction: + ( h ( list ) , sumList ( t ( list ) ) ) 
+Parsed ABranch: ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) 
+Parsed AIfElseFunction: ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) 
+Parsed ADefHeader: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) 
+Parsed AOneDefDefList: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) 
+Parsed ALastIdSigArgs: list 
+Parsed AArgumentsSig: ( list ) 
+Parsed AEqualNativeBinOp: = 
+Parsed AIdentifierArg: list 
+Parsed AEmptyListList: [ ] 
+Parsed AListArg: [ ] 
+Parsed ABinNativeFunction: = ( list , [ ] ) 
+Parsed AIdentityNativeUnaryOp: @ 
+Parsed AIntArg: 1 
+Parsed AUnaryNativeFunction: @ ( 1 ) 
+Parsed AMultNativeBinOp: * 
+Parsed AHeadNativeUnaryOp: h 
+Parsed AIdentifierArg: list 
+Parsed AUnaryNativeFunction: h ( list ) 
+Parsed AFunctionArg: h ( list ) 
+Parsed AUserDefinedUserFunc: prodList 
+Parsed ATailNativeUnaryOp: t 
+Parsed AIdentifierArg: list 
+Parsed AUnaryNativeFunction: t ( list ) 
+Parsed AFunctionArg: t ( list ) 
+Parsed ALastArgArgs: t ( list ) 
+Parsed AHasArgsArgList: ( t ( list ) ) 
+Parsed AUserDefinedFunction: prodList ( t ( list ) ) 
+Parsed AFunctionArg: prodList ( t ( list ) ) 
+Parsed ABinNativeFunction: * ( h ( list ) , prodList ( t ( list ) ) ) 
+Parsed ABranch: ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) 
+Parsed AIfElseFunction: ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) 
+Parsed ADefHeader: def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) 
+Parsed AMultipleDefsDefList: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) 
+Parsed AUserDefinedUserFunc: sumList 
+Parsed AUserDefinedUserFunc: prodList 
+Parsed AIntArg: 1 
+Parsed AIntArg: 2 
+Parsed AIntArg: 3 
+Parsed ALastArgArgs: 3 
+Parsed AArgRest: , 3 
+Parsed AMoreArgsArgs: 2 , 3 
+Parsed AArgRest: , 2 , 3 
+Parsed AMoreArgsArgs: 1 , 2 , 3 
+Parsed AListList: [ 1 , 2 , 3 ] 
+Parsed AListArg: [ 1 , 2 , 3 ] 
+Parsed ALastArgArgs: [ 1 , 2 , 3 ] 
+Parsed AHasArgsArgList: ( [ 1 , 2 , 3 ] ) 
+Parsed AUserDefinedFunction: prodList ( [ 1 , 2 , 3 ] ) 
+Parsed AFunctionArg: prodList ( [ 1 , 2 , 3 ] ) 
+Parsed AUserDefinedUserFunc: prodList 
+Parsed AIntArg: 5 
+Parsed AIntArg: 7 
+Parsed AIntArg: 2 
+Parsed ALastArgArgs: 2 
+Parsed AArgRest: , 2 
+Parsed AMoreArgsArgs: 7 , 2 
+Parsed AArgRest: , 7 , 2 
+Parsed AMoreArgsArgs: 5 , 7 , 2 
+Parsed AListList: [ 5 , 7 , 2 ] 
+Parsed AListArg: [ 5 , 7 , 2 ] 
+Parsed ALastArgArgs: [ 5 , 7 , 2 ] 
+Parsed AHasArgsArgList: ( [ 5 , 7 , 2 ] ) 
+Parsed AUserDefinedFunction: prodList ( [ 5 , 7 , 2 ] ) 
+Parsed AFunctionArg: prodList ( [ 5 , 7 , 2 ] ) 
+Parsed AUserDefinedUserFunc: prodList 
+Parsed AFloatArg: 0.0 
+Parsed AFloatArg: 127.92 
+Parsed AIntArg: 9 
+Parsed ALastArgArgs: 9 
+Parsed AArgRest: , 9 
+Parsed AMoreArgsArgs: 127.92 , 9 
+Parsed AArgRest: , 127.92 , 9 
+Parsed AMoreArgsArgs: 0.0 , 127.92 , 9 
+Parsed AListList: [ 0.0 , 127.92 , 9 ] 
+Parsed AListArg: [ 0.0 , 127.92 , 9 ] 
+Parsed ALastArgArgs: [ 0.0 , 127.92 , 9 ] 
+Parsed AHasArgsArgList: ( [ 0.0 , 127.92 , 9 ] ) 
+Parsed AUserDefinedFunction: prodList ( [ 0.0 , 127.92 , 9 ] ) 
+Parsed AFunctionArg: prodList ( [ 0.0 , 127.92 , 9 ] ) 
+Parsed ALastArgArgs: prodList ( [ 0.0 , 127.92 , 9 ] ) 
+Parsed AArgRest: , prodList ( [ 0.0 , 127.92 , 9 ] ) 
+Parsed AMoreArgsArgs: prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) 
+Parsed AArgRest: , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) 
+Parsed AMoreArgsArgs: prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) 
+Parsed AListList: [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] 
+Parsed AListArg: [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] 
+Parsed ALastArgArgs: [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] 
+Parsed AHasArgsArgList: ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] ) 
+Parsed AUserDefinedFunction: sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] ) 
+Parsed AUserDefsProgram: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] ) 
+Parsed Start: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] )  

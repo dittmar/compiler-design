@@ -2,7 +2,7 @@
 
 package wolf.node;
 
-public abstract class PFuncName extends Node
+public abstract class PUserFunc extends Node
 {
     // Empty body
 }
