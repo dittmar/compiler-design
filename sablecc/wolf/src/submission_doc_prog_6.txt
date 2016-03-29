@@ -6,8 +6,29 @@ Joseph Alacqua
 changed. Our grammar file, wolf.grammar, was updated to work with SableCC.
 Lambda functions were also added to our grammar and work successfully with
 the parser. Another sample program was added in order to ensure that all the
-features of our language were being tested.
+features of our language were being tested, including the ability to evaluate
+a lambda function like a normal function.  BinOp and UnaryOp nonterminals
+were also added to make it easier to check the correctness of built-in
+functions within a program.
   We experienced several difficulties during this assignment. Sample program 1,
 first created in the lexer phase, was syntactically wrong with some of the
-updated grammar rules, and needed to be fixed accordingly. The grammar
-was slightly changed in order to work with SableCC as well. 
+updated grammar rules and needed to be fixed accordingly. The grammar
+was slightly changed in order to work with SableCC as well.  Notably, labels
+had to be added where multiple nonterminals of the same name were in the
+right-hand-side of a rule.  Another difficulty was interpreting some of
+SableCC's more cryptic error messages.  It turns out that SableCC does not
+always provide very helpful hints when multiple cases of a symbol occur in
+the right-hand-side of a rule.
+
+Our updated grammar is grammar.txt.
+Our updated SableCC file is wolf.grammar.
+Our sample programs and their respective output are in sample_programs.
+    Files with the naming convention *.wolf are sample programs
+    Files with the naming convention *.parse are output files generated 
+    by the parser.
+    Files with the naming convention sample_program[1-8].wolf are correct
+    sample programs.
+    Files with the naming convention bad_program[1-4].wolf are incorrect
+    sample programs.
+The compiler directory in the SableCC-generated wolf directory contains the
+classes that use the SableCC-generated parser to parse our sample programs.
