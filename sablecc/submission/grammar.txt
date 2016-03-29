@@ -1,0 +1,115 @@
+Program = DefList Function
+Program = Function
+
+DefList = DefList DefHeader
+DefList = DefHeader
+
+DefHeader = Def identifier Sig assign Function
+
+Sig = l_paren r_paren
+Sig = l_paren SigArgs r_paren
+    
+SigArgs = identifier SigArgRest
+SigArgs = identifier
+
+SigArgRest = comma SigArgs
+
+Function = UserFunc ArgList
+Function = NativeUnaryOp l_paren Arg r_paren
+Function = NativeBinOp l_paren Arg comma Arg r_paren
+Function = Branch
+Function = Foldl FoldBody
+Function = Foldr FoldBody
+Function = map l_paren UnaryOp comma ListArgument r_paren
+
+Lambda = lambda_start l_paren Sig lambda_arrow Function r_paren
+
+FoldBody = l_paren bin_op comma ListArgument r_paren
+
+ListArgument = List
+ListArgument = identifier
+ListArgument = Function
+
+BinOp = NativeBinOp
+BinOp = identifier
+BinOp = Lambda
+       
+NativeBinOp = plus
+NativeBinOp = minus
+NativeBinOp = mult
+NativeBinOp = div
+NativeBinOp = mod
+NativeBinOp = lt
+NativeBinOp = gt
+NativeBinOp = lte
+NativeBinOp = gte
+NativeBinOp = equal
+NativeBinOp = not_equal
+NativeBinOp = and
+NativeBinOp = or
+NativeBinOp = xor
+NativeBinOp = append
+NativeBinOp = prepend
+
+UnaryOp = NativeUnaryOp
+UnaryOp = identifier
+UnaryOp = Lambda
+
+NativeUnaryOp = neg
+NativeUnaryOp = logical_not
+NativeUnaryOp = head
+NativeUnaryOp = tail
+NativeUnaryOp = reverse
+NativeUnaryOp = flatten
+NativeUnaryOp = identity
+NativeUnaryOp = print
+NativeUnaryOp = length
+                
+UserFunc = identifier
+UserFunc = Lambda
+          
+ArgList = l_paren r_paren
+ArgList = l_paren Args r_paren
+         
+Args = Arg ArgRest
+Args = Arg
+     
+ArgRest = comma Args
+
+Arg = Function
+Arg = List
+Arg = int_number
+Arg = float_number
+Arg = identifier
+Arg = String
+    
+String = string_start string_end
+String = string_start StringMiddle string_end
+       
+StringMiddle = StringMiddle string_body
+StringMiddle = string_body
+StringMiddle = StringMiddle StringEscapeSeq
+StringMiddle = StringEscapeSeq
+              
+StringEscapeSeq = string_escape EscapeChar
+
+EscapeChar = escape_alarm
+EscapeChar = escape_backspace
+EscapeChar = escape_formfeed
+EscapeChar = escape_carriage_return
+EscapeChar = escape_newline
+EscapeChar = escape_tab
+EscapeChar = escape_vertical_tab
+EscapeChar = escape_backslash
+EscapeChar = escape_single_quote
+EscapeChar = escape_double_quote
+EscapeChar = escape_question_mark
+EscapeChar = escape_octal_char
+EscapeChar = escape_hex_char
+EscapeChar = escape_unicode_char
+EscapeChar = escape_default
+            
+Branch = semi Function ternary_question_mark Function ternary_colon Function
+
+List = start_list end_list
+List = start_list Args end_list

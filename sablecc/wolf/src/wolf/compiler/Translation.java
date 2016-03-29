@@ -44,9 +44,11 @@ public class Translation extends DepthFirstAdapter {
     
     /**
      * On death of the Translation class, close the writer if it's still open.
+     * @param error_message is the message associated with the failure.
      */
-    public void die() {
+    public void die(String error_message) {
         try {
+            writer.append(error_message);
             writer.close();
         } catch (IOException e) {
             // writer already closed.

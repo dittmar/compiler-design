@@ -28,7 +28,7 @@ public class Compiler {
             } catch (ParserException | LexerException | IOException e) {
                 System.err.println("Error parsing " + filename + ": " +
                     e.getMessage());
-                translation.die();
+                translation.die(e.getMessage());
             }
         }
     }   

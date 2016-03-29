@@ -1,0 +1,1 @@
+[2,30] expecting: string start, 'h', 't', 'r', '$', '^', '{', '}', '.', flatten, '#', '\', '@', 'print', '=', '<', '>', '!=', '<=', '>=', '&', '|', 'x', '!', '+', '-', '*', '/', '%', '~', '[', ';', identifier, int number, float number
