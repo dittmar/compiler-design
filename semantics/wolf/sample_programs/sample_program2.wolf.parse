@@ -1,1 +1,38 @@
-SigArgs parsed successfully: n Sig parsed successfully: ( n ) NativeBinOp parsed successfully: = Arg parsed successfully: n Arg parsed successfully: 0 Function parsed successfully: = ( n , 0 ) NativeUnaryOp parsed successfully: @ Arg parsed successfully: 1 Function parsed successfully: @ ( 1 ) NativeBinOp parsed successfully: * Arg parsed successfully: n NativeBinOp parsed successfully: - Arg parsed successfully: n Arg parsed successfully: 1 Function parsed successfully: - ( n , 1 ) Arg parsed successfully: - ( n , 1 ) Args parsed successfully: - ( n , 1 ) ArgList parsed successfully: ( - ( n , 1 ) ) Arg parsed successfully: factorial ( - ( n , 1 ) ) Function parsed successfully: * ( n , factorial ( - ( n , 1 ) ) ) Branch parsed successfully: ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) Function parsed successfully: ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) Def parsed successfully: def factorial ( n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) SigArgs parsed successfully: element Sig parsed successfully: ( element ) NativeBinOp parsed successfully: + Arg parsed successfully: element Args parsed successfully: element ArgList parsed successfully: ( element ) Arg parsed successfully: factorial ( element ) Arg parsed successfully: 1 Function parsed successfully: + ( factorial ( element ) , 1 ) Lambda parsed successfully: \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) UnaryOp parsed successfully: \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) ListArgument parsed successfully: list Map parsed successfully: . ( \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) , list ) Function parsed successfully: . ( \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) , list ) Program parsed successfully: def factorial ( n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) , list ) 
+SigArgs parsed successfully: n 
+Sig parsed successfully: ( n ) 
+NativeBinOp parsed successfully: = 
+Arg parsed successfully: n 
+Arg parsed successfully: 0 
+Function parsed successfully: = ( n , 0 ) 
+NativeUnaryOp parsed successfully: @ 
+Arg parsed successfully: 1 
+Function parsed successfully: @ ( 1 ) 
+NativeBinOp parsed successfully: * 
+Arg parsed successfully: n 
+NativeBinOp parsed successfully: - 
+Arg parsed successfully: n 
+Arg parsed successfully: 1 
+Function parsed successfully: - ( n , 1 ) 
+Arg parsed successfully: - ( n , 1 ) 
+Args parsed successfully: - ( n , 1 ) 
+ArgList parsed successfully: ( - ( n , 1 ) ) 
+Arg parsed successfully: factorial ( - ( n , 1 ) ) 
+Function parsed successfully: * ( n , factorial ( - ( n , 1 ) ) ) 
+Branch parsed successfully: ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) 
+Function parsed successfully: ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) 
+Def parsed successfully: def factorial ( n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) 
+SigArgs parsed successfully: element 
+Sig parsed successfully: ( element ) 
+NativeBinOp parsed successfully: + 
+Arg parsed successfully: element 
+Args parsed successfully: element 
+ArgList parsed successfully: ( element ) 
+Arg parsed successfully: factorial ( element ) 
+Arg parsed successfully: 1 
+Function parsed successfully: + ( factorial ( element ) , 1 ) 
+Lambda parsed successfully: \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) 
+UnaryOp parsed successfully: \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) 
+ListArgument parsed successfully: list 
+Map parsed successfully: . ( \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) , list ) 
+Function parsed successfully: . ( \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) , list ) 
+Program parsed successfully: def factorial ( n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( element ) -> + ( factorial ( element ) , 1 ) ) , list ) 

@@ -74,8 +74,7 @@ public class Parser
     
     /**
      * Parse an ArgList
-     * ArgList = ()
-     *         = (Args) 
+     * @return list of tokens parsed so far
      */
     private List<String> ArgList()
     {
@@ -92,7 +91,7 @@ public class Parser
         }
         else
         {
-            error();
+            error(parsed);
         }
         log("ArgList", parsed);
         return parsed;
@@ -100,13 +99,7 @@ public class Parser
     
     /**
      * Parse an Arg.
-     * Arg = Function
-     = Lambda
-     = List
-     = float_literal
-     = string_literal
-     = int_literal
-     = id
+     * @return list of tokens parsed so far
      */
     private List<String> Arg()
     {
@@ -148,7 +141,7 @@ public class Parser
         }
         else
         {
-            error();
+            error(parsed);
         }
         log("Arg", parsed);
         return parsed;
@@ -156,7 +149,7 @@ public class Parser
     
     /**
      * Parse an ArgRest.
-     * ArgRest = , Arg
+     * @return list of tokens parsed so far
      */
     private List<String> ArgRest()
     {
@@ -169,7 +162,7 @@ public class Parser
     
     /**
      * Parse Args.
-     * Args = Arg ArgRest*
+     * @return list of tokens parsed so far
      */
     private List<String> Args()
     {
@@ -183,6 +176,10 @@ public class Parser
         return parsed;
     }
     
+    /**
+     * Parse a BinOp.
+     * @return list of tokens parsed so far
+     */
     private List<String> BinOp()
     {
         List<String> parsed = new ArrayList<>();
@@ -200,7 +197,7 @@ public class Parser
         }
         else
         {
-            error();
+            error(parsed);
         }
         log("BinOp", parsed);
         return parsed;
@@ -208,7 +205,7 @@ public class Parser
     
     /**
      * Parse a Branch.
-     * Branch = ; If : Else
+     * @return list of tokens parsed so far
      */
     private List<String> Branch()
     {
@@ -225,7 +222,7 @@ public class Parser
     
     /**
      * Parse a Def.
-     * Def = def id Sig := Function
+     * @return list of tokens parsed so far
      */
     private List<String> Def()
     {
@@ -242,6 +239,7 @@ public class Parser
     /**
      * Parse a string escape sequence in the format:
      * \<escape_chars>
+     * @return list of tokens parsed so far
      */
     private List<String> Escape()
     {
@@ -295,7 +293,7 @@ public class Parser
                 eat(TEscapeVerticalTab.class, parsed);
                 break;
             default:
-                error();
+                error(parsed);
         }
         log("Escape sequence", parsed);
         return parsed;
@@ -303,7 +301,7 @@ public class Parser
     
     /**
      * Parse a FoldBody.
-     * FoldBody = ( FuncName, FoldArg)
+     * @return list of tokens parsed so far
      */
     private List<String> FoldBody()
     {
@@ -319,18 +317,15 @@ public class Parser
     
     /**
      * Parse a Function.
-     * Function = FuncName ArgList
-      = Branch
-      = Foldl
-      = Foldr
+     * @return list of tokens parsed so far
      */
     private List<String> Function()
     {
         List<String> parsed = new ArrayList<>();
-        if (token instanceof TIdentifier ||
-            token instanceof TLambdaStart)
+        if (isUserFunc())
         {
             parsed.addAll(UserFunc());
+            parsed.addAll(ArgList());
         }
         else if (isNativeUnaryOp())
         {
@@ -368,7 +363,7 @@ public class Parser
         }
         else
         {
-            error();
+            error(parsed);
         }
         log("Function", parsed);
         return parsed;
@@ -376,7 +371,7 @@ public class Parser
     
     /**
      * Parse a Lambda.
-     * Lambda = \(ArgList -> Function)
+     * @return list of tokens parsed so far
      */
     private List<String> Lambda()
     {
@@ -393,8 +388,7 @@ public class Parser
     
     /**
      * Parse a List.
-     * List = [ Args ]
-     *      = []
+     * @return list of tokens parsed so far
      */
     private List<String> List()
     {
@@ -411,12 +405,16 @@ public class Parser
         }
         else
         {
-            error();
+            error(parsed);
         }
         log("List", parsed);
         return parsed;
     }
     
+    /**
+     * Parse a ListArgument
+     * @return list of tokens parsed so far
+     */
     private List<String> ListArgument()
     {
         List<String> parsed = new ArrayList<>();
@@ -434,12 +432,16 @@ public class Parser
         }
         else
         {
-            error();
+            error(parsed);
         }
         log("ListArgument", parsed);
         return parsed;
     }
     
+    /**
+     * Parse a Map
+     * @return list of tokens parsed so far
+     */
     private List<String> Map()
     {
         List<String> parsed = new ArrayList<>();
@@ -453,6 +455,10 @@ public class Parser
         return parsed;
     }
     
+    /**
+     * Parse a NativeUnaryOp.
+     * @return list of tokens parsed so far
+     */
     private List<String> NativeUnaryOp()
     {
         List<String> parsed = new ArrayList<>();
@@ -489,11 +495,16 @@ public class Parser
                 eat(TMap.class, parsed);
                 break;
             default:
-                error();
+                error(parsed);
         }
         log("NativeUnaryOp", parsed);
         return parsed;
     }
+    
+    /**
+     * Parse a NativeBinOp
+     * @return list of tokens parsed so far
+     */
     private List<String> NativeBinOp()
     {
         List<String> parsed = new ArrayList<>();
@@ -548,37 +559,36 @@ public class Parser
                 eat(TAppend.class, parsed);
                 break;   
             default:
-                error();
+                error(parsed);
         }
         log("NativeBinOp", parsed);
         return parsed;
     }
     
     /**
-     * Parse a Program.
-     * Program = Def* Function
+     * Parse a Program.  This is the starting rule for the WOL(F) grammar.
      */
     private void Program()
     {
+        List<String> parsed = new ArrayList<>();
         while (token instanceof TDef)
         {
-            program_parsed.addAll(Def());
+            parsed.addAll(Def());
         }
         if (isFunction())
         {
-            program_parsed.addAll(Function());
+            parsed.addAll(Function());
         }
         else
         {
-            error();
+            error(parsed);
         }
-        log("Program", program_parsed);
+        log("Program", parsed);
     }
     
     /**
      * Parse a Sig.
-     * Sig = ()
-     *     = (SigArgs)
+     * @return list of tokens parsed so far
      */
     private List<String> Sig()
     {
@@ -594,7 +604,7 @@ public class Parser
     
     /**
      * Parse a SigArgRest.
-     * SigArgRest = , id
+     * @return list of tokens parsed so far
      */
     private List<String> SigArgRest()
     {
@@ -607,7 +617,7 @@ public class Parser
     
     /**
      * Parse SigArgs.
-     * SigArgs = id SigArgRest*
+     * @return list of tokens parsed so far
      */
     private List<String> SigArgs()
     {
@@ -623,6 +633,7 @@ public class Parser
     
     /**
      * Parse a string literal, which may include escape sequences.
+     * @return list of tokens parsed so far
      */
     private List<String> String()
     {
@@ -640,7 +651,7 @@ public class Parser
             }
             else
             {
-                error();
+                error(parsed);
             }
         }
         eat(TStringEnd.class, parsed);
@@ -648,6 +659,10 @@ public class Parser
         return parsed;
     }
     
+    /**
+     * Parse a UnaryOp
+     * @return list of tokens parsed so far
+     */
     private List<String> UnaryOp()
     {
         List<String> parsed = new ArrayList<>();
@@ -667,6 +682,10 @@ public class Parser
         return parsed;
     }
     
+    /**
+     * Parse a UserFunc.
+     * @return list of tokens parsed so far
+     */
     private List<String> UserFunc()
     {
         List<String> parsed = new ArrayList<>();
@@ -680,7 +699,7 @@ public class Parser
         }
         else
         {
-            error();
+            error(parsed);
         }
         log("UserFunc", parsed);
         return parsed;
@@ -701,7 +720,7 @@ public class Parser
         }
         else
         {
-            error();
+            error(parsed);
         }
     }
     
@@ -710,7 +729,7 @@ public class Parser
      * not match the expected token.  Log the type of token, its position,
      * and the token itself.
      */
-    private void error()
+    private void error(List<String> parsed)
     {
         StringBuilder sb = new StringBuilder();
         sb.append("Unexpected token type: ")
@@ -718,7 +737,23 @@ public class Parser
           .append("(line ").append(line_count)
           .append(", column").append(token.getPos()).append("): ")
           .append(token.getText());
-        throw new IllegalArgumentException(sb.toString());
+        if (!parsed.isEmpty()) {
+          sb.append("\nContext: ");
+            for (String token_string : parsed)
+            {
+                sb.append(token_string).append(" ");
+            }
+        }
+        try 
+        {
+            writer.append(sb.toString().trim());
+            writer.close();
+        } 
+        catch (IOException e) 
+        {
+            // Do nothing; thrown error will send the message to output
+        }
+        throw new IllegalArgumentException(sb.toString().trim());
     }
     
     /**
@@ -731,16 +766,6 @@ public class Parser
     {
         String[] token_name_parts = token.getClass().getName().split("\\.");
         return token_name_parts[token_name_parts.length - 1];
-    }
-    
-    private boolean isBinOp()
-    {
-        return isUserFunc() || isNativeBinOp();
-    }
-    
-    private boolean isUnaryOp()
-    {
-        return isUserFunc() || isNativeUnaryOp();
     }
     
     /**
@@ -759,6 +784,11 @@ public class Parser
                token instanceof TMap;
     }
     
+    /**
+     * Decide if the current token indicates a NativeBinOp.
+     * @return true if the current token is a token that can start a
+     * NativeBinOp, false otherwise.
+     */
     private boolean isNativeBinOp()
     {
         return token instanceof TPrepend ||
@@ -779,6 +809,11 @@ public class Parser
                token instanceof TXor;
     }
     
+    /**
+     * Decide if the current token indicates a NativeUnaryOp.
+     * @return true if the current token is a token that can start a
+     * NativeUnaryOp, false otherwise.
+     */
     private boolean isNativeUnaryOp()
     {
         return token instanceof THead ||
@@ -792,6 +827,11 @@ public class Parser
                token instanceof TLogicalNot;
     }
     
+    /**
+     * Decide if the current token indicates a UserFunc.
+     * @return true if the current token is a token that can start a UserFunc,
+     * false otherwise.
+     */
     private boolean isUserFunc()
     {
         return token instanceof TIdentifier ||
@@ -799,8 +839,8 @@ public class Parser
     }
     
     /**
-     * Decide if the current token indicates a Argument.
-     * @return true if the current token is a token that can start a Argument,
+     * Decide if the current token indicates an Arg.
+     * @return true if the current token is a token that can start an Arg,
      * false otherwise.
      */
     private boolean isArg()
@@ -814,14 +854,20 @@ public class Parser
                isFunction();
     }
     
-    private void log(String func_name, List<String> parsed)
+    /**
+     * Log information about the last nonterminal parsed
+     * @param nonterminal_name the name of the nonterminal parsed
+     * @param parsed the list of symbols corresponding to the nonterminal.
+     */
+    private void log(String nonterminal_name, List<String> parsed)
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(func_name).append(" parsed successfully: ");
+        sb.append(nonterminal_name).append(" parsed successfully: ");
         for (String parsed_token_strings : parsed)
         {
             sb.append(parsed_token_strings).append(" ");
         }
+        sb.append("\n");
         if (writer != null)
         {
             try 
@@ -846,7 +892,15 @@ public class Parser
                token instanceof TNewline || 
                token instanceof TComment)
         {
-            if (token instanceof TNewline)
+            /* If a comment spans multiple lines, it will hide newlines.
+             * Add the number of newlines in the comment to the count.
+             */
+            if (token instanceof TComment)
+            {
+                line_count += token.getText().split("\n").length - 1;
+            }
+            // Add the number of newlines in the program to the count.
+            else if (token instanceof TNewline)
             {
                 line_count++;
             }

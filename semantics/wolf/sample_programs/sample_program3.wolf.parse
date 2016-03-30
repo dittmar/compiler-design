@@ -1,0 +1,83 @@
+SigArgRest parsed successfully: , list 
+SigArgs parsed successfully: n , list 
+Sig parsed successfully: ( n , list ) 
+NativeBinOp parsed successfully: = 
+NativeUnaryOp parsed successfully: # 
+Arg parsed successfully: list 
+Function parsed successfully: # ( list ) 
+Arg parsed successfully: # ( list ) 
+Arg parsed successfully: 0 
+Function parsed successfully: = ( # ( list ) , 0 ) 
+NativeBinOp parsed successfully: $ 
+Arg parsed successfully: n 
+List parsed successfully: [ ] 
+Arg parsed successfully: [ ] 
+Function parsed successfully: $ ( n , [ ] ) 
+NativeBinOp parsed successfully: <= 
+Arg parsed successfully: n 
+NativeUnaryOp parsed successfully: h 
+Arg parsed successfully: list 
+Function parsed successfully: h ( list ) 
+Arg parsed successfully: h ( list ) 
+Function parsed successfully: <= ( n , h ( list ) ) 
+NativeBinOp parsed successfully: ^ 
+Arg parsed successfully: n 
+Arg parsed successfully: list 
+Function parsed successfully: ^ ( n , list ) 
+NativeBinOp parsed successfully: ^ 
+NativeUnaryOp parsed successfully: h 
+Arg parsed successfully: list 
+Function parsed successfully: h ( list ) 
+Arg parsed successfully: h ( list ) 
+Arg parsed successfully: n 
+NativeUnaryOp parsed successfully: t 
+Arg parsed successfully: list 
+Function parsed successfully: t ( list ) 
+Arg parsed successfully: t ( list ) 
+ArgRest parsed successfully: , t ( list ) 
+Args parsed successfully: n , t ( list ) 
+ArgList parsed successfully: ( n , t ( list ) ) 
+Arg parsed successfully: insert ( n , t ( list ) ) 
+Function parsed successfully: ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Branch parsed successfully: ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Function parsed successfully: ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Branch parsed successfully: ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Function parsed successfully: ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Def parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+SigArgs parsed successfully: list 
+Sig parsed successfully: ( list ) 
+NativeBinOp parsed successfully: < 
+NativeUnaryOp parsed successfully: # 
+Arg parsed successfully: list 
+Function parsed successfully: # ( list ) 
+Arg parsed successfully: # ( list ) 
+Arg parsed successfully: 2 
+Function parsed successfully: < ( # ( list ) , 2 ) 
+NativeUnaryOp parsed successfully: @ 
+Arg parsed successfully: list 
+Function parsed successfully: @ ( list ) 
+UserFunc parsed successfully: insert 
+NativeUnaryOp parsed successfully: h 
+Arg parsed successfully: list 
+Function parsed successfully: h ( list ) 
+Arg parsed successfully: h ( list ) 
+NativeUnaryOp parsed successfully: t 
+Arg parsed successfully: list 
+Function parsed successfully: t ( list ) 
+Arg parsed successfully: t ( list ) 
+Args parsed successfully: t ( list ) 
+ArgList parsed successfully: ( t ( list ) ) 
+Arg parsed successfully: sort ( t ( list ) ) 
+ArgRest parsed successfully: , sort ( t ( list ) ) 
+Args parsed successfully: h ( list ) , sort ( t ( list ) ) 
+ArgList parsed successfully: ( h ( list ) , sort ( t ( list ) ) ) 
+Function parsed successfully: insert ( h ( list ) , sort ( t ( list ) ) ) 
+Branch parsed successfully: ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) 
+Function parsed successfully: ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) 
+Def parsed successfully: def sort ( list ) := ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) 
+UserFunc parsed successfully: sort 
+Arg parsed successfully: list 
+Args parsed successfully: list 
+ArgList parsed successfully: ( list ) 
+Function parsed successfully: sort ( list ) 
+Program parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) def sort ( list ) := ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) sort ( list ) 
