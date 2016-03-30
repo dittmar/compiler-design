@@ -5,7 +5,7 @@
 Program = DefList Function
 Program = Function
 
-DefList = DefList DefHeader
+DefList = DefHeader DefList
 DefList = DefHeader
 
 DefHeader = Def identifier Sig assign Function
@@ -13,10 +13,10 @@ DefHeader = Def identifier Sig assign Function
 Sig = l_paren r_paren
 Sig = l_paren SigArgs r_paren
     
-SigArgs = identifier SigArgRest
+SigArgs = SigArgRest identifier
 SigArgs = identifier
 
-SigArgRest = comma SigArgs
+SigArgRest = SigArgs comma
 
 Function = UserFunc ArgList
 Function = NativeUnaryOp l_paren Arg r_paren
@@ -75,10 +75,10 @@ UserFunc = Lambda
 ArgList = l_paren r_paren
 ArgList = l_paren Args r_paren
          
-Args = Arg ArgRest
+Args = ArgRest Arg
 Args = Arg
      
-ArgRest = comma Args
+ArgRest = Args comma
 
 Arg = Function
 Arg = List
@@ -90,9 +90,9 @@ Arg = String
 String = string_start string_end
 String = string_start StringMiddle string_end
        
-StringMiddle = StringMiddle string_body
+StringMiddle = string_body StringMiddle
 StringMiddle = string_body
-StringMiddle = StringMiddle StringEscapeSeq
+StringMiddle = StringEscapeSeq StringMiddle
 StringMiddle = StringEscapeSeq
               
 StringEscapeSeq = string_escape EscapeChar
