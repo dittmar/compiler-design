@@ -56,7 +56,20 @@ public class Parser
     {
         lexer = new WolfLexing(filename);
         token = nextValidToken();
+        try {
+            writer = new FileWriter(new File(filename + ".parse"));
+        } catch (IOException e) {
+            System.err.println("Could not create log file, writing to stdout");
+        }
         Program();
+        try 
+        {
+            writer.close();
+        } 
+        catch (IOException ex)
+        {
+            // writer already closed
+        }
     }
     
     /**
@@ -64,23 +77,25 @@ public class Parser
      * ArgList = ()
      *         = (Args) 
      */
-    private void ArgList()
+    private List<String> ArgList()
     {
-        eat(TLParen.class);
+        List<String> parsed = new ArrayList<>();
+        eat(TLParen.class, parsed);
         if (token instanceof TRParen)
         {
-            eat(TRParen.class);
+            eat(TRParen.class, parsed);
         }
         else if (isArg())
         {
-            Args();
-            eat(TRParen.class);
+            parsed.addAll(Args());
+            eat(TRParen.class, parsed);
         }
         else
         {
             error();
         }
-        System.out.println("ArgList parsed successfully.");
+        log("ArgList", parsed);
+        return parsed;
     }
     
     /**
@@ -93,109 +108,119 @@ public class Parser
      = int_literal
      = id
      */
-    private void Arg()
+    private List<String> Arg()
     {
+        List<String> parsed = new ArrayList<>();
         // The identifier could be a literal or a function call
         if (token instanceof TIdentifier)
         {
-            eat(TIdentifier.class);
+            eat(TIdentifier.class, parsed);
             // If it starts with a left parenthesis, it's a function call,
             // not a literal (e.g. float, string, int)
             if (token instanceof TLParen)
             {
-                ArgList();
+                parsed.addAll(ArgList());
             }
         }
         else if (token instanceof TIntNumber)
         {
-            eat(TIntNumber.class);
+            eat(TIntNumber.class, parsed);
         }
         else if (token instanceof TFloatNumber)
         {
-            eat(TFloatNumber.class);
+            eat(TFloatNumber.class, parsed);
         }
         else if (token instanceof TStringStart)
         {
-            String();
+            parsed.addAll(String());
         }
         else if (token instanceof TStartList)
         {
-            List();
+            parsed.addAll(List());
         }
         else if (token instanceof TLambdaStart)
         {
-            Lambda();
+            parsed.addAll(Lambda());
         }
         else if (isFunction())
         {
-            Function();
+            parsed.addAll(Function());
         }
         else
         {
             error();
         }
-        System.out.println("Arg parsed successfully.");
+        log("Arg", parsed);
+        return parsed;
     }
     
     /**
      * Parse an ArgRest.
      * ArgRest = , Arg
      */
-    private void ArgRest()
+    private List<String> ArgRest()
     {
-        eat(TComma.class);
-        Arg();
-        System.out.println("ArgRest parsed successfully.");
+        List<String> parsed = new ArrayList<>();
+        eat(TComma.class, parsed);
+        parsed.addAll(Arg());
+        log("ArgRest", parsed);
+        return parsed;
     }
     
     /**
      * Parse Args.
      * Args = Arg ArgRest*
      */
-    private void Args()
+    private List<String> Args()
     {
-        Arg();
+        List<String> parsed = new ArrayList<>();
+        parsed.addAll(Arg());
         while (token instanceof TComma)
         {
-            ArgRest();
+            parsed.addAll(ArgRest());
         }
-        System.out.println("Args parsed successfully.");
+        log("Args", parsed);
+        return parsed;
     }
     
-    private void BinOp()
+    private List<String> BinOp()
     {
+        List<String> parsed = new ArrayList<>();
         if (isNativeBinOp())
         {
-            NativeBinOp();
+            parsed.addAll(NativeBinOp());
         }
         else if (token instanceof TIdentifier)
         {
-            eat(TIdentifier.class);
+            eat(TIdentifier.class, parsed);
         }
         else if (token instanceof TLambdaStart)
         {
-            Lambda();
+            parsed.addAll(Lambda());
         }
         else
         {
             error();
         }
-        System.out.println("BinOp parsed successfully");
+        log("BinOp", parsed);
+        return parsed;
     }
     
     /**
      * Parse a Branch.
      * Branch = ; If : Else
      */
-    private void Branch()
+    private List<String> Branch()
     {
-        eat(TTernarySemi.class);
-        Function();
-        eat(TTernaryQuestionMark.class);
-        Function();
-        eat(TTernaryColon.class);
-        Function();
-        System.out.println("Branch parsed successfully.");
+        List<String> parsed = new ArrayList<>();
+        eat(TTernarySemi.class, parsed);
+        parsed.addAll(Function());
+        eat(TTernaryQuestionMark.class, parsed);
+        parsed.addAll(Function());
+        eat(TTernaryColon.class, parsed);
+        parsed.addAll(Function());
+        log("Branch", parsed);
+        return parsed;
     }
     
     /**
@@ -218,74 +243,78 @@ public class Parser
      * Parse a string escape sequence in the format:
      * \<escape_chars>
      */
-    private void Escape()
+    private List<String> Escape()
     {
-        eat(TStringEscape.class);
+        List<String> parsed = new ArrayList<>();
+        eat(TStringEscape.class, parsed);
         switch(getTokenName())
         {
             case "TEscapeAlarm":
-                eat(TEscapeAlarm.class);
+                eat(TEscapeAlarm.class, parsed);
                 break;
             case "TEscapeBackslash":
-                eat(TEscapeBackslash.class);
+                eat(TEscapeBackslash.class, parsed);
                 break;
             case "TEscapeBackspace":
-                eat(TEscapeBackspace.class);
+                eat(TEscapeBackspace.class, parsed);
                 break;
             case "TEscapeCarriageReturn":
-                eat(TEscapeCarriageReturn.class);
+                eat(TEscapeCarriageReturn.class, parsed);
                 break;
             case "TEscapeDefault":
-                eat(TEscapeDefault.class);
+                eat(TEscapeDefault.class, parsed);
                 break;
             case "TEscapeDoubleQuote":
-                eat(TEscapeDoubleQuote.class);
+                eat(TEscapeDoubleQuote.class, parsed);
                 break;
             case "TEscapeFormfeed":
-                eat(TEscapeFormfeed.class);
+                eat(TEscapeFormfeed.class, parsed);
                 break;
             case "TEscapeHexChar":
-                eat(TEscapeHexChar.class);
+                eat(TEscapeHexChar.class, parsed);
                 break;
             case "TEscapeNewline":
-                eat(TEscapeNewline.class);
+                eat(TEscapeNewline.class, parsed);
                 break;
             case "TEscapeOctalChar":
-                eat(TEscapeOctalChar.class);
+                eat(TEscapeOctalChar.class, parsed);
                 break;
             case "TEscapeQuestionMark":
-                eat(TEscapeQuestionMark.class);
+                eat(TEscapeQuestionMark.class, parsed);
                 break;
             case "TEscapeSingleQuote":
-                eat(TEscapeSingleQuote.class);
+                eat(TEscapeSingleQuote.class, parsed);
                 break;
             case "TEscapeTab":
-                eat(TEscapeTab.class);
+                eat(TEscapeTab.class, parsed);
                 break;
             case "TEscapeUnicodeChar":
-                eat(TEscapeUnicodeChar.class);
+                eat(TEscapeUnicodeChar.class, parsed);
                 break;
             case "TEscapeVerticalTab":
-                eat(TEscapeVerticalTab.class);
+                eat(TEscapeVerticalTab.class, parsed);
                 break;
             default:
                 error();
         }
-        System.out.println("Escape sequence parsed successfully.");
+        log("Escape sequence", parsed);
+        return parsed;
     }
     
     /**
      * Parse a FoldBody.
      * FoldBody = ( FuncName, FoldArg)
      */
-    private void FoldBody()
+    private List<String> FoldBody()
     {
-        eat(TLParen.class);
-        BinOp();
-        eat(TComma.class);
-        ListArgument();
-        eat(TRParen.class);
-        System.out.println("Fold function parsed successfully.");
+        List<String> parsed = new ArrayList<>();
+        eat(TLParen.class, parsed);
+        parsed.addAll(BinOp());
+        eat(TComma.class, parsed);
+        parsed.addAll(ListArgument());
+        eat(TRParen.class, parsed);
+        log("FoldBody", parsed);
+        return parsed;
     }
     
     /**
@@ -295,72 +324,71 @@ public class Parser
       = Foldl
       = Foldr
      */
-    private void Function()
+    private List<String> Function()
     {
         List<String> parsed = new ArrayList<>();
-        if (token instanceof TIdentifier)
+        if (token instanceof TIdentifier ||
+            token instanceof TLambdaStart)
         {
-            UserFunc();
+            parsed.addAll(UserFunc());
         }
         else if (isNativeUnaryOp())
         {
-            NativeUnaryOp();
-            eat(TLParen.class);
-            Arg();
-            eat(TRParen.class);
+            parsed.addAll(NativeUnaryOp());
+            eat(TLParen.class, parsed);
+            parsed.addAll(Arg());
+            eat(TRParen.class, parsed);
         }
         else if (isNativeBinOp())
         {
-            NativeBinOp();
-            eat(TLParen.class);
-            Arg();
-            eat(TComma.class);
-            Arg();
-            eat(TRParen.class);
+            parsed.addAll(NativeBinOp());
+            eat(TLParen.class, parsed);
+            parsed.addAll(Arg());
+            eat(TComma.class, parsed);
+            parsed.addAll(Arg());
+            eat(TRParen.class, parsed);
         }
         else if (token instanceof TTernarySemi)
         {
-            Branch();
+            parsed.addAll(Branch());
         }
         else if (token instanceof TFoldl)
         {
-            eat(TFoldl.class);
-            FoldBody();
+            eat(TFoldl.class, parsed);
+            parsed.addAll(FoldBody());
         }
         else if (token instanceof TFoldr)
         {
-            eat(TFoldr.class);
-            FoldBody();
+            eat(TFoldr.class, parsed);
+            parsed.addAll(FoldBody());
         }
         else if (token instanceof TMap)
         {
-            eat(TMap.class);
-            eat(TLParen.class);
-            UnaryOp();
-            eat(TComma.class);
-            ListArgument();
-            eat(TRParen.class);
+            parsed.addAll(Map());
         }
         else
         {
             error();
         }
-        System.out.println("Func parsed successfully.");
+        log("Function", parsed);
+        return parsed;
     }
     
     /**
      * Parse a Lambda.
      * Lambda = \(ArgList -> Function)
      */
-    private void Lambda()
+    private List<String> Lambda()
     {
-        eat(TLambdaStart.class);
-        eat(TLParen.class);
-        Sig();
-        eat(TLambdaArrow.class);
-        Function();
-        eat(TRParen.class);
-        System.out.println("Lambda parsed successfully.");
+        List<String> parsed = new ArrayList<>();
+        eat(TLambdaStart.class, parsed);
+        eat(TLParen.class, parsed);
+        parsed.addAll(Sig());
+        eat(TLambdaArrow.class, parsed);
+        parsed.addAll(Function());
+        eat(TRParen.class, parsed);
+        log("Lambda", parsed);
+        return parsed;
     }
     
     /**
@@ -368,137 +396,162 @@ public class Parser
      * List = [ Args ]
      *      = []
      */
-    private void List()
+    private List<String> List()
     {
-        eat(TStartList.class);
+        List<String> parsed = new ArrayList<>();
+        eat(TStartList.class, parsed);
         if (isArg())
         {
-            Args();
-            eat(TEndList.class);
+            parsed.addAll(Args());
+            eat(TEndList.class, parsed);
         } 
         else if (token instanceof TEndList)
         {
-            eat(TEndList.class);
+            eat(TEndList.class, parsed);
         }
         else
         {
             error();
         }
-        System.out.println("List parsed successfully.");
+        log("List", parsed);
+        return parsed;
     }
     
-    private void ListArgument()
+    private List<String> ListArgument()
     {
+        List<String> parsed = new ArrayList<>();
         if (token instanceof TStartList)
         {
-            List();
+            parsed.addAll(List());
         }
         else if (token instanceof TIdentifier)
         {
-            eat(TIdentifier.class);
+            eat(TIdentifier.class, parsed);
         }
         else if (isFunction())
         {
-            Function();
+            parsed.addAll(Function());
         }
         else
         {
             error();
         }
+        log("ListArgument", parsed);
+        return parsed;
     }
     
-    private void NativeUnaryOp()
+    private List<String> Map()
     {
+        List<String> parsed = new ArrayList<>();
+        eat(TMap.class, parsed);
+        eat(TLParen.class, parsed);
+        parsed.addAll(UnaryOp());
+        eat(TComma.class, parsed);
+        parsed.addAll(ListArgument());
+        eat(TRParen.class, parsed);
+        log("Map", parsed);
+        return parsed;
+    }
+    
+    private List<String> NativeUnaryOp()
+    {
+        List<String> parsed = new ArrayList<>();
         switch(getTokenName())
         {
             case "TNeg":
-                eat(TNeg.class);
+                eat(TNeg.class, parsed);
                 break;
             case "TLogicalNot":
-                eat(TLogicalNot.class);
+                eat(TLogicalNot.class, parsed);
                 break;
             case "THead":
-                eat(THead.class);
+                eat(THead.class, parsed);
                 break;
             case "TTail":
-                eat(TTail.class);
+                eat(TTail.class, parsed);
                 break;
             case "TReverse":
-                eat(TReverse.class);
+                eat(TReverse.class, parsed);
                 break;
             case "TFlatten":
-                eat(TFlatten.class);
+                eat(TFlatten.class, parsed);
                 break;
             case "TIdentity":
-                eat(TIdentity.class);
+                eat(TIdentity.class, parsed);
                 break;
             case "TPrint":
-                eat(TPrint.class);
+                eat(TPrint.class, parsed);
                 break;
             case "TLength":
-                eat(TLength.class);
+                eat(TLength.class, parsed);
+                break;
+            case "TMap":
+                eat(TMap.class, parsed);
                 break;
             default:
                 error();
         }
-        System.out.println("NativeUnaryOp parsed successfully");
+        log("NativeUnaryOp", parsed);
+        return parsed;
     }
-    private void NativeBinOp()
+    private List<String> NativeBinOp()
     {
+        List<String> parsed = new ArrayList<>();
         switch(getTokenName())
         {
             case "TPlus":
-                eat(TPlus.class);
+                eat(TPlus.class, parsed);
                 break;
             case "TMinus":
-                eat(TMinus.class);
+                eat(TMinus.class, parsed);
                 break;
             case "TMult":
-                eat(TMult.class);
+                eat(TMult.class, parsed);
                 break;
             case "TDiv":
-                eat(TDiv.class);
+                eat(TDiv.class, parsed);
                 break;
             case "TMod":
-                eat(TMod.class);
+                eat(TMod.class, parsed);
                 break;
             case "TLt":
-                eat(TLt.class);
+                eat(TLt.class, parsed);
                 break;
             case "TGt":
-                eat(TGt.class);
+                eat(TGt.class, parsed);
                 break;
             case "TLte":
-                eat(TLte.class);
+                eat(TLte.class, parsed);
                 break;
             case "TGte":
-                eat(TGte.class);
+                eat(TGte.class, parsed);
                 break;
             case "TEqual":
-                eat(TEqual.class);
+                eat(TEqual.class, parsed);
                 break;
             case "TNotEqual":
-                eat(TNotEqual.class);
+                eat(TNotEqual.class, parsed);
                 break;
             case "TAnd":
-                eat(TAnd.class);
+                eat(TAnd.class, parsed);
                 break;
             case "TOr":
-                eat(TOr.class);
+                eat(TOr.class, parsed);
                 break;
             case "TXor":
-                eat(TXor.class);
+                eat(TXor.class, parsed);
                 break;
             case "TPrepend":
-                eat(TPrepend.class);
+                eat(TPrepend.class, parsed);
                 break;
             case "TAppend":
-                eat(TAppend.class);
+                eat(TAppend.class, parsed);
                 break;   
             default:
                 error();
         }
-        System.out.println("NativeBinOp parsed successfully.");
+        log("NativeBinOp", parsed);
+        return parsed;
     }
     
     /**
@@ -536,89 +589,101 @@ public class Parser
         }
         eat(TRParen.class, parsed);
         log("Sig", parsed);
+        return parsed;
     }
     
     /**
      * Parse a SigArgRest.
      * SigArgRest = , id
      */
-    private void SigArgRest()
+    private List<String> SigArgRest()
     {
-        eat(TComma.class);
-        eat(TIdentifier.class);
-        System.out.println("SigArgRest parsed successfully.");
+        List<String> parsed = new ArrayList<>();
+        eat(TComma.class, parsed);
+        eat(TIdentifier.class, parsed);
+        log("SigArgRest", parsed);
+        return parsed;
     }
     
     /**
      * Parse SigArgs.
      * SigArgs = id SigArgRest*
      */
-    private void SigArgs()
+    private List<String> SigArgs()
     {
-        eat(TIdentifier.class);
+        List<String> parsed = new ArrayList<>();
+        eat(TIdentifier.class, parsed);
         while (token instanceof TComma)
         {
-            SigArgRest();
+            parsed.addAll(SigArgRest());
         }
-        System.out.println("SigArgs parsed successfully.");
+        log("SigArgs", parsed);
+        return parsed;
     }
     
     /**
      * Parse a string literal, which may include escape sequences.
      */
-    private void String()
+    private List<String> String()
     {
-        eat(TStringStart.class);
+        List<String> parsed = new ArrayList<>();
+        eat(TStringStart.class, parsed);
         while (!(token instanceof TStringEnd))
         {
             if (token instanceof TStringEscape)
             {
-                Escape();
+                parsed.addAll(Escape());
             }
             else if (token instanceof TStringBody)
             {
-                eat(TStringBody.class);
+                eat(TStringBody.class, parsed);
             }
             else
             {
                 error();
             }
         }
-        eat(TStringEnd.class);
-        System.out.println("String parsed successfully.");
+        eat(TStringEnd.class, parsed);
+        log("String", parsed);
+        return parsed;
     }
     
-    private void UnaryOp()
+    private List<String> UnaryOp()
     {
+        List<String> parsed = new ArrayList<>();
         if (isNativeUnaryOp())
         {
-            NativeUnaryOp();
+            parsed.addAll(NativeUnaryOp());
         }
         else if (token instanceof TIdentifier)
         {
-            eat(TIdentifier.class);
+            eat(TIdentifier.class, parsed);
         }
         else if (token instanceof TLambdaStart)
         {
-            Lambda();
+            parsed.addAll(Lambda());
         }
-        System.out.println("UnaryOp successfully parsed");
+        log("UnaryOp", parsed);
+        return parsed;
     }
     
-    private void UserFunc()
+    private List<String> UserFunc()
     {
+        List<String> parsed = new ArrayList<>();
         if (token instanceof TIdentifier)
         {
-            eat(TIdentifier.class);
+            eat(TIdentifier.class, parsed);
         }
         else if (token instanceof TLambdaStart)
         {
-            Lambda();
+            parsed.addAll(Lambda());
         }
         else
         {
             error();
         }
+        log("UserFunc", parsed);
+        return parsed;
     }
     
     // Helper functions
@@ -650,9 +715,8 @@ public class Parser
         StringBuilder sb = new StringBuilder();
         sb.append("Unexpected token type: ")
           .append(token.getClass().getName())
-          .append("\nError at line ").append(line_count)
-          .append(", column").append(token.getPos())
-          .append("\nInvalid token: ")
+          .append("(line ").append(line_count)
+          .append(", column").append(token.getPos()).append("): ")
           .append(token.getText());
         throw new IllegalArgumentException(sb.toString());
     }
@@ -667,6 +731,16 @@ public class Parser
     {
         String[] token_name_parts = token.getClass().getName().split("\\.");
         return token_name_parts[token_name_parts.length - 1];
+    }
+    
+    private boolean isBinOp()
+    {
+        return isUserFunc() || isNativeBinOp();
+    }
+    
+    private boolean isUnaryOp()
+    {
+        return isUserFunc() || isNativeUnaryOp();
     }
     
     /**
@@ -710,7 +784,6 @@ public class Parser
         return token instanceof THead ||
                token instanceof TTail ||
                token instanceof TReverse ||
-               token instanceof TMap ||
                token instanceof TLength ||
                token instanceof TFlatten ||
                token instanceof TIdentity ||
@@ -739,6 +812,27 @@ public class Parser
                token instanceof TStartList ||
                token instanceof TLambdaStart ||
                isFunction();
+    }
+    
+    private void log(String func_name, List<String> parsed)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append(func_name).append(" parsed successfully: ");
+        for (String parsed_token_strings : parsed)
+        {
+            sb.append(parsed_token_strings).append(" ");
+        }
+        if (writer != null)
+        {
+            try 
+            {
+                writer.append(sb.toString());
+            } 
+            catch (IOException e) 
+            {
+                System.out.println(sb.toString());
+            }
+        }
     }
     
     /**
@@ -785,29 +879,8 @@ public class Parser
                 catch(IllegalArgumentException iae)
                 {
                     // Make it easier to catch error output.
-                    System.err.println(iae.getMessage());
+                    System.out.println(iae.getMessage());
                 }
-            }
-        }
-    }
-    
-    private void log(String func_name, List<String> parsed)
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.append(func_name).append(" parsed successfully: ");
-        for (String parsed_token_strings : parsed)
-        {
-            sb.append(parsed_token_strings).append(" ");
-        }
-        if (writer != null)
-        {
-            try 
-            {
-                writer.append(sb.toString());
-            } 
-            catch (IOException e) 
-            {
-                System.out.println(sb.toString());
             }
         }
     }

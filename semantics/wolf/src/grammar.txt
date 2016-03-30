@@ -27,7 +27,7 @@ Function = map l_paren UnaryOp comma ListArgument r_paren
 
 Lambda = lambda_start l_paren Sig lambda_arrow Function r_paren
 
-FoldBody = l_paren bin_op comma ListArgument r_paren
+FoldBody = l_paren BinOp comma ListArgument r_paren
 
 ListArgument = List
 ListArgument = identifier
