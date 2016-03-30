@@ -7,14 +7,14 @@ import wolf.analysis.*;
 @SuppressWarnings("nls")
 public final class TTernarySemi extends Token
 {
-    public TTernarySemi(String text)
+    public TTernarySemi()
     {
-        setText(text);
+        super.setText(";");
     }
 
-    public TTernarySemi(String text, int line, int pos)
+    public TTernarySemi(int line, int pos)
     {
-        setText(text);
+        super.setText(";");
         setLine(line);
         setPos(pos);
     }
@@ -22,12 +22,18 @@ public final class TTernarySemi extends Token
     @Override
     public Object clone()
     {
-      return new TTernarySemi(getText(), getLine(), getPos());
+      return new TTernarySemi(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseTTernarySemi(this);
+    }
+
+    @Override
+    public void setText(@SuppressWarnings("unused") String text)
+    {
+        throw new RuntimeException("Cannot change TTernarySemi text.");
     }
 }

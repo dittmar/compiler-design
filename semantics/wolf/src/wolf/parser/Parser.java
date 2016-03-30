@@ -1,4 +1,9 @@
 package wolf.parser;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import wolf.*;
 import wolf.node.*;
 /**
@@ -16,13 +21,16 @@ public class Parser
 {
     private WolfLexing lexer;
     private Token token;
-    
+    private FileWriter writer;
+    private List<String> program_parsed;
+    private int line_count;
     /**
      * Empty constructor
      */
     public Parser()
     {
-        
+        program_parsed = new ArrayList<>();
+        line_count = 1;
     }
     
     /**
@@ -32,6 +40,11 @@ public class Parser
     {
         lexer = new WolfLexing();
         token = nextValidToken();
+        try {
+            writer = new FileWriter(new File("out.parse"));
+        } catch (IOException e) {
+            System.err.println("Could not create log file, writing to stdout");
+        }
         Program();
     }
     
@@ -189,14 +202,16 @@ public class Parser
      * Parse a Def.
      * Def = def id Sig := Function
      */
-    private void Def()
+    private List<String> Def()
     {
-        eat(TDef.class);
-        eat(TIdentifier.class);
-        Sig();
-        eat(TAssign.class);
-        Function();
-        System.out.println("Def parsed successfully.");
+        List<String> parsed = new ArrayList<>();
+        eat(TDef.class, parsed);
+        eat(TIdentifier.class, parsed);
+        parsed.addAll(Sig());
+        eat(TAssign.class, parsed);
+        parsed.addAll(Function());
+        log("Def", parsed);
+        return parsed;
     }
     
     /**
@@ -282,6 +297,7 @@ public class Parser
      */
     private void Function()
     {
+        List<String> parsed = new ArrayList<>();
         if (token instanceof TIdentifier)
         {
             UserFunc();
@@ -493,17 +509,17 @@ public class Parser
     {
         while (token instanceof TDef)
         {
-            Def();
+            program_parsed.addAll(Def());
         }
         if (isFunction())
         {
-            Function();
+            program_parsed.addAll(Function());
         }
         else
         {
             error();
         }
-        System.out.println("Program parsed successfully.");
+        log("Program", program_parsed);
     }
     
     /**
@@ -511,14 +527,15 @@ public class Parser
      * Sig = ()
      *     = (SigArgs)
      */
-    private void Sig()
+    private List<String> Sig()
     {
-        eat(TLParen.class);
+        List<String> parsed = new ArrayList<>();
+        eat(TLParen.class, parsed);
         if (token instanceof TIdentifier) {
-            SigArgs();
+            parsed.addAll(SigArgs());
         }
-        eat(TRParen.class);
-        System.out.println("Sig parsed successfully.");
+        eat(TRParen.class, parsed);
+        log("Sig", parsed);
     }
     
     /**
@@ -610,10 +627,11 @@ public class Parser
      * match the given class, then an error is thrown.
      * @param klass is the class of the token to be eaten.
      */
-    private void eat(Class klass)
+    private void eat(Class klass, List<String> parsed)
     {
         if (token.getClass().getName().equals(klass.getName()))
         {
+            parsed.add(token.getText());
             token = nextValidToken();
         }
         else
@@ -630,12 +648,12 @@ public class Parser
     private void error()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("Unexpected token type: ");
-        sb.append(token.getClass().getName());
-        sb.append("\nError at column: ");
-        sb.append(token.getPos());
-        sb.append("\nInvalid token: ");
-        sb.append(token.getText());
+        sb.append("Unexpected token type: ")
+          .append(token.getClass().getName())
+          .append("\nError at line ").append(line_count)
+          .append(", column").append(token.getPos())
+          .append("\nInvalid token: ")
+          .append(token.getText());
         throw new IllegalArgumentException(sb.toString());
     }
     
@@ -730,8 +748,14 @@ public class Parser
     private Token nextValidToken()
     {
         token = lexer.getToken();
-        while (token instanceof TSpace || token instanceof TComment)
+        while (token instanceof TSpace ||
+               token instanceof TNewline || 
+               token instanceof TComment)
         {
+            if (token instanceof TNewline)
+            {
+                line_count++;
+            }
             token = lexer.getToken();
         }
         return token;
@@ -761,8 +785,29 @@ public class Parser
                 catch(IllegalArgumentException iae)
                 {
                     // Make it easier to catch error output.
-                    System.out.println(iae.getMessage());
+                    System.err.println(iae.getMessage());
                 }
+            }
+        }
+    }
+    
+    private void log(String func_name, List<String> parsed)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append(func_name).append(" parsed successfully: ");
+        for (String parsed_token_strings : parsed)
+        {
+            sb.append(parsed_token_strings).append(" ");
+        }
+        if (writer != null)
+        {
+            try 
+            {
+                writer.append(sb.toString());
+            } 
+            catch (IOException e) 
+            {
+                System.out.println(sb.toString());
             }
         }
     }

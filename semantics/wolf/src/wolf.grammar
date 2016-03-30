@@ -11,7 +11,6 @@ digit = ['0'..'9'];
 // one or more digits
 digits = digit+;
 exp = ['e'+'E'] ['+'+'-']? digits;
-newline = [10 + 13];
 single_quote = ''';
 double_quote = '"';
 back_tick = '`';
@@ -67,8 +66,8 @@ print = 'print';
 def = 'def';
 
 comment = back_tick [[0..0xffff] - back_tick]* back_tick;
-space = ' ' | 9 | newline;
-
+space = ' ' | 9;
+newline = [10 + 13];
 assign = ':=';
 
 // relational operators
@@ -97,7 +96,7 @@ r_paren = ')';
 start_list = '[';
 end_list = ']';
 comma = ',';
-semi = ';';
+ternary_semi = ';';
 ternary_question_mark = question_mark;
 ternary_colon = ':';
 
@@ -109,7 +108,7 @@ float_number = (digits '.'? digits? | '.' digits)exp?;
 misc = [0..0xffff]; // catch all for any garbage.
 
 Ignored Tokens
-comment, space;
+comment, space, newline;
 
 Productions
 program = {user_defs} def_list function
@@ -223,7 +222,7 @@ escape_char = {alarm} escape_alarm
             | {unicode} escape_unicode_char
             | {default} escape_default;
             
-branch = semi [cond]: function
+branch = ternary_semi [cond]: function
          ternary_question_mark [if]: function
          ternary_colon [else]: function;
 list = {empty_list} start_list end_list

@@ -12,3 +12,6 @@ build.xml
 /sablecc/wolf/nbproject/private/
 /sablecc/wolf/build/
 /sablecc/wolf/nbproject/
+/semantics/wolf/build/
+/semantics/wolf/dist/
+/semantics/wolf/nbproject/

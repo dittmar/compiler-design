@@ -13,10 +13,9 @@ DefHeader = Def identifier Sig assign Function
 Sig = l_paren r_paren
 Sig = l_paren SigArgs r_paren
     
-SigArgs = SigArgRest identifier
-SigArgs = identifier
+SigArgs = identifier SigArgRest*
 
-SigArgRest = SigArgs comma
+SigArgRest = comma SigArgs
 
 Function = UserFunc ArgList
 Function = NativeUnaryOp l_paren Arg r_paren
