@@ -1,18 +1,18 @@
 /**
- * A sum expression. Represents addition of two expressions.
+ * A quotient expression. Represents division of two expressions.
  * @author (Kevin Dittmar)
  * @author (William Ezekiel)
  * @author (Joseph Alacqua)
  * @version Mar 29 2016
  */
-public class Sum extends Exp{
+public class Quotient extends Exp{
 
   /**
-   * Create a Sum
+   * Create a Quotient
    * @param l the left expression
    * @param r the right expression
    */
-  public Sum(Exp l, Exp r) {
+  public Quotient(Exp l, Exp r) {
     left = l;
     right = r;
   }

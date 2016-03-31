@@ -1,19 +1,19 @@
 /**
- * A sum expression. Represents addition of two expressions.
+ * An assign expression. Assigns a constant or expression to a variable.
  * @author (Kevin Dittmar)
  * @author (William Ezekiel)
  * @author (Joseph Alacqua)
- * @version Mar 29 2016
+ * @version Mar 30 2016
  */
-public class Sum extends Exp{
+public class Assign extends Exp{
 
   /**
-   * Create a Sum
-   * @param l the left expression
+   * Create an Assign
+   * @param v a variable
    * @param r the right expression
    */
-  public Sum(Exp l, Exp r) {
-    left = l;
+  public Assign(Variable v, Exp r) {
+    left = v;
     right = r;
   }
 
