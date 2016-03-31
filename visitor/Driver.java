@@ -96,7 +96,13 @@ public class Driver {
     q = new Quotient(five,five);
     System.out.println(toStr.visit(q) + " -> " + toStr.visit(simp.visit(q))); // 1
 
-    // Testing Mod, Mods pls b& joe
+    q = new Quotient(five, new Quotient(five,ten));
+    System.out.println(toStr.visit(q) + " -> " + toStr.visit(simp.visit(q))); // 10
+
+    q = new Quotient(new Quotient(five,ten),five);
+    System.out.println(toStr.visit(q) + " -> " + toStr.visit(simp.visit(q))); // 10
+
+    // Testing Mod
     System.out.println();
     Mod mod = new Mod(five,two);
     System.out.println(toStr.visit(mod) + " = " + eval.visit(mod)); // 1

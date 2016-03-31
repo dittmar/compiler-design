@@ -175,7 +175,30 @@ public class Simplify implements Visitor {
     if((Boolean) eq.visit(oneRight)) {
       return simpLeft;
     }
+
+    Exp rightIsQuotientSimplified;
+    if((rightIsQuotientSimplified = rightIsQuotientSimplification(simpLeft,simpRight)) != null) {
+      return rightIsQuotientSimplified;
+    }
+
+    Exp leftIsQuotientSimplified;
+    if((leftIsQuotientSimplified = rightIsQuotientSimplification(simpRight,simpLeft)) != null) {
+      return new Quotient(new Constant(1), leftIsQuotientSimplified);
+    }
+
     return result;
+  }
+
+
+  private Exp rightIsQuotientSimplification(Exp left, Exp right) {
+    Equals eq = new Equals();
+    if(right instanceof Quotient) {
+      Quotient q = new Quotient(left, right.left);
+      if((Boolean) eq.visit(q)) {
+        return right.right;
+      }
+    }
+    return null;
   }
 
   /**
