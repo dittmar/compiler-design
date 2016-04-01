@@ -13,7 +13,7 @@ public class ToString implements Visitor {
    * @return the string representation of the constant's value.
    */
   public String visit(Constant n) {
-    return "" + n.value;
+    return n.value.toString();
   }
 
   /**

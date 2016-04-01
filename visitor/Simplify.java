@@ -98,7 +98,7 @@ public class Simplify implements Visitor {
     }
 
     Exp productWithTwoQuotientsResult;
-    if((productWithTwoQuotientsResult = doubleQuotientSimplification(simpLeft,simpRight)) != null) {
+    if((productWithTwoQuotientsResult = productDoubleQuotientSimplification(simpLeft,simpRight)) != null) {
       return productWithTwoQuotientsResult;
     }
 
@@ -116,6 +116,14 @@ public class Simplify implements Visitor {
     return result;
   }
 
+  /**
+   * Simplification in which a quotient and simplified expression are multiplied. The denominator of
+   * the quotient is equal to the other expression.
+   * (b/a) * a = b
+   * @param left the left expression.
+   * @param right the right expression
+   * @return a simplified version of product or null if it cannot be simplified.
+   */
   private Exp productQuotientSimplification(Exp left, Exp right) {
     Equals eq = new Equals();
     if(left instanceof Quotient) {
@@ -128,7 +136,15 @@ public class Simplify implements Visitor {
     return null;
   }
 
-  private Exp doubleQuotientSimplification(Exp left, Exp right) {
+  /**
+   * Simplification in which the left and right of a product are both quotients that
+   * are reciprocals of one another.
+   * (a/b) * (b/a) = 1
+   * @param left the left expression
+   * @param right the right expression.
+   * @return a simplified version of product or null if it cannot be simplified.
+   */
+  private Exp productDoubleQuotientSimplification(Exp left, Exp right) {
     Equals eq = new Equals();
     if(left instanceof Quotient && right instanceof Quotient) {
       Product p1 = new Product(left.left,right.right);
@@ -177,12 +193,12 @@ public class Simplify implements Visitor {
     }
 
     Exp rightIsQuotientSimplified;
-    if((rightIsQuotientSimplified = rightIsQuotientSimplification(simpLeft,simpRight)) != null) {
+    if((rightIsQuotientSimplified =  quotientInQuotientSimplification(simpLeft,simpRight)) != null) {
       return rightIsQuotientSimplified;
     }
 
     Exp leftIsQuotientSimplified;
-    if((leftIsQuotientSimplified = rightIsQuotientSimplification(simpRight,simpLeft)) != null) {
+    if((leftIsQuotientSimplified =  quotientInQuotientSimplification(simpRight,simpLeft)) != null) {
       return new Quotient(new Constant(1), leftIsQuotientSimplified);
     }
 
@@ -190,7 +206,14 @@ public class Simplify implements Visitor {
   }
 
 
-  private Exp rightIsQuotientSimplification(Exp left, Exp right) {
+  /**
+   * Simplification in which a quotient contains one quotient. Two possible simplifications.
+   * a/(a/b) = b  or  (a/b)/a = (1/b)
+   * @param left the left expression.
+   * @param right the right expression
+   * @return a simplified version of quotient or null if it cannot be simplified.
+   */
+  private Exp quotientInQuotientSimplification(Exp left, Exp right) {
     Equals eq = new Equals();
     if(right instanceof Quotient) {
       Quotient q = new Quotient(left, right.left);
