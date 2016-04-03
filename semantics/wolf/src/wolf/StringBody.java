@@ -1,13 +1,13 @@
 package wolf;
 
-import wolf.enums.EscapeChar;
 import wolf.interfaces.StringMiddle;
+import wolf.node.TStringBody;
 
 /**
  *
  * @author Kevin Dittmar
  * @version Apr 3, 2016
  */
-public class StringEscapeSeq implements StringMiddle {
-    EscapeChar escape_char;
+public class StringBody implements StringMiddle {
+    TStringBody string_body;
 }

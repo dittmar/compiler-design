@@ -1,14 +1,13 @@
 package wolf;
 
 import wolf.interfaces.ListArgument;
-import wolf.interfaces.BinOp;
+import wolf.interfaces.Arg;
 
 /**
  *
  * @author Kevin Dittmar
  * @version Apr 3, 2016
  */
-public class FoldBody {
-    BinOp bin_op;
-    ListArgument list_argument;
+public class WolfList implements Arg, ListArgument {
+    ArgList arg_list;
 }

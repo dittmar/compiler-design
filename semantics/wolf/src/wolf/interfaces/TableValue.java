@@ -1,4 +1,4 @@
-package wolf;
+package wolf.interfaces;
 
 /**
  *

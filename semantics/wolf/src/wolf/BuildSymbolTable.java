@@ -1,5 +1,7 @@
 package wolf;
 
+import wolf.interfaces.Visitor;
+
 /**
  *
  * @author Kevin Dittmar

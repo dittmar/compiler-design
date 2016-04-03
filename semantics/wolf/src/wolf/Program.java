@@ -1,5 +1,7 @@
 package wolf;
 
+import wolf.interfaces.Visitor;
+import wolf.interfaces.WolfFunction;
 import java.util.List;
 
 /**
@@ -9,7 +11,7 @@ import java.util.List;
  */
 public class Program {
     List<Def> def_list;
-    Function function;
+    WolfFunction function;
     
     public void accept(Visitor v) {
         v.visit(this);

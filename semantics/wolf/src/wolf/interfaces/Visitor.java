@@ -1,4 +1,7 @@
-package wolf;
+package wolf.interfaces;
+
+import wolf.Def;
+import wolf.Program;
 
 /**
  *

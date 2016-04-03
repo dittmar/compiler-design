@@ -1,5 +1,7 @@
 package wolf;
 
+import wolf.interfaces.Visitor;
+import wolf.interfaces.WolfFunction;
 import wolf.node.TDef;
 
 /**
@@ -8,9 +10,9 @@ import wolf.node.TDef;
  * @version Apr 3, 2016
  */
 public class Def {
-    TDef def_name;
+    Identifier def_name;
     Sig sig;
-    Function function;
+    WolfFunction function;
     
     public void accept(Visitor v) {
         v.visit(this);
