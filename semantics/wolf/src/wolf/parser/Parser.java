@@ -1,4 +1,5 @@
 package wolf.parser;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,38 +7,36 @@ import java.util.ArrayList;
 import java.util.List;
 import wolf.*;
 import wolf.node.*;
+
 /**
- * A recursive descent Parser for the WOL(F) programming language.
- * Each non-helper function of the parser represents a non-terminal in the
- * grammar.  The rules for that non-terminal are in the header documentation
- * for its corresponding function.
- * 
+ * A recursive descent Parser for the WOL(F) programming language. Each
+ * non-helper function of the parser represents a non-terminal in the grammar.
+ * The rules for that non-terminal are in the header documentation for its
+ * corresponding function.
+ *
  * @author Kevin Dittmar
  * @author William Ezekiel
  * @author Joe Alacqua
  * @version Mar 1, 2016
  */
-public class Parser 
-{
+public class Parser {
+
     private WolfLexing lexer;
     private Token token;
     private FileWriter writer;
-    private List<String> program_parsed;
     private int line_count;
+
     /**
-     * Empty constructor
+     * Initialize line count.
      */
-    public Parser()
-    {
-        program_parsed = new ArrayList<>();
+    public Parser() {
         line_count = 1;
     }
-    
+
     /**
      * Parse a WOL(F) program from stdin.
      */
-    public void parse()
-    {
+    public void parse() {
         lexer = new WolfLexing();
         token = nextValidToken();
         try {
@@ -47,13 +46,13 @@ public class Parser
         }
         Program();
     }
-    
+
     /**
      * Parse a WOL(F) program from a file.
+     *
      * @param filename is the name of the file to parse as a WOL(F) program.
      */
-    public void parse(String filename)
-    {
+    public void parse(String filename) {
         lexer = new WolfLexing(filename);
         token = nextValidToken();
         try {
@@ -62,153 +61,121 @@ public class Parser
             System.err.println("Could not create log file, writing to stdout");
         }
         Program();
-        try 
-        {
+        try {
             writer.close();
-        } 
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             // writer already closed
         }
     }
-    
+
     /**
      * Parse an ArgList
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> ArgList()
-    {
+    private List<String> ArgList() {
         List<String> parsed = new ArrayList<>();
         eat(TLParen.class, parsed);
-        if (token instanceof TRParen)
-        {
+        if (token instanceof TRParen) {
             eat(TRParen.class, parsed);
-        }
-        else if (isArg())
-        {
+        } else if (isArg()) {
             parsed.addAll(Args());
             eat(TRParen.class, parsed);
-        }
-        else
-        {
+        } else {
             error(parsed);
         }
         log("ArgList", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse an Arg.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> Arg()
-    {
+    private List<String> Arg() {
         List<String> parsed = new ArrayList<>();
         // The identifier could be a literal or a function call
-        if (token instanceof TIdentifier)
-        {
+        if (token instanceof TIdentifier) {
             eat(TIdentifier.class, parsed);
             // If it starts with a left parenthesis, it's a function call,
             // not a literal (e.g. float, string, int)
-            if (token instanceof TLParen)
-            {
+            if (token instanceof TLParen) {
                 parsed.addAll(ArgList());
             }
-        }
-        else if (token instanceof TIntNumber)
-        {
+        } else if (token instanceof TIntNumber) {
             eat(TIntNumber.class, parsed);
-        }
-        else if (token instanceof TFloatNumber)
-        {
+        } else if (token instanceof TFloatNumber) {
             eat(TFloatNumber.class, parsed);
-        }
-        else if (token instanceof TStringStart)
-        {
+        } else if (token instanceof TStringStart) {
             parsed.addAll(String());
-        }
-        else if (token instanceof TStartList)
-        {
+        } else if (token instanceof TStartList) {
             parsed.addAll(List());
-        }
-        else if (token instanceof TLambdaStart)
-        {
+        } else if (token instanceof TLambdaStart) {
             parsed.addAll(Lambda());
-        }
-        else if (isFunction())
-        {
+        } else if (isFunction()) {
             parsed.addAll(Function());
-        }
-        else
-        {
+        } else {
             error(parsed);
         }
         log("Arg", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse an ArgRest.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> ArgRest()
-    {
+    private List<String> ArgRest() {
         List<String> parsed = new ArrayList<>();
         eat(TComma.class, parsed);
         parsed.addAll(Arg());
         log("ArgRest", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse Args.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> Args()
-    {
+    private List<String> Args() {
         List<String> parsed = new ArrayList<>();
         parsed.addAll(Arg());
-        while (token instanceof TComma)
-        {
+        while (token instanceof TComma) {
             parsed.addAll(ArgRest());
         }
         log("Args", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a BinOp.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> BinOp()
-    {
+    private List<String> BinOp() {
         List<String> parsed = new ArrayList<>();
-        if (isNativeBinOp())
-        {
+        if (isNativeBinOp()) {
             parsed.addAll(NativeBinOp());
-        }
-        else if (token instanceof TIdentifier)
-        {
+        } else if (token instanceof TIdentifier) {
             eat(TIdentifier.class, parsed);
-        }
-        else if (token instanceof TLambdaStart)
-        {
+        } else if (token instanceof TLambdaStart) {
             parsed.addAll(Lambda());
-        }
-        else
-        {
+        } else {
             error(parsed);
         }
         log("BinOp", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a Branch.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> Branch()
-    {
+    private List<String> Branch() {
         List<String> parsed = new ArrayList<>();
         eat(TTernarySemi.class, parsed);
         parsed.addAll(Function());
@@ -219,13 +186,13 @@ public class Parser
         log("Branch", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a Def.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> Def()
-    {
+    private List<String> Def() {
         List<String> parsed = new ArrayList<>();
         eat(TDef.class, parsed);
         eat(TIdentifier.class, parsed);
@@ -235,18 +202,16 @@ public class Parser
         log("Def", parsed);
         return parsed;
     }
-    
+
     /**
-     * Parse a string escape sequence in the format:
-     * \<escape_chars>
+     * Parse a string escape sequence in the format: \<escape_chars>
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> Escape()
-    {
+    private List<String> Escape() {
         List<String> parsed = new ArrayList<>();
         eat(TStringEscape.class, parsed);
-        switch(getTokenName())
-        {
+        switch (getTokenName()) {
             case "TEscapeAlarm":
                 eat(TEscapeAlarm.class, parsed);
                 break;
@@ -298,13 +263,13 @@ public class Parser
         log("Escape sequence", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a FoldBody.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> FoldBody()
-    {
+    private List<String> FoldBody() {
         List<String> parsed = new ArrayList<>();
         eat(TLParen.class, parsed);
         parsed.addAll(BinOp());
@@ -314,67 +279,52 @@ public class Parser
         log("FoldBody", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a Function.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> Function()
-    {
+    private List<String> Function() {
         List<String> parsed = new ArrayList<>();
-        if (isUserFunc())
-        {
+        if (isUserFunc()) {
             parsed.addAll(UserFunc());
             parsed.addAll(ArgList());
-        }
-        else if (isNativeUnaryOp())
-        {
+        } else if (isNativeUnaryOp()) {
             parsed.addAll(NativeUnaryOp());
             eat(TLParen.class, parsed);
             parsed.addAll(Arg());
             eat(TRParen.class, parsed);
-        }
-        else if (isNativeBinOp())
-        {
+        } else if (isNativeBinOp()) {
             parsed.addAll(NativeBinOp());
             eat(TLParen.class, parsed);
             parsed.addAll(Arg());
             eat(TComma.class, parsed);
             parsed.addAll(Arg());
             eat(TRParen.class, parsed);
-        }
-        else if (token instanceof TTernarySemi)
-        {
+        } else if (token instanceof TTernarySemi) {
             parsed.addAll(Branch());
-        }
-        else if (token instanceof TFoldl)
-        {
+        } else if (token instanceof TFoldl) {
             eat(TFoldl.class, parsed);
             parsed.addAll(FoldBody());
-        }
-        else if (token instanceof TFoldr)
-        {
+        } else if (token instanceof TFoldr) {
             eat(TFoldr.class, parsed);
             parsed.addAll(FoldBody());
-        }
-        else if (token instanceof TMap)
-        {
+        } else if (token instanceof TMap) {
             parsed.addAll(Map());
-        }
-        else
-        {
+        } else {
             error(parsed);
         }
         log("Function", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a Lambda.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> Lambda()
-    {
+    private List<String> Lambda() {
         List<String> parsed = new ArrayList<>();
         eat(TLambdaStart.class, parsed);
         eat(TLParen.class, parsed);
@@ -385,65 +335,53 @@ public class Parser
         log("Lambda", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a List.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> List()
-    {
+    private List<String> List() {
         List<String> parsed = new ArrayList<>();
         eat(TStartList.class, parsed);
-        if (isArg())
-        {
+        if (isArg()) {
             parsed.addAll(Args());
             eat(TEndList.class, parsed);
-        } 
-        else if (token instanceof TEndList)
-        {
+        } else if (token instanceof TEndList) {
             eat(TEndList.class, parsed);
-        }
-        else
-        {
+        } else {
             error(parsed);
         }
         log("List", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a ListArgument
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> ListArgument()
-    {
+    private List<String> ListArgument() {
         List<String> parsed = new ArrayList<>();
-        if (token instanceof TStartList)
-        {
+        if (token instanceof TStartList) {
             parsed.addAll(List());
-        }
-        else if (token instanceof TIdentifier)
-        {
+        } else if (token instanceof TIdentifier) {
             eat(TIdentifier.class, parsed);
-        }
-        else if (isFunction())
-        {
+        } else if (isFunction()) {
             parsed.addAll(Function());
-        }
-        else
-        {
+        } else {
             error(parsed);
         }
         log("ListArgument", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a Map
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> Map()
-    {
+    private List<String> Map() {
         List<String> parsed = new ArrayList<>();
         eat(TMap.class, parsed);
         eat(TLParen.class, parsed);
@@ -454,16 +392,15 @@ public class Parser
         log("Map", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a NativeUnaryOp.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> NativeUnaryOp()
-    {
+    private List<String> NativeUnaryOp() {
         List<String> parsed = new ArrayList<>();
-        switch(getTokenName())
-        {
+        switch (getTokenName()) {
             case "TNeg":
                 eat(TNeg.class, parsed);
                 break;
@@ -500,16 +437,15 @@ public class Parser
         log("NativeUnaryOp", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a NativeBinOp
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> NativeBinOp()
-    {
+    private List<String> NativeBinOp() {
         List<String> parsed = new ArrayList<>();
-        switch(getTokenName())
-        {
+        switch (getTokenName()) {
             case "TPlus":
                 eat(TPlus.class, parsed);
                 break;
@@ -557,41 +493,36 @@ public class Parser
                 break;
             case "TAppend":
                 eat(TAppend.class, parsed);
-                break;   
+                break;
             default:
                 error(parsed);
         }
         log("NativeBinOp", parsed);
         return parsed;
     }
-    
+
     /**
-     * Parse a Program.  This is the starting rule for the WOL(F) grammar.
+     * Parse a Program. This is the starting rule for the WOL(F) grammar.
      */
-    private void Program()
-    {
+    private void Program() {
         List<String> parsed = new ArrayList<>();
-        while (token instanceof TDef)
-        {
+        while (token instanceof TDef) {
             parsed.addAll(Def());
         }
-        if (isFunction())
-        {
+        if (isFunction()) {
             parsed.addAll(Function());
-        }
-        else
-        {
+        } else {
             error(parsed);
         }
         log("Program", parsed);
     }
-    
+
     /**
      * Parse a Sig.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> Sig()
-    {
+    private List<String> Sig() {
         List<String> parsed = new ArrayList<>();
         eat(TLParen.class, parsed);
         if (token instanceof TIdentifier) {
@@ -601,56 +532,49 @@ public class Parser
         log("Sig", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a SigArgRest.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> SigArgRest()
-    {
+    private List<String> SigArgRest() {
         List<String> parsed = new ArrayList<>();
         eat(TComma.class, parsed);
         eat(TIdentifier.class, parsed);
         log("SigArgRest", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse SigArgs.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> SigArgs()
-    {
+    private List<String> SigArgs() {
         List<String> parsed = new ArrayList<>();
         eat(TIdentifier.class, parsed);
-        while (token instanceof TComma)
-        {
+        while (token instanceof TComma) {
             parsed.addAll(SigArgRest());
         }
         log("SigArgs", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a string literal, which may include escape sequences.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> String()
-    {
+    private List<String> String() {
         List<String> parsed = new ArrayList<>();
         eat(TStringStart.class, parsed);
-        while (!(token instanceof TStringEnd))
-        {
-            if (token instanceof TStringEscape)
-            {
+        while (!(token instanceof TStringEnd)) {
+            if (token instanceof TStringEscape) {
                 parsed.addAll(Escape());
-            }
-            else if (token instanceof TStringBody)
-            {
+            } else if (token instanceof TStringBody) {
                 eat(TStringBody.class, parsed);
-            }
-            else
-            {
+            } else {
                 error(parsed);
             }
         }
@@ -658,280 +582,246 @@ public class Parser
         log("String", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a UnaryOp
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> UnaryOp()
-    {
+    private List<String> UnaryOp() {
         List<String> parsed = new ArrayList<>();
-        if (isNativeUnaryOp())
-        {
+        if (isNativeUnaryOp()) {
             parsed.addAll(NativeUnaryOp());
-        }
-        else if (token instanceof TIdentifier)
-        {
+        } else if (token instanceof TIdentifier) {
             eat(TIdentifier.class, parsed);
-        }
-        else if (token instanceof TLambdaStart)
-        {
+        } else if (token instanceof TLambdaStart) {
             parsed.addAll(Lambda());
         }
         log("UnaryOp", parsed);
         return parsed;
     }
-    
+
     /**
      * Parse a UserFunc.
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> UserFunc()
-    {
+    private List<String> UserFunc() {
         List<String> parsed = new ArrayList<>();
-        if (token instanceof TIdentifier)
-        {
+        if (token instanceof TIdentifier) {
             eat(TIdentifier.class, parsed);
-        }
-        else if (token instanceof TLambdaStart)
-        {
+        } else if (token instanceof TLambdaStart) {
             parsed.addAll(Lambda());
-        }
-        else
-        {
+        } else {
             error(parsed);
         }
         log("UserFunc", parsed);
         return parsed;
     }
-    
+
     // Helper functions
     /**
-     * Eats a token based on its class.  If the current token's class doesn't
+     * Eats a token based on its class. If the current token's class doesn't
      * match the given class, then an error is thrown.
+     *
      * @param klass is the class of the token to be eaten.
      */
-    private void eat(Class klass, List<String> parsed)
-    {
-        if (token.getClass().getName().equals(klass.getName()))
-        {
+    private void eat(Class klass, List<String> parsed) {
+        if (token.getClass().getName().equals(klass.getName())) {
             parsed.add(token.getText());
             token = nextValidToken();
-        }
-        else
-        {
+        } else {
             error(parsed);
         }
     }
-    
+
     /**
-     * Throw an IllegalArgumentException because the current token does
-     * not match the expected token.  Log the type of token, its position,
-     * and the token itself.
+     * Throw an IllegalArgumentException because the current token does not
+     * match the expected token. Log the type of token, its position, and the
+     * token itself.
      */
-    private void error(List<String> parsed)
-    {
+    private void error(List<String> parsed) {
         StringBuilder sb = new StringBuilder();
         sb.append("Unexpected token type: ")
-          .append(token.getClass().getName())
-          .append("(line ").append(line_count)
-          .append(", column").append(token.getPos()).append("): ")
-          .append(token.getText());
+                .append(token.getClass().getName())
+                .append("(line ").append(line_count)
+                .append(", column").append(token.getPos()).append("): ")
+                .append(token.getText());
         if (!parsed.isEmpty()) {
-          sb.append("\nContext: ");
-            for (String token_string : parsed)
-            {
+            sb.append("\nContext: ");
+            for (String token_string : parsed) {
                 sb.append(token_string).append(" ");
             }
         }
-        try 
-        {
+        try {
             writer.append(sb.toString().trim());
             writer.close();
-        } 
-        catch (IOException e) 
-        {
+        } catch (IOException e) {
             // Do nothing; thrown error will send the message to output
         }
         throw new IllegalArgumentException(sb.toString().trim());
     }
-    
+
     /**
-     * Get the name of a token from the extended class name.  Tokens
-     * are named wolf.node.<token_class>.  We want only the token_class for
-     * matching purposes.
+     * Get the name of a token from the extended class name. Tokens are named
+     * wolf.node.<token_class>. We want only the token_class for matching
+     * purposes.
+     *
      * @return the name of the token's class.
      */
-    private String getTokenName()
-    {
+    private String getTokenName() {
         String[] token_name_parts = token.getClass().getName().split("\\.");
         return token_name_parts[token_name_parts.length - 1];
     }
-    
+
     /**
      * Decide if the current token indicates a Function.
+     *
      * @return true if the current token is a token that can start a Function,
      * false otherwise.
      */
-    private boolean isFunction()
-    {
-        return isUserFunc() ||
-               isNativeUnaryOp() ||
-               isNativeBinOp() ||
-               token instanceof TTernarySemi ||
-               token instanceof TFoldl ||
-               token instanceof TFoldr ||
-               token instanceof TMap;
+    private boolean isFunction() {
+        return isUserFunc()
+                || isNativeUnaryOp()
+                || isNativeBinOp()
+                || token instanceof TTernarySemi
+                || token instanceof TFoldl
+                || token instanceof TFoldr
+                || token instanceof TMap;
     }
-    
+
     /**
      * Decide if the current token indicates a NativeBinOp.
+     *
      * @return true if the current token is a token that can start a
      * NativeBinOp, false otherwise.
      */
-    private boolean isNativeBinOp()
-    {
-        return token instanceof TPrepend ||
-               token instanceof TAppend ||
-               token instanceof TPlus ||
-               token instanceof TMinus ||
-               token instanceof TMult ||
-               token instanceof TDiv ||
-               token instanceof TMod ||
-               token instanceof TLt ||
-               token instanceof TLte ||
-               token instanceof TGt ||
-               token instanceof TGte ||
-               token instanceof TEqual ||
-               token instanceof TNotEqual ||
-               token instanceof TOr ||
-               token instanceof TAnd ||
-               token instanceof TXor;
+    private boolean isNativeBinOp() {
+        return token instanceof TPrepend
+                || token instanceof TAppend
+                || token instanceof TPlus
+                || token instanceof TMinus
+                || token instanceof TMult
+                || token instanceof TDiv
+                || token instanceof TMod
+                || token instanceof TLt
+                || token instanceof TLte
+                || token instanceof TGt
+                || token instanceof TGte
+                || token instanceof TEqual
+                || token instanceof TNotEqual
+                || token instanceof TOr
+                || token instanceof TAnd
+                || token instanceof TXor;
     }
-    
+
     /**
      * Decide if the current token indicates a NativeUnaryOp.
+     *
      * @return true if the current token is a token that can start a
      * NativeUnaryOp, false otherwise.
      */
-    private boolean isNativeUnaryOp()
-    {
-        return token instanceof THead ||
-               token instanceof TTail ||
-               token instanceof TReverse ||
-               token instanceof TLength ||
-               token instanceof TFlatten ||
-               token instanceof TIdentity ||
-               token instanceof TPrint ||
-               token instanceof TNeg ||
-               token instanceof TLogicalNot;
+    private boolean isNativeUnaryOp() {
+        return token instanceof THead
+                || token instanceof TTail
+                || token instanceof TReverse
+                || token instanceof TLength
+                || token instanceof TFlatten
+                || token instanceof TIdentity
+                || token instanceof TPrint
+                || token instanceof TNeg
+                || token instanceof TLogicalNot;
     }
-    
+
     /**
      * Decide if the current token indicates a UserFunc.
+     *
      * @return true if the current token is a token that can start a UserFunc,
      * false otherwise.
      */
-    private boolean isUserFunc()
-    {
-        return token instanceof TIdentifier ||
-               token instanceof TLambdaStart;
+    private boolean isUserFunc() {
+        return token instanceof TIdentifier
+                || token instanceof TLambdaStart;
     }
-    
+
     /**
      * Decide if the current token indicates an Arg.
-     * @return true if the current token is a token that can start an Arg,
-     * false otherwise.
+     *
+     * @return true if the current token is a token that can start an Arg, false
+     * otherwise.
      */
-    private boolean isArg()
-    {
-        return token instanceof TIdentifier ||
-               token instanceof TIntNumber ||
-               token instanceof TFloatNumber ||
-               token instanceof TStringStart ||
-               token instanceof TStartList ||
-               token instanceof TLambdaStart ||
-               isFunction();
+    private boolean isArg() {
+        return token instanceof TIdentifier
+                || token instanceof TIntNumber
+                || token instanceof TFloatNumber
+                || token instanceof TStringStart
+                || token instanceof TStartList
+                || token instanceof TLambdaStart
+                || isFunction();
     }
-    
+
     /**
      * Log information about the last nonterminal parsed
+     *
      * @param nonterminal_name the name of the nonterminal parsed
      * @param parsed the list of symbols corresponding to the nonterminal.
      */
-    private void log(String nonterminal_name, List<String> parsed)
-    {
+    private void log(String nonterminal_name, List<String> parsed) {
         StringBuilder sb = new StringBuilder();
         sb.append(nonterminal_name).append(" parsed successfully: ");
-        for (String parsed_token_strings : parsed)
-        {
+        for (String parsed_token_strings : parsed) {
             sb.append(parsed_token_strings).append(" ");
         }
         sb.append("\n");
-        if (writer != null)
-        {
-            try 
-            {
+        if (writer != null) {
+            try {
                 writer.append(sb.toString());
-            } 
-            catch (IOException e) 
-            {
+            } catch (IOException e) {
                 System.out.println(sb.toString());
             }
         }
     }
-    
+
     /**
      * Get the next valid token, skipping comments and whitespace.
+     *
      * @return the next non-ignored token.
      */
-    private Token nextValidToken()
-    {
+    private Token nextValidToken() {
         token = lexer.getToken();
-        while (token instanceof TSpace ||
-               token instanceof TNewline || 
-               token instanceof TComment)
-        {
+        while (token instanceof TSpace
+                || token instanceof TNewline
+                || token instanceof TComment) {
             /* If a comment spans multiple lines, it will hide newlines.
              * Add the number of newlines in the comment to the count.
              */
-            if (token instanceof TComment)
-            {
+            if (token instanceof TComment) {
                 line_count += token.getText().split("\n").length - 1;
-            }
-            // Add the number of newlines in the program to the count.
-            else if (token instanceof TNewline)
-            {
+            } // Add the number of newlines in the program to the count.
+            else if (token instanceof TNewline) {
                 line_count++;
             }
             token = lexer.getToken();
         }
         return token;
     }
-    
+
     /**
      * Driver to test parser.
+     *
      * @param args the names of all files to parse.
      */
-    public static void main(String args[])
-    {
-        if (args.length == 0)
-        {
+    public static void main(String args[]) {
+        if (args.length == 0) {
             new Parser().parse();
-        }
-        else
-        {
-            for (String filename : args)
-            {
+        } else {
+            for (String filename : args) {
                 System.out.println("Parsing " + filename);
                 // Wrap parse in try catch so that it will continue parsing
                 // the rest of the files.
-                try
-                {
+                try {
                     new Parser().parse(filename);
-                }
-                catch(IllegalArgumentException iae)
-                {
+                } catch (IllegalArgumentException iae) {
                     // Make it easier to catch error output.
                     System.out.println(iae.getMessage());
                 }

@@ -5,25 +5,27 @@
 Program = DefList Function
 Program = Function
 
-DefList = DefHeader DefList
-DefList = DefHeader
+DefList = Def DefList
+DefList = Def
 
-DefHeader = Def identifier Sig assign Function
+Def = def identifier Sig assign Function
 
 Sig = l_paren r_paren
 Sig = l_paren SigArgs r_paren
     
 SigArgs = identifier SigArgRest*
 
-SigArgRest = comma SigArgs
+SigArgRest = comma identifier
 
 Function = UserFunc ArgList
 Function = NativeUnaryOp l_paren Arg r_paren
 Function = NativeBinOp l_paren Arg comma Arg r_paren
 Function = Branch
-Function = Foldl FoldBody
-Function = Foldr FoldBody
-Function = map l_paren UnaryOp comma ListArgument r_paren
+Function = foldl FoldBody
+Function = foldr FoldBody
+Function = Map
+
+Map = map l_paren UnaryOp comma ListArgument r_paren
 
 Lambda = lambda_start l_paren Sig lambda_arrow Function r_paren
 
@@ -74,10 +76,9 @@ UserFunc = Lambda
 ArgList = l_paren r_paren
 ArgList = l_paren Args r_paren
          
-Args = ArgRest Arg
-Args = Arg
+Args = Arg ArgRest*
      
-ArgRest = Args comma
+ArgRest = comma Arg
 
 Arg = Function
 Arg = List

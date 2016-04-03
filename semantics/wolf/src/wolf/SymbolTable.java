@@ -3,17 +3,24 @@ import wolf.node.*;
 import java.util.Map;
 import java.util.HashMap;
 /**
- * A symbol table...more on this later.
- * @author sdb
+ * A symbol table.
+ * @author Kevin Dittmar
+ * @author William Ezekiel
  */
 public class SymbolTable {
-  Map<String,Binding> symTab;
-
+  Map<String, Binding> symbol_table;
+  SymbolTable parent_table;
+  
   /**
    * Create a symbol table
    */
   public SymbolTable() {
-    symTab = new HashMap();
+    symbol_table = new HashMap();
+  }
+  
+  public SymbolTable(SymbolTable parent_table) {
+    this();
+    this.parent_table = parent_table;
   }
 
   /**
@@ -24,8 +31,8 @@ public class SymbolTable {
    *    in symbol table.
    */
   public SymbolTable put(TIdentifier i, Binding b) {
-    if(!symTab.containsKey(i.getText())) {
-      symTab.put(i.getText(),b);
+    if(!symbol_table.containsKey(i.getText())) {
+      symbol_table.put(i.getText(),b);
       return this;
     }
     System.err.println("Identifier " + i + " already defined in this context");

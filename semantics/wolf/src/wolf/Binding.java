@@ -11,16 +11,16 @@ import wolf.node.*;
  */
 public class Binding {
     TIdentifier identifier;
-    Type type; // enum?  -- int, boolean?, string, float, list, function
+    TableValue table_value;
     
     /**
      * Create a binding. 
      * @param id the identifier
-     * @param type the type the identifier will be bound to
+     * @param table_value the type the identifier will be bound to
      */
-    public Binding(TIdentifier id, Type type) {
+    public Binding(TIdentifier id, TableValue table_value) {
         identifier = id;
-        this.type = type;
+        this.table_value = table_value;
     }
     
     /**
@@ -28,7 +28,7 @@ public class Binding {
      */
     @Override
     public String toString() {
-        return identifier.toString() + " |-> " + type;
+        return identifier.toString() + " |-> " + table_value.toString();
     }
     
     
