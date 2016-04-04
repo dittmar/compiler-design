@@ -1,4 +1,3 @@
 Sig parsed successfully: ( ) 
-NativeUnaryOp parsed successfully: h 
 NativeUnaryOp parsed successfully: print 
 Unexpected token type: wolf.node.TRParen(line 2, column30): )

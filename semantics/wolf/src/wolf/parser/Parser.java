@@ -302,6 +302,10 @@ public class Parser {
             eat(TComma.class, parsed);
             parsed.addAll(Arg());
             eat(TRParen.class, parsed);
+        } else if (isNativeListBinaryOp()) {
+            parsed.addAll(NativeListBinaryOp());
+        } else if (isNativeListUnaryOp()) {
+            parsed.addAll(NativeListUnaryOp());
         } else if (token instanceof TTernarySemi) {
             parsed.addAll(Branch());
         } else if (token instanceof TFoldl) {
@@ -394,51 +398,6 @@ public class Parser {
     }
 
     /**
-     * Parse a NativeUnaryOp.
-     *
-     * @return list of tokens parsed so far
-     */
-    private List<String> NativeUnaryOp() {
-        List<String> parsed = new ArrayList<>();
-        switch (getTokenName()) {
-            case "TNeg":
-                eat(TNeg.class, parsed);
-                break;
-            case "TLogicalNot":
-                eat(TLogicalNot.class, parsed);
-                break;
-            case "THead":
-                eat(THead.class, parsed);
-                break;
-            case "TTail":
-                eat(TTail.class, parsed);
-                break;
-            case "TReverse":
-                eat(TReverse.class, parsed);
-                break;
-            case "TFlatten":
-                eat(TFlatten.class, parsed);
-                break;
-            case "TIdentity":
-                eat(TIdentity.class, parsed);
-                break;
-            case "TPrint":
-                eat(TPrint.class, parsed);
-                break;
-            case "TLength":
-                eat(TLength.class, parsed);
-                break;
-            case "TMap":
-                eat(TMap.class, parsed);
-                break;
-            default:
-                error(parsed);
-        }
-        log("NativeUnaryOp", parsed);
-        return parsed;
-    }
-
-    /**
      * Parse a NativeBinOp
      *
      * @return list of tokens parsed so far
@@ -488,6 +447,21 @@ public class Parser {
             case "TXor":
                 eat(TXor.class, parsed);
                 break;
+            default:
+                error(parsed);
+        }
+        log("NativeBinOp", parsed);
+        return parsed;
+    }
+
+    /**
+     * Parse a NativeListBinaryOp
+     * 
+     * @return list of tokens parsed so far
+     */
+    private List<String> NativeListBinaryOp() {
+        List<String> parsed = new ArrayList<>();
+        switch(getTokenName()) {
             case "TPrepend":
                 eat(TPrepend.class, parsed);
                 break;
@@ -497,10 +471,76 @@ public class Parser {
             default:
                 error(parsed);
         }
-        log("NativeBinOp", parsed);
+        eat(TLParen.class, parsed);
+        Arg();
+        eat(TComma.class, parsed);
+        ListArgument();
+        eat(TRParen.class, parsed);
+        log("NativeListBinaryOp", parsed);
         return parsed;
     }
-
+    
+    /**
+     * Parse a NativeListUnaryOp
+     * @return list of tokens parsed so far
+     */
+    private List<String> NativeListUnaryOp()
+    {
+        List<String> parsed = new ArrayList<>();
+        switch(getTokenName()) {
+            case "THead":
+                eat(THead.class, parsed);
+                break;
+            case "TTail":
+                eat(TTail.class, parsed);
+                break;
+            case "TReverse":
+                eat(TReverse.class, parsed);
+                break;
+            case "TFlatten":
+                eat(TFlatten.class, parsed);
+                break;
+            case "TLength":
+                eat(TLength.class, parsed);
+                break;
+            default:
+                error(parsed);
+        }
+        eat(TLParen.class, parsed);
+        parsed.addAll(ListArgument());
+        eat(TRParen.class, parsed);
+        
+        log("NativeListUnaryOp", parsed);
+        return parsed;
+    }
+    
+    /**
+     * Parse a NativeUnaryOp.
+     *
+     * @return list of tokens parsed so far
+     */
+    private List<String> NativeUnaryOp() {
+        List<String> parsed = new ArrayList<>();
+        switch (getTokenName()) {
+            case "TNeg":
+                eat(TNeg.class, parsed);
+                break;
+            case "TLogicalNot":
+                eat(TLogicalNot.class, parsed);
+                break;
+            case "TIdentity":
+                eat(TIdentity.class, parsed);
+                break;
+            case "TPrint":
+                eat(TPrint.class, parsed);
+                break;
+            default:
+                error(parsed);
+        }
+        log("NativeUnaryOp", parsed);
+        return parsed;
+    }
+    
     /**
      * Parse a Program. This is the starting rule for the WOL(F) grammar.
      */
@@ -684,6 +724,8 @@ public class Parser {
         return isUserFunc()
                 || isNativeUnaryOp()
                 || isNativeBinOp()
+                || isNativeListBinaryOp()
+                || isNativeListUnaryOp()
                 || token instanceof TTernarySemi
                 || token instanceof TFoldl
                 || token instanceof TFoldr
@@ -697,9 +739,7 @@ public class Parser {
      * NativeBinOp, false otherwise.
      */
     private boolean isNativeBinOp() {
-        return token instanceof TPrepend
-                || token instanceof TAppend
-                || token instanceof TPlus
+        return token instanceof TPlus
                 || token instanceof TMinus
                 || token instanceof TMult
                 || token instanceof TDiv
@@ -715,6 +755,18 @@ public class Parser {
                 || token instanceof TXor;
     }
 
+    private boolean isNativeListBinaryOp() {
+        return token instanceof TPrepend || token instanceof TAppend;
+    }
+    
+    private boolean isNativeListUnaryOp() {
+        return token instanceof TLength
+                || token instanceof THead
+                || token instanceof TTail
+                || token instanceof TReverse
+                || token instanceof TFlatten;
+    }
+    
     /**
      * Decide if the current token indicates a NativeUnaryOp.
      *
@@ -722,12 +774,7 @@ public class Parser {
      * NativeUnaryOp, false otherwise.
      */
     private boolean isNativeUnaryOp() {
-        return token instanceof THead
-                || token instanceof TTail
-                || token instanceof TReverse
-                || token instanceof TLength
-                || token instanceof TFlatten
-                || token instanceof TIdentity
+        return token instanceof TIdentity
                 || token instanceof TPrint
                 || token instanceof TNeg
                 || token instanceof TLogicalNot;

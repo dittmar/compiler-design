@@ -56,8 +56,6 @@ Function parsed successfully: x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) 
 Arg parsed successfully: x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) 
 Function parsed successfully: | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) 
 Def parsed successfully: def relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) 
-NativeUnaryOp parsed successfully: _ 
-NativeUnaryOp parsed successfully: r 
 ArgList parsed successfully: ( ) 
 Arg parsed successfully: logical ( ) 
 Args parsed successfully: logical ( ) 
@@ -71,8 +69,10 @@ Arg parsed successfully: [ relational ( ) ]
 ArgRest parsed successfully: , [ relational ( ) ] 
 Args parsed successfully: [ logical ( ) ] , [ relational ( ) ] 
 List parsed successfully: [ [ logical ( ) ] , [ relational ( ) ] ] 
-Arg parsed successfully: [ [ logical ( ) ] , [ relational ( ) ] ] 
+ListArgument parsed successfully: [ [ logical ( ) ] , [ relational ( ) ] ] 
+NativeListUnaryOp parsed successfully: r ( [ [ logical ( ) ] , [ relational ( ) ] ] ) 
 Function parsed successfully: r ( [ [ logical ( ) ] , [ relational ( ) ] ] ) 
-Arg parsed successfully: r ( [ [ logical ( ) ] , [ relational ( ) ] ] ) 
+ListArgument parsed successfully: r ( [ [ logical ( ) ] , [ relational ( ) ] ] ) 
+NativeListUnaryOp parsed successfully: _ ( r ( [ [ logical ( ) ] , [ relational ( ) ] ] ) ) 
 Function parsed successfully: _ ( r ( [ [ logical ( ) ] , [ relational ( ) ] ] ) ) 
 Program parsed successfully: def logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) _ ( r ( [ [ logical ( ) ] , [ relational ( ) ] ] ) ) 
