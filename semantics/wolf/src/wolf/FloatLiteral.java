@@ -17,9 +17,10 @@ public class FloatLiteral implements Arg {
     /**
      * Accepts a visitor
      * @param v a visitor
+     * @return the type of this FloatLiteral, FLOAT
      */
     @Override
-    public void accept(Visitor v) {
-        v.visit(this);
+    public Object accept(Visitor v) {
+        return Type.FLOAT;
     }
 }

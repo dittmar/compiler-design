@@ -22,7 +22,7 @@ public class NativeBinary implements WolfFunction {
      * @param v a visitor
      */
     @Override
-    public void accept(Visitor v) {
-        v.visit(this);
+    public Object accept(Visitor v) {
+        return v.visit(this);
     }
 }

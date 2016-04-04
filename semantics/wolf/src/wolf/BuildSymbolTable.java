@@ -56,22 +56,23 @@ public class BuildSymbolTable implements Visitor {
      * @param n a function
      */
     @Override
-    public void visit(WolfFunction n) {
+    public Object visit(WolfFunction n) {
         if(n instanceof UserFunc) {
-            visit((UserFunc) n);
+            return visit((UserFunc) n);
         } else if(n instanceof NativeUnary) {
-            visit((NativeUnary) n);
+            return visit((NativeUnary) n);
         } else if(n instanceof NativeBinary) {
-            visit((NativeBinary) n);
+            return visit((NativeBinary) n);
         } else if (n instanceof Branch) {
-            visit((Branch) n);
+            return visit((Branch) n);
         } else if(n instanceof Fold) {
-            visit((Fold) n);
+            return visit((Fold) n);
         } else if(n instanceof WolfMap) {
-            visit((WolfMap) n);
+            return visit((WolfMap) n);
         } else {
             System.err.println("Invalid Function");
             System.exit(1);
+            return null;
         }
     }
     
@@ -80,9 +81,10 @@ public class BuildSymbolTable implements Visitor {
      * @param n a user function
      */
     @Override
-    public void visit(UserFunc n) {
+    public Object visit(UserFunc n) {
         n.user_func_name.accept(this);
         n.arg_list.accept(this);
+        return null;
     }
     
     /**
@@ -90,9 +92,8 @@ public class BuildSymbolTable implements Visitor {
      * @param n a native unary
      */
     @Override
-    public void visit(NativeUnary n) {
-        n.unary_op.accept(this);
-        n.arg.accept(this);
+    public Object visit(NativeUnary n) {
+        return n.accept(this);
     }
     
     /**
@@ -100,10 +101,11 @@ public class BuildSymbolTable implements Visitor {
      * @param n a branch
      */
     @Override
-    public void visit(Branch n) {
+    public Object visit(Branch n) {
         n.condition.accept(this);
         n.true_branch.accept(this);
         n.false_branch.accept(this);
+        return null;
     }
     
     /**
@@ -111,9 +113,10 @@ public class BuildSymbolTable implements Visitor {
      * @param n a mapping function object (WolfMap)
      */
     @Override
-    public void visit(WolfMap n) {
+    public Object visit(WolfMap n) {
         n.unary_op.accept(this);
         n.list_argument.accept(this);
+        return null;
     }
     
     /**
@@ -121,9 +124,10 @@ public class BuildSymbolTable implements Visitor {
      * @param n a fold function
      */
     @Override
-    public void visit(Fold n) {
+    public Object visit(Fold n) {
         n.fold_symbol.accept(this);
         n.fold_body.accept(this);
+        return null; //for now
     }
     
     /**
@@ -131,8 +135,8 @@ public class BuildSymbolTable implements Visitor {
      * @param n a fold symbol
      */
     @Override
-    public void visit(FoldSymbol n) {
-        n.accept(this);
+    public Object visit(FoldSymbol n) {
+        return n.accept(this);
     }
     
     /**
@@ -140,16 +144,17 @@ public class BuildSymbolTable implements Visitor {
      * @param n a unary operation object
      */
     @Override
-    public void visit(UnaryOp n) {
+    public Object visit(UnaryOp n) {
         if(n instanceof NativeUnary) {
-            visit((NativeUnary) n);
+            return visit((NativeUnary) n);
         } else if(n instanceof Identifier) {
-            visit((Identifier) n);
+            return visit((Identifier) n);
         } else if(n instanceof WolfLambda) {
-            visit((WolfLambda) n);
+            return visit((WolfLambda) n);
         } else {
             System.err.println("Invalid UnaryOp");
             System.exit(1);
+            return null;
         }
     }
     
@@ -158,17 +163,18 @@ public class BuildSymbolTable implements Visitor {
      * @param n a list argument
      */
     @Override
-    public void visit(ListArgument n) {
+    public Object visit(ListArgument n) {
         if(n instanceof WolfList) {
-            visit((WolfList) n);
+            return visit((WolfList) n);
         } else if(n instanceof Identifier) {
-            visit((Identifier) n);
+            return visit((Identifier) n);
         } else if(n instanceof WolfFunction) {
-            visit((WolfFunction) n);
+            return visit((WolfFunction) n);
         }
         else {
             System.err.println("Invalid List Argument");
             System.exit(1);
+            return null;
         }
     }
     
@@ -177,9 +183,10 @@ public class BuildSymbolTable implements Visitor {
      * @param n a lambda object (WolfLambda)
      */
     @Override
-    public void visit(WolfLambda n) {
+    public Object visit(WolfLambda n) {
         n.sig.accept(this);
         n.function.accept(this);
+        return null; // for now
     }
     
     /**
@@ -187,9 +194,10 @@ public class BuildSymbolTable implements Visitor {
      * @param n a fold body
      */
     @Override
-    public void visit(FoldBody n) {
+    public Object visit(FoldBody n) {
         n.bin_op.accept(this);
         n.list_argument.accept(this);
+        return null; // for now
     }
     
     /**
@@ -197,17 +205,18 @@ public class BuildSymbolTable implements Visitor {
      * @param n a binary operation
      */
     @Override
-    public void visit(BinOp n) {
+    public Object visit(BinOp n) {
         if(n instanceof NativeBinary) {
-            visit((NativeBinary) n);
+            return visit((NativeBinary) n);
         } else if(n instanceof Identifier) {
-            visit((Identifier) n);
+            return visit((Identifier) n);
         } else if(n instanceof WolfLambda) {
-            visit((WolfLambda) n);
+            return visit((WolfLambda) n);
         }
         else {
             System.err.println("Invalid BinOp");
             System.exit(1);
+            return null;
         }
     }
     
@@ -216,8 +225,8 @@ public class BuildSymbolTable implements Visitor {
      * @param n a list object (WolfList)
      */
     @Override
-    public void visit(WolfList n) {
-         n.arg_list.accept(this);
+    public Object visit(WolfList n) {
+         return n.arg_list.accept(this);
     }
     
     /**
@@ -225,47 +234,50 @@ public class BuildSymbolTable implements Visitor {
      * @param n an identifier
      */
     @Override
-    public void visit(Identifier n) {
-        n.accept(this);
+    public Object visit(Identifier n) {
+        return n.accept(this);
     }
     
     /**
      * Visit an argument
      * @param n an argument
+     * @return ???
      */
     @Override
-    public void visit(Arg n) {
+    public Object visit(Arg n) {
         if(n instanceof WolfFunction) {
-            visit((WolfFunction) n);
+            return visit((WolfFunction) n);
         } else if(n instanceof WolfList) {
-            visit((WolfList) n);
+            return visit((WolfList) n);
         } else if(n instanceof IntLiteral) {
-            visit((IntLiteral) n);
+            return visit((IntLiteral) n);
         } else if(n instanceof FloatLiteral) {
-            visit((FloatLiteral) n);
+            return visit((FloatLiteral) n);
         } else if(n instanceof Identifier) {
-            visit((Identifier) n);
+            return visit((Identifier) n);
         } else if(n instanceof WolfString) {
-            visit((WolfString) n);
+            return visit((WolfString) n);
         } else {
             System.err.println("Invalid Arg");
             System.exit(1);
+            return null;
         }
     }
     
     /**
      * Visit a user function name
-     * @param n a user functio name
+     * @param n a user function name
      */
     @Override
-    public void visit(UserFuncName n) {
+    public Object visit(UserFuncName n) {
         if(n instanceof Identifier) {
-            visit((Identifier) n);
+            return visit((Identifier) n);
         } else if(n instanceof WolfLambda) {
-            visit((WolfLambda) n);
+            return visit((WolfLambda) n);
         } else {
             System.err.println("Invalid UserFuncName");
             System.exit(1);
+            return null;
         }
     }
     
@@ -274,10 +286,11 @@ public class BuildSymbolTable implements Visitor {
      * @param n a list of arguments object (ArgList)
      */
     @Override
-    public void visit(ArgList n) {
+    public Object visit(ArgList n) {
         for(Arg arg:n.arg_list) {
             arg.accept(this);
         }
+        return n.accept(this);
     }
     
     /**
@@ -285,8 +298,8 @@ public class BuildSymbolTable implements Visitor {
      * @param n an integer literal
      */
     @Override
-    public void visit(IntLiteral n) {
-        n.accept(this);
+    public Object visit(IntLiteral n) {
+        return n.accept(this);
     }
     
     /**
@@ -294,18 +307,19 @@ public class BuildSymbolTable implements Visitor {
      * @param n a float literal
      */
     @Override
-    public void visit(FloatLiteral n) {
-        n.accept(this);
+    public Object visit(FloatLiteral n) {
+       return n.accept(this);
     }
     /**
      * Visit a string in the WOLF language
      * @param n a string object (WolfString)
      */
     @Override
-    public void visit(WolfString n) {
+    public Object visit(WolfString n) {
         for(StringMiddle sm:n.string_middle) {
             sm.accept(this);
         }
+        return n.accept(this);
     }
     
     /**
@@ -313,14 +327,15 @@ public class BuildSymbolTable implements Visitor {
      * @param n a string middle
      */
     @Override
-    public void visit(StringMiddle n) {
+    public Object visit(StringMiddle n) {
         if(n instanceof StringBody) {
-            visit((StringBody) n);
+            return visit((StringBody) n);
         } else if(n instanceof StringEscapeSeq) {
-            visit((StringEscapeSeq) n);
+            return visit((StringEscapeSeq) n);
         } else {
             System.err.println("Invalid StringMiddle");
             System.exit(1);
+            return null;
         }
     }
     
@@ -329,23 +344,15 @@ public class BuildSymbolTable implements Visitor {
      * @param n a string body
      */
     @Override
-    public void visit(StringBody n) {
-        n.accept(this);
+    public Object visit(StringBody n) {
+        return n.accept(this);
     }
     
     /**
      * Visit a string escape sequence
      * @param n a string escape sequence
      */
-    public void visit(StringEscapeSeq n) {
-        n.escape_char.accept(this);
+    public Object visit(StringEscapeSeq n) {
+        return n.accept(this);
     }
-    
-    /**
-     * Visit an escape character
-     * @param n an escape character
-     */
-    public void visit(EscapeChar n) {
-        n.accept(this);
-    } 
 }

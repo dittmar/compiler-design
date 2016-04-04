@@ -17,9 +17,10 @@ public class WolfList implements Arg, ListArgument {
     /**
      * Accept a visitor
      * @param v a visitor
+     * @return the type of this WolfList, LIST
      */
     @Override
-    public void accept(Visitor v) {
-        v.visit(this);
+    public Object accept(Visitor v) {
+        return Type.LIST;
     }
 }

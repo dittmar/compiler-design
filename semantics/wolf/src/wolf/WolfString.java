@@ -18,9 +18,10 @@ public class WolfString implements Arg {
     /**
      * Accept a visitor
      * @param v a visitor
+     * @return 
      */
     @Override
-    public void accept(Visitor v) {
-        v.visit(this);
+    public Object accept(Visitor v) {
+        return Type.STRING;
     }
 }

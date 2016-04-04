@@ -24,7 +24,7 @@ public class Identifier implements BinOp, UnaryOp, Arg, ListArgument,
      * @param v a visitor
      */
     @Override
-    public void accept(Visitor v) {
-        // To be completed
+    public Object accept(Visitor v) {
+        return null;
     }
 }

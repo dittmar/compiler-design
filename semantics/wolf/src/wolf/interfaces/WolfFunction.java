@@ -9,5 +9,5 @@ package wolf.interfaces;
  */
 public interface WolfFunction extends Arg, ListArgument {
     @Override
-    public void accept(Visitor v);
+    public Object accept(Visitor v);
 }

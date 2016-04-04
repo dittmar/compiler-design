@@ -22,7 +22,11 @@ public class NativeUnary implements WolfFunction, UnaryOp {
      * @param v a visitor
      */
     @Override
-    public void accept(Visitor v) {
-        v.visit(this);
+    public Object accept(Visitor v) {
+        Type argType = (Type) v.visit(arg);
+        switch(unary_op) {
+            
+        }
+        return null;
     }
 }

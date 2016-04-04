@@ -19,7 +19,8 @@ public class Branch implements WolfFunction {
     * Accept a visitor.
     * @param v a visitor
     */
-    public void accept(Visitor v) {
-        v.visit(this);
+    @Override
+    public Object accept(Visitor v) {
+        return v.visit(this);
     }
 }

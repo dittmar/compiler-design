@@ -30,7 +30,7 @@ public enum FoldSymbol {
      * Accept a visitor
      * @param v a visitor
      */
-    public void accept(Visitor v) {
-        // do nothing for now
+    public Object accept(Visitor v) {
+        return null;
     }
 }

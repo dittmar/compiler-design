@@ -39,12 +39,4 @@ public enum NativeUnaryOp {
     NativeUnaryOp(Class token_class) {
         this.token_class = token_class;
     }
-    
-    /**
-     * Accept a visitor
-     * @param v a visitor
-     */
-    public void accept(Visitor v) {
-        // do nothing
-    }
 }

@@ -8,5 +8,5 @@ package wolf.interfaces;
  * @version Apr 3, 2016
  */
 public interface Arg {
-    public void accept(Visitor v);
+    public Object accept(Visitor v);
 }

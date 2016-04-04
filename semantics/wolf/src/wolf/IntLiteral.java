@@ -17,9 +17,10 @@ public class IntLiteral implements Arg {
     /**
      * Accepts a visitor
      * @param v a visitor
+     * @return the type of this IntLiteral, INTEGER
      */
     @Override
-    public void accept(Visitor v) {
-        
+    public Object accept(Visitor v) {
+        return Type.INTEGER;
     }
 }
