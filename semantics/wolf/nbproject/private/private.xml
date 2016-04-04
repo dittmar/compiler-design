@@ -3,46 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/SymbolTable.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/IntLiteral.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/interfaces/UnaryOp.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/Fold.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/Def.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/TableValueTable.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/Type.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/enums/NativeUnaryOp.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/WolfLexing.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/interfaces/TableValue.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/WolfLambda.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/NativeBinary.java</file>
+            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/sample_programs/sample_program3.wolf</file>
             <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/parser/Parser.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/WolfList.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/StringEscapeSeq.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/BuildSymbolTable.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/WolfMap.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/interfaces/Arg.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/enums/NativeBinOp.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/enums/EscapeChar.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/interfaces/ListArgument.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/enums/FoldSymbol.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/FoldBody.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/ArgList.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/interfaces/Visitor.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/interfaces/StringMiddle.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/StringBody.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/interfaces/BinOp.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/interfaces/WolfFunction.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/UserFunc.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/TableValueType.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/WolfString.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/Binding.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/Program.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/Identifier.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/Sig.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/Branch.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/FloatLiteral.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/NativeUnary.java</file>
-            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/semantics/wolf/src/wolf/interfaces/UserFuncName.java</file>
         </group>
     </open-files>
 </project-private>

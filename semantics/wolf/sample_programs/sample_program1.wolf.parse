@@ -9,12 +9,12 @@ NativeUnaryOp parsed successfully: @
 Arg parsed successfully: 0 
 Function parsed successfully: @ ( 0 ) 
 NativeBinOp parsed successfully: + 
-NativeUnaryOp parsed successfully: h 
-Arg parsed successfully: list 
+ListArgument parsed successfully: list 
+NativeListUnaryOp parsed successfully: h ( list ) 
 Function parsed successfully: h ( list ) 
 Arg parsed successfully: h ( list ) 
-NativeUnaryOp parsed successfully: t 
-Arg parsed successfully: list 
+ListArgument parsed successfully: list 
+NativeListUnaryOp parsed successfully: t ( list ) 
 Function parsed successfully: t ( list ) 
 Arg parsed successfully: t ( list ) 
 Args parsed successfully: t ( list ) 
@@ -35,12 +35,12 @@ NativeUnaryOp parsed successfully: @
 Arg parsed successfully: 1 
 Function parsed successfully: @ ( 1 ) 
 NativeBinOp parsed successfully: * 
-NativeUnaryOp parsed successfully: h 
-Arg parsed successfully: list 
+ListArgument parsed successfully: list 
+NativeListUnaryOp parsed successfully: h ( list ) 
 Function parsed successfully: h ( list ) 
 Arg parsed successfully: h ( list ) 
-NativeUnaryOp parsed successfully: t 
-Arg parsed successfully: list 
+ListArgument parsed successfully: list 
+NativeListUnaryOp parsed successfully: t ( list ) 
 Function parsed successfully: t ( list ) 
 Arg parsed successfully: t ( list ) 
 Args parsed successfully: t ( list ) 

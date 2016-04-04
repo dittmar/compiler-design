@@ -59,24 +59,29 @@ NativeBinOp = not_equal
 NativeBinOp = and
 NativeBinOp = or
 NativeBinOp = xor
-NativeBinOp = append
-NativeBinOp = prepend
+
+NativeListBinary = NativeListBinOp l_paren Arg comma ListArgument r_paren
+NativeListBinOp = append
+NativeListBinOp = prepend
 
 NativeUnary = NativeUnaryOp l_paren Arg r_paren
 
 UnaryOp = NativeUnary
+UnaryOp = NativeListUnary
 UnaryOp = identifier
 UnaryOp = Lambda
 
 NativeUnaryOp = neg
 NativeUnaryOp = logical_not
-NativeUnaryOp = head
-NativeUnaryOp = tail
-NativeUnaryOp = reverse
-NativeUnaryOp = flatten
 NativeUnaryOp = identity
 NativeUnaryOp = print
-NativeUnaryOp = length
+
+NativeListUnary = NativeListUnaryOp l_paren ListArgument r_paren
+NativeListUnaryOp = head
+NativeListUnaryOp = tail
+NativeListUnaryOp = reverse
+NativeListUnaryOp = flatten
+NativeListUnaryOp = length
 
 UserFunc = UserFuncName ArgList
 
