@@ -1,6 +1,7 @@
 package wolf;
 
 import wolf.interfaces.Arg;
+import wolf.interfaces.Visitor;
 import wolf.node.TFloatNumber;
 
 /**
@@ -10,4 +11,7 @@ import wolf.node.TFloatNumber;
  */
 public class FloatLiteral implements Arg {
     TFloatNumber float_literal;
+    public void accept(Visitor v) {
+        v.visit(this);
+    }
 }

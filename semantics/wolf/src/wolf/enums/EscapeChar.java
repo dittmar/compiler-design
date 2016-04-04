@@ -1,5 +1,6 @@
 package wolf.enums;
 
+import wolf.interfaces.Visitor;
 import wolf.node.TEscapeAlarm;
 import wolf.node.TEscapeBackslash;
 import wolf.node.TEscapeBackspace;
@@ -42,5 +43,9 @@ public enum EscapeChar {
     
     EscapeChar(Class token_class) {
         this.token_class = token_class;
+    }
+    
+    public void accept(Visitor v) {
+        //magic
     }
 }

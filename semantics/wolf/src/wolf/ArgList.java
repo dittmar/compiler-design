@@ -1,6 +1,7 @@
 package wolf;
 import wolf.interfaces.Arg;
 import java.util.List;
+import wolf.interfaces.Visitor;
 /**
  *
  * @author Kevin Dittmar
@@ -8,4 +9,8 @@ import java.util.List;
  */
 public class ArgList {
     List<Arg> arg_list;
+    
+    public void accept(Visitor v) {
+        v.visit(this);
+    }
 }

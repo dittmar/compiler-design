@@ -12,7 +12,7 @@ Def = def identifier Sig assign Function
 
 Sig = l_paren r_paren
 Sig = l_paren SigArgs r_paren
-    
+
 SigArgs = identifier SigArgRest*
 
 SigArgRest = comma identifier
@@ -41,10 +41,10 @@ ListArgument = Function
 
 NativeBin = NativeBinOp l_paren Arg comma Arg r_paren
 
-BinOp = NativeBinOp
+BinOp = NativeBinary
 BinOp = identifier
 BinOp = Lambda
-       
+
 NativeBinOp = plus
 NativeBinOp = minus
 NativeBinOp = mult
@@ -64,7 +64,7 @@ NativeBinOp = prepend
 
 NativeUnary = NativeUnaryOp l_paren Arg r_paren
 
-UnaryOp = NativeUnaryOp
+UnaryOp = NativeUnary
 UnaryOp = identifier
 UnaryOp = Lambda
 
@@ -77,17 +77,17 @@ NativeUnaryOp = flatten
 NativeUnaryOp = identity
 NativeUnaryOp = print
 NativeUnaryOp = length
-                
+
 UserFunc = UserFuncName ArgList
 
 UserFuncName = identifier
-UserFunc = Lambda
-          
+UserFuncName = Lambda
+
 ArgList = l_paren r_paren
 ArgList = l_paren Args r_paren
-         
+
 Args = Arg ArgRest*
-     
+
 ArgRest = comma Arg
 
 Arg = Function
@@ -96,12 +96,12 @@ Arg = int_number
 Arg = float_number
 Arg = identifier
 Arg = String
-    
+
 String = string_start StringMiddle* string_end
-       
-StringMiddle = string_body
+
+StringMiddle = String_body
 StringMiddle = StringEscapeSeq
-              
+
 StringEscapeSeq = string_escape EscapeChar
 
 EscapeChar = escape_alarm
@@ -119,7 +119,7 @@ EscapeChar = escape_octal_char
 EscapeChar = escape_hex_char
 EscapeChar = escape_unicode_char
 EscapeChar = escape_default
-            
+
 Branch = semi Function ternary_question_mark Function ternary_colon Function
 
 List = start_list end_list

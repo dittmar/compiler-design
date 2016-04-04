@@ -1,6 +1,7 @@
 package wolf;
 
 import wolf.interfaces.UserFuncName;
+import wolf.interfaces.Visitor;
 import wolf.interfaces.WolfFunction;
 
 /**
@@ -11,4 +12,8 @@ import wolf.interfaces.WolfFunction;
 public class UserFunc implements WolfFunction {
     UserFuncName user_func_name;
     ArgList arg_list;
+    
+    public void accept(Visitor v) {
+        v.visit(this);
+    }
 }

@@ -3,6 +3,7 @@ package wolf;
 import java.util.List;
 import wolf.interfaces.Arg;
 import wolf.interfaces.StringMiddle;
+import wolf.interfaces.Visitor;
 
 /**
  *
@@ -11,4 +12,8 @@ import wolf.interfaces.StringMiddle;
  */
 public class WolfString implements Arg {
     List<StringMiddle> string_middle;
+    
+    public void accept(Visitor v) {
+        v.visit(this);
+    }
 }

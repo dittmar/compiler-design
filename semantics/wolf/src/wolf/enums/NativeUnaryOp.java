@@ -1,5 +1,6 @@
 package wolf.enums;
 
+import wolf.interfaces.Visitor;
 import wolf.node.TFlatten;
 import wolf.node.THead;
 import wolf.node.TIdentity;
@@ -30,5 +31,9 @@ public enum NativeUnaryOp {
     
     NativeUnaryOp(Class token_class) {
         this.token_class = token_class;
+    }
+    
+    public void accept(Visitor v) {
+        // do nothing
     }
 }

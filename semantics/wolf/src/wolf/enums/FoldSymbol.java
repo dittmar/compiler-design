@@ -1,5 +1,6 @@
 package wolf.enums;
 
+import wolf.interfaces.Visitor;
 import wolf.node.TFoldl;
 import wolf.node.TFoldr;
 
@@ -15,5 +16,9 @@ public enum FoldSymbol {
     final Class token_class;
     FoldSymbol(Class token_class) {
         this.token_class = token_class;
+    }
+    
+    public void accept(Visitor v) {
+        
     }
 }

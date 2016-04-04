@@ -1,6 +1,7 @@
 package wolf;
 
 import wolf.enums.FoldSymbol;
+import wolf.interfaces.Visitor;
 import wolf.interfaces.WolfFunction;
 
 /**
@@ -11,4 +12,8 @@ import wolf.interfaces.WolfFunction;
 public class Fold implements WolfFunction {
     FoldSymbol fold_symbol;
     FoldBody fold_body;
+    
+    public void accept(Visitor v) {
+        v.visit(this);
+    }
 }

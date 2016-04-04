@@ -5,6 +5,7 @@ import wolf.interfaces.BinOp;
 import wolf.interfaces.ListArgument;
 import wolf.interfaces.UnaryOp;
 import wolf.interfaces.UserFuncName;
+import wolf.interfaces.Visitor;
 import wolf.node.TIdentifier;
 
 /**
@@ -15,4 +16,8 @@ import wolf.node.TIdentifier;
 public class Identifier implements BinOp, UnaryOp, Arg, ListArgument,
     UserFuncName {
     TIdentifier identifier;
+    
+    public void accept(Visitor v) {
+        // We'll be back
+    }
 }

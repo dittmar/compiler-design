@@ -2,6 +2,7 @@ package wolf;
 
 import wolf.interfaces.UnaryOp;
 import wolf.interfaces.ListArgument;
+import wolf.interfaces.Visitor;
 import wolf.interfaces.WolfFunction;
 
 /**
@@ -12,4 +13,8 @@ import wolf.interfaces.WolfFunction;
 public class WolfMap implements WolfFunction {
     UnaryOp unary_op;
     ListArgument list_argument;
+    
+    public void accept(Visitor v) {
+        v.visit(this);
+    }
 }

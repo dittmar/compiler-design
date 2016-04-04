@@ -1,6 +1,7 @@
 package wolf;
 
 import wolf.interfaces.StringMiddle;
+import wolf.interfaces.Visitor;
 import wolf.node.TStringBody;
 
 /**
@@ -10,4 +11,8 @@ import wolf.node.TStringBody;
  */
 public class StringBody implements StringMiddle {
     TStringBody string_body;
+    
+    public void accept(Visitor v) {
+        v.visit(this);
+    }
 }

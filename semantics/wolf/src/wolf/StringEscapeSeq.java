@@ -2,6 +2,7 @@ package wolf;
 
 import wolf.enums.EscapeChar;
 import wolf.interfaces.StringMiddle;
+import wolf.interfaces.Visitor;
 
 /**
  *
@@ -10,4 +11,8 @@ import wolf.interfaces.StringMiddle;
  */
 public class StringEscapeSeq implements StringMiddle {
     EscapeChar escape_char;
+    
+    public void accept(Visitor v) {
+        v.visit(this);
+    }
 }

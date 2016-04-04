@@ -1,6 +1,7 @@
 package wolf;
 
 import wolf.interfaces.Arg;
+import wolf.interfaces.Visitor;
 import wolf.node.TIntNumber;
 
 /**
@@ -10,4 +11,8 @@ import wolf.node.TIntNumber;
  */
 public class IntLiteral implements Arg {
     TIntNumber int_literal;
+    
+    public void accept(Visitor v) {
+        
+    }
 }
