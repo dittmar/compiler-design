@@ -19,7 +19,7 @@ SigArgRest = comma identifier
 
 Function = UserFunc
 Function = NativeUnary
-Function = NativeBin
+Function = NativeBinary
 Function = Branch
 Function = Fold
 Function = Map
@@ -39,7 +39,7 @@ ListArgument = List
 ListArgument = identifier
 ListArgument = Function
 
-NativeBin = NativeBinOp l_paren Arg comma Arg r_paren
+NativeBinary = NativeBinOp l_paren Arg comma Arg r_paren
 
 BinOp = NativeBinary
 BinOp = identifier
@@ -82,7 +82,7 @@ UserFunc = UserFuncName ArgList
 
 UserFuncName = identifier
 UserFuncName = Lambda
-
+          
 ArgList = l_paren r_paren
 ArgList = l_paren Args r_paren
 
