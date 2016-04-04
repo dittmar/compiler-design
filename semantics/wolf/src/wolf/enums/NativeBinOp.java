@@ -18,8 +18,10 @@ import wolf.node.TPrepend;
 import wolf.node.TXor;
 
 /**
- *
+ * Enumerated type representing WOLF's native binary operations.
  * @author Kevin Dittmar
+ * @author William Ezekiel
+ * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
 public enum NativeBinOp {
@@ -42,6 +44,10 @@ public enum NativeBinOp {
     
     final Class token_class;
     
+    /**
+     * Create a NativeBinOp
+     * @param token_class the class of the token being represented
+     */
     NativeBinOp(Class token_class) {
         this.token_class = token_class;
     }

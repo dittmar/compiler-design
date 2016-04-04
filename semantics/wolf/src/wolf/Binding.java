@@ -31,13 +31,4 @@ public class Binding {
     public String toString() {
         return identifier.toString() + " |-> " + table_value.toString();
     }
-    
-    
-    /* Some testing stuff, ignore.
-    public static void main(String args[]) {
-        Binding b = new Binding(new TIdentifier("isaac"),Type.STRING);
-        System.out.println(b);
-    }
-    */
-    
 }

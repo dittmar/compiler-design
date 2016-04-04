@@ -4,8 +4,10 @@ import wolf.interfaces.Visitor;
 import wolf.interfaces.WolfFunction;
 
 /**
- *
+ * A branch, works like an if-else statement. 
  * @author Kevin Dittmar
+ * @author William Ezekiel
+ * @author Joe Alacqua
  * @version Apr 3, 2016
  */
 public class Branch implements WolfFunction {
@@ -13,7 +15,11 @@ public class Branch implements WolfFunction {
     WolfFunction true_branch;
     WolfFunction false_branch;
     
-        public void accept(Visitor v) {
+   /**
+    * Accept a visitor.
+    * @param v a visitor
+    */
+    public void accept(Visitor v) {
         v.visit(this);
     }
 }

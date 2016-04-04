@@ -18,8 +18,10 @@ import wolf.node.TEscapeUnicodeChar;
 import wolf.node.TEscapeVerticalTab;
 
 /**
- *
+ * Enumerated type representing different escape characters
  * @author Kevin Dittmar
+ * @author William Ezekiel
+ * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
 public enum EscapeChar {
@@ -41,11 +43,20 @@ public enum EscapeChar {
     
     Class token_class;
     
+    /**
+     * Create an EscapeChar
+     * @param token_class the token class of the escape character
+     *      to be represented.
+     */
     EscapeChar(Class token_class) {
         this.token_class = token_class;
     }
     
+    /**
+     * Accept a visitor
+     * @param v a visitor
+     */
     public void accept(Visitor v) {
-        //magic
+        //do nothing for now
     }
 }

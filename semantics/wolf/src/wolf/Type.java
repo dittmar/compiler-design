@@ -6,8 +6,11 @@
 package wolf;
 
 /**
- *
- * @author williamezekiel
+ * Enumerated type for different identifier types in WOLF
+ * @author William Ezekiel
+ * @author Kevin Dittmar
+ * @author Joseph Alacqua
+ * @version April 3 2016
  */
 public enum Type {
     INTEGER,STRING,FLOAT,BOOLEAN,LIST,FUNCTION

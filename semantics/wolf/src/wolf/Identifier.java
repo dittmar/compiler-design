@@ -9,15 +9,22 @@ import wolf.interfaces.Visitor;
 import wolf.node.TIdentifier;
 
 /**
- *
+ * An identifier, a name used to store the values of a program
  * @author Kevin Dittmar
+ * @author William Ezekiel
+ * @author Jospeh Alacqua
  * @version Apr 3, 2016
  */
 public class Identifier implements BinOp, UnaryOp, Arg, ListArgument,
     UserFuncName {
     TIdentifier identifier;
     
+    /**
+     * Accepts a visitor
+     * @param v a visitor
+     */
+    @Override
     public void accept(Visitor v) {
-        // We'll be back
+        // To be completed
     }
 }

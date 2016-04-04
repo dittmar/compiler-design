@@ -4,8 +4,11 @@ import wolf.enums.*;
 import wolf.*;
 
 /**
- *
+ * The visitor interface. Visitors define an operation to separate a class
+ * from said operation.
  * @author Kevin Dittmar
+ * @author William Ezekiel
+ * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
 public interface Visitor {
@@ -62,6 +65,5 @@ public interface Visitor {
     
     void visit(StringEscapeSeq n);
     
-    void visit(EscapeChar n);
-    
+    void visit(EscapeChar n);   
 }
