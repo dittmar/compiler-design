@@ -47,7 +47,7 @@ public class BuildSymbolTable implements Visitor {
     @Override
     public void visit(Sig n) {
         for(Identifier id: n.sig_args) {
-            id.accept(this);
+            visit(id);
         }
     }
     
@@ -235,6 +235,12 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public Object visit(Identifier n) {
+        // An identifier can be anything, it depends on the context of the
+        // fucntion. Identifiers are only used for user-defined functions, and
+        // its type cannot be determined until said function has been evaluated.
+        // A general type, PARAMETER, is used to encompass all possibilities.
+        Binding /*of*/ isaac = new Binding(n,new TableValueType(Type.PARAMETER));
+        program_table.put(n, isaac);
         return n.accept(this);
     }
     

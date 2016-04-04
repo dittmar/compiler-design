@@ -29,8 +29,9 @@ public enum FoldSymbol {
     /**
      * Accept a visitor
      * @param v a visitor
-     */
+     */ 
     public Object accept(Visitor v) {
+        // Don't Think we need this one
         return null;
     }
 }

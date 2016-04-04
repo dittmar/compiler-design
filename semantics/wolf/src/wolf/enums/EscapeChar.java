@@ -57,6 +57,6 @@ public enum EscapeChar {
      * @param v a visitor
      */
     public void accept(Visitor v) {
-        //do nothing for now
+        // don't think we need this one
     }
 }

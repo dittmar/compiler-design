@@ -13,6 +13,6 @@ package wolf;
  * @version April 3 2016
  */
 public enum Type {
-    INTEGER,STRING,FLOAT,LIST
+    INTEGER,STRING,FLOAT,LIST,PARAMETER;
     // Booleans are represented as integers: 0 - false, rest - true
 }

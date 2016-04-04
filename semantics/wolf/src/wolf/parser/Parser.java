@@ -60,12 +60,15 @@ public class Parser {
         } catch (IOException e) {
             System.err.println("Could not create log file, writing to stdout");
         }
+        //Program p = Program();
         Program();
         try {
             writer.close();
         } catch (IOException ex) {
             // writer already closed
         }
+        // BuildSymbolTable bst = new BuildSymbolTable();
+        //bst.visit(p);
     }
 
     /**

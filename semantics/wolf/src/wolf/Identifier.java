@@ -25,6 +25,8 @@ public class Identifier implements BinOp, UnaryOp, Arg, ListArgument,
      */
     @Override
     public Object accept(Visitor v) {
-        return null;
+        BuildSymbolTable bst = (BuildSymbolTable) v;
+        TableValueType tvt = (TableValueType) bst.program_table.lookup(this).table_value;
+        return tvt.type;
     }
 }

@@ -30,12 +30,16 @@ public class SymbolTable {
    * @return the updated symbol table or null if the identifier already exists
    *    in symbol table.
    */
-  public SymbolTable put(TIdentifier i, Binding b) {
-    if(!symbol_table.containsKey(i.getText())) {
-      symbol_table.put(i.getText(),b);
+  public SymbolTable put(Identifier i, Binding b) {
+    if(!symbol_table.containsKey(i.identifier.getText())) {
+      symbol_table.put(i.identifier.getText(),b);
       return this;
     }
     System.err.println("Identifier " + i + " already defined in this context");
     return null;
+  }
+  
+  public Binding lookup(Identifier i) {
+      return symbol_table.get(i.identifier.getText());
   }
 }

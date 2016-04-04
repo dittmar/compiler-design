@@ -11,7 +11,7 @@ import wolf.node.*;
  * @version(April 3 2016)
  */
 public class Binding {
-    TIdentifier identifier;
+    Identifier identifier;
     TableValue table_value;
     
     /**
@@ -19,7 +19,7 @@ public class Binding {
      * @param id the identifier
      * @param table_value the type the identifier will be bound to
      */
-    public Binding(TIdentifier id, TableValue table_value) {
+    public Binding(Identifier id, TableValue table_value) {
         identifier = id;
         this.table_value = table_value;
     }

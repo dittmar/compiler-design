@@ -1,0 +1,3 @@
+def plusThree(num) := +(num,3)
+
+plusThree(4)
