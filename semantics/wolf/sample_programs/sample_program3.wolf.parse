@@ -28,6 +28,56 @@ ListArgument parsed successfully: list
 NativeListUnaryOp parsed successfully: h ( list ) 
 Function parsed successfully: h ( list ) 
 Arg parsed successfully: h ( list ) 
-ListArgument parsed successfully: insert 
-Unexpected token type: wolf.node.TLParen(line 16, column 22): (
-Context: ^ ( h ( list ) , insert
+Arg parsed successfully: n 
+ListArgument parsed successfully: list 
+NativeListUnaryOp parsed successfully: t ( list ) 
+Function parsed successfully: t ( list ) 
+Arg parsed successfully: t ( list ) 
+ArgRest parsed successfully: , t ( list ) 
+Args parsed successfully: n , t ( list ) 
+ArgList parsed successfully: ( n , t ( list ) ) 
+ListArgument parsed successfully: insert ( n , t ( list ) ) 
+NativeListBinaryOp parsed successfully: ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Function parsed successfully: ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Branch parsed successfully: ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Function parsed successfully: ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Branch parsed successfully: ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Function parsed successfully: ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Def parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+SigArgs parsed successfully: list 
+Sig parsed successfully: ( list ) 
+NativeBinOp parsed successfully: < 
+ListArgument parsed successfully: list 
+NativeListUnaryOp parsed successfully: # ( list ) 
+Function parsed successfully: # ( list ) 
+Arg parsed successfully: # ( list ) 
+Arg parsed successfully: 2 
+Function parsed successfully: < ( # ( list ) , 2 ) 
+NativeUnaryOp parsed successfully: @ 
+Arg parsed successfully: list 
+Function parsed successfully: @ ( list ) 
+UserFunc parsed successfully: insert 
+ListArgument parsed successfully: list 
+NativeListUnaryOp parsed successfully: h ( list ) 
+Function parsed successfully: h ( list ) 
+Arg parsed successfully: h ( list ) 
+ListArgument parsed successfully: list 
+NativeListUnaryOp parsed successfully: t ( list ) 
+Function parsed successfully: t ( list ) 
+Arg parsed successfully: t ( list ) 
+Args parsed successfully: t ( list ) 
+ArgList parsed successfully: ( t ( list ) ) 
+Arg parsed successfully: sort ( t ( list ) ) 
+ArgRest parsed successfully: , sort ( t ( list ) ) 
+Args parsed successfully: h ( list ) , sort ( t ( list ) ) 
+ArgList parsed successfully: ( h ( list ) , sort ( t ( list ) ) ) 
+Function parsed successfully: insert ( h ( list ) , sort ( t ( list ) ) ) 
+Branch parsed successfully: ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) 
+Function parsed successfully: ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) 
+Def parsed successfully: def sort ( list ) := ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) 
+UserFunc parsed successfully: sort 
+Arg parsed successfully: list 
+Args parsed successfully: list 
+ArgList parsed successfully: ( list ) 
+Function parsed successfully: sort ( list ) 
+Program parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) def sort ( list ) := ; < ( # ( list ) , 2 ) ? @ ( list ) : insert ( h ( list ) , sort ( t ( list ) ) ) sort ( list ) 
