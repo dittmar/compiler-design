@@ -693,7 +693,7 @@ public class Parser {
         sb.append("Unexpected token type: ")
                 .append(token.getClass().getName())
                 .append("(line ").append(line_count)
-                .append(", column").append(token.getPos()).append("): ")
+                .append(", column ").append(token.getPos()).append("): ")
                 .append(token.getText());
         if (!parsed.isEmpty()) {
             sb.append("\nContext: ");
@@ -858,6 +858,7 @@ public class Parser {
             }
             token = lexer.getToken();
         }
+        line_count += token.getText().split("\n").length - 1;
         return token;
     }
 

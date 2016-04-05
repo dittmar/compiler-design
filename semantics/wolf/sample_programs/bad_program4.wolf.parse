@@ -48,5 +48,5 @@ SigArgs parsed successfully: list
 Sig parsed successfully: ( list ) 
 NativeBinOp parsed successfully: < 
 ListArgument parsed successfully: list 
-Unexpected token type: wolf.node.TComma(line 26, column28): ,
+Unexpected token type: wolf.node.TComma(line 26, column 28): ,
 Context: # ( list
