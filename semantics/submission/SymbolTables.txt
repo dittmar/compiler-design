@@ -1,0 +1,28 @@
+Parsing sample_programs/sample_program1.wolf
+        -----Table 0-----
+            Identifier                         Binding                            Table
+             prodList                          INTEGER                           Table 2
+             sumList                           INTEGER                           Table 1
+
+        -----Table 1-----
+            Identifier                         Binding                            Table
+                l                            LIST_INTEGER
+
+        -----Table 2-----
+            Identifier                         Binding                            Table
+             argParty                        LIST_INTEGER
+
+
+Parsing sample_programs/sample_program4.wolf
+        -----Table 0-----
+            Identifier                         Binding                            Table
+
+
+Parsing sample_programs/sample_program5.wolf
+        -----Table 0-----
+            Identifier                         Binding                            Table
+             argParty                           STRING                           Table 1
+
+        -----Table 1-----
+            Identifier                         Binding                            Table
+                s                               STRING

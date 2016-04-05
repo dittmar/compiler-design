@@ -22,4 +22,4 @@ def int relational() :=
     )
 )
 `return [1, 0]`
-_(r([logical(), relational()]))
+r([logical(), relational()])
