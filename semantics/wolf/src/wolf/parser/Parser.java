@@ -68,8 +68,8 @@ public class Parser {
             System.err.println("Could not create log file, writing to stdout");
         }
         ast = Program();
-        //BuildSymbolTable bst = new BuildSymbolTable();
-        //bst.visit(ast);
+        BuildSymbolTable bst = new BuildSymbolTable();
+        bst.visit(ast);
         try {
             writer.close();
         } catch (IOException ex) {
@@ -83,7 +83,7 @@ public class Parser {
      * @return list of tokens parsed so far
      */
     private ArgList ArgList() {
-        List<Arg> arg_list = null;
+        List<Arg> arg_list = new ArrayList<>();
         eat(TLParen.class);
         if (token instanceof TRParen) {
             eat(TRParen.class);
@@ -372,7 +372,7 @@ public class Parser {
      * @return list of tokens parsed so far
      */
     private WolfList List() {
-        List<Arg> args = null;
+        List<Arg> args = new ArrayList<>();
         eat(TStartList.class);
         if (isArg()) {
             args = Args();

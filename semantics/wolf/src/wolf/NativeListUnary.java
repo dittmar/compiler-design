@@ -39,8 +39,8 @@ public class NativeListUnary implements WolfFunction, UnaryOp {
                             + "HEAD. Expecting List.");
                     return null;
                 }
-                Arg head = ((WolfList) list_argument).arg_list.get(0);
-                return v.visit(list_argument);
+                //Arg head = ((WolfList) list_argument).arg_list.get(0);
+                return argType;
             case TAIL:
                 if(argType != Type.LIST) {
                     System.err.println("Invalid Argument " + argType + " for "

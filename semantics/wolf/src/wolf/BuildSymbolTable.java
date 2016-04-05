@@ -23,6 +23,7 @@ public class BuildSymbolTable implements Visitor {
     public void visit(Program n) {
         program_table = new SymbolTable();
         for (Def def : n.def_list) {
+            program_table.put(def.def_name, new Binding(def.def_name,new TableValueType(def.type)));
             def.accept(this);
         }
         n.function.accept(this);
@@ -35,7 +36,6 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public void visit(Def n) {
-        n.def_name.accept(this);
         n.sig.accept(this);
         n.function.accept(this);
     }
@@ -47,7 +47,8 @@ public class BuildSymbolTable implements Visitor {
     @Override
     public void visit(Sig n) {
         for(SigArg sig_arg: n.sig_args) {
-            visit(sig_arg);
+            program_table.put(sig_arg.identifier, 
+                    new Binding(sig_arg.identifier,new TableValueType(sig_arg.type)));
         }
     }
     
@@ -79,6 +80,10 @@ public class BuildSymbolTable implements Visitor {
             return visit((Fold) n);
         } else if(n instanceof WolfMap) {
             return visit((WolfMap) n);
+        } else if (n instanceof NativeListUnary) {
+            return n.accept(this);
+        } else if (n instanceof NativeListBinary) {
+            return n.accept(this);
         } else {
             System.err.println("Invalid Function");
             System.exit(1);
@@ -92,9 +97,8 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public Object visit(UserFunc n) {
-        n.user_func_name.accept(this);
         n.arg_list.accept(this);
-        return null;
+        return n.user_func_name.accept(this);
     }
     
     /**
@@ -112,10 +116,20 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public Object visit(Branch n) {
-        n.condition.accept(this);
-        n.true_branch.accept(this);
-        n.false_branch.accept(this);
-        return null;
+        Type condType = (Type) n.condition.accept(this);
+        if(condType != Type.INTEGER) {
+            System.err.print("Condition not of integer type!");
+            System.exit(1);
+        }
+        
+        Type trueType = (Type)  n.true_branch.accept(this);
+        Type falseType = (Type) n.false_branch.accept(this);
+        if(trueType != falseType) {
+            System.err.print("Ambiguous return types for branch: true branch: " 
+                    + trueType + " false branch: " + falseType);
+            System.exit(1);
+        }
+        return trueType;
     }
     
     /**
@@ -311,7 +325,7 @@ public class BuildSymbolTable implements Visitor {
         for(Arg arg:n.arg_list) {
             arg.accept(this);
         }
-        return n.accept(this);
+        return null;
     }
     
     /**
