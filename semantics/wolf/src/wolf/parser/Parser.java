@@ -371,6 +371,11 @@ public class Parser {
             parsed.addAll(List());
         } else if (token instanceof TIdentifier) {
             eat(TIdentifier.class, parsed);
+            // If it starts with a left parenthesis, it's a function call,
+            // not a literal (e.g. float, string, int)
+            if (token instanceof TLParen) {
+                parsed.addAll(ArgList());
+            }
         } else if (isFunction()) {
             parsed.addAll(Function());
         } else {
