@@ -33,34 +33,41 @@ public class NativeListUnary implements WolfFunction, UnaryOp {
         Type argType = (Type) v.visit(list_argument);
         switch(list_unary_op) {
             case HEAD:
-                if(argType.is_list) {
+                if(!argType.is_list) {
                     System.err.println("Invalid Argument " + argType + " for "
                             + "HEAD. Expecting List.");
                     return null;
                 }
                 //Arg head = ((WolfList) list_argument).arg_list.get(0);
-                return argType;
+                return new Type(argType.flat_type);
             case TAIL:
-                if(argType.is_list) {
+                if(!argType.is_list) {
                     System.err.println("Invalid Argument " + argType + " for "
                             + "TAIL. Expecting List.");
                     return null;
                 }
                 return argType;
             case REVERSE:
-                if(argType.is_list) {
+                if(!argType.is_list) {
                     System.err.println("Invalid Argument " + argType + " for "
                             + "REVERSE. Expecting List.");
                     return null;
                 }
                 return argType;
             case FLATTEN:
-                if(argType.is_list) {
+                if(!argType.is_list) {
                     System.err.println("Invalid Argument " + argType + " for "
                             + "FLATTEN. Expecting List.");
                     return null;
                 }
                 return argType;
+            case LENGTH:
+                if(!argType.is_list) {
+                    System.err.println("Invalid Argument " + argType + " for "
+                            + "LENGTH. Expecting List.");
+                    return null;
+                }
+                return new Type(argType.flat_type);
             default:
                 System.err.println("Invalid Native List Unary Operation");
                 return null;

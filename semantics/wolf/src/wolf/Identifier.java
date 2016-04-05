@@ -33,4 +33,8 @@ public class Identifier implements BinOp, UnaryOp, Arg, ListArgument,
         TableValueType tvt = (TableValueType) bst.program_table.lookup(this).table_value;
         return tvt.type;
     }
+    
+    public String toString() {
+        return "<" + identifier.toString() + ">";
+    }
 }

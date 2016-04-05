@@ -21,6 +21,18 @@ public class Type {
         this.is_list = is_list;
     }
     
+    public boolean equals(Object o) {
+        if(o instanceof Type) {
+            Type t = (Type) o;
+            return this.flat_type == t.flat_type && this.is_list == t.is_list;
+        }
+        return false;
+    }
+    
+    public String toString() {
+        return (is_list) ? "["+ flat_type.toString() + "]" : flat_type.toString();
+    }
+    
     /**
      * Accept a visitor
      * @param v a visitor

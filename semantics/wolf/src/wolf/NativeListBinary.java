@@ -38,7 +38,7 @@ public class NativeListBinary implements WolfFunction {
         switch(binary_op) {
             case APPEND:
             case PREPEND:
-                if(list_type.is_list) {
+                if(!list_type.is_list) {
                     System.err.println("Expecting list, found " + arg_type);
                 }
                 return list_type;

@@ -31,7 +31,7 @@ public class NativeBinary implements WolfFunction {
     public Object accept(Visitor v) {
         Type leftType = (Type) v.visit(arg_left);
         Type rightType = (Type) v.visit(arg_right);
-        boolean areSameType = (leftType == rightType);
+        boolean areSameType = (leftType.equals(rightType));
         switch(binary_op) {
             case PLUS:
             case MINUS:
@@ -80,7 +80,7 @@ public class NativeBinary implements WolfFunction {
                 return leftType;
             case EQUAL:
             case NOT_EQUAL:
-                return FlatType.INTEGER;
+                return new Type(FlatType.INTEGER);
             default:
                 System.err.println("Invalid Binary Operator!");
                 return null;

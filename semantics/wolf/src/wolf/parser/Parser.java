@@ -68,9 +68,9 @@ public class Parser {
             System.err.println("Could not create log file, writing to stdout");
         }
         ast = Program();
-        /*BuildSymbolTable bst = new BuildSymbolTable();
+        BuildSymbolTable bst = new BuildSymbolTable();
         bst.visit(ast);
-        */
+        
         try {
             writer.close();
         } catch (IOException ex) {

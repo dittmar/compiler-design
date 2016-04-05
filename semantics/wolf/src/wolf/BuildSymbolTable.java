@@ -1,5 +1,7 @@
 package wolf;
 
+import java.util.ArrayList;
+import java.util.List;
 import wolf.interfaces.*;
 import wolf.enums.*;
 
@@ -13,7 +15,9 @@ import wolf.enums.*;
  */
 public class BuildSymbolTable implements Visitor {
 
+    List<SymbolTable> tables;
     SymbolTable program_table;
+    SymbolTable def_table;
 
     /**
      * Visit a program
@@ -21,6 +25,7 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public void visit(Program n) {
+        tables = new ArrayList<>();
         program_table = new SymbolTable();
         for (Def def : n.def_list) {
             program_table.put(def.def_name, new Binding(def.def_name,new TableValueType(def.type)));
@@ -124,7 +129,7 @@ public class BuildSymbolTable implements Visitor {
         
         Type trueType = (Type)  n.true_branch.accept(this);
         Type falseType = (Type) n.false_branch.accept(this);
-        if(trueType != falseType) {
+        if(!(trueType.equals(falseType))) {
             System.err.print("Ambiguous return types for branch: true branch: " 
                     + trueType + " false branch: " + falseType);
             System.exit(1);
