@@ -11,8 +11,8 @@ Function parsed successfully: = ( # ( list ) , 0 )
 Arg parsed successfully: n 
 List parsed successfully: [ ] 
 ListArgument parsed successfully: [ ] 
-NativeListBinaryOp parsed successfully: $ ( , ) 
-Function parsed successfully: $ ( , ) 
+NativeListBinaryOp parsed successfully: $ ( n , [ ] ) 
+Function parsed successfully: $ ( n , [ ] ) 
 NativeBinOp parsed successfully: <= 
 Arg parsed successfully: n 
 ListArgument parsed successfully: list 
@@ -22,12 +22,12 @@ Arg parsed successfully: h ( list )
 Function parsed successfully: <= ( n , h ( list ) ) 
 Arg parsed successfully: n 
 ListArgument parsed successfully: list 
-NativeListBinaryOp parsed successfully: ^ ( , ) 
-Function parsed successfully: ^ ( , ) 
+NativeListBinaryOp parsed successfully: ^ ( n , list ) 
+Function parsed successfully: ^ ( n , list ) 
 ListArgument parsed successfully: list 
 NativeListUnaryOp parsed successfully: h ( list ) 
 Function parsed successfully: h ( list ) 
 Arg parsed successfully: h ( list ) 
 ListArgument parsed successfully: insert 
 Unexpected token type: wolf.node.TLParen(line 16, column22): (
-Context: ^ ( ,
+Context: ^ ( h ( list ) , insert
