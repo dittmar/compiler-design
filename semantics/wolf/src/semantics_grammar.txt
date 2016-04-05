@@ -8,12 +8,14 @@ Program = Function
 DefList = Def DefList
 DefList = Def
 
-Def = def identifier Sig assign Function
+Def = def Type identifier Sig assign Function
 
 Sig = l_paren r_paren
 Sig = l_paren SigArgs r_paren
 
-SigArgs = identifier SigArgRest*
+SigArgs = SigArg SigArgRest*
+
+SigArg = Type identifier
 
 SigArgRest = comma identifier
 
@@ -134,3 +136,8 @@ EscapeChar = escape_default
 
 List = start_list end_list
 List = start_list Args end_list
+
+Type = int_type
+Type = float_type
+Type = list_type
+Type = string_type

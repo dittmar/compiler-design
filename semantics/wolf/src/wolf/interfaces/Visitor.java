@@ -19,6 +19,8 @@ public interface Visitor {
 
     void visit(Sig n);
     
+    Object visit(SigArg n);
+    
     Object visit(WolfFunction n);
     
     Object visit(UserFunc n);
@@ -64,4 +66,6 @@ public interface Visitor {
     Object visit(StringBody n);
     
     Object visit(StringEscapeSeq n);   
+    
+    Type visit(Type n);
 }

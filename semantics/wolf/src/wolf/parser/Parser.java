@@ -68,8 +68,8 @@ public class Parser {
             System.err.println("Could not create log file, writing to stdout");
         }
         ast = Program();
-        BuildSymbolTable bst = new BuildSymbolTable();
-        bst.visit(ast);
+        //BuildSymbolTable bst = new BuildSymbolTable();
+        //bst.visit(ast);
         try {
             writer.close();
         } catch (IOException ex) {
@@ -204,6 +204,7 @@ public class Parser {
      */
     private Def Def() {
         eat(TDef.class);
+        Type type = Type();
         Identifier identifier = new Identifier(
             (TIdentifier) eat(TIdentifier.class)
         );
@@ -211,7 +212,7 @@ public class Parser {
         eat(TAssign.class);
         WolfFunction function = Function();
         log("Def");
-        return new Def(identifier, sig, function);
+        return new Def(type, identifier, sig, function);
     }
 
     /**
@@ -582,7 +583,7 @@ public class Parser {
     private Sig Sig() {
         Sig sig = null;
         eat(TLParen.class);
-        if (token instanceof TIdentifier) {
+        if (isType()) {
             sig = new Sig(SigArgs());
         }
         eat(TRParen.class);
@@ -595,23 +596,35 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private TIdentifier SigArgRest() {
+    private SigArg SigArgRest() {
         eat(TComma.class);
-        TIdentifier identifier = (TIdentifier) eat(TIdentifier.class);
+        Type type = Type();
+        Identifier id = new Identifier((TIdentifier) eat(TIdentifier.class));
         log("SigArgRest");
-        return identifier;
+        return new SigArg(type, id);
     }
 
+    /**
+     * Parse SigArg
+     */
+    private SigArg SigArg() {
+        Type type = Type();
+        return new SigArg(
+            type,
+            new Identifier((TIdentifier)eat(TIdentifier.class))
+        );
+    }
+    
     /**
      * Parse SigArgs.
      *
      * @return list of tokens parsed so far
      */
-    private List<Identifier> SigArgs() {
-        List<Identifier> sig_args = new ArrayList<>();
-        sig_args.add(new Identifier((TIdentifier) eat(TIdentifier.class)));
+    private List<SigArg> SigArgs() {
+        List<SigArg> sig_args = new ArrayList<>();
+        sig_args.add(SigArg());
         while (token instanceof TComma) {
-            sig_args.add(new Identifier(SigArgRest()));
+            sig_args.add(SigArgRest());
         }
         log("SigArgs");
         return sig_args;
@@ -641,6 +654,30 @@ public class Parser {
         return new WolfString(string);
     }
 
+    /**
+     * Parse a Type
+     * @return a Type
+     */
+    private Type Type() {
+        switch(getTokenName()) {
+            case "TIntType":
+                eat(TIntType.class);
+                return Type.INTEGER;
+            case "TFloatType":
+                eat(TFloatType.class);
+                return Type.FLOAT;
+            case "TStringType":
+                eat(TStringType.class);
+                return Type.STRING;
+            case "TListType":
+                eat(TListType.class);
+                return Type.LIST;
+            default:
+                error();
+        }
+        return null;
+    }
+            
     /**
      * Parse a UnaryOp
      *
@@ -827,6 +864,16 @@ public class Parser {
                 || isFunction();
     }
 
+    /**
+     * 
+     */
+    private boolean isType() {
+        return token instanceof TIntType
+                || token instanceof TFloatType
+                || token instanceof TStringType
+                || token instanceof TListType;
+    }
+    
     /**
      * Log information about the last nonterminal parsed
      *

@@ -31,9 +31,7 @@ public class NativeBinary implements WolfFunction {
     public Object accept(Visitor v) {
         Type leftType = (Type) v.visit(arg_left);
         Type rightType = (Type) v.visit(arg_right);
-        boolean areSameType = (leftType == rightType 
-                || leftType == Type.PARAMETER 
-                || rightType == Type.PARAMETER);
+        boolean areSameType = (leftType == rightType);
         switch(binary_op) {
             case PLUS:
             case MINUS:
@@ -49,11 +47,11 @@ public class NativeBinary implements WolfFunction {
                     System.err.println("Left should be of type " + rightType);
                     return null;
                 }
-                if(leftType != Type.INTEGER && leftType != Type.FLOAT && leftType != Type.PARAMETER) {
+                if(leftType != Type.INTEGER && leftType != Type.FLOAT) {
                     System.err.println("Left of type" + leftType + 
                             ". Expecting integer or float.");
                 }
-                if(rightType != Type.INTEGER && rightType != Type.FLOAT && leftType != Type.PARAMETER) {
+                if(rightType != Type.INTEGER && rightType != Type.FLOAT) {
                     System.err.println("Right of type" + leftType + 
                             ". Expecting integer or float.");
                 }
@@ -69,11 +67,11 @@ public class NativeBinary implements WolfFunction {
                     System.err.println("Left should be of type " + rightType);
                     return null;
                 }
-                if(leftType != Type.INTEGER && leftType != Type.PARAMETER) {
+                if(leftType != Type.INTEGER) {
                     System.err.println("Left of type" + leftType + 
                             ". Expecting integer.");
                 }
-                if(rightType != Type.INTEGER && rightType != Type.PARAMETER) {
+                if(rightType != Type.INTEGER) {
                     System.err.println("Right of type" + leftType + 
                             ". Expecting integer.");
                 }

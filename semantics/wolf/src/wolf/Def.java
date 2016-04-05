@@ -11,11 +11,14 @@ import wolf.interfaces.WolfFunction;
  * @version Apr 3, 2016
  */
 public class Def {
+    Type type;
     Identifier def_name;
     Sig sig;
     WolfFunction function;
     
-    public Def(Identifier def_name, Sig sig, WolfFunction function) {
+    public Def(Type type, Identifier def_name, Sig sig,
+            WolfFunction function) {
+        this.type = type;
         this.def_name = def_name;
         this.sig = sig;
         this.function = function;

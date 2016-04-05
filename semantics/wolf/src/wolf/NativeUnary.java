@@ -32,14 +32,14 @@ public class NativeUnary implements WolfFunction, UnaryOp {
         Type argType = (Type) v.visit(arg);
         switch(unary_op) {
             case NEG:
-                if(argType != Type.INTEGER && argType != Type.FLOAT && argType != Type.PARAMETER) {
+                if(argType != Type.INTEGER && argType != Type.FLOAT) {
                     System.err.println("Invalid Argument " + argType + " for "
                             + "NEG. Expecting Integer or Float.");
                     return null;
                 }
                 return argType;
             case LOGICAL_NOT:
-                if(argType != Type.INTEGER && argType != Type.PARAMETER) {
+                if(argType != Type.INTEGER) {
                     System.err.println("Invalid Argument " + argType + " for "
                             + "LOGICAL_NOT. Expecting Integer.");
                     return null;

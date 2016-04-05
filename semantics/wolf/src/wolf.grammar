@@ -46,6 +46,12 @@ Tokens
 
 {string->initial} string_end = single_quote;
 
+//types
+int_type = 'int';
+float_type = 'float';
+list_type = 'list';
+string_type = 'string';
+
 // list operators
 head = 'h';
 tail = 't';
@@ -110,120 +116,120 @@ misc = [0..0xffff]; // catch all for any garbage.
 Ignored Tokens
 comment, space, newline;
 
-Productions
-program = {user_defs} def_list function
-        | {no_defs} function;
-
-def_list = {multiple_defs} def_list def_header
-         | {one_def} def_header;
-
-def_header = def identifier sig assign function;
-
-sig = {empty} l_paren r_paren
-    | {arguments} l_paren sig_args r_paren;
-    
-sig_args = {more_ids} identifier sig_arg_rest
-         | {last_id} identifier;
-
-sig_arg_rest = comma sig_args;
-
-function = {user_defined} user_func arg_list
-         | {unary_native} native_unary_op l_paren arg r_paren
-         | {bin_native} native_bin_op l_paren [a]: arg comma [b]: arg r_paren
-         | {if_else} branch
-         | {foldl} foldl fold_body
-         | {foldr} foldr fold_body
-         | {map} map l_paren unary_op comma list_argument r_paren;
-
-lambda = lambda_start l_paren sig lambda_arrow function r_paren;
-
-fold_body = l_paren bin_op comma list_argument r_paren;
-
-list_argument = {literal} list
-              | {user_defined} identifier
-              | {returned_list} function;
-
-bin_op = {native} native_bin_op
-       | {user_defined} identifier
-       | {lambda} lambda;
-       
-native_bin_op = {plus} plus
-              | {minus} minus
-              | {mult} mult
-              | {div} div
-              | {mod} mod
-              | {less} lt
-              | {greater} gt
-              | {less_equal} lte
-              | {greater_equal} gte
-              | {equal} equal
-              | {not_equal} not_equal
-              | {and} and
-              | {or} or
-              | {xor} xor
-              | {append} append
-              | {prepend} prepend;
-
-unary_op = {native} native_unary_op
-         | {user_defined} identifier
-         | {lambda} lambda;
-
-native_unary_op = {arithmetic_not} neg
-                | {logical_not} logical_not
-                | {head} head
-                | {tail} tail
-                | {reverse} reverse
-                | {flatten} flatten
-                | {identity} identity
-                | {print} print
-                | {length} length;
-                
-user_func = {user_defined} identifier
-          | {lambda} lambda;
-          
-arg_list = {no_args} l_paren r_paren
-         | {has_args} l_paren args r_paren;
-         
-args = {more_args} arg arg_rest
-     | {last_arg} arg;
-     
-arg_rest = comma args;
-
-arg = {function} function
-    | {list} list
-    | {int} int_number
-    | {float} float_number
-    | {identifier} identifier
-    | {string} string;
-    
-string = {empty_string} string_start string_end
-       | {string} string_start string_middle string_end;
-       
-string_middle = {more_body} string_middle string_body
-              | {last_body} string_body
-              | {more_escape} string_middle string_escape_seq
-              | {last_escape} string_escape_seq;
-              
-string_escape_seq = string_escape escape_char;
-
-escape_char = {alarm} escape_alarm
-            | {backspace} escape_backspace
-            | {formfeed} escape_formfeed
-            | {cr} escape_carriage_return
-            | {newline} escape_newline
-            | {tab} escape_tab
-            | {vertical_tab} escape_vertical_tab
-            | {backslash} escape_backslash
-            | {single_quote} escape_single_quote
-            | {double_quote} escape_double_quote
-            | {question_mark} escape_question_mark
-            | {octal} escape_octal_char
-            | {hex} escape_hex_char
-            | {unicode} escape_unicode_char
-            | {default} escape_default;
-            
-branch = ternary_semi [cond]: function
-         ternary_question_mark [if]: function
-         ternary_colon [else]: function;
-list = {empty_list} start_list end_list
-     | {list} start_list args end_list;
+//Productions
+//program = {user_defs} def_list function
+//        | {no_defs} function;
+//
+//def_list = {multiple_defs} def_list def_header
+//         | {one_def} def_header;
+//
+//def_header = def identifier sig assign function;
+//
+//sig = {empty} l_paren r_paren
+//    | {arguments} l_paren sig_args r_paren;
+//    
+//sig_args = {more_ids} identifier sig_arg_rest
+//         | {last_id} identifier;
+//
+//sig_arg_rest = comma sig_args;
+//
+//function = {user_defined} user_func arg_list
+//         | {unary_native} native_unary_op l_paren arg r_paren
+//         | {bin_native} native_bin_op l_paren [a]: arg comma [b]: arg r_paren
+//         | {if_else} branch
+//         | {foldl} foldl fold_body
+//         | {foldr} foldr fold_body
+//         | {map} map l_paren unary_op comma list_argument r_paren;
+//
+//lambda = lambda_start l_paren sig lambda_arrow function r_paren;
+//
+//fold_body = l_paren bin_op comma list_argument r_paren;
+//
+//list_argument = {literal} list
+//              | {user_defined} identifier
+//              | {returned_list} function;
+//
+//bin_op = {native} native_bin_op
+//       | {user_defined} identifier
+//       | {lambda} lambda;
+//       
+//native_bin_op = {plus} plus
+//              | {minus} minus
+//              | {mult} mult
+//              | {div} div
+//              | {mod} mod
+//              | {less} lt
+//              | {greater} gt
+//              | {less_equal} lte
+//              | {greater_equal} gte
+//              | {equal} equal
+//              | {not_equal} not_equal
+//              | {and} and
+//              | {or} or
+//              | {xor} xor
+//              | {append} append
+//              | {prepend} prepend;
+//
+//unary_op = {native} native_unary_op
+//         | {user_defined} identifier
+//         | {lambda} lambda;
+//
+//native_unary_op = {arithmetic_not} neg
+//                | {logical_not} logical_not
+//                | {head} head
+//                | {tail} tail
+//                | {reverse} reverse
+//                | {flatten} flatten
+//                | {identity} identity
+//                | {print} print
+//                | {length} length;
+//                
+//user_func = {user_defined} identifier
+//          | {lambda} lambda;
+//          
+//arg_list = {no_args} l_paren r_paren
+//         | {has_args} l_paren args r_paren;
+//         
+//args = {more_args} arg arg_rest
+//     | {last_arg} arg;
+//     
+//arg_rest = comma args;
+//
+//arg = {function} function
+//    | {list} list
+//    | {int} int_number
+//    | {float} float_number
+//    | {identifier} identifier
+//    | {string} string;
+//    
+//string = {empty_string} string_start string_end
+//       | {string} string_start string_middle string_end;
+//       
+//string_middle = {more_body} string_middle string_body
+//              | {last_body} string_body
+//              | {more_escape} string_middle string_escape_seq
+//              | {last_escape} string_escape_seq;
+//              
+//string_escape_seq = string_escape escape_char;
+//
+//escape_char = {alarm} escape_alarm
+//            | {backspace} escape_backspace
+//            | {formfeed} escape_formfeed
+//            | {cr} escape_carriage_return
+//            | {newline} escape_newline
+//            | {tab} escape_tab
+//            | {vertical_tab} escape_vertical_tab
+//            | {backslash} escape_backslash
+//            | {single_quote} escape_single_quote
+//            | {double_quote} escape_double_quote
+//            | {question_mark} escape_question_mark
+//            | {octal} escape_octal_char
+//            | {hex} escape_hex_char
+//            | {unicode} escape_unicode_char
+//            | {default} escape_default;
+//            
+//branch = ternary_semi [cond]: function
+//         ternary_question_mark [if]: function
+//         ternary_colon [else]: function;
+//list = {empty_list} start_list end_list
+//     | {list} start_list args end_list;
