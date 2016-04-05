@@ -10,10 +10,10 @@ and relational operators
 `
 
 `evaluates to 0 (0 is a false value 0, everything else is a true value 1)`
-def logical() := !(|(&(x(1, 0), 2), ~(8)))
+def int logical() := !(|(&(x(1, 0), 2), ~(8)))
 
 `evaluates to 0`
-def relational() := 
+def int relational() := 
 
 |(                              `1 | 0 = 1`
     &(>(5, 2), !=(1, 2)),       `1 & 1 = 1`

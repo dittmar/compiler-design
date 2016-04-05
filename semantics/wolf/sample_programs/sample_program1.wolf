@@ -4,17 +4,17 @@
   Joe Alacqua
 `
 `This function adds up all elements in a list`
-def sumList(list) := ; =(list, []) ? @(0) : +(h(list), sumList(t(list)))
+def int sumList(list l) := ; =(l, []) ? @(0) : +(h(l), sumList(t(l)))
 
 `This function gets the product
 of all elements in a list`
-def prodList(list) := 
-    ; =(list, [])
+def int prodList(list l) := 
+    ; =(l, [])
     ? @(1)
-    : *(h(list), prodList(t(list)))
+    : *(h(l), prodList(t(l)))
 
 `
 returns 76
 I'm a comment
 `
-sumList([prodList([1,2,3]), prodList([5,7,2]), prodList([0.0,127.92,9])])
+sumList([prodList([1,2,3]), prodList([5,7,2]), prodList([0.0,127,9])])

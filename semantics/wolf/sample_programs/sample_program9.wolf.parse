@@ -1,11 +1,11 @@
-SigArgs parsed successfully: def plusThree ( num 
-Sig parsed successfully: def plusThree ( num ) 
-Arg parsed successfully: def plusThree ( num ) := + ( num 
-Arg parsed successfully: def plusThree ( num ) := + ( num , 3 
-NativeBinary parsed successfully: def plusThree ( num ) := + ( num , 3 ) 
-Def parsed successfully: def plusThree ( num ) := + ( num , 3 ) 
-UserFunc parsed successfully: def plusThree ( num ) := + ( num , 3 ) plusThree 
-Arg parsed successfully: def plusThree ( num ) := + ( num , 3 ) plusThree ( 4 
-Args parsed successfully: def plusThree ( num ) := + ( num , 3 ) plusThree ( 4 
-ArgList parsed successfully: def plusThree ( num ) := + ( num , 3 ) plusThree ( 4 ) 
-Program parsed successfully: def plusThree ( num ) := + ( num , 3 ) plusThree ( 4 ) 
+SigArgs parsed successfully: def int plusThree ( int num 
+Sig parsed successfully: def int plusThree ( int num ) 
+Arg parsed successfully: def int plusThree ( int num ) := + ( num 
+Arg parsed successfully: def int plusThree ( int num ) := + ( num , 3 
+NativeBinary parsed successfully: def int plusThree ( int num ) := + ( num , 3 ) 
+Def parsed successfully: def int plusThree ( int num ) := + ( num , 3 ) 
+UserFunc parsed successfully: def int plusThree ( int num ) := + ( num , 3 ) plusThree 
+Arg parsed successfully: def int plusThree ( int num ) := + ( num , 3 ) plusThree ( 4 
+Args parsed successfully: def int plusThree ( int num ) := + ( num , 3 ) plusThree ( 4 
+ArgList parsed successfully: def int plusThree ( int num ) := + ( num , 3 ) plusThree ( 4 ) 
+Program parsed successfully: def int plusThree ( int num ) := + ( num , 3 ) plusThree ( 4 ) 

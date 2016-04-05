@@ -11,10 +11,10 @@
 
 
 	`Inserts an element where it should be within a sorted list`
-	def insert(n, list) :=
-	    ;=(#(list), 0) ? $(n, []) :          `append the element to the empty list`
-	    ;<=(n, h(list)) ? ^(n, list) :       `the element goes first in the sorted list`
-	    ^(h(list), insert(n, t(list)))       `the head of the list comes before the new element`
+	def list insert(int n, list l) :=
+	    ;=(#(l), 0) ? $(n, []) :          `append the element to the empty list`
+	    ;<=(n, h(l)) ? ^(n, l) :       `the element goes first in the sorted list`
+	    ^(h(l), insert(n, t(l)))       `the head of the list comes before the new element`
 
 
 	`
@@ -23,10 +23,10 @@
 	go within the tail of the list.
 	`
 	`srt doesn’t match “sort” in the rest of the code, but we are not doing semantic checking yet, so that shouldn’t be caught.  However, a right paren is missing at the end of the function definition.`
-	def srt(list) := ;<(#(list, 2)) ? @(list) : insert(h(list), sort(t(list))
+	def list srt(list l) := ;<(#(l, 2)) ? @(l) : insert(h(l), sort(t(l))
 
 
-	sort(list)
+	sort([2,7,1,6])
 	`Assuming sort is called with the argument [2,7,1,6], the
 	trace would be the following:              
 	sort([2,7,1,6]) = insert(2, sort([7,1,6]))

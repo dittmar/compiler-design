@@ -1,2 +1,2 @@
 `Code breaks due to incorrect syntax`
-def breakFunc() := h(; print() : print())
+def int breakFunc() := h(; print() : print())
