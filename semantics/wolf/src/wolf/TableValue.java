@@ -34,6 +34,11 @@ public class TableValue {
      */
     @Override
     public String toString() {
-        return table.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(type);
+        if(table != null) {
+            sb.append(" -> Table ").append(table.index);
+        }
+        return sb.toString();
     }
 }

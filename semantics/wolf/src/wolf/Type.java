@@ -30,7 +30,7 @@ public class Type {
     }
     
     public String toString() {
-        return (is_list) ? "["+ flat_type.toString() + "]" : flat_type.toString();
+        return (is_list) ? "LIST_"+ flat_type.toString() : flat_type.toString();
     }
     
     /**

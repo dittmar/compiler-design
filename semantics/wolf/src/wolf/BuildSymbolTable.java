@@ -17,7 +17,7 @@ public class BuildSymbolTable implements Visitor {
 
     List<SymbolTable> tables;
     SymbolTable program_table;
-    SymbolTable def_table;
+    SymbolTable current_def_table;
 
     /**
      * Visit a program
@@ -26,13 +26,21 @@ public class BuildSymbolTable implements Visitor {
     @Override
     public void visit(Program n) {
         tables = new ArrayList<>();
-        program_table = new SymbolTable();
+        program_table = new SymbolTable(0);        
+        tables.add(program_table);
         for (Def def : n.def_list) {
-            program_table.put(def.def_name, new Binding(def.def_name,new TableValueType(def.type)));
+            current_def_table = new SymbolTable(program_table,tables.size());
+            program_table.put(def.def_name, new Binding(def.def_name, new TableValue(def.type,current_def_table)));
             def.accept(this);
+            tables.add(current_def_table);
         }
         n.function.accept(this);
-        System.out.println("A Winner is You!");
+        StringBuilder sb = new StringBuilder();
+        for(SymbolTable st : tables) {
+            sb.append(st);
+            sb.append("\n");
+        }
+        System.out.println(sb.toString());
     }
     
     /**
@@ -52,8 +60,8 @@ public class BuildSymbolTable implements Visitor {
     @Override
     public void visit(Sig n) {
         for(SigArg sig_arg: n.sig_args) {
-            program_table.put(sig_arg.identifier, 
-                    new Binding(sig_arg.identifier,new TableValueType(sig_arg.type)));
+            current_def_table.put(sig_arg.identifier, 
+                    new Binding(sig_arg.identifier,new TableValue(sig_arg.type,null)));
         }
     }
     
@@ -122,7 +130,7 @@ public class BuildSymbolTable implements Visitor {
     @Override
     public Object visit(Branch n) {
         Type condType = (Type) n.condition.accept(this);
-        if(condType.flat_type != FlatType.INTEGER) {
+        if(!condType.equals(new Type(FlatType.INTEGER))) {
             System.err.print("Condition not of integer type!");
             System.exit(1);
         }

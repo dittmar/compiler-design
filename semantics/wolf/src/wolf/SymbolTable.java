@@ -10,16 +10,18 @@ import java.util.HashMap;
 public class SymbolTable {
   Map<String, Binding> symbol_table;
   SymbolTable parent_table;
+  int index;
   
   /**
    * Create a symbol table
    */
-  public SymbolTable() {
+  public SymbolTable(int index) {
     symbol_table = new HashMap();
+    this.index = index;
   }
   
-  public SymbolTable(SymbolTable parent_table) {
-    this();
+  public SymbolTable(SymbolTable parent_table, int index) {
+    this(index);
     this.parent_table = parent_table;
   }
 
@@ -42,4 +44,43 @@ public class SymbolTable {
   public Binding lookup(Identifier i) {
       return symbol_table.get(i.identifier.getText());
   }
+  
+  public String toString() {
+      StringBuilder sb = new StringBuilder();
+      sb.append(paddedTableString("-----Table " + index + "-----"))
+        .append("\n")
+        .append(paddedTableString("Identifier"))
+        .append(paddedTableString("Binding"))
+        .append(paddedTableString("Table"))
+        .append("\n");
+      for(String key: symbol_table.keySet()) {
+          Binding b = symbol_table.get(key);
+          Identifier id = b.identifier;
+          Type type = b.table_value.type;
+          SymbolTable table = b.table_value.table;
+          sb.append(paddedTableString(id.toString()))
+            .append(paddedTableString(type.toString()));
+          if (table != null) {
+              sb.append(paddedTableString("Table " + table.index));
+          }
+          sb.append("\n");
+      }
+      return sb.toString();
+  }
+  
+      /**
+     * @param string a string
+     * @return a padded string for the string representation of this parse table.
+     */
+    private String paddedTableString(String string) {
+        int left_num_spaces =
+            (32 - string.length()) / 2 + 1;
+        int right_num_spaces = left_num_spaces + (string.length() % 2);
+        return String.format(
+            "%" + left_num_spaces + "s" +   // left spaces
+            "%s" +                          // table contents
+            "%" + right_num_spaces + "s",   // right spaces
+            " ", string, " "
+        );
+    }
 }

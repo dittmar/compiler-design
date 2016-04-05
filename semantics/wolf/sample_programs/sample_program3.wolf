@@ -11,7 +11,7 @@ http://en.literateprograms.org/Insertion_sort_%28Haskell%29
 
 `Inserts an element where it should be within a sorted list`
 def list int insert(int n, list int l) :=
-    ;=(#(l), 0) ? $(n, []) :          `append the element to the empty list`
+    ;=(#(l), 0) ? @([n]) :          `append the element to the empty list`
     ;<=(n, h(l)) ? ^(n, l) :       `the element goes first in the sorted list`
     ^(h(l), insert(n, t(l)))       `the head of the list comes before the new element`
 

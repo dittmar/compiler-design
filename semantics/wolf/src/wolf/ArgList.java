@@ -4,7 +4,7 @@ import java.util.List;
 import wolf.interfaces.Visitor;
 /**
  * A list of arguments
- * @author (Kevin Dittmar)
+* @author (Kevin Dittmar)
  * @author (William Ezekiel)
  * @author (Joseph Alacqua)
  * @version Apr 3, 2016

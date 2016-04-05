@@ -27,6 +27,6 @@ public class WolfList implements Arg, ListArgument {
     @Override
     public Object accept(Visitor v) {
         return null;
-        //return Type.LIST;
+        //return new Type(FlatType.LIST);
     }
 }
