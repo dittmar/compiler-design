@@ -1,28 +1,54 @@
+sample_program1.wolf Symbol Table Output:
 Parsing sample_programs/sample_program1.wolf
-        -----Table 0-----
-            Identifier                         Binding                            Table
-             prodList                          INTEGER                           Table 2
-             sumList                           INTEGER                           Table 1
+   -----Table Program Environment Table-----  
+            Identifier                         Binding                            Table               
+             prodList                          INTEGER                     Table prodList Table       
+             sumList                           INTEGER                     Table sumList Table        
 
-        -----Table 1-----
-            Identifier                         Binding                            Table
-                l                            LIST_INTEGER
+  -----Table sumList Table-----   
+            Identifier                         Binding                            Table               
+                l                            LIST_INTEGER           
 
-        -----Table 2-----
-            Identifier                         Binding                            Table
-             argParty                        LIST_INTEGER
-
-
-Parsing sample_programs/sample_program4.wolf
-        -----Table 0-----
-            Identifier                         Binding                            Table
+  -----Table prodList Table-----  
+            Identifier                         Binding                            Table               
+             argParty                        LIST_INTEGER           
 
 
+
+
+
+
+
+
+sample_program3.wolf Symbol Table Output:
+Parsing sample_programs/sample_program3.wolf
+   -----Table Program Environment Table-----  
+            Identifier                         Binding                            Table               
+              insert                         LIST_INTEGER                   Table insert Table        
+               sort                          LIST_INTEGER                    Table sort Table         
+
+   -----Table insert Table-----   
+            Identifier                         Binding                            Table               
+                l                            LIST_INTEGER           
+                n                              INTEGER              
+
+    -----Table sort Table-----    
+            Identifier                         Binding                            Table               
+                l                            LIST_INTEGER           
+
+
+
+
+
+
+
+
+sample_program5.wolf Symbol Table Output:
 Parsing sample_programs/sample_program5.wolf
-        -----Table 0-----
-            Identifier                         Binding                            Table
-             argParty                           STRING                           Table 1
+   -----Table Program Environment Table-----  
+            Identifier                         Binding                            Table               
+             argParty                           STRING                     Table argParty Table       
 
-        -----Table 1-----
-            Identifier                         Binding                            Table
-                s                               STRING
+  -----Table argParty Table-----  
+            Identifier                         Binding                            Table               
+                s                               STRING              

@@ -37,7 +37,7 @@ public class TableValue {
         StringBuilder sb = new StringBuilder();
         sb.append(type);
         if(table != null) {
-            sb.append(" -> Table ").append(table.index);
+            sb.append(" -> Table ").append(table.table);
         }
         return sb.toString();
     }

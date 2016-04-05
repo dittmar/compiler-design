@@ -1,5 +1,4 @@
 package wolf;
-import wolf.node.*;
 import java.util.Map;
 import java.util.HashMap;
 /**
@@ -10,18 +9,18 @@ import java.util.HashMap;
 public class SymbolTable {
   Map<String, Binding> symbol_table;
   SymbolTable parent_table;
-  int index;
+  String table;
   
   /**
    * Create a symbol table
    */
-  public SymbolTable(int index) {
+  public SymbolTable(String table) {
     symbol_table = new HashMap();
-    this.index = index;
+    this.table = table;
   }
   
-  public SymbolTable(SymbolTable parent_table, int index) {
-    this(index);
+  public SymbolTable(SymbolTable parent_table, String table) {
+    this(table);
     this.parent_table = parent_table;
   }
 
@@ -47,7 +46,7 @@ public class SymbolTable {
   
   public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append(paddedTableString("-----Table " + index + "-----"))
+      sb.append(paddedTableString("-----Table " + table + "-----"))
         .append("\n")
         .append(paddedTableString("Identifier"))
         .append(paddedTableString("Binding"))
@@ -61,7 +60,7 @@ public class SymbolTable {
           sb.append(paddedTableString(id.toString()))
             .append(paddedTableString(type.toString()));
           if (table != null) {
-              sb.append(paddedTableString("Table " + table.index));
+              sb.append(paddedTableString("Table " + table.table));
           }
           sb.append("\n");
       }
