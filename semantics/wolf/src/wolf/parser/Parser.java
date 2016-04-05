@@ -81,7 +81,7 @@ public class Parser {
     /**
      * Parse an ArgList
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for ArgList
      */
     private ArgList ArgList() {
         List<Arg> arg_list = new ArrayList<>();
@@ -101,7 +101,7 @@ public class Parser {
     /**
      * Parse an Arg.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for Arg
      */
     private Arg Arg() {
         Arg arg = null;
@@ -140,7 +140,7 @@ public class Parser {
     /**
      * Parse an ArgRest.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for ArgRest
      */
     private Arg ArgRest() {
         eat(TComma.class);
@@ -152,7 +152,7 @@ public class Parser {
     /**
      * Parse Args.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for Args
      */
     private List<Arg> Args() {
         List<Arg> arg_list = new ArrayList<>();
@@ -167,7 +167,7 @@ public class Parser {
     /**
      * Parse a BinOp.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for BinOp
      */
     private BinOp BinOp() {
         if (isNativeBinOp()) {
@@ -185,7 +185,7 @@ public class Parser {
     /**
      * Parse a Branch.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for Branch
      */
     private Branch Branch() {
         eat(TTernarySemi.class);
@@ -201,7 +201,7 @@ public class Parser {
     /**
      * Parse a Def.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for Def
      */
     private Def Def() {
         eat(TDef.class);
@@ -219,7 +219,7 @@ public class Parser {
     /**
      * Parse a string escape sequence in the format: \<escape_chars>
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for Escape
      */
     private EscapeChar Escape() {
         eat(TStringEscape.class);
@@ -279,7 +279,7 @@ public class Parser {
     /**
      * Parse a FoldBody.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for FoldBody
      */
     private FoldBody FoldBody() {
         eat(TLParen.class);
@@ -294,7 +294,7 @@ public class Parser {
     /**
      * Parse a Function.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for a WolfFunction
      */
     private WolfFunction Function() {
         if (isUserFunc()) {
@@ -354,7 +354,7 @@ public class Parser {
     /**
      * Parse a Lambda.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for Lambda
      */
     private WolfLambda Lambda() {
         eat(TLambdaStart.class);
@@ -370,7 +370,7 @@ public class Parser {
     /**
      * Parse a List.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for List
      */
     private WolfList List() {
         eat(TStartList.class);
@@ -383,7 +383,7 @@ public class Parser {
     /**
      * Parse a ListArgument
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for ListArgument
      */
     private ListArgument ListArgument() {
         if (token instanceof TStartList) {
@@ -411,7 +411,7 @@ public class Parser {
     /**
      * Parse a Map
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for Map
      */
     private WolfMap Map() {
         eat(TMap.class);
@@ -427,7 +427,7 @@ public class Parser {
     /**
      * Parse a NativeBinOp
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for NativeBinOp
      */
     private NativeBinOp NativeBinOp() {
         switch (getTokenName()) {
@@ -482,7 +482,7 @@ public class Parser {
     /**
      * Parse a NativeListBinaryOp
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for NativeListBinaryOp
      */
     private NativeListBinaryOp NativeListBinaryOp() {
         switch (getTokenName()) {
@@ -501,7 +501,7 @@ public class Parser {
     /**
      * Parse a NativeListUnaryOp
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for NativeListUnaryOp
      */
     private NativeListUnaryOp NativeListUnaryOp() {
         switch (getTokenName()) {
@@ -529,7 +529,7 @@ public class Parser {
     /**
      * Parse a NativeUnaryOp.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for NativeUnaryOp
      */
     private NativeUnaryOp NativeUnaryOp() {
         switch (getTokenName()) {
@@ -553,6 +553,7 @@ public class Parser {
 
     /**
      * Parse a Program. This is the starting rule for the WOL(F) grammar.
+     * @return abstract syntax tree for the whole Program
      */
     private Program Program() {
         List<Def> def_list = new ArrayList<>();
@@ -572,7 +573,7 @@ public class Parser {
     /**
      * Parse a Sig.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for Sig
      */
     private Sig Sig() {
         Sig sig = null;
@@ -588,7 +589,7 @@ public class Parser {
     /**
      * Parse a SigArgRest.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for SigArgRest.
      */
     private SigArg SigArgRest() {
         eat(TComma.class);
@@ -600,6 +601,7 @@ public class Parser {
 
     /**
      * Parse SigArg
+     * @return abstract syntax tree for SigArg
      */
     private SigArg SigArg() {
         Type type = Type();
@@ -612,7 +614,7 @@ public class Parser {
     /**
      * Parse SigArgs.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for SigArgs, a List of SigArg
      */
     private List<SigArg> SigArgs() {
         List<SigArg> sig_args = new ArrayList<>();
@@ -627,7 +629,7 @@ public class Parser {
     /**
      * Parse a string literal, which may include escape sequences.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for WolfString
      */
     private WolfString String() {
         List<StringMiddle> string = new ArrayList<>();
@@ -677,7 +679,7 @@ public class Parser {
     /**
      * Parse a UnaryOp
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for UnaryOp
      */
     private UnaryOp UnaryOp() {
         if (isNativeUnaryOp()) {
@@ -693,7 +695,7 @@ public class Parser {
     /**
      * Parse a UserFunc.
      *
-     * @return list of tokens parsed so far
+     * @return abstract syntax tree for UserFunc
      */
     private UserFuncName UserFunc() {
         UserFuncName user_func_name = null;
@@ -808,10 +810,18 @@ public class Parser {
                 || token instanceof TXor;
     }
 
+    /**
+     * @return true if the token corresponds to a binary function that operates
+     * on lists, false otherwise.
+     */
     private boolean isNativeListBinaryOp() {
         return token instanceof TPrepend || token instanceof TAppend;
     }
 
+    /**
+     * @return true if the token corresponds to a unary function that operates
+     * on lists, false otherwise.
+     */
     private boolean isNativeListUnaryOp() {
         return token instanceof TLength
                 || token instanceof THead
@@ -861,7 +871,7 @@ public class Parser {
     }
 
     /**
-     * 
+     * @return true if the token corresponds to a type, false otherwise.
      */
     private boolean isType() {
         return token instanceof TIntType
