@@ -1,5 +1,4 @@
 package wolf;
-import wolf.interfaces.TableValue;
 import wolf.node.*;
 
 /**

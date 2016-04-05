@@ -30,8 +30,8 @@ public class Identifier implements BinOp, UnaryOp, Arg, ListArgument,
     @Override
     public Object accept(Visitor v) {
         BuildSymbolTable bst = (BuildSymbolTable) v;
-        TableValueType tvt = (TableValueType) bst.program_table.lookup(this).table_value;
-        return tvt.type;
+        TableValue tv = bst.program_table.lookup(this).table_value;
+        return tv.type;
     }
     
     public String toString() {
