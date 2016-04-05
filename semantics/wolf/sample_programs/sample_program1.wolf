@@ -9,7 +9,7 @@ def int sumList(list int l) := ; =(#(l),0) ? @(0) : +(h(l), sumList(t(l)))
 `This function gets the product
 of all elements in a list`
 def int prodList(list int argParty) := 
-    ; =(argParty, [])
+    ; =(#(argParty), 0)
     ? @(1)
     : *(h(argParty), prodList(t(argParty)))
 

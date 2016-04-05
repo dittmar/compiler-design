@@ -68,8 +68,8 @@ public class Parser {
             System.err.println("Could not create log file, writing to stdout");
         }
         ast = Program();
-        BuildSymbolTable bst = new BuildSymbolTable();
-        bst.visit(ast);
+        //BuildSymbolTable bst = new BuildSymbolTable();
+        //bst.visit(ast);
         
         try {
             writer.close();
@@ -373,16 +373,9 @@ public class Parser {
      * @return list of tokens parsed so far
      */
     private WolfList List() {
-        List<Arg> args = new ArrayList<>();
         eat(TStartList.class);
-        if (isArg()) {
-            args = Args();
-            eat(TEndList.class);
-        } else if (token instanceof TEndList) {
-            eat(TEndList.class);
-        } else {
-            error();
-        }
+        List<Arg> args = Args();
+        eat(TEndList.class);
         log("List");
         return new WolfList(args);
     }
