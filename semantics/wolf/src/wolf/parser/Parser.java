@@ -472,9 +472,9 @@ public class Parser {
                 error(parsed);
         }
         eat(TLParen.class, parsed);
-        Arg();
+        parsed.addAll(Arg());
         eat(TComma.class, parsed);
-        ListArgument();
+        parsed.addAll(ListArgument());
         eat(TRParen.class, parsed);
         log("NativeListBinaryOp", parsed);
         return parsed;

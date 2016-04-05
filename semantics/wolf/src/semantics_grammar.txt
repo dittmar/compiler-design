@@ -20,30 +20,25 @@ SigArgRest = comma identifier
 Function = UserFunc
 Function = NativeUnary
 Function = NativeBinary
+Function = NativeListUnary
+Function = NativeListBinary
 Function = Branch
 Function = Fold
 Function = Map
 
-Fold = FoldSymbol FoldBody
+UserFunc = UserFuncName ArgList
 
-FoldSymbol = foldl
-FoldSymbol = foldr
+UserFuncName = identifier
+UserFuncName = Lambda
 
-Map = map l_paren UnaryOp comma ListArgument r_paren
+NativeUnary = NativeUnaryOp l_paren Arg r_paren
 
-Lambda = lambda_start l_paren Sig lambda_arrow Function r_paren
-
-FoldBody = l_paren BinOp comma ListArgument r_paren
-
-ListArgument = List
-ListArgument = identifier
-ListArgument = Function
+NativeUnaryOp = neg
+NativeUnaryOp = logical_not
+NativeUnaryOp = identity
+NativeUnaryOp = print
 
 NativeBinary = NativeBinOp l_paren Arg comma Arg r_paren
-
-BinOp = NativeBinary
-BinOp = identifier
-BinOp = Lambda
 
 NativeBinOp = plus
 NativeBinOp = minus
@@ -60,21 +55,38 @@ NativeBinOp = and
 NativeBinOp = or
 NativeBinOp = xor
 
+Branch = semi Function ternary_question_mark Function ternary_colon Function
+
+Fold = FoldSymbol FoldBody
+
+FoldSymbol = foldl
+FoldSymbol = foldr
+
+FoldBody = l_paren Binary comma ListArgument r_paren
+
+Binary = NativeBinary
+Binary = NativeListBinary
+Binary = UserFunc
+Binary = LambdaFunc
+
+Map = map l_paren Unary comma ListArgument r_paren
+
+Unary = NativeUnary
+Unary = NativeListUnary
+Unary = UserFunc
+Unary = LambdaFunc
+
+Lambda = lambda_start l_paren Sig lambda_arrow Function r_paren
+
+LambdaFunc = Lambda ArgList
+
+ListArgument = List
+ListArgument = identifier
+ListArgument = Function
+
 NativeListBinary = NativeListBinOp l_paren Arg comma ListArgument r_paren
 NativeListBinOp = append
 NativeListBinOp = prepend
-
-NativeUnary = NativeUnaryOp l_paren Arg r_paren
-
-UnaryOp = NativeUnary
-UnaryOp = NativeListUnary
-UnaryOp = identifier
-UnaryOp = Lambda
-
-NativeUnaryOp = neg
-NativeUnaryOp = logical_not
-NativeUnaryOp = identity
-NativeUnaryOp = print
 
 NativeListUnary = NativeListUnaryOp l_paren ListArgument r_paren
 NativeListUnaryOp = head
@@ -82,11 +94,6 @@ NativeListUnaryOp = tail
 NativeListUnaryOp = reverse
 NativeListUnaryOp = flatten
 NativeListUnaryOp = length
-
-UserFunc = UserFuncName ArgList
-
-UserFuncName = identifier
-UserFuncName = Lambda
           
 ArgList = l_paren r_paren
 ArgList = l_paren Args r_paren
@@ -124,8 +131,6 @@ EscapeChar = escape_octal_char
 EscapeChar = escape_hex_char
 EscapeChar = escape_unicode_char
 EscapeChar = escape_default
-
-Branch = semi Function ternary_question_mark Function ternary_colon Function
 
 List = start_list end_list
 List = start_list Args end_list
