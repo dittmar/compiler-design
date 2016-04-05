@@ -26,7 +26,7 @@ public class WolfList implements Arg, ListArgument {
      */
     @Override
     public Object accept(Visitor v) {
-        return null;
-        //return new Type(FlatType.LIST);
+        Type type = (Type) this.arg_list.get(0).accept(v);
+        return new Type(type.flat_type, true);
     }
 }
