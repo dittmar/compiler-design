@@ -13,7 +13,11 @@ import wolf.interfaces.Visitor;
  * @version Apr 3, 2016
  */
 public class WolfString implements Arg {
-    List<StringMiddle> string_middle;
+    List<StringMiddle> string;
+    
+    public WolfString(List<StringMiddle> string) {
+        this.string = string;
+    }
     
     /**
      * Accept a visitor

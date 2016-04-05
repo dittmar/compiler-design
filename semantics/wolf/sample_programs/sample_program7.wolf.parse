@@ -1,20 +1,17 @@
-SigArgRest parsed successfully: , y 
-SigArgs parsed successfully: n , y 
-Sig parsed successfully: ( n , y ) 
-NativeBinOp parsed successfully: + 
-NativeBinOp parsed successfully: * 
-Arg parsed successfully: n 
-Arg parsed successfully: y 
-Function parsed successfully: * ( n , y ) 
-Arg parsed successfully: * ( n , y ) 
-Arg parsed successfully: y 
-Function parsed successfully: + ( * ( n , y ) , y ) 
+SigArgRest parsed successfully: \ ( ( n , y 
+SigArgs parsed successfully: \ ( ( n , y 
+Sig parsed successfully: \ ( ( n , y ) 
+Arg parsed successfully: \ ( ( n , y ) -> + ( * ( n 
+Arg parsed successfully: \ ( ( n , y ) -> + ( * ( n , y 
+NativeBinary parsed successfully: \ ( ( n , y ) -> + ( * ( n , y ) 
+Arg parsed successfully: \ ( ( n , y ) -> + ( * ( n , y ) 
+Arg parsed successfully: \ ( ( n , y ) -> + ( * ( n , y ) , y 
+NativeBinary parsed successfully: \ ( ( n , y ) -> + ( * ( n , y ) , y ) 
 Lambda parsed successfully: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) 
 UserFunc parsed successfully: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) 
-Arg parsed successfully: 2 
-Arg parsed successfully: 7 
-ArgRest parsed successfully: , 7 
-Args parsed successfully: 2 , 7 
-ArgList parsed successfully: ( 2 , 7 ) 
-Function parsed successfully: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) ( 2 , 7 ) 
+Arg parsed successfully: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) ( 2 
+Arg parsed successfully: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) ( 2 , 7 
+ArgRest parsed successfully: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) ( 2 , 7 
+Args parsed successfully: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) ( 2 , 7 
+ArgList parsed successfully: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) ( 2 , 7 ) 
 Program parsed successfully: \ ( ( n , y ) -> + ( * ( n , y ) , y ) ) ( 2 , 7 ) 

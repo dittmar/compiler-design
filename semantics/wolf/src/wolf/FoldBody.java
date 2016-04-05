@@ -15,6 +15,10 @@ public class FoldBody {
     BinOp bin_op;
     ListArgument list_argument;
     
+    public FoldBody(BinOp bin_op, ListArgument list_argument) {
+        this.bin_op = bin_op;
+        this.list_argument = list_argument;
+    }
     /**
      * Accept a visitor
      * @param v a visitor

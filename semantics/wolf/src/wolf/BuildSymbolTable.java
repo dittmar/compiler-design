@@ -226,7 +226,10 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public Object visit(WolfList n) {
-         return n.arg_list.accept(this);
+        for(Arg arg:n.arg_list) {
+            arg.accept(this);
+        }
+        return n.accept(this);
     }
     
     /**
@@ -322,7 +325,7 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public Object visit(WolfString n) {
-        for(StringMiddle sm:n.string_middle) {
+        for(StringMiddle sm:n.string) {
             sm.accept(this);
         }
         return n.accept(this);

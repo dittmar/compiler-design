@@ -15,6 +15,11 @@ public class UserFunc implements WolfFunction {
     UserFuncName user_func_name;
     ArgList arg_list;
     
+    public UserFunc(UserFuncName user_func_name, ArgList arg_list) {
+        this.user_func_name = user_func_name;
+        this.arg_list = arg_list;
+    }
+    
     /**
      * Accept a visitor
      * @param v a visitor

@@ -1,52 +1,32 @@
-SigArgRest parsed successfully: , list 
-SigArgs parsed successfully: n , list 
-Sig parsed successfully: ( n , list ) 
-NativeBinOp parsed successfully: = 
-ListArgument parsed successfully: list 
-NativeListUnaryOp parsed successfully: # ( list ) 
-Function parsed successfully: # ( list ) 
-Arg parsed successfully: # ( list ) 
-Arg parsed successfully: 0 
-Function parsed successfully: = ( # ( list ) , 0 ) 
-Arg parsed successfully: n 
-List parsed successfully: [ ] 
-ListArgument parsed successfully: [ ] 
-NativeListBinaryOp parsed successfully: $ ( n , [ ] ) 
-Function parsed successfully: $ ( n , [ ] ) 
-NativeBinOp parsed successfully: <= 
-Arg parsed successfully: n 
-ListArgument parsed successfully: list 
-NativeListUnaryOp parsed successfully: h ( list ) 
-Function parsed successfully: h ( list ) 
-Arg parsed successfully: h ( list ) 
-Function parsed successfully: <= ( n , h ( list ) ) 
-Arg parsed successfully: n 
-ListArgument parsed successfully: list 
-NativeListBinaryOp parsed successfully: ^ ( n , list ) 
-Function parsed successfully: ^ ( n , list ) 
-ListArgument parsed successfully: list 
-NativeListUnaryOp parsed successfully: h ( list ) 
-Function parsed successfully: h ( list ) 
-Arg parsed successfully: h ( list ) 
-Arg parsed successfully: n 
-ListArgument parsed successfully: list 
-NativeListUnaryOp parsed successfully: t ( list ) 
-Function parsed successfully: t ( list ) 
-Arg parsed successfully: t ( list ) 
-ArgRest parsed successfully: , t ( list ) 
-Args parsed successfully: n , t ( list ) 
-ArgList parsed successfully: ( n , t ( list ) ) 
-ListArgument parsed successfully: insert ( n , t ( list ) ) 
-NativeListBinaryOp parsed successfully: ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
-Function parsed successfully: ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
-Branch parsed successfully: ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
-Function parsed successfully: ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
-Branch parsed successfully: ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
-Function parsed successfully: ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+SigArgRest parsed successfully: def insert ( n , list 
+SigArgs parsed successfully: def insert ( n , list 
+Sig parsed successfully: def insert ( n , list ) 
+NativeListUnary parsed successfully: def insert ( n , list ) := ; = ( # ( list ) 
+Arg parsed successfully: def insert ( n , list ) := ; = ( # ( list ) 
+Arg parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 
+NativeBinary parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) 
+Arg parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n 
+List parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] 
+NativeListBinary parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) 
+Arg parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n 
+NativeListUnary parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) 
+Arg parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) 
+NativeBinary parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) 
+Arg parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n 
+NativeListBinary parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) 
+NativeListUnary parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) 
+Arg parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) 
+Arg parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n 
+NativeListUnary parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) 
+Arg parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) 
+ArgRest parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) 
+Args parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) 
+ArgList parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) 
+NativeListBinary parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Branch parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
+Branch parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
 Def parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) 
-SigArgs parsed successfully: list 
-Sig parsed successfully: ( list ) 
-NativeBinOp parsed successfully: < 
-ListArgument parsed successfully: list 
+SigArgs parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) def srt ( list 
+Sig parsed successfully: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) def srt ( list ) 
 Unexpected token type: wolf.node.TComma(line 26, column 28): ,
-Context: # ( list
+Context: def insert ( n , list ) := ; = ( # ( list ) , 0 ) ? $ ( n , [ ] ) : ; <= ( n , h ( list ) ) ? ^ ( n , list ) : ^ ( h ( list ) , insert ( n , t ( list ) ) ) def srt ( list ) := ; < ( # ( list

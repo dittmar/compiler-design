@@ -1,15 +1,11 @@
 package wolf.enums;
 
+import wolf.interfaces.UnaryOp;
 import wolf.interfaces.Visitor;
-import wolf.node.TFlatten;
-import wolf.node.THead;
 import wolf.node.TIdentity;
-import wolf.node.TLength;
 import wolf.node.TLogicalNot;
 import wolf.node.TNeg;
 import wolf.node.TPrint;
-import wolf.node.TReverse;
-import wolf.node.TTail;
 
 /**
  * Enumerated type representing WOLF's native unary operations
@@ -18,16 +14,11 @@ import wolf.node.TTail;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public enum NativeUnaryOp {
+public enum NativeUnaryOp implements UnaryOp {
     NEG(TNeg.class),
     LOGICAL_NOT(TLogicalNot.class),
-    HEAD(THead.class),
-    TAIL(TTail.class),
-    REVERSE(TReverse.class),
-    FLATTEN(TFlatten.class),
     IDENTITY(TIdentity.class),
-    PRINT(TPrint.class),
-    LENGTH(TLength.class);
+    PRINT(TPrint.class);
     
     Class token_class;
     
@@ -38,5 +29,10 @@ public enum NativeUnaryOp {
      */
     NativeUnaryOp(Class token_class) {
         this.token_class = token_class;
+    }
+    
+    @Override
+    public Object accept(Visitor n) {
+        return null;
     }
 }

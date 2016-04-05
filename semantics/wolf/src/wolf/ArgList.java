@@ -12,6 +12,10 @@ import wolf.interfaces.Visitor;
 public class ArgList {
     List<Arg> arg_list;
     
+    public ArgList(List<Arg> arg_list) {
+        this.arg_list = arg_list;
+    }
+    
    /**
     * Accept a visitor.
     * @param v a visitor

@@ -1,7 +1,8 @@
 package wolf;
 
-import wolf.interfaces.ListArgument;
+import java.util.List;
 import wolf.interfaces.Arg;
+import wolf.interfaces.ListArgument;
 import wolf.interfaces.Visitor;
 
 /**
@@ -12,7 +13,11 @@ import wolf.interfaces.Visitor;
  * @version Apr 3, 2016
  */
 public class WolfList implements Arg, ListArgument {
-    ArgList arg_list;
+    List<Arg> arg_list;
+    
+    public WolfList(List<Arg> arg_list) {
+        this.arg_list = arg_list;
+    }
     
     /**
      * Accept a visitor

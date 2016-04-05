@@ -17,6 +17,12 @@ public class NativeBinary implements WolfFunction {
     Arg arg_left;
     Arg arg_right;
     
+    public NativeBinary(NativeBinOp binary_op, Arg arg_left, Arg arg_right) {
+        this.binary_op = binary_op;
+        this.arg_left = arg_left;
+        this.arg_right = arg_right;
+    }
+    
     /**
      * Accept a visitor
      * @param v a visitor
@@ -75,13 +81,6 @@ public class NativeBinary implements WolfFunction {
             case EQUAL:
             case NOT_EQUAL:
                 return Type.INTEGER;
-            case APPEND:
-            case PREPEND:
-                if(rightType != Type.LIST && rightType != Type.PARAMETER) {
-                    System.err.println("Right of type" + leftType + 
-                            ". Expecting list.");
-                }
-                return Type.LIST;
             default:
                 System.err.println("Invalid Binary Operator!");
                 return null;

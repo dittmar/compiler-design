@@ -19,6 +19,10 @@ public class Identifier implements BinOp, UnaryOp, Arg, ListArgument,
     UserFuncName {
     TIdentifier identifier;
     
+    public Identifier(TIdentifier identifier) {
+        this.identifier = identifier;
+    }
+    
     /**
      * Accepts a visitor
      * @param v a visitor

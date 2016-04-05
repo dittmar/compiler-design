@@ -15,6 +15,11 @@ public class Program {
     List<Def> def_list;
     WolfFunction function;
     
+    public Program(List<Def> def_list, WolfFunction function) {
+        this.def_list = def_list;
+        this.function = function;
+    }
+    
     /**
      * Accept a visitor
      * @param v a visitor

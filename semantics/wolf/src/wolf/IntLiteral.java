@@ -14,6 +14,10 @@ import wolf.node.TIntNumber;
 public class IntLiteral implements Arg {
     TIntNumber int_literal;
     
+    public IntLiteral(TIntNumber int_literal) {
+        this.int_literal = int_literal;
+    }
+    
     /**
      * Accepts a visitor
      * @param v a visitor

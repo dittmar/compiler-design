@@ -1,39 +1,30 @@
-NativeBinOp parsed successfully: - 
-BinOp parsed successfully: - 
-NativeBinOp parsed successfully: + 
-BinOp parsed successfully: + 
-Arg parsed successfully: 2 
-Arg parsed successfully: 1 
-ArgRest parsed successfully: , 1 
-Arg parsed successfully: 10 
-ArgRest parsed successfully: , 10 
-Arg parsed successfully: 7 
-ArgRest parsed successfully: , 7 
-Args parsed successfully: 2 , 1 , 10 , 7 
-List parsed successfully: [ 2 , 1 , 10 , 7 ] 
-ListArgument parsed successfully: [ 2 , 1 , 10 , 7 ] 
-FoldBody parsed successfully: ( + , [ 2 , 1 , 10 , 7 ] ) 
-Function parsed successfully: { ( + , [ 2 , 1 , 10 , 7 ] ) 
-Arg parsed successfully: { ( + , [ 2 , 1 , 10 , 7 ] ) 
-Arg parsed successfully: 8 
-ArgRest parsed successfully: , 8 
-NativeBinOp parsed successfully: * 
-BinOp parsed successfully: * 
-Arg parsed successfully: 5 
-Arg parsed successfully: 6 
-ArgRest parsed successfully: , 6 
-Arg parsed successfully: 4 
-ArgRest parsed successfully: , 4 
-Args parsed successfully: 5 , 6 , 4 
-List parsed successfully: [ 5 , 6 , 4 ] 
-ListArgument parsed successfully: [ 5 , 6 , 4 ] 
-FoldBody parsed successfully: ( * , [ 5 , 6 , 4 ] ) 
-Function parsed successfully: { ( * , [ 5 , 6 , 4 ] ) 
-Arg parsed successfully: { ( * , [ 5 , 6 , 4 ] ) 
-ArgRest parsed successfully: , { ( * , [ 5 , 6 , 4 ] ) 
-Args parsed successfully: { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) 
-List parsed successfully: [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] 
-ListArgument parsed successfully: [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] 
-FoldBody parsed successfully: ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] ) 
-Function parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] ) 
+Foldr parsed successfully: } 
+Foldl parsed successfully: } ( - , [ { 
+Arg parsed successfully: } ( - , [ { ( + , [ 2 
+Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 
+ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 
+Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 
+ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 
+Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 
+ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 
+Args parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 
+List parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] 
+FoldBody parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) 
+Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) 
+Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 
+ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 
+Foldl parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { 
+Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 
+Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 
+ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 
+Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 
+ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 
+Args parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 
+List parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] 
+FoldBody parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) 
+Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) 
+ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) 
+Args parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) 
+List parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] 
+FoldBody parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] ) 
 Program parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] ) 

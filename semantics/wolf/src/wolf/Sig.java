@@ -13,6 +13,10 @@ import wolf.interfaces.Visitor;
 public class Sig {
     List<Identifier> sig_args;
     
+    public Sig(List<Identifier> sig_args) {
+        this.sig_args = sig_args;
+    }
+
     /**
      * Accept a visitor
      * @param v a visitor

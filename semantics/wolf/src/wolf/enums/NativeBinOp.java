@@ -1,7 +1,8 @@
 package wolf.enums;
 
+import wolf.interfaces.BinOp;
+import wolf.interfaces.Visitor;
 import wolf.node.TAnd;
-import wolf.node.TAppend;
 import wolf.node.TDiv;
 import wolf.node.TEqual;
 import wolf.node.TGt;
@@ -14,7 +15,6 @@ import wolf.node.TMult;
 import wolf.node.TNotEqual;
 import wolf.node.TOr;
 import wolf.node.TPlus;
-import wolf.node.TPrepend;
 import wolf.node.TXor;
 
 /**
@@ -24,7 +24,7 @@ import wolf.node.TXor;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public enum NativeBinOp {
+public enum NativeBinOp implements BinOp {
     PLUS(TPlus.class),
     MINUS(TMinus.class),
     MULT(TMult.class),
@@ -38,9 +38,7 @@ public enum NativeBinOp {
     NOT_EQUAL(TNotEqual.class),
     AND(TAnd.class),
     OR(TOr.class),
-    XOR(TXor.class),
-    APPEND(TAppend.class),
-    PREPEND(TPrepend.class);
+    XOR(TXor.class);
     
     final Class token_class;
     
@@ -50,5 +48,9 @@ public enum NativeBinOp {
      */
     NativeBinOp(Class token_class) {
         this.token_class = token_class;
+    }
+    
+    public Object accept(Visitor n) {
+        return null;
     }
 }

@@ -15,6 +15,11 @@ public class WolfLambda implements WolfFunction, BinOp, UnaryOp, UserFuncName {
     Sig sig;
     WolfFunction function;
     
+    public WolfLambda(Sig sig, WolfFunction function) {
+        this.sig = sig;
+        this.function = function;
+    }
+    
     /**
      * Accept a visitor
      * @param v a visitor

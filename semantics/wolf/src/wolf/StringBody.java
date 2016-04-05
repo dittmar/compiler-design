@@ -14,6 +14,10 @@ import wolf.node.TStringBody;
 public class StringBody implements StringMiddle {
     TStringBody string_body;
     
+    public StringBody(TStringBody string_body) {
+        this.string_body = string_body;
+    }
+    
     /**
      * Accept a visitor
      * @param v a visitor

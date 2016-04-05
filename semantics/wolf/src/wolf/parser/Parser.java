@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import wolf.*;
+import wolf.enums.*;
+import wolf.interfaces.*;
 import wolf.node.*;
 
 /**
@@ -25,11 +27,14 @@ public class Parser {
     private Token token;
     private FileWriter writer;
     private int line_count;
+    private Program ast;
+    private List<String> parsed;
 
     /**
      * Initialize line count.
      */
     public Parser() {
+        parsed = new ArrayList<>();
         line_count = 1;
     }
 
@@ -44,7 +49,9 @@ public class Parser {
         } catch (IOException e) {
             System.err.println("Could not create log file, writing to stdout");
         }
-        Program();
+        ast = Program();
+        BuildSymbolTable bst = new BuildSymbolTable();
+        bst.visit(ast);
     }
 
     /**
@@ -60,15 +67,14 @@ public class Parser {
         } catch (IOException e) {
             System.err.println("Could not create log file, writing to stdout");
         }
-        //Program p = Program();
-        Program();
+        ast = Program();
+        BuildSymbolTable bst = new BuildSymbolTable();
+        bst.visit(ast);
         try {
             writer.close();
         } catch (IOException ex) {
             // writer already closed
         }
-        // BuildSymbolTable bst = new BuildSymbolTable();
-        //bst.visit(p);
     }
 
     /**
@@ -76,19 +82,19 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> ArgList() {
-        List<String> parsed = new ArrayList<>();
-        eat(TLParen.class, parsed);
+    private ArgList ArgList() {
+        List<Arg> arg_list = null;
+        eat(TLParen.class);
         if (token instanceof TRParen) {
-            eat(TRParen.class, parsed);
+            eat(TRParen.class);
         } else if (isArg()) {
-            parsed.addAll(Args());
-            eat(TRParen.class, parsed);
+            arg_list = Args();
+            eat(TRParen.class);
         } else {
-            error(parsed);
+            error();
         }
-        log("ArgList", parsed);
-        return parsed;
+        log("ArgList");
+        return new ArgList(arg_list);
     }
 
     /**
@@ -96,33 +102,38 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> Arg() {
-        List<String> parsed = new ArrayList<>();
+    private Arg Arg() {
+        Arg arg = null;
         // The identifier could be a literal or a function call
         if (token instanceof TIdentifier) {
-            eat(TIdentifier.class, parsed);
+            Identifier identifier = new Identifier(
+                (TIdentifier) eat(TIdentifier.class)
+            );
             // If it starts with a left parenthesis, it's a function call,
             // not a literal (e.g. float, string, int)
             if (token instanceof TLParen) {
-                parsed.addAll(ArgList());
+                ArgList arg_list = ArgList();
+                arg = new UserFunc(identifier, arg_list);
+            } else {
+                arg = identifier;
             }
         } else if (token instanceof TIntNumber) {
-            eat(TIntNumber.class, parsed);
+            arg = new IntLiteral((TIntNumber) eat(TIntNumber.class));
         } else if (token instanceof TFloatNumber) {
-            eat(TFloatNumber.class, parsed);
+            arg = new FloatLiteral((TFloatNumber) eat(TFloatNumber.class));
         } else if (token instanceof TStringStart) {
-            parsed.addAll(String());
+            arg = String();
         } else if (token instanceof TStartList) {
-            parsed.addAll(List());
+            arg = List();
         } else if (token instanceof TLambdaStart) {
-            parsed.addAll(Lambda());
+            arg = Lambda();
         } else if (isFunction()) {
-            parsed.addAll(Function());
+            arg = Function();
         } else {
-            error(parsed);
+            error();
         }
-        log("Arg", parsed);
-        return parsed;
+        log("Arg");
+        return arg;
     }
 
     /**
@@ -130,12 +141,11 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> ArgRest() {
-        List<String> parsed = new ArrayList<>();
-        eat(TComma.class, parsed);
-        parsed.addAll(Arg());
-        log("ArgRest", parsed);
-        return parsed;
+    private Arg ArgRest() {
+        eat(TComma.class);
+        Arg arg = Arg();
+        log("ArgRest");
+        return arg;
     }
 
     /**
@@ -143,14 +153,14 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> Args() {
-        List<String> parsed = new ArrayList<>();
-        parsed.addAll(Arg());
+    private List<Arg> Args() {
+        List<Arg> arg_list = new ArrayList<>();
+        arg_list.add(Arg());
         while (token instanceof TComma) {
-            parsed.addAll(ArgRest());
+            arg_list.add(ArgRest());
         }
-        log("Args", parsed);
-        return parsed;
+        log("Args");
+        return arg_list;
     }
 
     /**
@@ -158,19 +168,17 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> BinOp() {
-        List<String> parsed = new ArrayList<>();
+    private BinOp BinOp() {
         if (isNativeBinOp()) {
-            parsed.addAll(NativeBinOp());
+            return NativeBinOp();
         } else if (token instanceof TIdentifier) {
-            eat(TIdentifier.class, parsed);
+            return new Identifier((TIdentifier) eat(TIdentifier.class));
         } else if (token instanceof TLambdaStart) {
-            parsed.addAll(Lambda());
+            return Lambda();
         } else {
-            error(parsed);
+            error();
         }
-        log("BinOp", parsed);
-        return parsed;
+        return null;
     }
 
     /**
@@ -178,16 +186,15 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> Branch() {
-        List<String> parsed = new ArrayList<>();
-        eat(TTernarySemi.class, parsed);
-        parsed.addAll(Function());
-        eat(TTernaryQuestionMark.class, parsed);
-        parsed.addAll(Function());
-        eat(TTernaryColon.class, parsed);
-        parsed.addAll(Function());
-        log("Branch", parsed);
-        return parsed;
+    private Branch Branch() {
+        eat(TTernarySemi.class);
+        WolfFunction cond = Function();
+        eat(TTernaryQuestionMark.class);
+        WolfFunction true_func = Function();
+        eat(TTernaryColon.class);
+        WolfFunction false_func = Function();
+        log("Branch");
+        return new Branch(cond, true_func, false_func);
     }
 
     /**
@@ -195,15 +202,16 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> Def() {
-        List<String> parsed = new ArrayList<>();
-        eat(TDef.class, parsed);
-        eat(TIdentifier.class, parsed);
-        parsed.addAll(Sig());
-        eat(TAssign.class, parsed);
-        parsed.addAll(Function());
-        log("Def", parsed);
-        return parsed;
+    private Def Def() {
+        eat(TDef.class);
+        Identifier identifier = new Identifier(
+            (TIdentifier) eat(TIdentifier.class)
+        );
+        Sig sig = Sig();
+        eat(TAssign.class);
+        WolfFunction function = Function();
+        log("Def");
+        return new Def(identifier, sig, function);
     }
 
     /**
@@ -211,60 +219,59 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> Escape() {
-        List<String> parsed = new ArrayList<>();
-        eat(TStringEscape.class, parsed);
+    private EscapeChar Escape() {
+        eat(TStringEscape.class);
         switch (getTokenName()) {
             case "TEscapeAlarm":
-                eat(TEscapeAlarm.class, parsed);
-                break;
+                eat(TEscapeAlarm.class);
+                return EscapeChar.ESCAPE_ALARM;
             case "TEscapeBackslash":
-                eat(TEscapeBackslash.class, parsed);
-                break;
+                eat(TEscapeBackslash.class);
+                return EscapeChar.ESCAPE_BACKSLASH;
             case "TEscapeBackspace":
-                eat(TEscapeBackspace.class, parsed);
-                break;
+                eat(TEscapeBackspace.class);
+                return EscapeChar.ESCAPE_BACKSPACE;
             case "TEscapeCarriageReturn":
-                eat(TEscapeCarriageReturn.class, parsed);
-                break;
+                eat(TEscapeCarriageReturn.class);
+                return EscapeChar.ESCAPE_CARRIAGE_RETURN;
             case "TEscapeDefault":
-                eat(TEscapeDefault.class, parsed);
-                break;
+                eat(TEscapeDefault.class);
+                return EscapeChar.ESCAPE_DEFAULT;
             case "TEscapeDoubleQuote":
-                eat(TEscapeDoubleQuote.class, parsed);
-                break;
+                eat(TEscapeDoubleQuote.class);
+                return EscapeChar.ESCAPE_DOUBLE_QUOTE;
             case "TEscapeFormfeed":
-                eat(TEscapeFormfeed.class, parsed);
-                break;
+                eat(TEscapeFormfeed.class);
+                return EscapeChar.ESCAPE_FORMFEED;
             case "TEscapeHexChar":
-                eat(TEscapeHexChar.class, parsed);
-                break;
+                eat(TEscapeHexChar.class);
+                return EscapeChar.ESCAPE_HEX_CHAR;
             case "TEscapeNewline":
-                eat(TEscapeNewline.class, parsed);
-                break;
+                eat(TEscapeNewline.class);
+                return EscapeChar.ESCAPE_NEWLINE;
             case "TEscapeOctalChar":
-                eat(TEscapeOctalChar.class, parsed);
-                break;
+                eat(TEscapeOctalChar.class);
+                return EscapeChar.ESCAPE_OCTAL_CHAR;
             case "TEscapeQuestionMark":
-                eat(TEscapeQuestionMark.class, parsed);
-                break;
+                eat(TEscapeQuestionMark.class);
+                return EscapeChar.ESCAPE_QUESTION_MARK;
             case "TEscapeSingleQuote":
-                eat(TEscapeSingleQuote.class, parsed);
-                break;
+                eat(TEscapeSingleQuote.class);
+                return EscapeChar.ESCAPE_SINGLE_QUOTE;
             case "TEscapeTab":
-                eat(TEscapeTab.class, parsed);
-                break;
+                eat(TEscapeTab.class);
+                return EscapeChar.ESCAPE_TAB;
             case "TEscapeUnicodeChar":
-                eat(TEscapeUnicodeChar.class, parsed);
-                break;
+                eat(TEscapeUnicodeChar.class);
+                return EscapeChar.ESCAPE_UNICODE_CHAR;
             case "TEscapeVerticalTab":
-                eat(TEscapeVerticalTab.class, parsed);
-                break;
+                eat(TEscapeVerticalTab.class);
+                return EscapeChar.ESCAPE_VERTICAL_TAB;
             default:
-                error(parsed);
+                error();
         }
-        log("Escape sequence", parsed);
-        return parsed;
+        log("Escape sequence");
+        return null;
     }
 
     /**
@@ -272,15 +279,14 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> FoldBody() {
-        List<String> parsed = new ArrayList<>();
-        eat(TLParen.class, parsed);
-        parsed.addAll(BinOp());
-        eat(TComma.class, parsed);
-        parsed.addAll(ListArgument());
-        eat(TRParen.class, parsed);
-        log("FoldBody", parsed);
-        return parsed;
+    private FoldBody FoldBody() {
+        eat(TLParen.class);
+        BinOp bin_op = BinOp();
+        eat(TComma.class);
+        ListArgument list_argument = ListArgument();
+        eat(TRParen.class);
+        log("FoldBody");
+        return new FoldBody(bin_op, list_argument);
     }
 
     /**
@@ -288,42 +294,59 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> Function() {
-        List<String> parsed = new ArrayList<>();
+    private WolfFunction Function() {
         if (isUserFunc()) {
-            parsed.addAll(UserFunc());
-            parsed.addAll(ArgList());
+            return new UserFunc(UserFunc(), ArgList());
         } else if (isNativeUnaryOp()) {
-            parsed.addAll(NativeUnaryOp());
-            eat(TLParen.class, parsed);
-            parsed.addAll(Arg());
-            eat(TRParen.class, parsed);
+            NativeUnaryOp native_unary_op = NativeUnaryOp();
+            eat(TLParen.class);
+            Arg arg = Arg();
+            eat(TRParen.class);
+            log("NativeUnary");
+            return new NativeUnary(native_unary_op, arg);
         } else if (isNativeBinOp()) {
-            parsed.addAll(NativeBinOp());
-            eat(TLParen.class, parsed);
-            parsed.addAll(Arg());
-            eat(TComma.class, parsed);
-            parsed.addAll(Arg());
-            eat(TRParen.class, parsed);
+            NativeBinOp native_bin_op = NativeBinOp();
+            eat(TLParen.class);
+            Arg arg_left = Arg();
+            eat(TComma.class);
+            Arg arg_right = Arg();
+            eat(TRParen.class);
+            log("NativeBinary");
+            return new NativeBinary(native_bin_op, arg_left, arg_right);
         } else if (isNativeListBinaryOp()) {
-            parsed.addAll(NativeListBinaryOp());
+            NativeListBinaryOp native_list_binary_op = NativeListBinaryOp();
+            eat(TLParen.class);
+            Arg arg = Arg();
+            eat(TComma.class);
+            ListArgument list_argument = ListArgument();
+            eat(TRParen.class);
+            log("NativeListBinary");
+            return new NativeListBinary(
+                native_list_binary_op, arg, list_argument
+            );
         } else if (isNativeListUnaryOp()) {
-            parsed.addAll(NativeListUnaryOp());
+            NativeListUnaryOp native_list_unary_op = NativeListUnaryOp();
+            eat(TLParen.class);
+            ListArgument list_argument = ListArgument();
+            eat(TRParen.class);
+            log("NativeListUnary");
+            return new NativeListUnary(native_list_unary_op, list_argument);
         } else if (token instanceof TTernarySemi) {
-            parsed.addAll(Branch());
+            return Branch();
         } else if (token instanceof TFoldl) {
-            eat(TFoldl.class, parsed);
-            parsed.addAll(FoldBody());
+            eat(TFoldl.class);
+            log("Foldl");
+            return new Fold(FoldSymbol.FOLD_LEFT, FoldBody());
         } else if (token instanceof TFoldr) {
-            eat(TFoldr.class, parsed);
-            parsed.addAll(FoldBody());
+            eat(TFoldr.class);
+            log("Foldr");
+            return new Fold(FoldSymbol.FOLD_RIGHT, FoldBody());
         } else if (token instanceof TMap) {
-            parsed.addAll(Map());
+            return Map();
         } else {
-            error(parsed);
+            error();
         }
-        log("Function", parsed);
-        return parsed;
+        return null;
     }
 
     /**
@@ -331,16 +354,15 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> Lambda() {
-        List<String> parsed = new ArrayList<>();
-        eat(TLambdaStart.class, parsed);
-        eat(TLParen.class, parsed);
-        parsed.addAll(Sig());
-        eat(TLambdaArrow.class, parsed);
-        parsed.addAll(Function());
-        eat(TRParen.class, parsed);
-        log("Lambda", parsed);
-        return parsed;
+    private WolfLambda Lambda() {
+        eat(TLambdaStart.class);
+        eat(TLParen.class);
+        Sig sig = Sig();
+        eat(TLambdaArrow.class);
+        WolfFunction function = Function();
+        eat(TRParen.class);
+        log("Lambda");
+        return new WolfLambda(sig, function);
     }
 
     /**
@@ -348,19 +370,19 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> List() {
-        List<String> parsed = new ArrayList<>();
-        eat(TStartList.class, parsed);
+    private WolfList List() {
+        List<Arg> args = null;
+        eat(TStartList.class);
         if (isArg()) {
-            parsed.addAll(Args());
-            eat(TEndList.class, parsed);
+            args = Args();
+            eat(TEndList.class);
         } else if (token instanceof TEndList) {
-            eat(TEndList.class, parsed);
+            eat(TEndList.class);
         } else {
-            error(parsed);
+            error();
         }
-        log("List", parsed);
-        return parsed;
+        log("List");
+        return new WolfList(args);
     }
 
     /**
@@ -368,24 +390,27 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> ListArgument() {
-        List<String> parsed = new ArrayList<>();
+    private ListArgument ListArgument() {
         if (token instanceof TStartList) {
-            parsed.addAll(List());
+            return List();
         } else if (token instanceof TIdentifier) {
-            eat(TIdentifier.class, parsed);
+            Identifier identifier = new Identifier(
+                (TIdentifier) eat(TIdentifier.class)
+            );
             // If it starts with a left parenthesis, it's a function call,
             // not a literal (e.g. float, string, int)
             if (token instanceof TLParen) {
-                parsed.addAll(ArgList());
+                ArgList arg_list = ArgList();
+                return new UserFunc(identifier, arg_list);
+            } else {
+                return identifier;
             }
         } else if (isFunction()) {
-            parsed.addAll(Function());
+            return Function();
         } else {
-            error(parsed);
+            error();
         }
-        log("ListArgument", parsed);
-        return parsed;
+        return null;
     }
 
     /**
@@ -393,16 +418,15 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> Map() {
-        List<String> parsed = new ArrayList<>();
-        eat(TMap.class, parsed);
-        eat(TLParen.class, parsed);
-        parsed.addAll(UnaryOp());
-        eat(TComma.class, parsed);
-        parsed.addAll(ListArgument());
-        eat(TRParen.class, parsed);
-        log("Map", parsed);
-        return parsed;
+    private WolfMap Map() {
+        eat(TMap.class);
+        eat(TLParen.class);
+        UnaryOp unary_op = UnaryOp();
+        eat(TComma.class);
+        ListArgument list_argument = ListArgument();
+        eat(TRParen.class);
+        log("Map");
+        return new WolfMap(unary_op, list_argument);
     }
 
     /**
@@ -410,159 +434,144 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> NativeBinOp() {
-        List<String> parsed = new ArrayList<>();
+    private NativeBinOp NativeBinOp() {
         switch (getTokenName()) {
             case "TPlus":
-                eat(TPlus.class, parsed);
-                break;
+                eat(TPlus.class);
+                return NativeBinOp.PLUS;
             case "TMinus":
-                eat(TMinus.class, parsed);
-                break;
+                eat(TMinus.class);
+                return NativeBinOp.MINUS;
             case "TMult":
-                eat(TMult.class, parsed);
-                break;
+                eat(TMult.class);
+                return NativeBinOp.MULT;
             case "TDiv":
-                eat(TDiv.class, parsed);
-                break;
+                eat(TDiv.class);
+                return NativeBinOp.DIV;
             case "TMod":
-                eat(TMod.class, parsed);
-                break;
+                eat(TMod.class);
+                return NativeBinOp.MOD;
             case "TLt":
-                eat(TLt.class, parsed);
-                break;
+                eat(TLt.class);
+                return NativeBinOp.LT;
             case "TGt":
-                eat(TGt.class, parsed);
-                break;
+                eat(TGt.class);
+                return NativeBinOp.GT;
             case "TLte":
-                eat(TLte.class, parsed);
-                break;
+                eat(TLte.class);
+                return NativeBinOp.LTE;
             case "TGte":
-                eat(TGte.class, parsed);
-                break;
+                eat(TGte.class);
+                return NativeBinOp.GTE;
             case "TEqual":
-                eat(TEqual.class, parsed);
-                break;
+                eat(TEqual.class);
+                return NativeBinOp.EQUAL;
             case "TNotEqual":
-                eat(TNotEqual.class, parsed);
-                break;
+                eat(TNotEqual.class);
+                return NativeBinOp.NOT_EQUAL;
             case "TAnd":
-                eat(TAnd.class, parsed);
-                break;
+                eat(TAnd.class);
+                return NativeBinOp.AND;
             case "TOr":
-                eat(TOr.class, parsed);
-                break;
+                eat(TOr.class);
+                return NativeBinOp.OR;
             case "TXor":
-                eat(TXor.class, parsed);
-                break;
+                eat(TXor.class);
+                return NativeBinOp.XOR;
             default:
-                error(parsed);
+                error();
         }
-        log("NativeBinOp", parsed);
-        return parsed;
+        return null;
     }
 
     /**
      * Parse a NativeListBinaryOp
-     * 
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> NativeListBinaryOp() {
-        List<String> parsed = new ArrayList<>();
-        switch(getTokenName()) {
+    private NativeListBinaryOp NativeListBinaryOp() {
+        switch (getTokenName()) {
             case "TPrepend":
-                eat(TPrepend.class, parsed);
-                break;
+                eat(TPrepend.class);
+                return NativeListBinaryOp.PREPEND;
             case "TAppend":
-                eat(TAppend.class, parsed);
-                break;
+                eat(TAppend.class);
+                return NativeListBinaryOp.APPEND;
             default:
-                error(parsed);
+                error();
         }
-        eat(TLParen.class, parsed);
-        parsed.addAll(Arg());
-        eat(TComma.class, parsed);
-        parsed.addAll(ListArgument());
-        eat(TRParen.class, parsed);
-        log("NativeListBinaryOp", parsed);
-        return parsed;
+        return null;
     }
-    
+
     /**
      * Parse a NativeListUnaryOp
+     *
      * @return list of tokens parsed so far
      */
-    private List<String> NativeListUnaryOp()
-    {
-        List<String> parsed = new ArrayList<>();
-        switch(getTokenName()) {
+    private NativeListUnaryOp NativeListUnaryOp() {
+        switch (getTokenName()) {
             case "THead":
-                eat(THead.class, parsed);
-                break;
+                eat(THead.class);
+                return NativeListUnaryOp.HEAD;
             case "TTail":
-                eat(TTail.class, parsed);
-                break;
+                eat(TTail.class);
+                return NativeListUnaryOp.TAIL;
             case "TReverse":
-                eat(TReverse.class, parsed);
-                break;
+                eat(TReverse.class);
+                return NativeListUnaryOp.REVERSE;
             case "TFlatten":
-                eat(TFlatten.class, parsed);
-                break;
+                eat(TFlatten.class);
+                return NativeListUnaryOp.FLATTEN;
             case "TLength":
-                eat(TLength.class, parsed);
-                break;
+                eat(TLength.class);
+                return NativeListUnaryOp.LENGTH;
             default:
-                error(parsed);
+                error();
         }
-        eat(TLParen.class, parsed);
-        parsed.addAll(ListArgument());
-        eat(TRParen.class, parsed);
-        
-        log("NativeListUnaryOp", parsed);
-        return parsed;
+        return null;
     }
-    
+
     /**
      * Parse a NativeUnaryOp.
      *
      * @return list of tokens parsed so far
      */
-    private List<String> NativeUnaryOp() {
-        List<String> parsed = new ArrayList<>();
+    private NativeUnaryOp NativeUnaryOp() {
         switch (getTokenName()) {
             case "TNeg":
-                eat(TNeg.class, parsed);
-                break;
+                eat(TNeg.class);
+                return NativeUnaryOp.NEG;
             case "TLogicalNot":
-                eat(TLogicalNot.class, parsed);
-                break;
+                eat(TLogicalNot.class);
+                return NativeUnaryOp.LOGICAL_NOT;
             case "TIdentity":
-                eat(TIdentity.class, parsed);
-                break;
+                eat(TIdentity.class);
+                return NativeUnaryOp.IDENTITY;
             case "TPrint":
-                eat(TPrint.class, parsed);
-                break;
+                eat(TPrint.class);
+                return NativeUnaryOp.PRINT;
             default:
-                error(parsed);
+                error();
+                return null;
         }
-        log("NativeUnaryOp", parsed);
-        return parsed;
     }
-    
+
     /**
      * Parse a Program. This is the starting rule for the WOL(F) grammar.
      */
-    private void Program() {
-        List<String> parsed = new ArrayList<>();
+    private Program Program() {
+        List<Def> def_list = new ArrayList<>();
+        WolfFunction function = null;
         while (token instanceof TDef) {
-            parsed.addAll(Def());
+            def_list.add(Def());
         }
         if (isFunction()) {
-            parsed.addAll(Function());
+            function = Function();
         } else {
-            error(parsed);
+            error();
         }
-        log("Program", parsed);
+        log("Program");
+        return new Program(def_list, function);
     }
 
     /**
@@ -570,15 +579,15 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> Sig() {
-        List<String> parsed = new ArrayList<>();
-        eat(TLParen.class, parsed);
+    private Sig Sig() {
+        Sig sig = null;
+        eat(TLParen.class);
         if (token instanceof TIdentifier) {
-            parsed.addAll(SigArgs());
+            sig = new Sig(SigArgs());
         }
-        eat(TRParen.class, parsed);
-        log("Sig", parsed);
-        return parsed;
+        eat(TRParen.class);
+        log("Sig");
+        return sig;
     }
 
     /**
@@ -586,12 +595,11 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> SigArgRest() {
-        List<String> parsed = new ArrayList<>();
-        eat(TComma.class, parsed);
-        eat(TIdentifier.class, parsed);
-        log("SigArgRest", parsed);
-        return parsed;
+    private TIdentifier SigArgRest() {
+        eat(TComma.class);
+        TIdentifier identifier = (TIdentifier) eat(TIdentifier.class);
+        log("SigArgRest");
+        return identifier;
     }
 
     /**
@@ -599,14 +607,14 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> SigArgs() {
-        List<String> parsed = new ArrayList<>();
-        eat(TIdentifier.class, parsed);
+    private List<Identifier> SigArgs() {
+        List<Identifier> sig_args = new ArrayList<>();
+        sig_args.add(new Identifier((TIdentifier) eat(TIdentifier.class)));
         while (token instanceof TComma) {
-            parsed.addAll(SigArgRest());
+            sig_args.add(new Identifier(SigArgRest()));
         }
-        log("SigArgs", parsed);
-        return parsed;
+        log("SigArgs");
+        return sig_args;
     }
 
     /**
@@ -614,21 +622,23 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> String() {
-        List<String> parsed = new ArrayList<>();
-        eat(TStringStart.class, parsed);
+    private WolfString String() {
+        List<StringMiddle> string = new ArrayList<>();
+        eat(TStringStart.class);
         while (!(token instanceof TStringEnd)) {
             if (token instanceof TStringEscape) {
-                parsed.addAll(Escape());
+                string.add(Escape());
             } else if (token instanceof TStringBody) {
-                eat(TStringBody.class, parsed);
+                string.add(
+                    new StringBody((TStringBody) eat(TStringBody.class))
+                );
             } else {
-                error(parsed);
+                error();
             }
         }
-        eat(TStringEnd.class, parsed);
-        log("String", parsed);
-        return parsed;
+        eat(TStringEnd.class);
+        log("String");
+        return new WolfString(string);
     }
 
     /**
@@ -636,17 +646,15 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> UnaryOp() {
-        List<String> parsed = new ArrayList<>();
+    private UnaryOp UnaryOp() {
         if (isNativeUnaryOp()) {
-            parsed.addAll(NativeUnaryOp());
+            return NativeUnaryOp();
         } else if (token instanceof TIdentifier) {
-            eat(TIdentifier.class, parsed);
+            return new Identifier((TIdentifier) eat(TIdentifier.class));
         } else if (token instanceof TLambdaStart) {
-            parsed.addAll(Lambda());
+            return Lambda();
         }
-        log("UnaryOp", parsed);
-        return parsed;
+        return null;
     }
 
     /**
@@ -654,17 +662,19 @@ public class Parser {
      *
      * @return list of tokens parsed so far
      */
-    private List<String> UserFunc() {
-        List<String> parsed = new ArrayList<>();
+    private UserFuncName UserFunc() {
+        UserFuncName user_func_name = null;
         if (token instanceof TIdentifier) {
-            eat(TIdentifier.class, parsed);
+            user_func_name = new Identifier(
+                (TIdentifier) eat(TIdentifier.class)
+            );
         } else if (token instanceof TLambdaStart) {
-            parsed.addAll(Lambda());
+            user_func_name = Lambda();
         } else {
-            error(parsed);
+            error();
         }
-        log("UserFunc", parsed);
-        return parsed;
+        log("UserFunc");
+        return user_func_name;
     }
 
     // Helper functions
@@ -674,13 +684,15 @@ public class Parser {
      *
      * @param klass is the class of the token to be eaten.
      */
-    private void eat(Class klass, List<String> parsed) {
+    private Token eat(Class klass) {
+        Token parsed_token = token;
         if (token.getClass().getName().equals(klass.getName())) {
             parsed.add(token.getText());
             token = nextValidToken();
         } else {
-            error(parsed);
+            error();
         }
+        return parsed_token;
     }
 
     /**
@@ -688,7 +700,7 @@ public class Parser {
      * match the expected token. Log the type of token, its position, and the
      * token itself.
      */
-    private void error(List<String> parsed) {
+    private void error() {
         StringBuilder sb = new StringBuilder();
         sb.append("Unexpected token type: ")
                 .append(token.getClass().getName())
@@ -766,7 +778,7 @@ public class Parser {
     private boolean isNativeListBinaryOp() {
         return token instanceof TPrepend || token instanceof TAppend;
     }
-    
+
     private boolean isNativeListUnaryOp() {
         return token instanceof TLength
                 || token instanceof THead
@@ -774,7 +786,7 @@ public class Parser {
                 || token instanceof TReverse
                 || token instanceof TFlatten;
     }
-    
+
     /**
      * Decide if the current token indicates a NativeUnaryOp.
      *
@@ -821,7 +833,7 @@ public class Parser {
      * @param nonterminal_name the name of the nonterminal parsed
      * @param parsed the list of symbols corresponding to the nonterminal.
      */
-    private void log(String nonterminal_name, List<String> parsed) {
+    private void log(String nonterminal_name) {
         StringBuilder sb = new StringBuilder();
         sb.append(nonterminal_name).append(" parsed successfully: ");
         for (String parsed_token_strings : parsed) {

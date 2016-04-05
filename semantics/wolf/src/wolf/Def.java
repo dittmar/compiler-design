@@ -15,6 +15,12 @@ public class Def {
     Sig sig;
     WolfFunction function;
     
+    public Def(Identifier def_name, Sig sig, WolfFunction function) {
+        this.def_name = def_name;
+        this.sig = sig;
+        this.function = function;
+    }
+    
     /**
      * Accept a visitor
      * @param v a visitor

@@ -1,95 +1,75 @@
-SigArgs parsed successfully: list 
-Sig parsed successfully: ( list ) 
-NativeBinOp parsed successfully: = 
-Arg parsed successfully: list 
-List parsed successfully: [ ] 
-Arg parsed successfully: [ ] 
-Function parsed successfully: = ( list , [ ] ) 
-NativeUnaryOp parsed successfully: @ 
-Arg parsed successfully: 0 
-Function parsed successfully: @ ( 0 ) 
-NativeBinOp parsed successfully: + 
-ListArgument parsed successfully: list 
-NativeListUnaryOp parsed successfully: h ( list ) 
-Function parsed successfully: h ( list ) 
-Arg parsed successfully: h ( list ) 
-ListArgument parsed successfully: list 
-NativeListUnaryOp parsed successfully: t ( list ) 
-Function parsed successfully: t ( list ) 
-Arg parsed successfully: t ( list ) 
-Args parsed successfully: t ( list ) 
-ArgList parsed successfully: ( t ( list ) ) 
-Arg parsed successfully: sumList ( t ( list ) ) 
-Function parsed successfully: + ( h ( list ) , sumList ( t ( list ) ) ) 
-Branch parsed successfully: ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) 
-Function parsed successfully: ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) 
+SigArgs parsed successfully: def sumList ( list 
+Sig parsed successfully: def sumList ( list ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list 
+List parsed successfully: def sumList ( list ) := ; = ( list , [ ] 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] 
+NativeBinary parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 
+NativeUnary parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) 
+NativeListUnary parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) 
+NativeListUnary parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) 
+Args parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) 
+ArgList parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) 
+NativeBinary parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) 
+Branch parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) 
 Def parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) 
-SigArgs parsed successfully: list 
-Sig parsed successfully: ( list ) 
-NativeBinOp parsed successfully: = 
-Arg parsed successfully: list 
-List parsed successfully: [ ] 
-Arg parsed successfully: [ ] 
-Function parsed successfully: = ( list , [ ] ) 
-NativeUnaryOp parsed successfully: @ 
-Arg parsed successfully: 1 
-Function parsed successfully: @ ( 1 ) 
-NativeBinOp parsed successfully: * 
-ListArgument parsed successfully: list 
-NativeListUnaryOp parsed successfully: h ( list ) 
-Function parsed successfully: h ( list ) 
-Arg parsed successfully: h ( list ) 
-ListArgument parsed successfully: list 
-NativeListUnaryOp parsed successfully: t ( list ) 
-Function parsed successfully: t ( list ) 
-Arg parsed successfully: t ( list ) 
-Args parsed successfully: t ( list ) 
-ArgList parsed successfully: ( t ( list ) ) 
-Arg parsed successfully: prodList ( t ( list ) ) 
-Function parsed successfully: * ( h ( list ) , prodList ( t ( list ) ) ) 
-Branch parsed successfully: ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) 
-Function parsed successfully: ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) 
-Def parsed successfully: def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) 
-UserFunc parsed successfully: sumList 
-Arg parsed successfully: 1 
-Arg parsed successfully: 2 
-ArgRest parsed successfully: , 2 
-Arg parsed successfully: 3 
-ArgRest parsed successfully: , 3 
-Args parsed successfully: 1 , 2 , 3 
-List parsed successfully: [ 1 , 2 , 3 ] 
-Arg parsed successfully: [ 1 , 2 , 3 ] 
-Args parsed successfully: [ 1 , 2 , 3 ] 
-ArgList parsed successfully: ( [ 1 , 2 , 3 ] ) 
-Arg parsed successfully: prodList ( [ 1 , 2 , 3 ] ) 
-Arg parsed successfully: 5 
-Arg parsed successfully: 7 
-ArgRest parsed successfully: , 7 
-Arg parsed successfully: 2 
-ArgRest parsed successfully: , 2 
-Args parsed successfully: 5 , 7 , 2 
-List parsed successfully: [ 5 , 7 , 2 ] 
-Arg parsed successfully: [ 5 , 7 , 2 ] 
-Args parsed successfully: [ 5 , 7 , 2 ] 
-ArgList parsed successfully: ( [ 5 , 7 , 2 ] ) 
-Arg parsed successfully: prodList ( [ 5 , 7 , 2 ] ) 
-ArgRest parsed successfully: , prodList ( [ 5 , 7 , 2 ] ) 
-Arg parsed successfully: 0.0 
-Arg parsed successfully: 127.92 
-ArgRest parsed successfully: , 127.92 
-Arg parsed successfully: 9 
-ArgRest parsed successfully: , 9 
-Args parsed successfully: 0.0 , 127.92 , 9 
-List parsed successfully: [ 0.0 , 127.92 , 9 ] 
-Arg parsed successfully: [ 0.0 , 127.92 , 9 ] 
-Args parsed successfully: [ 0.0 , 127.92 , 9 ] 
-ArgList parsed successfully: ( [ 0.0 , 127.92 , 9 ] ) 
-Arg parsed successfully: prodList ( [ 0.0 , 127.92 , 9 ] ) 
-ArgRest parsed successfully: , prodList ( [ 0.0 , 127.92 , 9 ] ) 
-Args parsed successfully: prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) 
-List parsed successfully: [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] 
-Arg parsed successfully: [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] 
-Args parsed successfully: [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] 
-ArgList parsed successfully: ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] ) 
-Function parsed successfully: sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] ) 
-Program parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] ) 
+SigArgs parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list 
+Sig parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list 
+List parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] 
+NativeBinary parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 
+NativeUnary parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) 
+NativeListUnary parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) 
+NativeListUnary parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) 
+Args parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) 
+ArgList parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) 
+NativeBinary parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) 
+Branch parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) 
+Def parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) 
+UserFunc parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 
+ArgRest parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 
+ArgRest parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 
+Args parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 
+List parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] 
+Args parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] 
+ArgList parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 
+ArgRest parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 
+ArgRest parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 
+Args parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 
+List parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] 
+Args parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] 
+ArgList parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) 
+ArgRest parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 
+ArgRest parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 
+ArgRest parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 
+Args parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 
+List parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] 
+Args parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] 
+ArgList parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) 
+ArgRest parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) 
+Args parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) 
+List parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) : + ( h ( list ) , sumList ( t ( list ) ) ) def prodList ( list ) := ; = ( list , [ ] ) ? @ ( 1 ) : * ( h ( list ) , prodList ( t ( list ) ) ) sumList ( [ prodList ( [ 1 , 2 , 3 ] ) , prodList ( [ 5 , 7 , 2 ] ) , prodList ( [ 0.0 , 127.92 , 9 ] ) ] 
+Arg parsed successfully: def sumList ( list ) := ; = ( list , [ ] ) ? @ ( 0 ) 

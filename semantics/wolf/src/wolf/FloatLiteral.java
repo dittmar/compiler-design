@@ -14,6 +14,9 @@ import wolf.node.TFloatNumber;
 public class FloatLiteral implements Arg {
     TFloatNumber float_literal;
     
+    public FloatLiteral(TFloatNumber float_literal) {
+        this.float_literal = float_literal;
+    }
     /**
      * Accepts a visitor
      * @param v a visitor

@@ -15,6 +15,13 @@ public class Branch implements WolfFunction {
     WolfFunction true_branch;
     WolfFunction false_branch;
     
+    public Branch (WolfFunction condition, WolfFunction true_branch,
+        WolfFunction false_branch) {
+        this.condition = condition;
+        this.true_branch = true_branch;
+        this.false_branch = false_branch;
+    }
+    
    /**
     * Accept a visitor.
     * @param v a visitor

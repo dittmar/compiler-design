@@ -16,6 +16,11 @@ public class WolfMap implements WolfFunction {
     UnaryOp unary_op;
     ListArgument list_argument;
     
+    public WolfMap(UnaryOp unary_op, ListArgument list_argument) {
+        this.unary_op = unary_op;
+        this.list_argument = list_argument;
+    }
+    
     /**
      * Accept a visitor
      * @param v a visitor

@@ -17,6 +17,11 @@ public class NativeUnary implements WolfFunction, UnaryOp {
     NativeUnaryOp unary_op;
     Arg arg;
     
+    public NativeUnary(NativeUnaryOp unary_op, Arg arg) {
+        this.unary_op = unary_op;
+        this.arg = arg;
+    }
+    
     /**
      * Accepts a visitor
      * @param v a visitor
@@ -40,45 +45,9 @@ public class NativeUnary implements WolfFunction, UnaryOp {
                     return null;
                 }
                 return argType;
-            case HEAD:
-                if(argType != Type.LIST && argType != Type.PARAMETER) {
-                    System.err.println("Invalid Argument " + argType + " for "
-                            + "HEAD. Expecting List.");
-                    return null;
-                }
-                Arg head = ((WolfList) arg).arg_list.arg_list.get(0);
-                return v.visit(arg);
-            case TAIL:
-                if(argType != Type.LIST && argType != Type.PARAMETER) {
-                    System.err.println("Invalid Argument " + argType + " for "
-                            + "TAIL. Expecting List.");
-                    return null;
-                }
-                return argType;
-            case REVERSE:
-                if(argType != Type.LIST && argType != Type.PARAMETER) {
-                    System.err.println("Invalid Argument " + argType + " for "
-                            + "REVERSE. Expecting List.");
-                    return null;
-                }
-                return argType;
-            case FLATTEN:
-                if(argType != Type.LIST && argType != Type.PARAMETER) {
-                    System.err.println("Invalid Argument " + argType + " for "
-                            + "FLATTEN. Expecting List.");
-                    return null;
-                }
-                return argType;
             case IDENTITY:
             case PRINT:
                 return argType;
-            case LENGTH:
-                if(argType != Type.LIST && argType != Type.STRING && argType != Type.PARAMETER) {
-                    System.err.println("Invalid Argument " + argType + " for "
-                            + "LENGTH. Expecting List.");
-                    return null;
-                }
-                return Type.INTEGER;
             default:
                 System.err.println("Invalid Native Unary Operation");
                 return null;

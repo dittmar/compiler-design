@@ -15,6 +15,11 @@ public class Fold implements WolfFunction {
     FoldSymbol fold_symbol;
     FoldBody fold_body;
     
+    public Fold(FoldSymbol fold_symbol, FoldBody fold_body) {
+        this.fold_symbol = fold_symbol;
+        this.fold_body = fold_body;
+    }
+    
     /**
      * Accept a visitor
      * @param v a visitor

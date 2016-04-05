@@ -1,5 +1,6 @@
 package wolf.enums;
 
+import wolf.interfaces.StringMiddle;
 import wolf.interfaces.Visitor;
 import wolf.node.TEscapeAlarm;
 import wolf.node.TEscapeBackslash;
@@ -24,7 +25,7 @@ import wolf.node.TEscapeVerticalTab;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public enum EscapeChar {
+public enum EscapeChar implements StringMiddle {
     ESCAPE_ALARM(TEscapeAlarm.class),
     ESCAPE_BACKSPACE(TEscapeBackspace.class),
     ESCAPE_FORMFEED(TEscapeFormfeed.class),
@@ -56,7 +57,7 @@ public enum EscapeChar {
      * Accept a visitor
      * @param v a visitor
      */
-    public void accept(Visitor v) {
-        // don't think we need this one
+    public Object accept(Visitor v) {
+        return null;
     }
 }
