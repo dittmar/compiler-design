@@ -137,7 +137,9 @@ EscapeChar = escape_default
 List = start_list end_list
 List = start_list Args end_list
 
-Type = int_type
-Type = float_type
-Type = list_type
-Type = string_type
+Type = FlatType
+Type = list_type FlatType
+
+FlatType = int_type
+FlatType = float_type
+FlatType = string_type

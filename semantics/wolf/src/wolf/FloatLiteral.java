@@ -24,6 +24,6 @@ public class FloatLiteral implements Arg {
      */
     @Override
     public Object accept(Visitor v) {
-        return Type.FLOAT;
+        return new Type(FlatType.FLOAT);
     }
 }

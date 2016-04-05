@@ -47,11 +47,13 @@ public class NativeBinary implements WolfFunction {
                     System.err.println("Left should be of type " + rightType);
                     return null;
                 }
-                if(leftType != Type.INTEGER && leftType != Type.FLOAT) {
+                if(leftType.flat_type != FlatType.INTEGER && 
+                   leftType.flat_type != FlatType.FLOAT) {
                     System.err.println("Left of type" + leftType + 
                             ". Expecting integer or float.");
                 }
-                if(rightType != Type.INTEGER && rightType != Type.FLOAT) {
+                if(rightType.flat_type != FlatType.INTEGER && 
+                   rightType.flat_type  != FlatType.FLOAT) {
                     System.err.println("Right of type" + leftType + 
                             ". Expecting integer or float.");
                 }
@@ -67,18 +69,18 @@ public class NativeBinary implements WolfFunction {
                     System.err.println("Left should be of type " + rightType);
                     return null;
                 }
-                if(leftType != Type.INTEGER) {
+                if(leftType.flat_type != FlatType.INTEGER) {
                     System.err.println("Left of type" + leftType + 
                             ". Expecting integer.");
                 }
-                if(rightType != Type.INTEGER) {
+                if(rightType.flat_type != FlatType.INTEGER) {
                     System.err.println("Right of type" + leftType + 
                             ". Expecting integer.");
                 }
                 return leftType;
             case EQUAL:
             case NOT_EQUAL:
-                return Type.INTEGER;
+                return FlatType.INTEGER;
             default:
                 System.err.println("Invalid Binary Operator!");
                 return null;

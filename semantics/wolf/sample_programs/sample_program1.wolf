@@ -4,11 +4,11 @@
   Joe Alacqua
 `
 `This function adds up all elements in a list`
-def int sumList(list l) := ; =(l, []) ? @(0) : +(h(l), sumList(t(l)))
+def int sumList(list int l) := ; =(l, []) ? @(0) : +(h(l), sumList(t(l)))
 
 `This function gets the product
 of all elements in a list`
-def int prodList(list l) := 
+def int prodList(list int l) := 
     ; =(l, [])
     ? @(1)
     : *(h(l), prodList(t(l)))

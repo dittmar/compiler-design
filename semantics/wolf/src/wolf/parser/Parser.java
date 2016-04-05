@@ -68,8 +68,9 @@ public class Parser {
             System.err.println("Could not create log file, writing to stdout");
         }
         ast = Program();
-        BuildSymbolTable bst = new BuildSymbolTable();
+        /*BuildSymbolTable bst = new BuildSymbolTable();
         bst.visit(ast);
+        */
         try {
             writer.close();
         } catch (IOException ex) {
@@ -659,19 +660,21 @@ public class Parser {
      * @return a Type
      */
     private Type Type() {
+        boolean is_list = false;
+        if (token instanceof TListType) {
+            eat(TListType.class);
+            is_list = true;
+        }
         switch(getTokenName()) {
             case "TIntType":
                 eat(TIntType.class);
-                return Type.INTEGER;
+                return new Type(FlatType.INTEGER, is_list);
             case "TFloatType":
                 eat(TFloatType.class);
-                return Type.FLOAT;
+                return new Type(FlatType.FLOAT, is_list);
             case "TStringType":
                 eat(TStringType.class);
-                return Type.STRING;
-            case "TListType":
-                eat(TListType.class);
-                return Type.LIST;
+                return new Type(FlatType.STRING, is_list);
             default:
                 error();
         }

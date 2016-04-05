@@ -1,7 +1,6 @@
 package wolf;
 
 import wolf.enums.NativeListUnaryOp;
-import wolf.interfaces.Arg;
 import wolf.interfaces.ListArgument;
 import wolf.interfaces.UnaryOp;
 import wolf.interfaces.Visitor;
@@ -34,7 +33,7 @@ public class NativeListUnary implements WolfFunction, UnaryOp {
         Type argType = (Type) v.visit(list_argument);
         switch(list_unary_op) {
             case HEAD:
-                if(argType != Type.LIST) {
+                if(argType.is_list) {
                     System.err.println("Invalid Argument " + argType + " for "
                             + "HEAD. Expecting List.");
                     return null;
@@ -42,21 +41,21 @@ public class NativeListUnary implements WolfFunction, UnaryOp {
                 //Arg head = ((WolfList) list_argument).arg_list.get(0);
                 return argType;
             case TAIL:
-                if(argType != Type.LIST) {
+                if(argType.is_list) {
                     System.err.println("Invalid Argument " + argType + " for "
                             + "TAIL. Expecting List.");
                     return null;
                 }
                 return argType;
             case REVERSE:
-                if(argType != Type.LIST) {
+                if(argType.is_list) {
                     System.err.println("Invalid Argument " + argType + " for "
                             + "REVERSE. Expecting List.");
                     return null;
                 }
                 return argType;
             case FLATTEN:
-                if(argType != Type.LIST) {
+                if(argType.is_list) {
                     System.err.println("Invalid Argument " + argType + " for "
                             + "FLATTEN. Expecting List.");
                     return null;

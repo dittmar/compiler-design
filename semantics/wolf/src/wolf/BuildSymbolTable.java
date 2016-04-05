@@ -117,7 +117,7 @@ public class BuildSymbolTable implements Visitor {
     @Override
     public Object visit(Branch n) {
         Type condType = (Type) n.condition.accept(this);
-        if(condType != Type.INTEGER) {
+        if(condType.flat_type != FlatType.INTEGER) {
             System.err.print("Condition not of integer type!");
             System.exit(1);
         }

@@ -25,6 +25,6 @@ public class IntLiteral implements Arg {
      */
     @Override
     public Object accept(Visitor v) {
-        return Type.INTEGER;
+        return new Type(FlatType.INTEGER);
     }
 }
