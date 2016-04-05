@@ -1,0 +1,13 @@
+SigArgs parsed successfully: num 
+Sig parsed successfully: ( num ) 
+NativeBinOp parsed successfully: + 
+Arg parsed successfully: num 
+Arg parsed successfully: 3 
+Function parsed successfully: + ( num , 3 ) 
+Def parsed successfully: def plusThree ( num ) := + ( num , 3 ) 
+UserFunc parsed successfully: plusThree 
+Arg parsed successfully: 4 
+Args parsed successfully: 4 
+ArgList parsed successfully: ( 4 ) 
+Function parsed successfully: plusThree ( 4 ) 
+Program parsed successfully: def plusThree ( num ) := + ( num , 3 ) plusThree ( 4 ) 

@@ -3,5 +3,5 @@ Arg parsed successfully: 1
 Arg parsed successfully: 2 
 ArgRest parsed successfully: , 2 
 Args parsed successfully: 1 , 2 
-Unexpected token type: wolf.node.TIntNumber(line 2, column28): 3
+Unexpected token type: wolf.node.TIntNumber(line 2, column 28): 3
 Context: [ 1 , 2
