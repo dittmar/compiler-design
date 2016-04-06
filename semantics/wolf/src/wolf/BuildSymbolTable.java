@@ -237,6 +237,8 @@ public class BuildSymbolTable implements Visitor {
         SymbolTable lambda_table = new SymbolTable(lambda_table_name);
         lambda_table.parent_table = current_def_table;
         current_def_table = lambda_table;
+        
+        
         n.sig.accept(this);
         Type type = n.function.accept(this);
         
@@ -244,9 +246,17 @@ public class BuildSymbolTable implements Visitor {
             new TIdentifier(lambda_table_name)
         );
         tables.add(lambda_table);
-        program_table.put(lambda_id, new Binding(
-            lambda_id, new TableValue(type, lambda_table))
+        Binding binding = new Binding(
+            lambda_id, 
+            new TableValue(type, lambda_table)
         );
+        if (lambda_table.parent_table == null) {
+            program_table.put(lambda_id, binding);
+        } else {
+            lambda_table.parent_table.put(lambda_id, binding);
+        }
+        
+        current_def_table = lambda_table.parent_table;
         return type;
     }
     

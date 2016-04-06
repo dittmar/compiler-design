@@ -127,7 +127,7 @@ public class Parser {
         } else if (token instanceof TStartList) {
             arg = List();
         } else if (token instanceof TLambdaStart) {
-            arg = Lambda();
+            arg = new UserFunc(Lambda(), ArgList());
         } else if (isFunction()) {
             arg = Function();
         } else {
