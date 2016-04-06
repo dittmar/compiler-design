@@ -26,7 +26,7 @@ public class WolfMap implements WolfFunction {
      * @param v a visitor
      */
     @Override
-    public Object accept(Visitor v) {
+    public Type accept(Visitor v) {
         return v.visit(this);
     }
 }

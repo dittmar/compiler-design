@@ -1,5 +1,7 @@
 package wolf.interfaces;
 
+import wolf.Type;
+
 /**
  * Interface for an Arg in WOLF
  * @author William Ezekiel
@@ -8,5 +10,5 @@ package wolf.interfaces;
  * @version Apr 3, 2016
  */
 public interface Arg {
-    public Object accept(Visitor v);
+    public Type accept(Visitor v);
 }

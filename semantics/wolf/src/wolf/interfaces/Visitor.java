@@ -15,59 +15,61 @@ public interface Visitor {
 
     void visit(Program n);
 
-    void visit(Def n);
+    Type visit(Def n);
 
     void visit(Sig n);
     
-    Object visit(SigArg n);
+    Type visit(SigArg n);
     
-    Object visit(WolfFunction n);
+    Type visit(WolfFunction n);
     
-    Object visit(UserFunc n);
+    Type visit(UserFunc n);
     
-    Object visit(NativeUnary n);
+    Type visit(NativeUnary n);
     
-    Object visit(Branch n);
+    Type visit(NativeBinary n);
     
-    Object visit(WolfMap n);
+    Type visit(Branch n);
     
-    Object visit(Fold n);
+    Type visit(WolfMap n);
     
-    Object visit(FoldSymbol n);
+    Type visit(Fold n);
     
-    Object visit(UnaryOp n);
+    void visit(FoldSymbol n);
     
-    Object visit(ListArgument n);
+    Type visit(UnaryOp n);
     
-    Object visit(WolfLambda n);
+    Type visit(ListArgument n);
     
-    Object visit(FoldBody n);
+    Type visit(WolfLambda n);
     
-    Object visit(BinOp n);
+    Type visit(FoldBody n);
     
-    Object visit(WolfList n);
+    Type visit(BinOp n);
     
-    Object visit(Identifier n);
+    Type visit(WolfList n);
     
-    Object visit(Arg n);
+    Type visit(Identifier n);
     
-    Object visit(UserFuncName n);
+    Type visit(Arg n);
     
-    Object visit(ArgList n);
+    Type visit(UserFuncName n);
     
-    Object visit(IntLiteral n);
+    void visit(ArgsList n);
     
-    Object visit(FloatLiteral n);
+    Type visit(ListArgsList n);
     
-    Object visit(WolfString n);
+    Type visit(IntLiteral n);
     
-    Object visit(StringMiddle n);
+    Type visit(FloatLiteral n);
     
-    Object visit(StringBody n);
+    Type visit(WolfString n);
     
-    Object visit(StringEscapeSeq n);   
+    void visit(StringMiddle n);
+    
+    void visit(StringBody n);
+    
+    void visit(StringEscapeSeq n);   
     
     Type visit(Type n);
-    
-    Object visit(NativeBinary n);
 }

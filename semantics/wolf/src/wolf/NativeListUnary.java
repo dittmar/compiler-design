@@ -29,7 +29,7 @@ public class NativeListUnary implements WolfFunction, UnaryOp {
      * @return the type returned by this unary op.
      */
     @Override
-    public Object accept(Visitor v) {
+    public Type accept(Visitor v) {
         Type argType = (Type) v.visit(list_argument);
         switch(list_unary_op) {
             case HEAD:

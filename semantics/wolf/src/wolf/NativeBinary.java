@@ -28,7 +28,7 @@ public class NativeBinary implements WolfFunction {
      * @param v a visitor
      */
     @Override
-    public Object accept(Visitor v) {
+    public Type accept(Visitor v) {
         Type leftType = (Type) v.visit(arg_left);
         Type rightType = (Type) v.visit(arg_right);
         boolean areSameType = (leftType.equals(rightType));

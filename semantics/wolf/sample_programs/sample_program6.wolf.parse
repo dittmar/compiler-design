@@ -49,4 +49,5 @@ Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , 
 ArgRest parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) , relational ( ) 
 Args parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) , relational ( ) 
 List parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) , relational ( ) ] 
-Nativ
+NativeListUnary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) , relational ( ) ] ) 
+Program parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) , relational ( ) ] ) 

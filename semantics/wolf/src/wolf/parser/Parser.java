@@ -83,7 +83,7 @@ public class Parser {
      *
      * @return abstract syntax tree for ArgList
      */
-    private ArgList ArgList() {
+    private Args ArgList() {
         List<Arg> arg_list = new ArrayList<>();
         eat(TLParen.class);
         if (token instanceof TRParen) {
@@ -95,7 +95,7 @@ public class Parser {
             error();
         }
         log("ArgList");
-        return new ArgList(arg_list);
+        return new ArgsList(arg_list);
     }
 
     /**
@@ -113,7 +113,7 @@ public class Parser {
             // If it starts with a left parenthesis, it's a function call,
             // not a literal (e.g. float, string, int)
             if (token instanceof TLParen) {
-                ArgList arg_list = ArgList();
+                Args arg_list = ArgList();
                 arg = new UserFunc(identifier, arg_list);
             } else {
                 arg = identifier;
@@ -395,7 +395,7 @@ public class Parser {
             // If it starts with a left parenthesis, it's a function call,
             // not a literal (e.g. float, string, int)
             if (token instanceof TLParen) {
-                ArgList arg_list = ArgList();
+                Args arg_list = ArgList();
                 return new UserFunc(identifier, arg_list);
             } else {
                 return identifier;

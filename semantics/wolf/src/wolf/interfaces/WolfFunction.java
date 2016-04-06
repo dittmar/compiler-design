@@ -1,5 +1,7 @@
 package wolf.interfaces;
 
+import wolf.Type;
+
 /**
  * An interface for each type of function in WOLF
  * @author Kevin Dittmar
@@ -9,5 +11,5 @@ package wolf.interfaces;
  */
 public interface WolfFunction extends Arg, ListArgument {
     @Override
-    public Object accept(Visitor v);
+    public Type accept(Visitor v);
 }

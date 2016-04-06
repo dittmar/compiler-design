@@ -8,5 +8,5 @@ package wolf.interfaces;
  * @version Apr 3, 2016
  */
 public interface StringMiddle {
-    Object accept(Visitor v);
+    void accept(Visitor v);
 }

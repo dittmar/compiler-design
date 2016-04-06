@@ -25,7 +25,7 @@ public class WolfString implements Arg {
      * @return 
      */
     @Override
-    public Object accept(Visitor v) {
+    public Type accept(Visitor v) {
         return new Type(FlatType.STRING);
     }
 }

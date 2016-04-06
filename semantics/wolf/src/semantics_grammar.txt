@@ -134,7 +134,6 @@ EscapeChar = escape_hex_char
 EscapeChar = escape_unicode_char
 EscapeChar = escape_default
 
-List = start_list end_list
 List = start_list Args end_list
 
 Type = FlatType

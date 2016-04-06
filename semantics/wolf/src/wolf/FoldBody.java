@@ -23,7 +23,7 @@ public class FoldBody {
      * Accept a visitor
      * @param v a visitor
      */
-    public void accept(Visitor v) {
-        v.visit(this);
+    public Type accept(Visitor v) {
+        return v.visit(this);
     }
 }

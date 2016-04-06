@@ -1,5 +1,6 @@
 package wolf;
 
+import wolf.interfaces.Args;
 import wolf.interfaces.UserFuncName;
 import wolf.interfaces.Visitor;
 import wolf.interfaces.WolfFunction;
@@ -13,9 +14,9 @@ import wolf.interfaces.WolfFunction;
  */
 public class UserFunc implements WolfFunction {
     UserFuncName user_func_name;
-    ArgList arg_list;
+    Args arg_list;
     
-    public UserFunc(UserFuncName user_func_name, ArgList arg_list) {
+    public UserFunc(UserFuncName user_func_name, Args arg_list) {
         this.user_func_name = user_func_name;
         this.arg_list = arg_list;
     }
@@ -25,7 +26,7 @@ public class UserFunc implements WolfFunction {
      * @param v a visitor
      */
     @Override
-    public Object accept(Visitor v) {
+    public Type accept(Visitor v) {
         return v.visit(this);
     }
 }

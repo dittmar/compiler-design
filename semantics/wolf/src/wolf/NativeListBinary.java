@@ -32,7 +32,7 @@ public class NativeListBinary implements WolfFunction {
      * @param v a visitor
      */
     @Override
-    public Object accept(Visitor v) {
+    public Type accept(Visitor v) {
         Type arg_type = (Type) v.visit(arg);
         Type list_type = (Type) v.visit(list_argument);
         switch(binary_op) {
