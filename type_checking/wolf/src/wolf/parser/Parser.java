@@ -744,7 +744,7 @@ public class Parser {
         
         sb.append("Unexpected token type: ")
                 .append(token.getClass().getName())
-                .append("around (line ").append(line_count)
+                .append(" around (line ").append(line_count)
                 .append(", column ").append(token.getPos()).append("): ")
                 .append(token.getText());
         if (!parsed.isEmpty()) {
