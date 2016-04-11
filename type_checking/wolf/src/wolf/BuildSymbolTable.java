@@ -179,20 +179,22 @@ public class BuildSymbolTable implements Visitor {
     public Type visit(Branch n) {
         Type condType = (Type) n.condition.accept(this);
         if (!condType.equals(new Type(FlatType.INTEGER))) {
-            System.err.println(
-                n.condition + " of type " + condType + ".  Should be integer."
+            throw new UnsupportedOperationException(
+                n.condition + " of type " + condType + 
+                ".  Condition functions must return an integer."
             );
-            System.exit(1);
         }
 
         Type trueType = (Type) n.true_branch.accept(this);
         Type falseType = (Type) n.false_branch.accept(this);
         if (!(trueType.equals(falseType))) {
-            System.err.println("Ambiguous return types for branch: " + 
-                "true branch: " + trueType + " false branch: " + falseType);
-            System.err.println("true branch: " + n.true_branch);
-            System.err.println("false branch: " + n.false_branch);
-            System.exit(1);
+            throw new UnsupportedOperationException(
+                "Ambiguous return types for branch: " + 
+                "\ntrue branch: " + trueType + 
+                "\nfalse branch: " + falseType +
+                "\ntrue branch: " + n.true_branch +
+                "\nfalse branch: " + n.false_branch
+            );
         }
         return trueType;
     }
