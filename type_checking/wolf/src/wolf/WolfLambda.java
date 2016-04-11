@@ -25,6 +25,7 @@ public class WolfLambda implements WolfFunction, BinOp, UnaryOp, UserFuncName {
     /**
      * Accept a visitor
      * @param v a visitor
+     * @return the type of the lambda
      */
     @Override
     public Type accept(Visitor v) {

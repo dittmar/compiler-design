@@ -54,6 +54,9 @@ public class NativeUnary implements WolfFunction, UnaryOp {
         }
     }
     
+    /**
+     * @return String representation of a unary op
+     */
     @Override
     public String toString() {
         return unary_op.toString() + "(" + arg.toString() + ")";

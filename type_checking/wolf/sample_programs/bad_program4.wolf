@@ -23,7 +23,9 @@
 	go within the tail of the list.
 	`
 	`srt doesn’t match “sort” in the rest of the code, but we are not doing semantic checking yet, so that shouldn’t be caught.  However, a right paren is missing at the end of the function definition.`
-	def list int srt(list int l) := ;<(#(l), 2) ? @(l) : insert(h(l), sort(t(l))
+	def list int srt(list int l) := ; <(#(l), 2) 
+                                        ? @(l)
+                                        : insert(h(l), sort(t(l))
 
 
 	sort([2,7,1,6])

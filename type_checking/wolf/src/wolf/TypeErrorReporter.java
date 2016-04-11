@@ -11,17 +11,12 @@ import wolf.interfaces.ListArgument;
  * @author Joe Alacqua
  * @version Apr 10, 2016
  */
-public final class TypeErrorReporter {
-    public static void error(String message) 
-            throws UnsupportedOperationException {
-        throw new UnsupportedOperationException(message);
-    }
-    
+public final class TypeErrorReporter { 
     public static void mismatchErrorBinary(Arg left, Type l, Arg right, Type r,
             String op, List<Type> expected_types)
             throws UnsupportedOperationException {
         StringBuilder sb = new StringBuilder();
-        sb.append(op).append(" requires: ");
+        sb.append(op).append(" can use: ");
         
         if (expected_types == null || expected_types.isEmpty()) {
             sb.append("any type");
@@ -48,7 +43,7 @@ public final class TypeErrorReporter {
             ListArgument list, Type list_t, String op, List<Type> arg_expected,
             List<Type> list_expected) throws UnsupportedOperationException {
         StringBuilder sb = new StringBuilder();
-        sb.append(op).append(" requires: ");
+        sb.append(op).append(" can use: ");
         if (arg_expected == null || arg_expected.isEmpty()) {
             sb.append("any type");
         } else {
@@ -81,5 +76,44 @@ public final class TypeErrorReporter {
           .append(arg.toString()).append(" is of type ").append(arg_t)
           .append("\n");
         throw new UnsupportedOperationException(sb.toString());
+    }
+    
+    public static void mismatchErrorUnary(Arg arg, Type type, String op,
+            List<Type> expected) throws UnsupportedOperationException {
+        StringBuilder sb = new StringBuilder();
+        sb.append(op).append(" can use: ");
+        if (expected == null || expected.isEmpty()) {
+            sb.append("any type");
+        } else {
+            sb.append("[");
+            StringBuilder types = new StringBuilder();
+            for (Type t : expected) {
+                types.append(t).append(" ");
+            }
+            sb.append(types.toString().trim());
+            sb.append("]");
+        }
+        sb.append("\n");
+        sb.append(arg.toString()).append(" is of type ").append(type);
+    }
+    
+    public static void mismatchErrorListUnary(ListArgument arg, Type type,
+            String op, List<Type> expected)
+            throws UnsupportedOperationException {
+        StringBuilder sb = new StringBuilder();
+        sb.append(op).append(" can use: ");
+        if (expected == null || expected.isEmpty()) {
+            sb.append("any list type");
+        } else {
+            sb.append("[");
+            StringBuilder types = new StringBuilder();
+            for (Type t : expected) {
+                types.append(t).append(" ");
+            }
+            sb.append(types.toString().trim());
+            sb.append("]");
+        }
+        sb.append("\n");
+        sb.append(arg.toString()).append(" is of type ").append(type);
     }
 }

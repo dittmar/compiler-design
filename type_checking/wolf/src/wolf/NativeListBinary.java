@@ -41,20 +41,28 @@ public class NativeListBinary implements WolfFunction {
         switch(binary_op) {
             case APPEND:
             case PREPEND:
-                List<Type> list_types = new ArrayList<>();
-                list_types.add(list_type);
-                TypeErrorReporter.mismatchErrorBinaryList(
-                    arg, arg_type, 
-                    list_argument, list_type,
-                    binary_op.toString(), null, list_types
-                );
                 if(!list_type.is_list) {
-                    System.err.println("Expecting list, found " + arg_type);
+                    List<Type> list_types = new ArrayList<>();
+                    list_types.add(list_type);
+                    TypeErrorReporter.mismatchErrorBinaryList(
+                        arg, arg_type, 
+                        list_argument, list_type,
+                        binary_op.toString(), null, list_types
+                    );
                 }
                 return list_type;
             default:
                 System.err.println("Invalid Native List Binary Operation!");
                 return null;
         }
+    }
+    
+    /**
+     * @return string representation of a list binary op
+     */
+    @Override
+    public String toString() {
+        return binary_op.toString() + "(" + 
+            arg.toString() + ", " + list_argument.toString() + ")";
     }
 }

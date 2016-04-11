@@ -1,5 +1,6 @@
 package wolf;
 
+import java.util.Objects;
 import wolf.interfaces.Visitor;
 
 /**
@@ -24,6 +25,11 @@ public class Type {
         this.is_list = is_list;
     }
     
+    /**
+     * @param o is the object to test against for equality
+     * @return true if o is the same as this Type, false otherwise
+     */
+    @Override
     public boolean equals(Object o) {
         if(o instanceof Type) {
             Type t = (Type) o;
@@ -31,7 +37,22 @@ public class Type {
         }
         return false;
     }
+
+    /**
+     * @return an int hash code for the type
+     */
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.flat_type);
+        hash = 83 * hash + (this.is_list ? 1 : 0);
+        return hash;
+    }
     
+    /**
+     * @return a String representation of the type.
+     */
+    @Override
     public String toString() {
         return (is_list) ? "LIST_"+ flat_type.toString() : flat_type.toString();
     }

@@ -34,38 +34,37 @@ public class NativeListUnary implements WolfFunction, UnaryOp {
         switch(list_unary_op) {
             case HEAD:
                 if(!argType.is_list) {
-                    System.err.println("Invalid Argument " + argType + " for "
-                            + "HEAD. Expecting List.");
-                    return null;
+                    TypeErrorReporter.mismatchErrorListUnary(
+                        list_argument, argType, list_unary_op.toString(), null
+                    );
                 }
-                //Arg head = ((WolfList) list_argument).arg_list.get(0);
                 return new Type(argType.flat_type);
             case TAIL:
                 if(!argType.is_list) {
-                    System.err.println("Invalid Argument " + argType + " for "
-                            + "TAIL. Expecting List.");
-                    return null;
+                    TypeErrorReporter.mismatchErrorListUnary(
+                        list_argument, argType, list_unary_op.toString(), null
+                    );
                 }
                 return argType;
             case REVERSE:
                 if(!argType.is_list) {
-                    System.err.println("Invalid Argument " + argType + " for "
-                            + "REVERSE. Expecting List.");
-                    return null;
+                    TypeErrorReporter.mismatchErrorListUnary(
+                        list_argument, argType, list_unary_op.toString(), null
+                    );
                 }
                 return argType;
             case FLATTEN:
                 if(!argType.is_list) {
-                    System.err.println("Invalid Argument " + argType + " for "
-                            + "FLATTEN. Expecting List.");
-                    return null;
+                    TypeErrorReporter.mismatchErrorListUnary(
+                        list_argument, argType, list_unary_op.toString(), null
+                    );
                 }
                 return argType;
             case LENGTH:
                 if(!argType.is_list) {
-                    System.err.println("Invalid Argument " + argType + " for "
-                            + "LENGTH. Expecting List.");
-                    return null;
+                    TypeErrorReporter.mismatchErrorListUnary(
+                        list_argument, argType, list_unary_op.toString(), null
+                    );
                 }
                 return new Type(argType.flat_type);
             default:
@@ -74,8 +73,12 @@ public class NativeListUnary implements WolfFunction, UnaryOp {
         }
     }
     
+    /**
+     * @return string representation of a list unary op
+     */
+    @Override
     public String toString() {
-        return "";
+        return list_unary_op.toString() + "(" + list_argument.toString() + ")";
     }
 }
 

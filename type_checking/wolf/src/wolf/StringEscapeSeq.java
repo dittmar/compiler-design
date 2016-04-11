@@ -18,7 +18,8 @@ public class StringEscapeSeq implements StringMiddle {
      * Accept a visitor
      * @param v a visitor
      */
+    @Override
     public void accept(Visitor v) {
-        v.visit(this);
+        // Do nothing
     }
 }

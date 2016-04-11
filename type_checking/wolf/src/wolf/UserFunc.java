@@ -24,6 +24,7 @@ public class UserFunc implements WolfFunction {
     /**
      * Accept a visitor
      * @param v a visitor
+     * @return the type of this user-defined function
      */
     @Override
     public Type accept(Visitor v) {

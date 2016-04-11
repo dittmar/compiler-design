@@ -1,0 +1,11 @@
+SigArgRest parsed successfully: def int p ( string q , string s 
+SigArgs parsed successfully: def int p ( string q , string s 
+Sig parsed successfully: def int p ( string q , string s ) 
+Arg parsed successfully: def int p ( string q , string s ) := = ( q 
+Arg parsed successfully: def int p ( string q , string s ) := = ( q , s 
+NativeBinary parsed successfully: def int p ( string q , string s ) := = ( q , s ) 
+Def parsed successfully: def int p ( string q , string s ) := = ( q , s ) 
+Arg parsed successfully: def int p ( string q , string s ) := = ( q , s ) + ( 2 
+Arg parsed successfully: def int p ( string q , string s ) := = ( q , s ) + ( 2 , 1 
+Unexpected token type: wolf.node.TComma(line 3, column 7): ,
+Context: def int p ( string q , string s ) := = ( q , s ) + ( 2 , 1

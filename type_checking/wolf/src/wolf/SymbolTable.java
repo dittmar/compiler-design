@@ -11,14 +11,15 @@ import java.util.HashMap;
 public class SymbolTable {
   Map<String, Binding> symbol_table;
   SymbolTable parent_table;
-  String table;
+  String table_name;
   
   /**
    * Create a symbol table
+     * @param table
    */
-  public SymbolTable(String table) {
+  public SymbolTable(String table_name) {
     symbol_table = new HashMap();
-    this.table = table;
+    this.table_name = table_name;
   }
   
   public SymbolTable(SymbolTable parent_table, String table) {
@@ -48,7 +49,7 @@ public class SymbolTable {
   
   public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append(paddedTableString("-----Table " + table + "-----"))
+      sb.append(paddedTableString("-----Table " + table_name + "-----"))
         .append("\n")
         .append(paddedTableString("Identifier"))
         .append(paddedTableString("Binding"))
@@ -58,11 +59,11 @@ public class SymbolTable {
           Binding b = symbol_table.get(key);
           Identifier id = b.identifier;
           Type type = b.table_value.type;
-          SymbolTable table = b.table_value.table;
+          SymbolTable sym_table = b.table_value.table;
           sb.append(paddedTableString(id.toString()))
             .append(paddedTableString(type.toString()));
-          if (table != null) {
-              sb.append(paddedTableString("Table " + table.table));
+          if (sym_table != null) {
+              sb.append(paddedTableString("Table " + sym_table.table_name));
           }
           sb.append("\n");
       }
@@ -71,7 +72,8 @@ public class SymbolTable {
   
       /**
      * @param string a string
-     * @return a padded string for the string representation of this parse table.
+     * @return a padded string for the string representation
+     * of this parse table.
      */
     private String paddedTableString(String string) {
         int left_num_spaces =

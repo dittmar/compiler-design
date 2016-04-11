@@ -68,8 +68,12 @@ public class Parser {
             System.err.println("Could not create log file, writing to stdout");
         }
         ast = Program();
-        BuildSymbolTable bst = new BuildSymbolTable();
-        bst.visit(ast);
+        try {
+            BuildSymbolTable bst = new BuildSymbolTable();
+            bst.visit(ast);
+        } catch (UnsupportedOperationException e) {
+            System.out.println(e);
+        }
         
         try {
             writer.close();
@@ -737,9 +741,10 @@ public class Parser {
      */
     private void error() {
         StringBuilder sb = new StringBuilder();
+        
         sb.append("Unexpected token type: ")
                 .append(token.getClass().getName())
-                .append("(line ").append(line_count)
+                .append("around (line ").append(line_count)
                 .append(", column ").append(token.getPos()).append("): ")
                 .append(token.getText());
         if (!parsed.isEmpty()) {
@@ -909,9 +914,9 @@ public class Parser {
      */
     private Token nextValidToken() {
         token = lexer.getToken();
-        while (token instanceof TSpace
-                || token instanceof TNewline
-                || token instanceof TComment) {
+        while (token instanceof TSpace ||
+               token instanceof TNewline ||
+               token instanceof TComment) {
             /* If a comment spans multiple lines, it will hide newlines.
              * Add the number of newlines in the comment to the count.
              */

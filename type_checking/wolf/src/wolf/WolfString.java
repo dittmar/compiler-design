@@ -22,7 +22,7 @@ public class WolfString implements Arg {
     /**
      * Accept a visitor
      * @param v a visitor
-     * @return 
+     * @return the String type
      */
     @Override
     public Type accept(Visitor v) {

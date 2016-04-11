@@ -1,0 +1,19 @@
+SigArgRest parsed successfully: def int badBranch ( int y , string z 
+SigArgs parsed successfully: def int badBranch ( int y , string z 
+Sig parsed successfully: def int badBranch ( int y , string z ) 
+Arg parsed successfully: def int badBranch ( int y , string z ) := ; > ( y 
+Arg parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z 
+NativeBinary parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) 
+Arg parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) ? @ ( y 
+NativeUnary parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) ? @ ( y ) 
+Arg parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) ? @ ( y ) : @ ( z 
+NativeUnary parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) ? @ ( y ) : @ ( z ) 
+Branch parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) ? @ ( y ) : @ ( z ) 
+Def parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) ? @ ( y ) : @ ( z ) 
+UserFunc parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) ? @ ( y ) : @ ( z ) badBranch 
+Arg parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) ? @ ( y ) : @ ( z ) badBranch ( 1 
+Arg parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) ? @ ( y ) : @ ( z ) badBranch ( 1 , 3.0 
+ArgRest parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) ? @ ( y ) : @ ( z ) badBranch ( 1 , 3.0 
+Args parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) ? @ ( y ) : @ ( z ) badBranch ( 1 , 3.0 
+ArgList parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) ? @ ( y ) : @ ( z ) badBranch ( 1 , 3.0 ) 
+Program parsed successfully: def int badBranch ( int y , string z ) := ; > ( y , z ) ? @ ( y ) : @ ( z ) badBranch ( 1 , 3.0 ) 

@@ -94,4 +94,13 @@ public class NativeBinary implements WolfFunction {
                 return null;
         }
     }
+    
+    /**
+     * @return string representation of a binary op
+     */
+    @Override
+    public String toString() {
+        return binary_op.toString() + "(" + 
+            arg_left.toString() + ", " + arg_right.toString() + ")";
+    }
 }
