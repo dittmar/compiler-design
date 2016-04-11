@@ -1,0 +1,6 @@
+`
+ Binary Op with too many arguments
+ Handled in Parser already!
+`
+def int plusFive(int num) := +(num,2,3)
+plusFive(5)

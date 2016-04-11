@@ -22,4 +22,8 @@ public class StringEscapeSeq implements StringMiddle {
     public void accept(Visitor v) {
         // Do nothing
     }
+    
+    public String toString() {
+        return "\\" + escape_char.toString();
+    }
 }

@@ -41,7 +41,7 @@ public class BuildSymbolTable implements Visitor {
         for (Def def : n.def_list) {
             current_def_table = new SymbolTable(
                 program_table,
-                def.def_name.toString() + " Table"
+                def.def_name.toString()
             );
             program_table.put(
                 def.def_name,

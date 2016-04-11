@@ -26,7 +26,25 @@ public class WolfList implements Arg, ListArgument {
      */
     @Override
     public Type accept(Visitor v) {
-        Type type = (Type) this.arg_list.get(0).accept(v);
-        return new Type(type.flat_type, true);
+        if(v instanceof BuildSymbolTable) {
+            Type type = (Type) this.arg_list.get(0).accept(v);
+            return new Type(type.flat_type, true);
+        }
+        else if (v instanceof SemanticTypeCheck) {
+            Type listType = (Type) this.arg_list.get(0).accept(v);
+            for(Arg arg: arg_list) {
+                Type argType = arg.accept(v);
+                if(!argType.equals(listType)) {
+                    throw new UnsupportedOperationException(arg.toString() + 
+                        " is of type " + argType + " in a list of type " + 
+                        listType);
+                }
+            }
+            return new Type(listType.flat_type, true);
+        }
+        else {
+            System.exit(1);
+            return null;
+        }
     }
 }

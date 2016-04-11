@@ -26,4 +26,8 @@ public class StringBody implements StringMiddle {
     public void accept(Visitor v) {
         //Do nothing
     }
+    
+    public String toString() {
+        return string_body.getText();
+    }
 }

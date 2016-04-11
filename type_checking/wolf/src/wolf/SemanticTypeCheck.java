@@ -27,7 +27,6 @@ public class SemanticTypeCheck implements Visitor {
         this.tables = tables;
         this.program_table = this.current_def_table = program_table;
         last_table_names = new Stack<>();
-        last_table_names.push(program_table.table_name);
     }
     
     /**
@@ -36,9 +35,13 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public void visit(Program n) {
-
+        for(Def def:n.def_list) {
+            last_table_names.push(current_def_table.table_name);
+            current_def_table = getTableWithName(def.def_name.identifier.getText());
+            def.accept(this);
+            current_def_table = getTableWithName(last_table_names.pop());
+        }
         n.function.accept(this);
-        StringBuilder sb = new StringBuilder();
         System.out.println("Type Checking Successfully Completed");
     }
 
@@ -49,30 +52,40 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(Def n) {
-        // aint no party
-        return null;
+        Type returnType = n.function.accept(this);
+        if(!returnType.equals(n.type)) {
+            throw new UnsupportedOperationException("Return type: " + returnType +
+                    " does not match expected type: " + n.type + " in " +
+                    n.toString()
+            );
+        }
+        return returnType;
     }
 
     /**
-     * Visit a function signature
+     * Visit a function signature. Never visited in SemanticTypeCheck. 
+     * Only here to please the Java compiler.
      * @param n a signature (Sig)
      */
     @Override
     public void visit(Sig n) {
-        // do nothing for now
+        // nothing to type check in a Sig
     }
 
     /**
+     * Visit a signature argument. Never visited in SemanticTypeCheck. 
+     * Only here to please the Java compiler.
      * @param n is the SigArg to visit
-     * @return the type of the SigArg
+     * @return null
      */
     @Override
     public Type visit(SigArg n) {
-        // ArgParty memes
-        return null; // should never be called, but w.e
+        // nothing to type check in a SigArg
+        return null;
     }
 
     /**
+     * Visit a type
      * @param n is the type to visit
      * @return the type of the Type
      */
@@ -121,7 +134,7 @@ public class SemanticTypeCheck implements Visitor {
         if(n.user_func_name instanceof Identifier) {
             Identifier id = (Identifier) n.user_func_name;
             last_table_names.push(current_def_table.table_name);
-            current_def_table = getTableWithName(id.identifier.getText() + " Table");
+            current_def_table = getTableWithName(id.identifier.getText());
         }
         else if(n.user_func_name instanceof WolfLambda) {
             last_table_names.push(current_def_table.table_name);
@@ -253,66 +266,10 @@ public class SemanticTypeCheck implements Visitor {
      * @param n a lambda object (WolfLambda)
      * @return type of lambda
      */
-    
-    /*String lambda_table_name = "Lambda" + ++lambda_count;
-        // Make a symbol table for the lambda
-        SymbolTable lambda_table = new SymbolTable(lambda_table_name);
-        // Set the parent table of the lambda to be the current table scope
-        lambda_table.parent_table = current_def_table;
-        // Set the current table scope to be the lambda in preparation to
-        // examine the lambda function and its parameters
-        current_def_table = lambda_table;
-
-        // Parse the lambda for types
-        n.sig.accept(this);
-        Type type = n.function.accept(this);
-
-        // Make an identifier for the lambda in the symbol tables
-        Identifier lambda_id = new Identifier(
-                new TIdentifier(lambda_table_name)
-        );
-        
-        // Add the lambda to the symbol tables list
-        tables.add(lambda_table);
-        // Bind the lambda's table information to its identifier
-        Binding binding = new Binding(
-                lambda_id,
-                new TableValue(type, lambda_table)
-        );
-        // if the lambda has no parent, put it in the global environment table
-        // otherwise, put it in its parent's table
-        if (lambda_table.parent_table == null) {
-            program_table.put(lambda_id, binding);
-        } else {
-            lambda_table.parent_table.put(lambda_id, binding);
-        }
-        // Reset the scope now that the lambda has been processed
-        current_def_table = lambda_table.parent_table;
-        return type;*/
     @Override
     public Type visit(WolfLambda n) {
-        //set current_def_table to correct one
-        /*n.sig.accept(this);
-        Type type = n.function.accept(this);
-        
-        // Add the lambda to the symbol tables list
-        tables.add(lambda_table);
-        // Bind the lambda's table information to its identifier
-        Binding binding = new Binding(
-                lambda_id,
-                new TableValue(type, lambda_table)
-        );
-        // if the lambda has no parent, put it in the global environment table
-        // otherwise, put it in its parent's table
-        if (lambda_table.parent_table == null) {
-            program_table.put(lambda_id, binding);
-        } else {
-            lambda_table.parent_table.put(lambda_id, binding);
-        }
-        // Reset the scope now that the lambda has been processed
-        current_def_table = lambda_table.parent_table;
-        return type;*/
-        return current_def_table.parent_table.symbol_table.get(current_def_table.table_name).table_value.type;
+        return current_def_table.parent_table.symbol_table.get(
+                current_def_table.table_name).table_value.type;
     }
 
     /**
@@ -424,16 +381,17 @@ public class SemanticTypeCheck implements Visitor {
     public void visit(ArgsList n) {
         int numArgsInDef = current_def_table.getNumberOfArguments();
         if(numArgsInDef != n.getArgList().size()) {
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException("Number of arguments (" + n.getArgList().size() + ") differs from"
+                    + " expecting number of arguments (" + numArgsInDef + " in " + current_def_table.table_name);
         }
         List<Type> argFormat = new ArrayList();
         for (Arg arg : n.getArgList()) {
             argFormat.add(arg.accept(this));
-            
         }
         List<Type> defArgFormat = current_def_table.getArgFormat();
         if(!argFormat.equals(defArgFormat)) {
-            throw new UnsupportedOperationException("Argument types of function do not match");
+            throw new UnsupportedOperationException("Argument Format " + argFormat + " does "
+                    + " not match expected: " + defArgFormat + "in " + current_def_table.table_name);
         }
         
     }

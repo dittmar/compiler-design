@@ -1,6 +1,0 @@
-def int fivePlus(int num) := +(num,5)
-`fivePlus(10)`
-`fivePlus('I am an evil String named Eve')`
-`fivePlus(fivePlus(5))`
-`fivePlus(\((int pie) -> +(pie,2))(1))`
-fivePlus(\((int pie) -> @('argparty'))(1))

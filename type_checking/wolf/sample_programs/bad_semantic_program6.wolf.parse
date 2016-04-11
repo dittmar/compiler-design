@@ -1,0 +1,6 @@
+SigArgs parsed successfully: def int plusFive ( int num 
+Sig parsed successfully: def int plusFive ( int num ) 
+Arg parsed successfully: def int plusFive ( int num ) := + ( num 
+Arg parsed successfully: def int plusFive ( int num ) := + ( num , 2 
+Unexpected token type: wolf.node.TComma around (line 5, column 37): ,
+Context: def int plusFive ( int num ) := + ( num , 2

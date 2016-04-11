@@ -32,4 +32,8 @@ public class Def {
     public Type accept(Visitor v) {
         return v.visit(this);
     }
+    
+    public String toString() {
+        return def_name.toString();
+    }
 }

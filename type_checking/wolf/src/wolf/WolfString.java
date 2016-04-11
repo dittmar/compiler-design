@@ -28,4 +28,12 @@ public class WolfString implements Arg {
     public Type accept(Visitor v) {
         return new Type(FlatType.STRING);
     }
+    
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for(StringMiddle middle:string) {
+            sb.append(middle.toString());
+        }
+        return sb.toString();
+    }
 }
