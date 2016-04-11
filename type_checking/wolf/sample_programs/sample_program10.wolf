@@ -1,2 +1,2 @@
 def int func(int q) := \((int y, int z) -> +(\((int n, int z) -> *(n, z))(q, y) , z))(3, 7)
-func(5)
+func(\((int num) -> @(num))(5))

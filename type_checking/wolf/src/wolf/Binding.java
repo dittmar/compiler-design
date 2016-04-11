@@ -29,4 +29,8 @@ public class Binding {
     public String toString() {
         return identifier.toString() + " |-> " + table_value.toString();
     }
+    
+    public boolean hasTable() {
+        return table_value.table != null;
+    }
 }

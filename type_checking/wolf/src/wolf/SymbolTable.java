@@ -1,6 +1,8 @@
 package wolf;
+import java.util.ArrayList;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 /**
  * A symbol table.
  * @author (Kevin Dittmar)
@@ -18,7 +20,7 @@ public class SymbolTable {
      * @param table
    */
   public SymbolTable(String table_name) {
-    symbol_table = new HashMap();
+    symbol_table = new LinkedHashMap();
     this.table_name = table_name;
   }
   
@@ -85,5 +87,26 @@ public class SymbolTable {
             "%" + right_num_spaces + "s",   // right spaces
             " ", string, " "
         );
+    }
+    
+    
+    public int getNumberOfArguments() {
+        int count = 0;
+        for(Binding binding:symbol_table.values()) {
+            if(!binding.hasTable()) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    public List<Type> getArgFormat() {
+        List<Type> argTypes = new ArrayList();
+        for(Binding binding:symbol_table.values()) {
+            if(!binding.hasTable()) {
+                argTypes.add(binding.table_value.type); 
+            }
+        }
+        return argTypes;
     }
 }

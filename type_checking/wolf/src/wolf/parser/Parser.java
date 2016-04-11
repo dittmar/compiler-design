@@ -52,6 +52,9 @@ public class Parser {
         ast = Program();
         BuildSymbolTable bst = new BuildSymbolTable();
         bst.visit(ast);
+        SemanticTypeCheck stc = new SemanticTypeCheck(bst.getTables(),
+                bst.getProgramTable());
+        stc.visit(ast);
     }
 
     /**
@@ -71,6 +74,9 @@ public class Parser {
         try {
             BuildSymbolTable bst = new BuildSymbolTable();
             bst.visit(ast);
+            SemanticTypeCheck stc = new SemanticTypeCheck(bst.getTables(),
+                bst.getProgramTable());
+            stc.visit(ast);
         } catch (UnsupportedOperationException e) {
             System.out.println(e);
         }

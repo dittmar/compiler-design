@@ -5,61 +5,41 @@ import java.util.List;
 import wolf.interfaces.*;
 import wolf.enums.*;
 import wolf.node.TIdentifier;
+import java.util.Stack;
 
 /**
- * A visitor responsible for building symbol tables for the parser.
+ * Type Checking
  *
- * @author William Ezekiel
  * @author Kevin Dittmar
- * @author Joseph Alacqua
- * @version Apr 3, 2016
+ * @author William Ezekiel
+ * @version Apr 10, 2016
  */
-public class BuildSymbolTable implements Visitor {
-
-    public List<SymbolTable> getTables() {
-        return tables;
-    }
-
-    public SymbolTable getProgramTable() {
-        return program_table;
-    }
+public class SemanticTypeCheck implements Visitor {
 
     List<SymbolTable> tables;
     SymbolTable program_table;
     SymbolTable current_def_table;
-    int lambda_count = 0;
+    int lambda_count = 1;
+    Stack<String> last_table_names;
 
+    public SemanticTypeCheck(List<SymbolTable> tables, 
+            SymbolTable program_table) {
+        this.tables = tables;
+        this.program_table = this.current_def_table = program_table;
+        last_table_names = new Stack<>();
+        last_table_names.push(program_table.table_name);
+    }
+    
     /**
      * Visit a program
      * @param n a program
      */
     @Override
     public void visit(Program n) {
-        tables = new ArrayList<>();
-        program_table = new SymbolTable("Program Environment Table");
-        tables.add(program_table);
-        for (Def def : n.def_list) {
-            current_def_table = new SymbolTable(
-                program_table,
-                def.def_name.toString() + " Table"
-            );
-            program_table.put(
-                def.def_name,
-                new Binding(
-                    def.def_name, 
-                    new TableValue(def.type, current_def_table)
-                )
-            );
-            def.accept(this);
-            tables.add(current_def_table);
-        }
+
         n.function.accept(this);
         StringBuilder sb = new StringBuilder();
-        for (SymbolTable st : tables) {
-            sb.append(st);
-            sb.append("\n");
-        }
-        System.out.println(sb.toString());
+        System.out.println("Type Checking Successfully Completed");
     }
 
     /**
@@ -69,11 +49,8 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public Type visit(Def n) {
-        // sig has no args if n.sig is null
-        if (n.sig != null) {
-            n.sig.accept(this);
-        }
-        return n.function.accept(this);
+        // aint no party
+        return null;
     }
 
     /**
@@ -82,12 +59,7 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public void visit(Sig n) {
-        for (SigArg sig_arg : n.sig_args) {
-            current_def_table.put(
-                sig_arg.identifier,
-                new Binding(sig_arg.identifier, new TableValue(sig_arg.type))
-            );
-        }
+        // do nothing for now
     }
 
     /**
@@ -96,8 +68,8 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public Type visit(SigArg n) {
-        n.identifier.accept(this);
-        return n.type.accept(this);
+        // ArgParty memes
+        return null; // should never be called, but w.e
     }
 
     /**
@@ -146,8 +118,23 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public Type visit(UserFunc n) {
+        if(n.user_func_name instanceof Identifier) {
+            Identifier id = (Identifier) n.user_func_name;
+            last_table_names.push(current_def_table.table_name);
+            current_def_table = getTableWithName(id.identifier.getText() + " Table");
+        }
+        else if(n.user_func_name instanceof WolfLambda) {
+            last_table_names.push(current_def_table.table_name);
+            current_def_table = getTableWithName("Lambda" + lambda_count++);
+        }
+        else {
+            System.err.print("Invalid UserFunc");
+            System.exit(1);
+        }
         n.arg_list.accept(this);
-        return n.user_func_name.accept(this);
+        Type result = n.user_func_name.accept(this);
+        current_def_table = getTableWithName(last_table_names.pop());
+        return result;
     }
 
     /**
@@ -179,20 +166,13 @@ public class BuildSymbolTable implements Visitor {
     public Type visit(Branch n) {
         Type condType = (Type) n.condition.accept(this);
         if (!condType.equals(new Type(FlatType.INTEGER))) {
-            System.err.println(
-                n.condition + " of type " + condType + ".  Should be integer."
-            );
-            System.exit(1);
+           throw new UnsupportedOperationException();
         }
 
         Type trueType = (Type) n.true_branch.accept(this);
         Type falseType = (Type) n.false_branch.accept(this);
         if (!(trueType.equals(falseType))) {
-            System.err.println("Ambiguous return types for branch: " + 
-                "true branch: " + trueType + " false branch: " + falseType);
-            System.err.println("true branch: " + n.true_branch);
-            System.err.println("false branch: " + n.false_branch);
-            System.exit(1);
+            throw new UnsupportedOperationException();
         }
         return trueType;
     }
@@ -273,9 +253,8 @@ public class BuildSymbolTable implements Visitor {
      * @param n a lambda object (WolfLambda)
      * @return type of lambda
      */
-    @Override
-    public Type visit(WolfLambda n) {
-        String lambda_table_name = "Lambda" + ++lambda_count;
+    
+    /*String lambda_table_name = "Lambda" + ++lambda_count;
         // Make a symbol table for the lambda
         SymbolTable lambda_table = new SymbolTable(lambda_table_name);
         // Set the parent table of the lambda to be the current table scope
@@ -309,7 +288,31 @@ public class BuildSymbolTable implements Visitor {
         }
         // Reset the scope now that the lambda has been processed
         current_def_table = lambda_table.parent_table;
-        return type;
+        return type;*/
+    @Override
+    public Type visit(WolfLambda n) {
+        //set current_def_table to correct one
+        /*n.sig.accept(this);
+        Type type = n.function.accept(this);
+        
+        // Add the lambda to the symbol tables list
+        tables.add(lambda_table);
+        // Bind the lambda's table information to its identifier
+        Binding binding = new Binding(
+                lambda_id,
+                new TableValue(type, lambda_table)
+        );
+        // if the lambda has no parent, put it in the global environment table
+        // otherwise, put it in its parent's table
+        if (lambda_table.parent_table == null) {
+            program_table.put(lambda_id, binding);
+        } else {
+            lambda_table.parent_table.put(lambda_id, binding);
+        }
+        // Reset the scope now that the lambda has been processed
+        current_def_table = lambda_table.parent_table;
+        return type;*/
+        return current_def_table.parent_table.symbol_table.get(current_def_table.table_name).table_value.type;
     }
 
     /**
@@ -419,9 +422,20 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public void visit(ArgsList n) {
-        for (Arg arg : n.getArgList()) {
-            arg.accept(this);
+        int numArgsInDef = current_def_table.getNumberOfArguments();
+        if(numArgsInDef != n.getArgList().size()) {
+            throw new UnsupportedOperationException();
         }
+        List<Type> argFormat = new ArrayList();
+        for (Arg arg : n.getArgList()) {
+            argFormat.add(arg.accept(this));
+            
+        }
+        List<Type> defArgFormat = current_def_table.getArgFormat();
+        if(!argFormat.equals(defArgFormat)) {
+            throw new UnsupportedOperationException("Argument types of function do not match");
+        }
+        
     }
 
     /**
@@ -507,5 +521,14 @@ public class BuildSymbolTable implements Visitor {
     @Override
     public void visit(StringEscapeSeq n) {
         n.accept(this);
+    }
+    
+    public SymbolTable getTableWithName(String name) {
+        for(SymbolTable table: tables) {
+            if(table.table_name.equals(name)) {
+                return table;
+            }
+        }
+        return null;
     }
 }
