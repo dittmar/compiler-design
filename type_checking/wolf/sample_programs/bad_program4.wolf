@@ -1,0 +1,49 @@
+`
+	  Kevin Dittmar
+	  William Ezekiel
+	  Joe Alacqua
+	`
+	`Sorts a list of numbers with insertion sort`
+	`
+	insertion sort algorithm converted from Haskell from:
+	http://en.literateprograms.org/Insertion_sort_%28Haskell%29
+	`
+
+
+	`Inserts an element where it should be within a sorted list`
+	def list int insert(int n, list int l) :=
+	    ;=(#(l), 0) ? @([n]) :          `append the element to the empty list`
+	    ;<=(n, h(l)) ? ^(n, l) :       `the element goes first in the sorted list`
+	    ^(h(l), insert(n, t(l)))       `the head of the list comes before the new element`
+
+
+	`
+	If the list is less than 2 elements long, it's already sorted.
+	Otherwise, kick off sort by inserting the head of the list where it should
+	go within the tail of the list.
+	`
+	`srt doesn’t match “sort” in the rest of the code, but we are not doing semantic checking yet, so that shouldn’t be caught.  However, a right paren is missing at the end of the function definition.`
+	def list int srt(list int l) := ;<(#(l), 2) ? @(l) : insert(h(l), sort(t(l))
+
+
+	sort([2,7,1,6])
+	`Assuming sort is called with the argument [2,7,1,6], the
+	trace would be the following:              
+	sort([2,7,1,6]) = insert(2, sort([7,1,6]))
+	                = insert(2, insert(7, sort([1,6])))
+	                = insert(2, insert(7, insert(1, sort([6]))))
+	                = insert(2, insert(7, insert(1, @([6]))))
+	                = insert(2, insert(7, insert(1, [6])))
+	                = insert(2, insert(7, ^(1, [6])))
+	                = insert(2, insert(7, [1,6]))
+	                = insert(2, ^(1, insert(7, [6])))
+	                = insert(2, ^(1, ^(6, insert(7, []))))
+	                = insert(2, ^(1, ^(6, $(7, []))))
+	                = insert(2, ^(1, ^(6, [7])))
+	                = insert(2, ^(1, [6,7]))
+	                = insert(2, [1,6,7])
+	                = ^(1, insert(2, [6,7]))
+	                = ^(1, ^(2, [6,7]))
+	                = ^(1, [2,6,7])
+	                = [1,2,6,7]
+	`
