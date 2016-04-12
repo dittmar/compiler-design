@@ -36,7 +36,8 @@ public class BuildSymbolTable implements Visitor {
     @Override
     public void visit(Program n) {
         tables = new ArrayList<>();
-        program_table = new SymbolTable("Program Environment Table");
+        program_table = current_def_table = 
+                new SymbolTable("Program Environment Table");
         tables.add(program_table);
         for (Def def : n.def_list) {
             current_def_table = new SymbolTable(

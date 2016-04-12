@@ -116,4 +116,76 @@ public final class TypeErrorReporter {
         sb.append("\n");
         sb.append(arg.toString()).append(" is of type ").append(type);
     }
+    
+    /**
+     * When creating a user defined function, this error message occurs if
+     * the expected type the function should return differs from what is
+     * actually given.
+     * @param defGiven the type actually given
+     * @param defExpected the expected type
+     * @param defName the name of the user defined function. Lambda functions
+     *  use the format Lambda#.
+     */
+    public static void mismatchDefType(Type defGiven, Type defExpected, String defName) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ERROR - Expecting Type ").append(defExpected)
+                .append(" in \"").append(defName).append("\".")
+                .append(" Given Type: ").append(defGiven);
+        System.out.println(sb.toString());
+    }
+
+    public static void mismatchArgumentFormat(List<Type> argFormatGiven,
+            List<Type> argFormatExpected, String funcName) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ERROR - Function \"").append(funcName).append("\"");
+        if(argFormatExpected.isEmpty()) {
+            sb.append(" expecting no arguments.");
+        }
+        else {
+            sb.append(" expecting arguments of the form (");
+            for(int i = 0; i < argFormatExpected.size()-1; i++) {
+                Type type = argFormatExpected.get(i);
+                sb.append(type).append(", ");
+            }
+            sb.append(argFormatExpected.get(argFormatExpected.size()-1))
+                    .append(").");
+        }
+        sb.append(" Given Format: ");
+        if(argFormatExpected.isEmpty()) {
+            sb.append(" None.");
+        }
+        else {
+            sb.append(" (");
+            for(int i = 0; i < argFormatGiven.size()-1; i++) {
+                Type type = argFormatGiven.get(i);
+                sb.append(type).append(", ");
+            }
+            sb.append(argFormatGiven.get(argFormatGiven.size()-1))
+                    .append(").");
+        }
+        System.out.println(sb.toString());
+    }
+
+    public static void mismatchBranchCondition(Type givenType) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ERROR - Condition statement in branch requires INTEGER return type")
+                .append("Given Type: ").append(givenType);
+        System.out.println(sb.toString());
+    }
+    
+    public static void mismatchBranchTrueFalse(Type trueType, Type falseType) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ERROR - Types in branch choices differ. Type 1: ").append(trueType)
+                .append(" Type 2: ").append(falseType);
+        System.out.println(sb.toString());
+    }
+    
+    public static void mismatchListItemWithListType(Arg item, Type itemType, 
+            Type listType) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ERROR - \"").append(item.toString()).append("\" is of type ")
+                .append(itemType).append(" in a list of type ")
+                .append(listType).append(".");
+        System.out.println(sb.toString());
+    }
 }

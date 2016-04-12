@@ -21,6 +21,7 @@ public class SemanticTypeCheck implements Visitor {
     SymbolTable current_def_table;
     int lambda_count = 1;
     Stack<String> last_table_names;
+    int errors = 0;
 
     public SemanticTypeCheck(List<SymbolTable> tables, 
             SymbolTable program_table) {
@@ -42,7 +43,15 @@ public class SemanticTypeCheck implements Visitor {
             current_def_table = getTableWithName(last_table_names.pop());
         }
         n.function.accept(this);
-        System.out.println("Type Checking Successfully Completed");
+        printResults();
+    }
+    
+    private void printResults() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Type Checking Completed with ").append(errors)
+                .append((errors == 1) ? " error!" : " errors!");
+        System.out.println(sb.toString());
+        System.out.println("\n");
     }
 
     /**
@@ -52,14 +61,14 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(Def n) {
-        Type returnType = n.function.accept(this);
-        if(!returnType.equals(n.type)) {
-            throw new UnsupportedOperationException("Return type: " + returnType +
-                    " does not match expected type: " + n.type + " in " +
-                    n.toString()
-            );
+        Type expectedType = n.function.accept(this);
+        Type actualType = n.type;
+        if(!expectedType.equals(actualType)) {
+            String defName = n.def_name.identifier.getText();
+            TypeErrorReporter.mismatchDefType(actualType, expectedType, defName);
+            errors++;
         }
-        return returnType;
+        return expectedType;
     }
 
     /**
@@ -179,13 +188,15 @@ public class SemanticTypeCheck implements Visitor {
     public Type visit(Branch n) {
         Type condType = (Type) n.condition.accept(this);
         if (!condType.equals(new Type(FlatType.INTEGER))) {
-           throw new UnsupportedOperationException();
+           TypeErrorReporter.mismatchBranchCondition(condType);
+           errors++;
         }
 
         Type trueType = (Type) n.true_branch.accept(this);
         Type falseType = (Type) n.false_branch.accept(this);
         if (!(trueType.equals(falseType))) {
-            throw new UnsupportedOperationException();
+            TypeErrorReporter.mismatchBranchTrueFalse(trueType, falseType);
+            errors++;
         }
         return trueType;
     }
@@ -379,19 +390,18 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public void visit(ArgsList n) {
-        int numArgsInDef = current_def_table.getNumberOfArguments();
-        if(numArgsInDef != n.getArgList().size()) {
-            throw new UnsupportedOperationException("Number of arguments (" + n.getArgList().size() + ") differs from"
-                    + " expecting number of arguments (" + numArgsInDef + " in " + current_def_table.table_name);
-        }
-        List<Type> argFormat = new ArrayList();
+        List<Type> actualArgFormat = new ArrayList();
         for (Arg arg : n.getArgList()) {
-            argFormat.add(arg.accept(this));
+            actualArgFormat.add(arg.accept(this));
         }
-        List<Type> defArgFormat = current_def_table.getArgFormat();
-        if(!argFormat.equals(defArgFormat)) {
-            throw new UnsupportedOperationException("Argument Format " + argFormat + " does "
-                    + " not match expected: " + defArgFormat + "in " + current_def_table.table_name);
+        List<Type> expectedArgFormat = current_def_table.getArgFormat();
+        
+        // Must have same number of arguments AND argument formats
+        // must be the same
+        if(!actualArgFormat.equals(expectedArgFormat)) {
+            TypeErrorReporter.mismatchArgumentFormat(actualArgFormat, 
+                    expectedArgFormat, current_def_table.table_name);
+            errors++;
         }
         
     }
