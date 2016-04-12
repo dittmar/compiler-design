@@ -196,8 +196,10 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(WolfMap n) {
-        visit(n.unary_op);
-        return visit(n.list_argument);
+        n.unary_op.accept(this);
+        Type bergiepls = visit(n.list_argument);
+        System.out.println("Returns a "+ bergiepls);
+        return bergiepls;
     }
 
     /**
@@ -283,8 +285,12 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(FoldBody n) {
-        n.bin_op.accept(this);
-        return new Type(n.list_argument.accept(this).flat_type);
+        List<Type> valid_types = (List<Type>) n.bin_op.accept(this);
+        Type returnType = new Type(n.list_argument.accept(this).flat_type);
+        if(!valid_types.contains(returnType)) {
+            System.exit(1);
+        }
+        return returnType;
     }
 
     /**
