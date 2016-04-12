@@ -1,0 +1,5 @@
+`
+Differing number of arguments
+`
+def int fivePlus(int num) := @(5)
+fivePlus(5,10)

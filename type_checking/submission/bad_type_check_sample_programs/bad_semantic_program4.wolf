@@ -1,0 +1,4 @@
+`
+Lambda expects String argument, receives an integer.s
+`
+\((string argParty) -> @(argParty))(2)

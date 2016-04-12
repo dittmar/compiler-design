@@ -1,0 +1,26 @@
+Kevin Dittmar
+William Ezekiel
+Joe Alacqua
+
+Attached to this submission is our current program in the wolf directory.
+The grammar.txt file contains the most recent version of our language's
+grammar.  Our sample programs are divided into three categories.  The
+good_sample_programs directory contains programs that parse successfully
+and are semantically correct.  The bad_parse_sample_programs directory
+contains programs that do not parse successfully because they do not
+follow the syntax of the language, or type errors are detectable without
+any actual values.  For example, calling a native function that requires a
+list argument and providing it with an integer type argument will be rejected
+before formal type-checking starts.  The bad_type_check_sample_programs
+directory contains programs that parse correctly, but they are semantically
+incorrect due to type mismatches.
+
+The problems that we encountered during this phase were mainly related to
+keeping track of lambda functions for type checking as well as keeping track
+of their various scopes.  This was solved by adding an identification number
+to every lambda, and keeping their symbol tables in a List for reference.
+We also added a Stack to keep track of nested scopes.  We did not have to
+change our grammar at all.  We continued to use the top-down parser because
+a lot of the groundwork was done using the top-down parser in program 7.
+Our top-down parser is also much more efficient and easier to modify than
+our bottom-up parser.

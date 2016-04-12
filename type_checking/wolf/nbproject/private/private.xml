@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/type_checking/wolf/src/wolf/WolfString.java</file>
-            <file>file:/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/type_checking/wolf/sample_programs/sample_program12.wolf</file>
-            <file>file:/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/type_checking/wolf/src/wolf/WolfLambda.java</file>
-            <file>file:/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/type_checking/wolf/src/wolf/Binding.java</file>
-            <file>file:/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/type_checking/wolf/src/wolf/SymbolTable.java</file>
-            <file>file:/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/type_checking/wolf/src/wolf/SemanticTypeCheck.java</file>
-            <file>file:/Users/williamezekiel/Documents/Compiler_Design_Theory/cdt_git/compiler-design/type_checking/wolf/src/wolf/parser/Parser.java</file>
+            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/type_checking/wolf/src/wolf/parser/Parser.java</file>
+            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/type_checking/wolf/src/wolf/BuildSymbolTable.java</file>
+            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/type_checking/wolf/src/wolf/NativeBinary.java</file>
+            <file>file:/C:/Users/Kevin/Documents/GitHub/compiler-design/type_checking/wolf/src/wolf/SemanticTypeCheck.java</file>
         </group>
     </open-files>
 </project-private>
