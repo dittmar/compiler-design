@@ -1,0 +1,13 @@
+SigArgRest parsed successfully: def int func ( int i , string s 
+SigArgs parsed successfully: def int func ( int i , string s 
+Sig parsed successfully: def int func ( int i , string s ) 
+Arg parsed successfully: def int func ( int i , string s ) := @ ( 0 
+NativeUnary parsed successfully: def int func ( int i , string s ) := @ ( 0 ) 
+Def parsed successfully: def int func ( int i , string s ) := @ ( 0 ) 
+UserFunc parsed successfully: def int func ( int i , string s ) := @ ( 0 ) func 
+Arg parsed successfully: def int func ( int i , string s ) := @ ( 0 ) func ( 0 
+Arg parsed successfully: def int func ( int i , string s ) := @ ( 0 ) func ( 0 , 2 
+ArgRest parsed successfully: def int func ( int i , string s ) := @ ( 0 ) func ( 0 , 2 
+Args parsed successfully: def int func ( int i , string s ) := @ ( 0 ) func ( 0 , 2 
+ArgList parsed successfully: def int func ( int i , string s ) := @ ( 0 ) func ( 0 , 2 ) 
+Program parsed successfully: def int func ( int i , string s ) := @ ( 0 ) func ( 0 , 2 ) 

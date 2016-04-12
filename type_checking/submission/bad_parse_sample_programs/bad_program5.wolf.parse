@@ -1,0 +1,4 @@
+Parsing sample_programs\bad_program5.wolf
+java.lang.UnsupportedOperationException: > can use: [INTEGER FLOAT]
+y is of type INTEGER
+z is of type STRING

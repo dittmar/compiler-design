@@ -1,0 +1,12 @@
+Parsing sample_programs\sample_program7.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+          \(INTEGER n,INTEGER y)                           INTEGER                         Table \(INTEGER n,INTEGER y)       
+
+  -----Table \(INTEGER n,INTEGER y)-----  
+                Identifier                                 Binding                                    Table                   
+                    n                                      INTEGER                  
+                    y                                      INTEGER                  
+
+
+Type Checking Completed Successfully!

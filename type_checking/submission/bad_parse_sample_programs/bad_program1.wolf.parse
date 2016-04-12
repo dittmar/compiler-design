@@ -1,0 +1,3 @@
+Parsing sample_programs\bad_program1.wolf
+Unexpected token type: wolf.node.TRParen around (line 2, column 34): )
+Context: def int breakFunc ( ) := h ( ; print (

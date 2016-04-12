@@ -1,0 +1,11 @@
+Parsing sample_programs\bad_semantic_program2.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+                 fivePlus                                  INTEGER                                Table fivePlus              
+
+         -----Table fivePlus-----         
+                Identifier                                 Binding                                    Table                   
+                   num                                     INTEGER                  
+
+
+java.lang.UnsupportedOperationException: ERROR - Expecting Type INTEGER in "fivePlus". Actual Type: STRING

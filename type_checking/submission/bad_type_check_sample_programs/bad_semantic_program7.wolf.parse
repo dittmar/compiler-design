@@ -1,0 +1,4 @@
+Parsing sample_programs\bad_semantic_program7.wolf
+java.lang.UnsupportedOperationException: Types must match: 
+2 is of type INTEGER,
+argParty is of type STRING

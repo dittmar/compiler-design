@@ -1,0 +1,3 @@
+Parsing sample_programs\bad_program4.wolf
+Unexpected token type: wolf.node.TIdentifier around (line 31, column 2): sort
+Context: def list int insert ( int n , list int l ) := ; = ( # ( l ) , 0 ) ? @ ( [ n ] ) : ; <= ( n , h ( l ) ) ? ^ ( n , l ) : ^ ( h ( l ) , insert ( n , t ( l ) ) ) def list int srt ( list int l ) := ; < ( # ( l ) , 2 ) ? @ ( l ) : insert ( h ( l ) , sort ( t ( l ) )

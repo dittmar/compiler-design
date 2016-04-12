@@ -1,0 +1,11 @@
+Parsing sample_programs\bad_semantic_program9.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+               \(INTEGER a)                                INTEGER                              Table \(INTEGER a)            
+
+       -----Table \(INTEGER a)-----       
+                Identifier                                 Binding                                    Table                   
+                    a                                      INTEGER                  
+
+
+java.lang.UnsupportedOperationException: \(INTEGER a) does not accept FLOAT

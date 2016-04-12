@@ -1,0 +1,5 @@
+Parsing sample_programs\bad_semantic_program10.wolf
+java.lang.UnsupportedOperationException: $ can use: [STRING];
+[LIST_STRING]
+y is of type INTEGER
+l is of type LIST_STRING

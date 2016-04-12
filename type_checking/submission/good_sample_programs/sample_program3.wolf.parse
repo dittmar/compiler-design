@@ -1,0 +1,17 @@
+Parsing sample_programs\sample_program3.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+                  insert                                 LIST_INTEGER                              Table insert               
+                   sort                                  LIST_INTEGER                               Table sort                
+
+          -----Table insert-----          
+                Identifier                                 Binding                                    Table                   
+                    n                                      INTEGER                  
+                    l                                    LIST_INTEGER               
+
+           -----Table sort-----           
+                Identifier                                 Binding                                    Table                   
+                    l                                    LIST_INTEGER               
+
+
+Type Checking Completed Successfully!

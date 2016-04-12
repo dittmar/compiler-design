@@ -1,0 +1,14 @@
+Parsing sample_programs\sample_program6.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+                 logical                                   INTEGER                                Table logical               
+                relational                                 INTEGER                               Table relational             
+
+         -----Table logical-----          
+                Identifier                                 Binding                                    Table                   
+
+        -----Table relational-----        
+                Identifier                                 Binding                                    Table                   
+
+
+Type Checking Completed Successfully!

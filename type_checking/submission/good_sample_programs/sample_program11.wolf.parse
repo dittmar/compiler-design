@@ -1,0 +1,17 @@
+Parsing sample_programs\sample_program11.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+               branchLogic                                  FLOAT                               Table branchLogic             
+
+        -----Table \(FLOAT y)-----        
+                Identifier                                 Binding                                    Table                   
+                    y                                       FLOAT                   
+
+       -----Table branchLogic-----        
+                Identifier                                 Binding                                    Table                   
+                  bool_a                                   INTEGER                  
+                  bool_b                                   INTEGER                  
+                \(FLOAT y)                                  FLOAT                                Table \(FLOAT y)             
+
+
+Type Checking Completed Successfully!

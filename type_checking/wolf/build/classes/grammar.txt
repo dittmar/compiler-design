@@ -8,37 +8,40 @@ Program = Function
 DefList = Def DefList
 DefList = Def
 
-Def = def identifier Sig assign Function
+Def = def Type identifier Sig assign Function
 
 Sig = l_paren r_paren
 Sig = l_paren SigArgs r_paren
-    
-SigArgs = identifier SigArgRest*
+
+SigArgs = SigArg SigArgRest*
+
+SigArg = Type identifier
 
 SigArgRest = comma identifier
 
-Function = UserFunc ArgList
-Function = NativeUnaryOp l_paren Arg r_paren
-Function = NativeBinOp l_paren Arg comma Arg r_paren
+Function = UserFunc
+Function = NativeUnary
+Function = NativeBinary
+Function = NativeListUnary
+Function = NativeListBinary
 Function = Branch
-Function = foldl FoldBody
-Function = foldr FoldBody
+Function = Fold
 Function = Map
 
-Map = map l_paren UnaryOp comma ListArgument r_paren
+UserFunc = UserFuncName ArgList
 
-Lambda = lambda_start l_paren Sig lambda_arrow Function r_paren
+UserFuncName = identifier
+UserFuncName = Lambda
 
-FoldBody = l_paren BinOp comma ListArgument r_paren
+NativeUnary = NativeUnaryOp l_paren Arg r_paren
 
-ListArgument = List
-ListArgument = identifier
-ListArgument = Function
+NativeUnaryOp = neg
+NativeUnaryOp = logical_not
+NativeUnaryOp = identity
+NativeUnaryOp = print
 
-BinOp = NativeBinOp
-BinOp = identifier
-BinOp = Lambda
-       
+NativeBinary = NativeBinOp l_paren Arg comma Arg r_paren
+
 NativeBinOp = plus
 NativeBinOp = minus
 NativeBinOp = mult
@@ -53,31 +56,52 @@ NativeBinOp = not_equal
 NativeBinOp = and
 NativeBinOp = or
 NativeBinOp = xor
-NativeBinOp = append
-NativeBinOp = prepend
 
-UnaryOp = NativeUnaryOp
-UnaryOp = identifier
-UnaryOp = Lambda
+Branch = semi Function ternary_question_mark Function ternary_colon Function
 
-NativeUnaryOp = neg
-NativeUnaryOp = logical_not
-NativeUnaryOp = head
-NativeUnaryOp = tail
-NativeUnaryOp = reverse
-NativeUnaryOp = flatten
-NativeUnaryOp = identity
-NativeUnaryOp = print
-NativeUnaryOp = length
-                
-UserFunc = identifier
-UserFunc = Lambda
+Fold = FoldSymbol FoldBody
+
+FoldSymbol = foldl
+FoldSymbol = foldr
+
+FoldBody = l_paren Binary comma ListArgument r_paren
+
+Binary = NativeBinary
+Binary = NativeListBinary
+Binary = UserFunc
+Binary = LambdaFunc
+
+Map = map l_paren Unary comma ListArgument r_paren
+
+Unary = NativeUnary
+Unary = NativeListUnary
+Unary = UserFunc
+Unary = LambdaFunc
+
+Lambda = lambda_start l_paren Sig lambda_arrow Function r_paren
+
+LambdaFunc = Lambda ArgList
+
+ListArgument = List
+ListArgument = identifier
+ListArgument = Function
+
+NativeListBinary = NativeListBinOp l_paren Arg comma ListArgument r_paren
+NativeListBinOp = append
+NativeListBinOp = prepend
+
+NativeListUnary = NativeListUnaryOp l_paren ListArgument r_paren
+NativeListUnaryOp = head
+NativeListUnaryOp = tail
+NativeListUnaryOp = reverse
+NativeListUnaryOp = flatten
+NativeListUnaryOp = length
           
 ArgList = l_paren r_paren
 ArgList = l_paren Args r_paren
-         
+
 Args = Arg ArgRest*
-     
+
 ArgRest = comma Arg
 
 Arg = Function
@@ -86,15 +110,12 @@ Arg = int_number
 Arg = float_number
 Arg = identifier
 Arg = String
-    
-String = string_start string_end
-String = string_start StringMiddle string_end
-       
-StringMiddle = string_body StringMiddle
-StringMiddle = string_body
-StringMiddle = StringEscapeSeq StringMiddle
+
+String = string_start StringMiddle* string_end
+
+StringMiddle = String_body
 StringMiddle = StringEscapeSeq
-              
+
 StringEscapeSeq = string_escape EscapeChar
 
 EscapeChar = escape_alarm
@@ -112,8 +133,12 @@ EscapeChar = escape_octal_char
 EscapeChar = escape_hex_char
 EscapeChar = escape_unicode_char
 EscapeChar = escape_default
-            
-Branch = semi Function ternary_question_mark Function ternary_colon Function
 
-List = start_list end_list
 List = start_list Args end_list
+
+Type = FlatType
+Type = list_type FlatType
+
+FlatType = int_type
+FlatType = float_type
+FlatType = string_type

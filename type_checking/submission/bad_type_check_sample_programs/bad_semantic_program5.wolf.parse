@@ -1,0 +1,16 @@
+Parsing sample_programs\bad_semantic_program5.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+                 fivePlus                                  INTEGER                                Table fivePlus              
+
+       -----Table \(INTEGER y)-----       
+                Identifier                                 Binding                                    Table                   
+                    y                                      INTEGER                  
+
+         -----Table fivePlus-----         
+                Identifier                                 Binding                                    Table                   
+                   num                                     INTEGER                  
+               \(INTEGER y)                                INTEGER                              Table \(INTEGER y)            
+
+
+java.lang.UnsupportedOperationException: ERROR - Function "\(INTEGER y)" expecting arguments of the form (INTEGER). Given Format:  (INTEGER, INTEGER).

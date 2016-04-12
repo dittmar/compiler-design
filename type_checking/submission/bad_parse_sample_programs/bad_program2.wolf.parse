@@ -1,0 +1,2 @@
+Parsing sample_programs\bad_program2.wolf
+Unexpected token type: wolf.node.TLParen around (line 2, column 18): (

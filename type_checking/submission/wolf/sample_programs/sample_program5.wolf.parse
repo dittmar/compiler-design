@@ -1,0 +1,15 @@
+SigArgs parsed successfully: def string argParty ( string s 
+Sig parsed successfully: def string argParty ( string s ) 
+Arg parsed successfully: def string argParty ( string s ) := + ( s 
+String parsed successfully: def string argParty ( string s ) := + ( s , print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' 
+Arg parsed successfully: def string argParty ( string s ) := + ( s , print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' 
+NativeUnary parsed successfully: def string argParty ( string s ) := + ( s , print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' ) 
+Arg parsed successfully: def string argParty ( string s ) := + ( s , print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' ) 
+NativeBinary parsed successfully: def string argParty ( string s ) := + ( s , print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' ) ) 
+Def parsed successfully: def string argParty ( string s ) := + ( s , print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' ) ) 
+UserFunc parsed successfully: def string argParty ( string s ) := + ( s , print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' ) ) argParty 
+String parsed successfully: def string argParty ( string s ) := + ( s , print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' ) ) argParty ( ' p ' 
+Arg parsed successfully: def string argParty ( string s ) := + ( s , print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' ) ) argParty ( ' p ' 
+Args parsed successfully: def string argParty ( string s ) := + ( s , print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' ) ) argParty ( ' p ' 
+ArgList parsed successfully: def string argParty ( string s ) := + ( s , print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' ) ) argParty ( ' p ' ) 
+Program parsed successfully: def string argParty ( string s ) := + ( s , print ( ' I \ ' m an escape  \ \ \ a \ b \ v \ d \ t \ r \ n \ x33 \ 121 \ f \ " \ ? \ u2109 \ m ' ) ) argParty ( ' p ' ) 

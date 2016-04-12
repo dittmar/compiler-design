@@ -1,0 +1,3 @@
+Parsing sample_programs\bad_program6.wolf
+Unexpected token type: wolf.node.TComma around (line 3, column 7): ,
+Context: def int p ( string q , string s ) := = ( q , s ) + ( 2 , 1

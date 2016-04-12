@@ -1,0 +1,11 @@
+Parsing sample_programs\sample_program5.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+                 argParty                                   STRING                                Table argParty              
+
+         -----Table argParty-----         
+                Identifier                                 Binding                                    Table                   
+                    s                                       STRING                  
+
+
+Type Checking Completed Successfully!

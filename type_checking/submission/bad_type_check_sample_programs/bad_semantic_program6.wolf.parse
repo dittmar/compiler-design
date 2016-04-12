@@ -1,0 +1,3 @@
+Parsing sample_programs\bad_semantic_program6.wolf
+java.lang.UnsupportedOperationException: h can use: any list type
+l is of type INTEGER

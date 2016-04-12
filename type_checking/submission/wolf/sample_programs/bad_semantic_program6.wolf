@@ -1,0 +1,2 @@
+def int func(int l) := h(l)
+func(5)

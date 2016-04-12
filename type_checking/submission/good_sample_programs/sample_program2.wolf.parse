@@ -1,0 +1,16 @@
+Parsing sample_programs\sample_program2.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+                factorial                                  INTEGER                               Table factorial              
+
+        -----Table factorial-----         
+                Identifier                                 Binding                                    Table                   
+                    n                                      INTEGER                  
+         \(LIST_INTEGER element)                           INTEGER                        Table \(LIST_INTEGER element)       
+
+ -----Table \(LIST_INTEGER element)-----  
+                Identifier                                 Binding                                    Table                   
+                 element                                 LIST_INTEGER               
+
+
+Type Checking Completed Successfully!

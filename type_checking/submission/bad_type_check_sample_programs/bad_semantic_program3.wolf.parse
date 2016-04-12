@@ -1,0 +1,11 @@
+Parsing sample_programs\bad_semantic_program3.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+                 fivePlus                                  INTEGER                                Table fivePlus              
+
+         -----Table fivePlus-----         
+                Identifier                                 Binding                                    Table                   
+                   num                                     INTEGER                  
+
+
+java.lang.UnsupportedOperationException: ERROR - Function "fivePlus" expecting arguments of the form (INTEGER). Given Format:  (INTEGER, INTEGER).

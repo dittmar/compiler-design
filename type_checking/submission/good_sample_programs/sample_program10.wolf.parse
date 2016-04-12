@@ -1,0 +1,28 @@
+Parsing sample_programs\sample_program10.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+                   func                                    INTEGER                                  Table func                
+
+  -----Table \(INTEGER n,INTEGER z)-----  
+                Identifier                                 Binding                                    Table                   
+                    n                                      INTEGER                  
+                    z                                      INTEGER                  
+
+  -----Table \(INTEGER y,INTEGER z)-----  
+                Identifier                                 Binding                                    Table                   
+                    y                                      INTEGER                  
+                    z                                      INTEGER                  
+          \(INTEGER n,INTEGER z)                           INTEGER                         Table \(INTEGER n,INTEGER z)       
+
+           -----Table func-----           
+                Identifier                                 Binding                                    Table                   
+                    q                                      INTEGER                  
+          \(INTEGER y,INTEGER z)                           INTEGER                         Table \(INTEGER y,INTEGER z)       
+              \(INTEGER num)                               INTEGER                             Table \(INTEGER num)           
+
+      -----Table \(INTEGER num)-----      
+                Identifier                                 Binding                                    Table                   
+                   num                                     INTEGER                  
+
+
+Type Checking Completed Successfully!

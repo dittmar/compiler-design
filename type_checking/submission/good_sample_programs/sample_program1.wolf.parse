@@ -1,0 +1,16 @@
+Parsing sample_programs\sample_program1.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+                 sumList                                   INTEGER                                Table sumList               
+                 prodList                                  INTEGER                                Table prodList              
+
+         -----Table sumList-----          
+                Identifier                                 Binding                                    Table                   
+                    l                                    LIST_INTEGER               
+
+         -----Table prodList-----         
+                Identifier                                 Binding                                    Table                   
+                 argParty                                LIST_INTEGER               
+
+
+Type Checking Completed Successfully!

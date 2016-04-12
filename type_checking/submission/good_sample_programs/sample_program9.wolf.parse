@@ -1,0 +1,11 @@
+Parsing sample_programs\sample_program9.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+                plusThree                                  INTEGER                               Table plusThree              
+
+        -----Table plusThree-----         
+                Identifier                                 Binding                                    Table                   
+                   num                                     INTEGER                  
+
+
+Type Checking Completed Successfully!

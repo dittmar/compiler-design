@@ -1,0 +1,7 @@
+Sig parsed successfully: def int randomFunc ( ) 
+Arg parsed successfully: def int randomFunc ( ) := h ( [ 1 
+Arg parsed successfully: def int randomFunc ( ) := h ( [ 1 , 2 
+ArgRest parsed successfully: def int randomFunc ( ) := h ( [ 1 , 2 
+Args parsed successfully: def int randomFunc ( ) := h ( [ 1 , 2 
+Unexpected token type: wolf.node.TIntNumber around (line 2, column 32): 3
+Context: def int randomFunc ( ) := h ( [ 1 , 2

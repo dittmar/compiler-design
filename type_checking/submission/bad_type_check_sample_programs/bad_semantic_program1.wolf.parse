@@ -1,0 +1,12 @@
+Parsing sample_programs\bad_semantic_program1.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+                   func                                    INTEGER                                  Table func                
+
+           -----Table func-----           
+                Identifier                                 Binding                                    Table                   
+                    i                                      INTEGER                  
+                    s                                       STRING                  
+
+
+java.lang.UnsupportedOperationException: ERROR - Function "func" expecting arguments of the form (INTEGER, STRING). Given Format:  (INTEGER, INTEGER).

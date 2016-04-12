@@ -1,0 +1,11 @@
+Parsing sample_programs\bad_semantic_program8.wolf
+   -----Table Program Environment-----    
+                Identifier                                 Binding                                    Table                   
+                 giveList                                  INTEGER                                Table giveList              
+
+         -----Table giveList-----         
+                Identifier                                 Binding                                    Table                   
+                   nums                                  LIST_INTEGER               
+
+
+java.lang.UnsupportedOperationException: ERROR - "argParty" is of type STRING in a list of type INTEGER.

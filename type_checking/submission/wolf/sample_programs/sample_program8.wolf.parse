@@ -1,0 +1,25 @@
+Foldl parsed successfully: { 
+SigArgRest parsed successfully: { ( \ ( ( int a , int b 
+SigArgs parsed successfully: { ( \ ( ( int a , int b 
+Sig parsed successfully: { ( \ ( ( int a , int b ) 
+Arg parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a 
+Arg parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b 
+NativeBinary parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) 
+Arg parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) 
+Arg parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 
+NativeBinary parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) 
+Lambda parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) 
+Arg parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 
+Arg parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 
+ArgRest parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 
+Arg parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 
+NativeUnary parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) 
+Arg parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) 
+ArgRest parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) 
+Arg parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) , 5 
+ArgRest parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) , 5 
+Args parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) , 5 
+List parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) , 5 ] 
+Map parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) , 5 ] ) 
+FoldBody parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) , 5 ] ) ) 
+Program parsed successfully: { ( \ ( ( int a , int b ) -> / ( - ( a , b ) , 2 ) ) , . ( ~ , [ 1 , 2 , ~ ( 3 ) , 5 ] ) ) 
