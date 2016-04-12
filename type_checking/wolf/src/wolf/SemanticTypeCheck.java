@@ -274,8 +274,13 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(WolfLambda n) {
-        return current_def_table.parent_table.symbol_table.get(
-                current_def_table.table_name).table_value.type;
+        SymbolTable table = current_def_table.parent_table;
+        if (table == null) {
+            table = current_def_table;
+        }
+        return table.symbol_table.get(
+            current_def_table.table_name
+        ).table_value.type;
     }
 
     /**

@@ -6,7 +6,6 @@ import wolf.node.TIdentity;
 import wolf.node.TLogicalNot;
 import wolf.node.TNeg;
 import wolf.node.TPrint;
-import wolf.node.Token;
 
 /**
  * Enumerated type representing WOLF's native unary operations

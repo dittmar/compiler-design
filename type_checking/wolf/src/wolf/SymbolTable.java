@@ -17,15 +17,19 @@ public class SymbolTable {
   
   /**
    * Create a symbol table
-     * @param table
+   * @param table_name it the name of the table
    */
   public SymbolTable(String table_name) {
     symbol_table = new LinkedHashMap();
     this.table_name = table_name;
   }
   
-  public SymbolTable(SymbolTable parent_table, String table) {
-    this(table);
+  /**
+   * @param parent_table is the parent table of this symbol table
+   * @param table_name is the name of this symbol table
+   */
+  public SymbolTable(SymbolTable parent_table, String table_name) {
+    this(table_name);
     this.parent_table = parent_table;
   }
 
@@ -49,6 +53,10 @@ public class SymbolTable {
       return symbol_table.get(i.identifier.getText());
   }
   
+  /**
+   * @return string representation of a symbol table
+   */
+  @Override
   public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append(paddedTableString("-----Table " + table_name + "-----"))
@@ -79,7 +87,7 @@ public class SymbolTable {
      */
     private String paddedTableString(String string) {
         int left_num_spaces =
-            (32 - string.length()) / 2 + 1;
+            (Math.max(32, string.length()) - string.length()) / 2 + 1;
         int right_num_spaces = left_num_spaces + (string.length() % 2);
         return String.format(
             "%" + left_num_spaces + "s" +   // left spaces
