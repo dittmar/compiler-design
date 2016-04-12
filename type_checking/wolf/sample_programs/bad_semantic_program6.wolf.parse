@@ -1,6 +1,9 @@
-SigArgs parsed successfully: def int plusFive ( int num 
-Sig parsed successfully: def int plusFive ( int num ) 
-Arg parsed successfully: def int plusFive ( int num ) := + ( num 
-Arg parsed successfully: def int plusFive ( int num ) := + ( num , 2 
-Unexpected token type: wolf.node.TComma around (line 5, column 37): ,
-Context: def int plusFive ( int num ) := + ( num , 2
+SigArgs parsed successfully: def int func ( int l 
+Sig parsed successfully: def int func ( int l ) 
+NativeListUnary parsed successfully: def int func ( int l ) := h ( l ) 
+Def parsed successfully: def int func ( int l ) := h ( l ) 
+UserFunc parsed successfully: def int func ( int l ) := h ( l ) func 
+Arg parsed successfully: def int func ( int l ) := h ( l ) func ( 5 
+Args parsed successfully: def int func ( int l ) := h ( l ) func ( 5 
+ArgList parsed successfully: def int func ( int l ) := h ( l ) func ( 5 ) 
+Program parsed successfully: def int func ( int l ) := h ( l ) func ( 5 ) 

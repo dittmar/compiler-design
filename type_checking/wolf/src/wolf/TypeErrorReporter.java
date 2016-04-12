@@ -71,9 +71,9 @@ public final class TypeErrorReporter {
         }
         
         sb.append("\n")
-          .append(list.toString()).append(" is of type ").append(list_t)
-          .append("\n")
           .append(arg.toString()).append(" is of type ").append(arg_t)
+          .append("\n")
+          .append(list.toString()).append(" is of type ").append(list_t)
           .append("\n");
         throw new UnsupportedOperationException(sb.toString());
     }
@@ -95,6 +95,7 @@ public final class TypeErrorReporter {
         }
         sb.append("\n");
         sb.append(arg.toString()).append(" is of type ").append(type);
+        throw new UnsupportedOperationException(sb.toString());
     }
     
     public static void mismatchErrorListUnary(ListArgument arg, Type type,
@@ -115,6 +116,7 @@ public final class TypeErrorReporter {
         }
         sb.append("\n");
         sb.append(arg.toString()).append(" is of type ").append(type);
+        throw new UnsupportedOperationException(sb.toString());
     }
     
     /**
