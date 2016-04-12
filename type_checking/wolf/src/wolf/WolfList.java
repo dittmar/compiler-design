@@ -31,14 +31,12 @@ public class WolfList implements Arg, ListArgument {
             return new Type(type.flat_type, true);
         }
         else if (v instanceof SemanticTypeCheck) {
-            SemanticTypeCheck stc = (SemanticTypeCheck) v;
             Type listType = (Type) this.arg_list.get(0).accept(v);
             for(Arg arg: arg_list) {
                 Type argType = arg.accept(v);
                 if(!argType.equals(listType)) {
                     TypeErrorReporter.mismatchListItemWithListType(arg, 
                             argType, listType);
-                    stc.errors++;
                 }
             }
             return new Type(listType.flat_type, true);

@@ -2,5 +2,5 @@
  Binary Op with too many arguments
  Handled in Parser already!
 `
-def int giveList(list int nums) := @(2)
+def int giveList(list int nums) := +(2,'argParty')
 giveList([1,'argParty',2])

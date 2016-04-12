@@ -27,4 +27,8 @@ public class IntLiteral implements Arg {
     public Type accept(Visitor v) {
         return new Type(FlatType.INTEGER);
     }
+    
+    public String toString() {
+        return int_literal.getText();
+    }
 }

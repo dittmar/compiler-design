@@ -21,7 +21,6 @@ public class SemanticTypeCheck implements Visitor {
     SymbolTable current_def_table;
     int lambda_count = 1;
     Stack<String> last_table_names;
-    int errors = 0;
 
     public SemanticTypeCheck(List<SymbolTable> tables, 
             SymbolTable program_table) {
@@ -43,15 +42,7 @@ public class SemanticTypeCheck implements Visitor {
             current_def_table = getTableWithName(last_table_names.pop());
         }
         n.function.accept(this);
-        printResults();
-    }
-    
-    private void printResults() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Type Checking Completed with ").append(errors)
-                .append((errors == 1) ? " error!" : " errors!");
-        System.out.println(sb.toString());
-        System.out.println("\n");
+        System.out.println("Type Checking Completed Successfully!");
     }
 
     /**
@@ -66,7 +57,6 @@ public class SemanticTypeCheck implements Visitor {
         if(!expectedType.equals(actualType)) {
             String defName = n.def_name.identifier.getText();
             TypeErrorReporter.mismatchDefType(actualType, expectedType, defName);
-            errors++;
         }
         return expectedType;
     }
@@ -189,14 +179,12 @@ public class SemanticTypeCheck implements Visitor {
         Type condType = (Type) n.condition.accept(this);
         if (!condType.equals(new Type(FlatType.INTEGER))) {
            TypeErrorReporter.mismatchBranchCondition(condType);
-           errors++;
         }
 
         Type trueType = (Type) n.true_branch.accept(this);
         Type falseType = (Type) n.false_branch.accept(this);
         if (!(trueType.equals(falseType))) {
             TypeErrorReporter.mismatchBranchTrueFalse(trueType, falseType);
-            errors++;
         }
         return trueType;
     }
@@ -401,7 +389,6 @@ public class SemanticTypeCheck implements Visitor {
         if(!actualArgFormat.equals(expectedArgFormat)) {
             TypeErrorReporter.mismatchArgumentFormat(actualArgFormat, 
                     expectedArgFormat, current_def_table.table_name);
-            errors++;
         }
         
     }
