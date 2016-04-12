@@ -525,4 +525,9 @@ public class BuildSymbolTable implements Visitor {
     public void visit(StringEscapeSeq n) {
         n.accept(this);
     }
+    
+    @Override
+    public SymbolTable getCurrentDefTable() {
+        return current_def_table;
+    }
 }

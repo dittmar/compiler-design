@@ -138,11 +138,16 @@ public class SemanticTypeCheck implements Visitor {
             current_def_table = getTableWithName(last_table_names.pop());
         }
         else if(n.user_func_name instanceof WolfLambda) {
+            // Save the current scope.
             last_table_names.push(current_def_table.table_name);
+            // Get the lambda and its corresponding table.
             WolfLambda lambda = (WolfLambda) n.user_func_name;
             current_def_table = lambda_table_list.get(lambda.getId());
+            // Check the lambda's arguments.
             n.arg_list.accept(this);
+            // Reset the scope
             current_def_table = getTableWithName(last_table_names.pop());
+            // Get the lambda's return type
             type = visitLambda((WolfLambda) n.user_func_name);
         }
         else {
@@ -198,34 +203,25 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(WolfMap n) {
-        n.unary_op.accept(this);
-        Type type = visit(n.list_argument);
-        return type;
-        /*
-        Type type = new Type(n.list_argument.accept(this).flat_type);
-        if (n.unary_op instanceof WolfLambda) {
-            WolfLambda lambda = (WolfLambda) n.unary_op;
-            Type valid_type = lambda.function.accept(this);
-            if (valid_type.equals(type)) {
-                return type;
+        Object type_object = n.unary_op.accept(this);
+        Type arg_type = new Type(n.list_argument.accept(this).flat_type);
+        // There's a single valid type for the operation.
+        if (type_object instanceof Type) {
+            Type valid_type = (Type) type_object;
+            if (valid_type.equals(arg_type)) {
+                return arg_type;
             }
-        } else {
-            Object valid_type = n.unary_op.accept(this);
-            if (valid_type instanceof Type) {
-                if (valid_type.equals(type)) {
-                    return type;
-                }
-            } else if (valid_type instanceof List) {
-                List<Type> valid_types = (List<Type>) valid_type;
-                if(valid_types.contains(type)) {
-                    return type;
-                }      
+        } 
+        // The operation supports several different types
+        else if (type_object instanceof List) {
+            List<Type> valid_types = (List<Type>) type_object;
+            if(valid_types.contains(arg_type)) {
+                return arg_type;
             }
         }
-        
         throw new UnsupportedOperationException(
-            n.unary_op + " does not accept " + type);
-        */
+            n.unary_op + " does not accept " + arg_type);
+        
     }
 
     /**
@@ -305,27 +301,24 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(FoldBody n) {
-        List<Type> valid_types = (List<Type>) n.bin_op.accept(this);
-        Type returnType = new Type(n.list_argument.accept(this).flat_type);
-        if(!valid_types.contains(returnType)) {
-            System.exit(1);
-        }
-        return returnType;
-        
-        /*
-        Object valid_type = n.bin_op.accept(this);
-        Type type = new Type(n.list_argument.accept(this).flat_type);
-        if (valid_type instanceof Type && valid_type.equals(type)) {
-            return type;
-        } else {
-            List<Type> valid_types = (List<Type>) valid_type;
-            if(valid_types.contains(type)) {
-                return type;
-            }      
+        Object type_object = n.bin_op.accept(this);
+        Type arg_type = new Type(n.list_argument.accept(this).flat_type);
+        // There's a single valid type for the operation.
+        if (type_object instanceof Type) {
+            Type valid_type = (Type) type_object;
+            if (valid_type.equals(arg_type)) {
+                return arg_type;
+            }
+        } 
+        // The operation supports several different types
+        else if (type_object instanceof List) {
+            List<Type> valid_types = (List<Type>) type_object;
+            if(valid_types.contains(arg_type)) {
+                return arg_type;
+            }
         }
         throw new UnsupportedOperationException(
-                    n.bin_op + " does not accept " + type);
-        */
+                n.bin_op + " does not accept " + arg_type);
     }
 
     /**
@@ -523,6 +516,11 @@ public class SemanticTypeCheck implements Visitor {
             }
         }
         return null;
+    }
+    
+    @Override
+    public SymbolTable getCurrentDefTable() {
+        return current_def_table;
     }
     
     private Type visitLambda(WolfLambda lambda) {

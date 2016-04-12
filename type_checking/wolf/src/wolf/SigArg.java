@@ -21,4 +21,9 @@ public class SigArg {
     public void visit(Visitor v) {
         v.visit(this);
     }
+    
+    @Override
+    public String toString() {
+        return type + " " + identifier;
+    }
 }

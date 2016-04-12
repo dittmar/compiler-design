@@ -26,66 +26,34 @@ public class Identifier implements BinOp, UnaryOp, Arg, ListArgument,
     /**
      * Accepts a visitor
      * @param v a visitor
+     * @return the type of this identifier
      */
     @Override
     public Type accept(Visitor v) {
-        if(v instanceof BuildSymbolTable) {
-            BuildSymbolTable bst = (BuildSymbolTable) v;
-            TableValue tv = null;
-            Binding b = bst.current_def_table.lookup(this);
-            if(b == null) {
-                SymbolTable parent = bst.current_def_table.parent_table;
-                boolean hasParent = parent != null;
-                while(hasParent && tv == null) {
-                    b = parent.lookup(this);
-                    if(b == null) {
-                        parent = parent.parent_table;
-                        hasParent = parent != null;
-                    }
-                    else {
-                        tv = b.table_value;
-                    }
+        TableValue tv = null;
+        Binding b = v.getCurrentDefTable().lookup(this);
+        if(b == null) {
+            SymbolTable parent = v.getCurrentDefTable().parent_table;
+            while(parent != null && tv == null) {
+                b = parent.lookup(this);
+                if(b == null) {
+                    parent = parent.parent_table;
+                }
+                else {
+                    tv = b.table_value;
                 }
             }
-            else {
-                tv = b.table_value;
-            }
-            if(tv == null) {
-                return null;
-            }
-            return tv.type;
         }
-        else if(v instanceof SemanticTypeCheck) {
-            SemanticTypeCheck stc = (SemanticTypeCheck) v;
-            TableValue tv = null;
-            Binding b = stc.current_def_table.lookup(this);
-            if(b == null) {
-                SymbolTable parent = stc.current_def_table.parent_table;
-                boolean hasParent = parent != null;
-                while(hasParent && tv == null) {
-                    b = parent.lookup(this);
-                    if(b == null) {
-                        parent = parent.parent_table;
-                        hasParent = parent != null;
-                    }
-                    else {
-                        tv = b.table_value;
-                    }
-                }
-            }
-            else {
-                tv = b.table_value;
-            }
-            if(tv == null) {
-                return null;
-            }
-            return tv.type;
+        else {
+            tv = b.table_value;
         }
-        else{
-            return null;
+        if(tv == null) {
+            throw new IllegalArgumentException();
         }
+        return tv.type;
     }
     
+    @Override
     public String toString() {
         return identifier.toString().trim();
     }

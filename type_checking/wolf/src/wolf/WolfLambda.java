@@ -47,4 +47,9 @@ public class WolfLambda implements WolfFunction, BinOp, UnaryOp, UserFuncName {
     public void setId(int id_number) {
         this.id_number = id_number;
     }
+    
+    @Override
+    public String toString() {
+        return "lambda with signature " + sig.toString();
+    }
 }

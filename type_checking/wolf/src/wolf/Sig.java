@@ -24,4 +24,17 @@ public class Sig {
     public void accept(Visitor v) {
         v.visit(this);
     }
+    
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("(");
+        for (int i = 0; i < sig_args.size(); i++) {
+            sb.append(sig_args.get(i));
+            if (i < sig_args.size() - 1) {
+                sb.append(",");
+            }
+        }
+        sb.append(")");
+        return sb.toString();
+    }
 }

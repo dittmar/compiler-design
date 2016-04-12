@@ -72,4 +72,6 @@ public interface Visitor {
     void visit(StringEscapeSeq n);   
     
     Type visit(Type n);
+    
+    SymbolTable getCurrentDefTable();
 }
