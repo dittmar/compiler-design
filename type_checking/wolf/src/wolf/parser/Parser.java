@@ -78,7 +78,7 @@ public class Parser {
                 bst.getProgramTable());
             stc.visit(ast);
         } catch (UnsupportedOperationException e) {
-            System.out.println(e + "\n\n");
+            System.out.println(e);
         }
         
         try {
@@ -86,6 +86,7 @@ public class Parser {
         } catch (IOException ex) {
             // writer already closed
         }
+        System.out.println("\n\n");
     }
 
     /**

@@ -1,6 +1,5 @@
 `
- Binary Op with too many arguments
- Handled in Parser already!
+ Binary Op + has 2 differing arguments.
 `
 def int giveList(list int nums) := +(2,'argParty')
-giveList([1,'argParty',2])
+giveList([1,2])
