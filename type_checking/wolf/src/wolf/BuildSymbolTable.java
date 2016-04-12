@@ -2,8 +2,8 @@ package wolf;
 
 import java.util.ArrayList;
 import java.util.List;
-import wolf.interfaces.*;
 import wolf.enums.*;
+import wolf.interfaces.*;
 import wolf.node.TIdentifier;
 
 /**
@@ -23,12 +23,17 @@ public class BuildSymbolTable implements Visitor {
     public SymbolTable getProgramTable() {
         return program_table;
     }
-
+    
+    public List<SymbolTable> getLambdaTableList() {
+        return lambda_table_list;
+    }
+    
     List<SymbolTable> tables;
     SymbolTable program_table;
     SymbolTable current_def_table;
+    List<SymbolTable> lambda_table_list;
     int lambda_count = 0;
-
+    
     /**
      * Visit a program
      * @param n a program
@@ -38,6 +43,7 @@ public class BuildSymbolTable implements Visitor {
         tables = new ArrayList<>();
         program_table = current_def_table = 
                 new SymbolTable("Program Environment");
+        lambda_table_list = new ArrayList<>();
         tables.add(program_table);
         for (Def def : n.def_list) {
             current_def_table = new SymbolTable(
@@ -278,11 +284,19 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public Type visit(WolfLambda n) {
-        String lambda_table_name = "Lambda" + ++lambda_count;
+        String lambda_table_name = "Lambda" + lambda_count;
+        n.setId(lambda_count);
+        
         // Make a symbol table for the lambda
         SymbolTable lambda_table = new SymbolTable(lambda_table_name);
+        
         // Set the parent table of the lambda to be the current table scope
         lambda_table.parent_table = current_def_table;
+        
+        // Register lambda in the list to keep track of it
+        lambda_table_list.add(lambda_count, lambda_table);
+        lambda_count++;
+        
         // Set the current table scope to be the lambda in preparation to
         // examine the lambda function and its parameters
         current_def_table = lambda_table;

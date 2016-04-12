@@ -1,5 +1,9 @@
 package wolf.enums;
 
+import java.util.ArrayList;
+import java.util.List;
+import wolf.FlatType;
+import wolf.Type;
 import wolf.interfaces.UnaryOp;
 import wolf.interfaces.Visitor;
 import wolf.node.TIdentity;
@@ -33,7 +37,19 @@ public enum NativeUnaryOp implements UnaryOp {
     
     @Override
     public Object accept(Visitor n) {
-        return null;
+        List<Type> valid_types = new ArrayList<>();
+        valid_types.add(new Type(FlatType.INTEGER));
+        if (!token_class.equals(TLogicalNot.class)) {
+            valid_types.add(new Type(FlatType.FLOAT));
+            if (!token_class.equals(TNeg.class)) {
+                valid_types.add(new Type(FlatType.STRING));
+                if (!token_class.equals(TPrint.class) &&
+                    !token_class.equals(TIdentity.class)) {
+                    return null;
+                }
+            }
+        }
+        return valid_types;
     }
     
     @Override

@@ -2,10 +2,9 @@ package wolf;
 
 import java.util.ArrayList;
 import java.util.List;
-import wolf.interfaces.*;
-import wolf.enums.*;
-import wolf.node.TIdentifier;
 import java.util.Stack;
+import wolf.enums.*;
+import wolf.interfaces.*;
 
 /**
  * Type Checking
@@ -19,14 +18,15 @@ public class SemanticTypeCheck implements Visitor {
     List<SymbolTable> tables;
     SymbolTable program_table;
     SymbolTable current_def_table;
-    int lambda_count = 1;
     Stack<String> last_table_names;
-
+    List<SymbolTable> lambda_table_list;
+    
     public SemanticTypeCheck(List<SymbolTable> tables, 
-            SymbolTable program_table) {
+            SymbolTable program_table, List<SymbolTable> lambda_table_list) {
         this.tables = tables;
         this.program_table = this.current_def_table = program_table;
         last_table_names = new Stack<>();
+        this.lambda_table_list = lambda_table_list;
     }
     
     /**
@@ -117,9 +117,7 @@ public class SemanticTypeCheck implements Visitor {
         } else if (n instanceof NativeListBinary) {
             return n.accept(this);
         } else {
-            System.err.println("Invalid Function");
-            System.exit(1);
-            return null;
+            throw new IllegalArgumentException("Invalid Function");
         }
     }
 
@@ -130,23 +128,27 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(UserFunc n) {
+        Type type = null;
         if(n.user_func_name instanceof Identifier) {
             Identifier id = (Identifier) n.user_func_name;
             last_table_names.push(current_def_table.table_name);
             current_def_table = getTableWithName(id.identifier.getText());
+            type = n.user_func_name.accept(this);
+            n.arg_list.accept(this);
+            current_def_table = getTableWithName(last_table_names.pop());
         }
         else if(n.user_func_name instanceof WolfLambda) {
             last_table_names.push(current_def_table.table_name);
-            current_def_table = getTableWithName("Lambda" + lambda_count++);
+            WolfLambda lambda = (WolfLambda) n.user_func_name;
+            current_def_table = lambda_table_list.get(lambda.getId());
+            n.arg_list.accept(this);
+            current_def_table = getTableWithName(last_table_names.pop());
+            type = visitLambda((WolfLambda) n.user_func_name);
         }
         else {
-            System.err.print("Invalid UserFunc");
-            System.exit(1);
+            throw new IllegalArgumentException("Invalid UserFunc");
         }
-        n.arg_list.accept(this);
-        Type result = n.user_func_name.accept(this);
-        current_def_table = getTableWithName(last_table_names.pop());
-        return result;
+        return type;
     }
 
     /**
@@ -197,9 +199,33 @@ public class SemanticTypeCheck implements Visitor {
     @Override
     public Type visit(WolfMap n) {
         n.unary_op.accept(this);
-        Type bergiepls = visit(n.list_argument);
-        System.out.println("Returns a "+ bergiepls);
-        return bergiepls;
+        Type type = visit(n.list_argument);
+        return type;
+        /*
+        Type type = new Type(n.list_argument.accept(this).flat_type);
+        if (n.unary_op instanceof WolfLambda) {
+            WolfLambda lambda = (WolfLambda) n.unary_op;
+            Type valid_type = lambda.function.accept(this);
+            if (valid_type.equals(type)) {
+                return type;
+            }
+        } else {
+            Object valid_type = n.unary_op.accept(this);
+            if (valid_type instanceof Type) {
+                if (valid_type.equals(type)) {
+                    return type;
+                }
+            } else if (valid_type instanceof List) {
+                List<Type> valid_types = (List<Type>) valid_type;
+                if(valid_types.contains(type)) {
+                    return type;
+                }      
+            }
+        }
+        
+        throw new UnsupportedOperationException(
+            n.unary_op + " does not accept " + type);
+        */
     }
 
     /**
@@ -234,16 +260,9 @@ public class SemanticTypeCheck implements Visitor {
         } else if (n instanceof Identifier) {
             return visit((Identifier) n);
         } else if (n instanceof WolfLambda) {
-            last_table_names.push(current_def_table.table_name);
-            current_def_table = getTableWithName("Lambda"+lambda_count);
-            lambda_count++;
-            Type returnType = visit((WolfLambda) n);
-            current_def_table = getTableWithName(last_table_names.pop());
-            return returnType;
+            return visitLambda((WolfLambda) n);
         } else {
-            System.err.println("Invalid UnaryOp");
-            System.exit(1);
-            return null;
+            throw new IllegalArgumentException("Invalid UnaryOp");
         }
     }
 
@@ -261,9 +280,7 @@ public class SemanticTypeCheck implements Visitor {
         } else if (n instanceof WolfFunction) {
             return visit((WolfFunction) n);
         } else {
-            System.err.println("Invalid List Argument");
-            System.exit(1);
-            return null;
+            throw new IllegalArgumentException("Invalid List Argument");
         }
     }
 
@@ -274,12 +291,10 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(WolfLambda n) {
-        SymbolTable table = current_def_table.parent_table;
-        if (table == null) {
-            table = current_def_table;
-        }
-        return table.symbol_table.get(
-            current_def_table.table_name
+        SymbolTable lambda_table = lambda_table_list.get(n.getId());
+        SymbolTable parent_table = lambda_table.parent_table;
+        return parent_table.symbol_table.get(
+            lambda_table.table_name
         ).table_value.type;
     }
 
@@ -296,6 +311,21 @@ public class SemanticTypeCheck implements Visitor {
             System.exit(1);
         }
         return returnType;
+        
+        /*
+        Object valid_type = n.bin_op.accept(this);
+        Type type = new Type(n.list_argument.accept(this).flat_type);
+        if (valid_type instanceof Type && valid_type.equals(type)) {
+            return type;
+        } else {
+            List<Type> valid_types = (List<Type>) valid_type;
+            if(valid_types.contains(type)) {
+                return type;
+            }      
+        }
+        throw new UnsupportedOperationException(
+                    n.bin_op + " does not accept " + type);
+        */
     }
 
     /**
@@ -310,16 +340,9 @@ public class SemanticTypeCheck implements Visitor {
         } else if (n instanceof Identifier) {
             return visit((Identifier) n);
         } else if (n instanceof WolfLambda) {
-            last_table_names.push(current_def_table.table_name);
-            current_def_table = getTableWithName("Lambda"+lambda_count);
-            lambda_count++;
-            Type returnType = visit((WolfLambda) n);
-            current_def_table = getTableWithName(last_table_names.pop());
-            return returnType;
+            return visitLambda((WolfLambda) n);
         } else {
-            System.err.println("Invalid BinOp");
-            System.exit(1);
-            return null;
+            throw new IllegalArgumentException("Invalid BinOp");
         }
     }
 
@@ -369,9 +392,7 @@ public class SemanticTypeCheck implements Visitor {
         } else if (n instanceof WolfString) {
             return visit((WolfString) n);
         } else {
-            System.err.println("Invalid Arg");
-            System.exit(1);
-            return null;
+            throw new IllegalArgumentException("Invalid Arg");
         }
     }
 
@@ -385,16 +406,9 @@ public class SemanticTypeCheck implements Visitor {
         if (n instanceof Identifier) {
             return visit((Identifier) n);
         } else if (n instanceof WolfLambda) {
-            last_table_names.push(current_def_table.table_name);
-            current_def_table = getTableWithName("Lambda"+lambda_count);
-            lambda_count++;
-            Type returnType = visit((WolfLambda) n);
-            current_def_table = getTableWithName(last_table_names.pop());
-            return returnType;
+            return visitLambda((WolfLambda) n);
         } else {
-            System.err.println("Invalid UserFuncName");
-            System.exit(1);
-            return null;
+            throw new IllegalArgumentException("Invalid UserFuncName");
         }
     }
 
@@ -431,9 +445,8 @@ public class SemanticTypeCheck implements Visitor {
         for (Arg arg : n.getArgList()) {
             Type next_type = arg.accept(this);
             if (type != null && !type.equals(next_type)) {
-                System.err.println("List has multiple types: "
+                throw new IllegalArgumentException("List has multiple types: "
                         + type.toString() + " and " + next_type.toString());
-                System.exit(1);
             }
             type = next_type;
         }
@@ -481,8 +494,7 @@ public class SemanticTypeCheck implements Visitor {
         } else if (n instanceof StringEscapeSeq) {
             visit((StringEscapeSeq) n);
         } else {
-            System.err.println("Invalid StringMiddle");
-            System.exit(1);
+            throw new IllegalArgumentException("Invalid StringMiddle");
         }
     }
 
@@ -511,5 +523,13 @@ public class SemanticTypeCheck implements Visitor {
             }
         }
         return null;
+    }
+    
+    private Type visitLambda(WolfLambda lambda) {
+        last_table_names.push(current_def_table.table_name);
+        current_def_table = lambda_table_list.get(lambda.getId());
+        Type returnType = visit(lambda);
+        current_def_table = getTableWithName(last_table_names.pop());
+        return returnType;
     }
 }

@@ -16,6 +16,7 @@ import wolf.interfaces.WolfFunction;
 public class WolfLambda implements WolfFunction, BinOp, UnaryOp, UserFuncName {
     Sig sig;
     WolfFunction function;
+    private int id_number;
     
     public WolfLambda(Sig sig, WolfFunction function) {
         this.sig = sig;
@@ -30,5 +31,20 @@ public class WolfLambda implements WolfFunction, BinOp, UnaryOp, UserFuncName {
     @Override
     public Type accept(Visitor v) {
         return v.visit(this);
+    }
+    
+    /**
+     * @return the lambda's identification number 
+     */
+    public int getId() {
+        return id_number;
+    }
+    
+    /**
+     * Give the lambda function an identification number
+     * @param id_number the id of the lambda
+     */
+    public void setId(int id_number) {
+        this.id_number = id_number;
     }
 }

@@ -87,7 +87,7 @@ public class SymbolTable {
      */
     private String paddedTableString(String string) {
         int left_num_spaces =
-            (Math.max(32, string.length()) - string.length()) / 2 + 1;
+            (Math.max(40, string.length()) - string.length()) / 2 + 1;
         int right_num_spaces = left_num_spaces + (string.length() % 2);
         return String.format(
             "%" + left_num_spaces + "s" +   // left spaces
