@@ -16,21 +16,21 @@ Arg parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) 
 NativeBinary parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) 
 Branch parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) 
 Def parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) 
-SigArgs parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element 
-Sig parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) 
-Arg parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element 
-Args parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element 
-ArgList parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) 
-Arg parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) 
-Arg parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) , 1 
-NativeBinary parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) , 1 ) 
-Lambda parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) , 1 ) ) 
-Arg parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 
-Arg parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 
-ArgRest parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 
-Arg parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 , 9 
-ArgRest parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 , 9 
-Args parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 , 9 
-List parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 , 9 ] 
-Map parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 , 9 ] ) 
-Program parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 , 9 ] ) 
+SigArgs parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element 
+Sig parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) 
+Arg parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element 
+Args parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element 
+ArgList parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) 
+Arg parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) 
+Arg parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) , 1 
+NativeBinary parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) , 1 ) 
+Lambda parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) , 1 ) ) 
+Arg parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 
+Arg parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 
+ArgRest parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 
+Arg parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 , 9 
+ArgRest parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 , 9 
+Args parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 , 9 
+List parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 , 9 ] 
+Map parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 , 9 ] ) 
+Program parsed successfully: def int factorial ( int n ) := ; = ( n , 0 ) ? @ ( 1 ) : * ( n , factorial ( - ( n , 1 ) ) ) . ( \ ( ( list int element ) -> + ( factorial ( element ) , 1 ) ) , [ 4 , 5 , 9 ] ) 

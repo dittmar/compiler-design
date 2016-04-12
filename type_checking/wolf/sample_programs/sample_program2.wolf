@@ -18,4 +18,4 @@ The map operator . gets a lambda function that calculates n! + 1
 For example, the list [0,3,1,5] becomes [2,7,2,121]
 `
 
-.(\((int element) -> +(factorial(element), 1)), [4, 5, 9])
+.(\((list int element) -> +(factorial(element), 1)), [4, 5, 9])

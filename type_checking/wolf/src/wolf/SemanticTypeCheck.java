@@ -196,8 +196,8 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(WolfMap n) {
-        n.unary_op.accept(this);
-        return n.list_argument.accept(this);
+        visit(n.unary_op);
+        return visit(n.list_argument);
     }
 
     /**
@@ -232,7 +232,12 @@ public class SemanticTypeCheck implements Visitor {
         } else if (n instanceof Identifier) {
             return visit((Identifier) n);
         } else if (n instanceof WolfLambda) {
-            return visit((WolfLambda) n);
+            last_table_names.push(current_def_table.table_name);
+            current_def_table = getTableWithName("Lambda"+lambda_count);
+            lambda_count++;
+            Type returnType = visit((WolfLambda) n);
+            current_def_table = getTableWithName(last_table_names.pop());
+            return returnType;
         } else {
             System.err.println("Invalid UnaryOp");
             System.exit(1);
@@ -279,7 +284,7 @@ public class SemanticTypeCheck implements Visitor {
     @Override
     public Type visit(FoldBody n) {
         n.bin_op.accept(this);
-        return n.list_argument.accept(this);
+        return new Type(n.list_argument.accept(this).flat_type);
     }
 
     /**
@@ -294,7 +299,12 @@ public class SemanticTypeCheck implements Visitor {
         } else if (n instanceof Identifier) {
             return visit((Identifier) n);
         } else if (n instanceof WolfLambda) {
-            return visit((WolfLambda) n);
+            last_table_names.push(current_def_table.table_name);
+            current_def_table = getTableWithName("Lambda"+lambda_count);
+            lambda_count++;
+            Type returnType = visit((WolfLambda) n);
+            current_def_table = getTableWithName(last_table_names.pop());
+            return returnType;
         } else {
             System.err.println("Invalid BinOp");
             System.exit(1);
@@ -364,7 +374,12 @@ public class SemanticTypeCheck implements Visitor {
         if (n instanceof Identifier) {
             return visit((Identifier) n);
         } else if (n instanceof WolfLambda) {
-            return visit((WolfLambda) n);
+            last_table_names.push(current_def_table.table_name);
+            current_def_table = getTableWithName("Lambda"+lambda_count);
+            lambda_count++;
+            Type returnType = visit((WolfLambda) n);
+            current_def_table = getTableWithName(last_table_names.pop());
+            return returnType;
         } else {
             System.err.println("Invalid UserFuncName");
             System.exit(1);

@@ -17,4 +17,4 @@ def int prodList(list int argParty) :=
 returns 76
 I'm a comment
 `
-sumList([prodList([1,2,3]), prodList([5,7,2]), prodList([0.0,127,9])])
+sumList([prodList([1,2,3]), prodList([5,7,2]), prodList([0,127,9])])
