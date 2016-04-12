@@ -31,58 +31,58 @@ public class NativeBinary implements WolfFunction {
      */
     @Override
     public Type accept(Visitor v) {
-        Type leftType = (Type) v.visit(arg_left);
-        Type rightType = (Type) v.visit(arg_right);
-        boolean areSameType = (leftType.equals(rightType) ||
-                              (leftType.isNumeric() && rightType.isNumeric()));
+        Type left_type = (Type) v.visit(arg_left);
+        Type right_type = (Type) v.visit(arg_right);
+        boolean areSameType = (left_type.equals(right_type) ||
+            (left_type.isNumeric() && right_type.isNumeric()));
+        
         switch(binary_op) {
             case PLUS:
             case MINUS:
             if(!areSameType) {
-                TypeErrorReporter.mismatchErrorBinary(
-                    arg_left, leftType,
-                    arg_right, rightType,
-                    binary_op.toString(), null
+                TypeErrorReporter.mismatchArgTypes(
+                    arg_left, left_type,
+                    arg_right, right_type
                 );
             }
-            return leftType;
+            return left_type;
             case MULT:
             case DIV:
             case MOD:
-                if (!leftType.isNumeric() || !rightType.isNumeric()) {
+                if (!left_type.isNumeric() || !right_type.isNumeric()) {
                     ArrayList<Type> types = new ArrayList<>();
                     types.add(new Type(FlatType.INTEGER));
                     types.add(new Type(FlatType.FLOAT));
                     TypeErrorReporter.mismatchErrorBinary(
-                        arg_left, leftType,
-                        arg_right, rightType,
+                        arg_left, left_type,
+                        arg_right, right_type,
                         binary_op.toString(), types);
                 }
-                return leftType;
+                return left_type;
             case LT:
             case GT:
             case LTE:
             case GTE:
-                if (!leftType.isNumeric() || !rightType.isNumeric()) {
+                if (!left_type.isNumeric() || !right_type.isNumeric()) {
                     ArrayList<Type> types = new ArrayList<>();
                     types.add(new Type(FlatType.INTEGER));
                     types.add(new Type(FlatType.FLOAT));
                     TypeErrorReporter.mismatchErrorBinary(
-                        arg_left, leftType,
-                        arg_right, rightType,
+                        arg_left, left_type,
+                        arg_right, right_type,
                         binary_op.toString(), types);
                 }
                 return new Type(FlatType.INTEGER);
             case AND:
             case OR:
             case XOR:
-                if (leftType.flat_type != FlatType.INTEGER ||
-                    rightType.flat_type != FlatType.INTEGER) {
+                if (left_type.flat_type != FlatType.INTEGER ||
+                    right_type.flat_type != FlatType.INTEGER) {
                     ArrayList<Type> types = new ArrayList<>();
                     types.add(new Type(FlatType.INTEGER));
                     TypeErrorReporter.mismatchErrorBinary(
-                        arg_left, leftType,
-                        arg_right, rightType,
+                        arg_left, left_type,
+                        arg_right, right_type,
                         binary_op.toString(), types);
                 }
                 return new Type(FlatType.INTEGER);

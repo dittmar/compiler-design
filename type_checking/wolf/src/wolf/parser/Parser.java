@@ -90,7 +90,6 @@ public class Parser {
         } catch (IOException ex) {
             // writer already closed
         }
-        System.out.println("\n\n");
     }
 
     /**

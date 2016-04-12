@@ -284,7 +284,7 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public Type visit(WolfLambda n) {
-        String lambda_table_name = "Lambda" + lambda_count;
+        String lambda_table_name = n.toString();
         n.setId(lambda_count);
         
         // Make a symbol table for the lambda

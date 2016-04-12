@@ -121,17 +121,17 @@ public final class TypeErrorReporter {
      * When creating a user defined function, this error message occurs if
      * the expected type the function should return differs from what is
      * actually given.
-     * @param defGiven the type actually given
-     * @param defExpected the expected type
-     * @param defName the name of the user defined function. Lambda functions
+     * @param actual_type the type actually given
+     * @param expected_type the expected type
+     * @param def_name the name of the user defined function. Lambda functions
      *  use the format Lambda#.
      */
-    public static void mismatchDefType(Type defGiven, Type defExpected, String defName)
-            throws UnsupportedOperationException {
+    public static void mismatchDefType(Type actual_type, Type expected_type, 
+            String def_name) throws UnsupportedOperationException {
         StringBuilder sb = new StringBuilder();
-        sb.append("ERROR - Expecting Type ").append(defExpected)
-                .append(" in \"").append(defName).append("\".")
-                .append(" Given Type: ").append(defGiven);
+        sb.append("ERROR - Expecting Type ").append(expected_type)
+                .append(" in \"").append(def_name).append("\".")
+                .append(" Actual Type: ").append(actual_type);
         throw new UnsupportedOperationException(sb.toString());
     }
 
@@ -191,6 +191,15 @@ public final class TypeErrorReporter {
         sb.append("ERROR - \"").append(item.toString()).append("\" is of type ")
                 .append(itemType).append(" in a list of type ")
                 .append(listType).append(".");
+        throw new UnsupportedOperationException(sb.toString());
+    }
+    
+    public static void mismatchArgTypes(Arg expected, Type e_type,
+            Arg actual, Type a_type) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Types must match: \n")
+          .append(expected).append(" is of type ").append(e_type)
+          .append(",\n").append(actual).append(" is of type ").append(a_type);
         throw new UnsupportedOperationException(sb.toString());
     }
 }

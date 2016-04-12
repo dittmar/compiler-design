@@ -52,13 +52,14 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(Def n) {
-        Type expectedType = n.function.accept(this);
-        Type actualType = n.type;
-        if(!expectedType.equals(actualType)) {
-            String defName = n.def_name.identifier.getText();
-            TypeErrorReporter.mismatchDefType(actualType, expectedType, defName);
+        Type actual_type = n.function.accept(this);
+        Type expected_type = n.type;
+        if(!expected_type.equals(actual_type)) {
+            String def_name = n.def_name.identifier.getText();
+            TypeErrorReporter.mismatchDefType(
+                actual_type, expected_type, def_name);
         }
-        return expectedType;
+        return expected_type;
     }
 
     /**

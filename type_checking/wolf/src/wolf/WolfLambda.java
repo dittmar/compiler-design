@@ -50,6 +50,6 @@ public class WolfLambda implements WolfFunction, BinOp, UnaryOp, UserFuncName {
     
     @Override
     public String toString() {
-        return "lambda with signature " + sig.toString();
+        return "\\" + sig.toString();
     }
 }
