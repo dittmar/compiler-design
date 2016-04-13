@@ -1,0 +1,33 @@
+SigArgRest parsed successfully: def float branchLogic ( int bool_a , int bool_b 
+SigArgs parsed successfully: def float branchLogic ( int bool_a , int bool_b 
+Sig parsed successfully: def float branchLogic ( int bool_a , int bool_b ) 
+Arg parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a 
+NativeUnary parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) 
+Arg parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b 
+NativeUnary parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) 
+SigArgs parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y 
+Sig parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) 
+Arg parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y 
+Arg parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y 
+NativeBinary parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) 
+Lambda parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) 
+UserFunc parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) 
+Arg parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 
+Args parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 
+ArgList parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) 
+Arg parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 
+NativeUnary parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) 
+Branch parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) 
+Arg parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) : @ ( 3.333 
+NativeUnary parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) : @ ( 3.333 ) 
+Branch parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) : @ ( 3.333 ) 
+Def parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) : @ ( 3.333 ) 
+UserFunc parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) : @ ( 3.333 ) branchLogic 
+Arg parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) : @ ( 3.333 ) branchLogic ( 0 
+Arg parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) : @ ( 3.333 ) branchLogic ( 0 , ~ ( 12 
+NativeUnary parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) : @ ( 3.333 ) branchLogic ( 0 , ~ ( 12 ) 
+Arg parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) : @ ( 3.333 ) branchLogic ( 0 , ~ ( 12 ) 
+ArgRest parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) : @ ( 3.333 ) branchLogic ( 0 , ~ ( 12 ) 
+Args parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) : @ ( 3.333 ) branchLogic ( 0 , ~ ( 12 ) 
+ArgList parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) : @ ( 3.333 ) branchLogic ( 0 , ~ ( 12 ) ) 
+Program parsed successfully: def float branchLogic ( int bool_a , int bool_b ) := ; @ ( bool_a ) ? ; @ ( bool_b ) ? \ ( ( float y ) -> * ( y , y ) ) ( 7.5 ) : @ ( 2.22 ) : @ ( 3.333 ) branchLogic ( 0 , ~ ( 12 ) ) 

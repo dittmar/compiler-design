@@ -1,0 +1,18 @@
+SigArgs parsed successfully: def int addFive ( int num 
+Sig parsed successfully: def int addFive ( int num ) 
+Arg parsed successfully: def int addFive ( int num ) := ; = ( num 
+Arg parsed successfully: def int addFive ( int num ) := ; = ( num , 5 
+NativeBinary parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) 
+Arg parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) ? + ( num 
+Arg parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) ? + ( num , 5 
+NativeBinary parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) ? + ( num , 5 ) 
+Arg parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) ? + ( num , 5 ) : + ( num 
+Arg parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) ? + ( num , 5 ) : + ( num , 5 
+NativeBinary parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) ? + ( num , 5 ) : + ( num , 5 ) 
+Branch parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) ? + ( num , 5 ) : + ( num , 5 ) 
+Def parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) ? + ( num , 5 ) : + ( num , 5 ) 
+UserFunc parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) ? + ( num , 5 ) : + ( num , 5 ) addFive 
+Arg parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) ? + ( num , 5 ) : + ( num , 5 ) addFive ( 10 
+Args parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) ? + ( num , 5 ) : + ( num , 5 ) addFive ( 10 
+ArgList parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) ? + ( num , 5 ) : + ( num , 5 ) addFive ( 10 ) 
+Program parsed successfully: def int addFive ( int num ) := ; = ( num , 5 ) ? + ( num , 5 ) : + ( num , 5 ) addFive ( 10 ) 

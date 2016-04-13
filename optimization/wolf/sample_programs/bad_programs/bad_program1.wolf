@@ -1,0 +1,2 @@
+`Code breaks due to incorrect syntax`
+def int breakFunc() := h(; print() : print())

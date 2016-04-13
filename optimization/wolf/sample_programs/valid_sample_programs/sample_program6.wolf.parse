@@ -1,0 +1,53 @@
+Sig parsed successfully: def int logical ( ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 
+NativeBinary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 
+NativeBinary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 
+NativeUnary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) 
+NativeBinary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) 
+NativeUnary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) 
+Def parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) 
+Sig parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 
+NativeBinary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 
+NativeBinary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) 
+NativeBinary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 
+NativeBinary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 
+NativeBinary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 
+NativeBinary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) 
+NativeBinary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) 
+NativeBinary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) 
+NativeBinary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) 
+Def parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) 
+ArgList parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) 
+ArgList parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) , relational ( ) 
+Arg parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) , relational ( ) 
+ArgRest parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) , relational ( ) 
+Args parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) , relational ( ) 
+List parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) , relational ( ) ] 
+NativeListUnary parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) , relational ( ) ] ) 
+Program parsed successfully: def int logical ( ) := ! ( | ( & ( x ( 1 , 0 ) , 2 ) , ~ ( 8 ) ) ) def int relational ( ) := | ( & ( > ( 5 , 2 ) , != ( 1 , 2 ) ) , x ( >= ( 1 , 0 ) , <= ( % ( 5 , 2 ) , / ( 6 , 4 ) ) ) ) r ( [ logical ( ) , relational ( ) ] ) 

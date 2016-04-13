@@ -1,0 +1,23 @@
+SigArgRest parsed successfully: def list string insert ( int y , list string l 
+SigArgs parsed successfully: def list string insert ( int y , list string l 
+Sig parsed successfully: def list string insert ( int y , list string l ) 
+Arg parsed successfully: def list string insert ( int y , list string l ) := $ ( y 
+NativeListBinary parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) 
+Def parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) 
+UserFunc parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert 
+Arg parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 
+String parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' 
+Arg parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' 
+String parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' , ' dog ' 
+Arg parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' , ' dog ' 
+ArgRest parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' , ' dog ' 
+String parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' , ' dog ' , ' wolf ' 
+Arg parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' , ' dog ' , ' wolf ' 
+ArgRest parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' , ' dog ' , ' wolf ' 
+Args parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' , ' dog ' , ' wolf ' 
+List parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' , ' dog ' , ' wolf ' ] 
+Arg parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' , ' dog ' , ' wolf ' ] 
+ArgRest parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' , ' dog ' , ' wolf ' ] 
+Args parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' , ' dog ' , ' wolf ' ] 
+ArgList parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' , ' dog ' , ' wolf ' ] ) 
+Program parsed successfully: def list string insert ( int y , list string l ) := $ ( y , l ) insert ( 5 , [ ' cat ' , ' dog ' , ' wolf ' ] ) 

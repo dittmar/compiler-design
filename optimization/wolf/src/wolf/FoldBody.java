@@ -1,0 +1,30 @@
+package wolf;
+
+import wolf.interfaces.ListArgument;
+import wolf.interfaces.BinOp;
+import wolf.interfaces.Visitor;
+
+/**
+ * The body of a fold function
+ * @author Kevin Dittmar
+ * @author William Ezekiel
+ * @author Joseph Alacqua
+ * @version Apr 3, 2016
+ */
+public class FoldBody {
+    BinOp bin_op;
+    ListArgument list_argument;
+    
+    public FoldBody(BinOp bin_op, ListArgument list_argument) {
+        this.bin_op = bin_op;
+        this.list_argument = list_argument;
+    }
+    /**
+     * Accept a visitor
+     * @param v a visitor
+     * @return the return type of the fold
+     */
+    public Type accept(Visitor v) {
+        return v.visit(this);
+    }
+}

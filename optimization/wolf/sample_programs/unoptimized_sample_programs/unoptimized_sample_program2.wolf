@@ -1,0 +1,6 @@
+`
+  Double negation (integer negation and logical negation)
+`
+def int absValue(int num) := ; !(!(<(num,0))) ? *(~(1),num) : @(num)
+absValue(~(~(5)))
+absValue(~(~(~(2))))

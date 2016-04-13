@@ -1,0 +1,8 @@
+`
+  A branch where the condition always evaluates to true
+  and a branch where the condition always evaluates to false.
+`
+def int myNumber(int num) := ; =(0,0) ? @(num) : ~(num)
+def int myNegativeNumber(int num) := ; =(0,1) ? @(num) : ~(num)
+myNumber(2)
+myNegativeNumber(2)

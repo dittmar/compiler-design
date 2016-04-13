@@ -1,0 +1,19 @@
+`
+  Arithmetic Simplifications
+`
+
+`
+  Should simplify to @(0)
+`
+-(10,10)
+*(0,10)
+*(10,0)
+/(0,10)
+%(10,1)
+%(0,55)
+
+`
+  Should simplify to @(1)
+`
+%(1,10)
+/(10,10)
