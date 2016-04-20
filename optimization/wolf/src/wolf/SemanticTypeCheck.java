@@ -288,6 +288,8 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(WolfLambda n) {
+        n.function.accept(this);
+        n.sig.accept(this);
         SymbolTable lambda_table = lambda_table_list.get(n.getId());
         SymbolTable parent_table = lambda_table.parent_table;
         return parent_table.symbol_table.get(
