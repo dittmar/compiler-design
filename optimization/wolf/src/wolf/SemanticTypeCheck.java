@@ -291,11 +291,14 @@ public class SemanticTypeCheck implements Visitor {
         if (n.sig != null) {
             n.sig.accept(this);
         }
+        SymbolTable lambda_table = lambda_table_list.get(n.getId());
+        SymbolTable parent_table = lambda_table.parent_table;
+        last_table_names.add(current_def_table.table_name);
+        current_def_table = lambda_table;
         if (n.function != null) {
             n.function.accept(this);
         }
-        SymbolTable lambda_table = lambda_table_list.get(n.getId());
-        SymbolTable parent_table = lambda_table.parent_table;
+        current_def_table = getTableWithName(last_table_names.pop());
         return parent_table.symbol_table.get(
             lambda_table.table_name
         ).table_value.type;
