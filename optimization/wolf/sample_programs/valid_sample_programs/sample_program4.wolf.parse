@@ -1,29 +1,29 @@
 Foldr parsed successfully: } 
 Foldl parsed successfully: } ( - , [ { 
-Arg parsed successfully: } ( - , [ { ( + , [ 2 
-Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 
-ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 
-Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 
-ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 
-Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 
-ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 
 Args parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 
 List parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] 
 FoldBody parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) 
-Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) 
-Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 
-ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 
 Foldl parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { 
-Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 
-Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 
-ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 
-Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 
-ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 
 Args parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 
 List parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] 
 FoldBody parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) 
-Arg parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) 
-ArgRest parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) 
+ListElement parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) 
 Args parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) 
 List parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] 
 FoldBody parsed successfully: } ( - , [ { ( + , [ 2 , 1 , 10 , 7 ] ) , 8 , { ( * , [ 5 , 6 , 4 ] ) ] ) 
