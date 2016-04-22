@@ -30,6 +30,12 @@ public interface Analysis extends Switch
     void caseTEscapeDefault(TEscapeDefault node);
     void caseTStringBody(TStringBody node);
     void caseTStringEnd(TStringEnd node);
+    void caseTInputStart(TInputStart node);
+    void caseTInputInt(TInputInt node);
+    void caseTInputFloat(TInputFloat node);
+    void caseTInputString(TInputString node);
+    void caseTInputArgNumber(TInputArgNumber node);
+    void caseTInputEnd(TInputEnd node);
     void caseTIntType(TIntType node);
     void caseTFloatType(TFloatType node);
     void caseTListType(TListType node);
@@ -42,7 +48,7 @@ public interface Analysis extends Switch
     void caseTFoldl(TFoldl node);
     void caseTFoldr(TFoldr node);
     void caseTMap(TMap node);
-    void caseTFlatten(TFlatten node);
+    void caseTLast(TLast node);
     void caseTLength(TLength node);
     void caseTLambdaStart(TLambdaStart node);
     void caseTLambdaArrow(TLambdaArrow node);

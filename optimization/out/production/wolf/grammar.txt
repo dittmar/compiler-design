@@ -94,7 +94,7 @@ NativeListUnary = NativeListUnaryOp l_paren ListArgument r_paren
 NativeListUnaryOp = head
 NativeListUnaryOp = tail
 NativeListUnaryOp = reverse
-NativeListUnaryOp = flatten
+NativeListUnaryOp = last
 NativeListUnaryOp = length
           
 ArgList = l_paren r_paren
@@ -134,7 +134,17 @@ EscapeChar = escape_hex_char
 EscapeChar = escape_unicode_char
 EscapeChar = escape_default
 
-List = start_list Args end_list
+List = start_list ListElements end_list
+
+ListElements = ListElement ListElementRest*
+
+ListElementRest = comma ListElement
+
+ListElement = Function
+ListElement = int_number
+ListElement = float_number
+ListElement = identifier
+ListElement = String
 
 Type = FlatType
 Type = list_type FlatType
@@ -142,3 +152,5 @@ Type = list_type FlatType
 FlatType = int_type
 FlatType = float_type
 FlatType = string_type
+
+InputArg = input_start FlatType int_number input_end

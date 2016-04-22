@@ -53,13 +53,13 @@ public class NativeListUnary implements WolfFunction, UnaryOp {
                     );
                 }
                 return argType;
-            case FLATTEN:
+            case LAST:
                 if(!argType.is_list) {
                     TypeErrorReporter.mismatchErrorListUnary(
                         list_argument, argType, list_unary_op.toString(), null
                     );
                 }
-                return argType;
+                return new Type(argType.flat_type);
             case LENGTH:
                 if(!argType.is_list) {
                     TypeErrorReporter.mismatchErrorListUnary(

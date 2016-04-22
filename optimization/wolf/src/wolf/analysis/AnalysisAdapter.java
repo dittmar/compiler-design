@@ -183,6 +183,42 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTInputStart(TInputStart node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTInputInt(TInputInt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTInputFloat(TInputFloat node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTInputString(TInputString node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTInputArgNumber(TInputArgNumber node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTInputEnd(TInputEnd node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTIntType(TIntType node)
     {
         defaultCase(node);
@@ -255,7 +291,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTFlatten(TFlatten node)
+    public void caseTLast(TLast node)
     {
         defaultCase(node);
     }

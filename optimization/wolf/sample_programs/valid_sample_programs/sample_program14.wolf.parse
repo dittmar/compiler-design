@@ -1,15 +1,2 @@
-Arg parsed successfully: h ( h ( [ [ 1 
-Arg parsed successfully: h ( h ( [ [ 1 , 2 
-ArgRest parsed successfully: h ( h ( [ [ 1 , 2 
-Args parsed successfully: h ( h ( [ [ 1 , 2 
-List parsed successfully: h ( h ( [ [ 1 , 2 ] 
-Arg parsed successfully: h ( h ( [ [ 1 , 2 ] 
-Arg parsed successfully: h ( h ( [ [ 1 , 2 ] , 3 
-ArgRest parsed successfully: h ( h ( [ [ 1 , 2 ] , 3 
-Arg parsed successfully: h ( h ( [ [ 1 , 2 ] , 3 , 4 
-ArgRest parsed successfully: h ( h ( [ [ 1 , 2 ] , 3 , 4 
-Args parsed successfully: h ( h ( [ [ 1 , 2 ] , 3 , 4 
-List parsed successfully: h ( h ( [ [ 1 , 2 ] , 3 , 4 ] 
-NativeListUnary parsed successfully: h ( h ( [ [ 1 , 2 ] , 3 , 4 ] ) 
-NativeListUnary parsed successfully: h ( h ( [ [ 1 , 2 ] , 3 , 4 ] ) ) 
-Program parsed successfully: h ( h ( [ [ 1 , 2 ] , 3 , 4 ] ) ) 
+Unexpected token type: wolf.node.TStartList around (line 1, column 6): [
+Context: h ( h ( [

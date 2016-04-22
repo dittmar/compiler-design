@@ -3,6 +3,7 @@ package wolf;
 import java.util.List;
 import wolf.interfaces.Arg;
 import wolf.interfaces.ListArgument;
+import wolf.interfaces.ListElement;
 
 /**
  *
@@ -186,7 +187,7 @@ public final class TypeErrorReporter {
         throw new UnsupportedOperationException(sb.toString());
     }
     
-    public static void mismatchListItemWithListType(Arg item, Type itemType, 
+    public static void mismatchListItemWithListType(ListElement item, Type itemType,
             Type listType) 
             throws UnsupportedOperationException {
         StringBuilder sb = new StringBuilder();

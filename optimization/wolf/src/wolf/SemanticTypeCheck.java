@@ -349,8 +349,8 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(WolfList n) {
-        for (Arg arg : n.list_elements) {
-            arg.accept(this);
+        for (ListElement list_element : n.list_elements) {
+            list_element.accept(this);
         }
         return n.accept(this);
     }
@@ -389,6 +389,28 @@ public class SemanticTypeCheck implements Visitor {
             return visit((WolfString) n);
         } else {
             throw new IllegalArgumentException("Invalid Arg");
+        }
+    }
+
+        /**
+     * Visit a list element
+     * @param n a list element
+     * @return type of list element
+     */
+    @Override
+    public Type visit(ListElement n) {
+        if (n instanceof WolfFunction) {
+            return visit((WolfFunction) n);
+        } else if (n instanceof IntLiteral) {
+            return visit((IntLiteral) n);
+        } else if (n instanceof FloatLiteral) {
+            return visit((FloatLiteral) n);
+        } else if (n instanceof Identifier) {
+            return visit((Identifier) n);
+        } else if (n instanceof WolfString) {
+            return visit((WolfString) n);
+        } else {
+            throw new IllegalArgumentException("Invalid ListElement");
         }
     }
 

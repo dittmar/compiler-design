@@ -7,14 +7,14 @@ import wolf.analysis.*;
 @SuppressWarnings("nls")
 public final class TStringType extends Token
 {
-    public TStringType()
+    public TStringType(String text)
     {
-        super.setText("string");
+        setText(text);
     }
 
-    public TStringType(int line, int pos)
+    public TStringType(String text, int line, int pos)
     {
-        super.setText("string");
+        setText(text);
         setLine(line);
         setPos(pos);
     }
@@ -22,18 +22,12 @@ public final class TStringType extends Token
     @Override
     public Object clone()
     {
-      return new TStringType(getLine(), getPos());
+      return new TStringType(getText(), getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseTStringType(this);
-    }
-
-    @Override
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TStringType text.");
     }
 }

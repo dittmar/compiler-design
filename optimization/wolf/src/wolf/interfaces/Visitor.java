@@ -40,6 +40,8 @@ public interface Visitor {
     Type visit(UnaryOp n);
     
     Type visit(ListArgument n);
+
+    Type visit(ListElement n);
     
     Type visit(WolfLambda n);
     

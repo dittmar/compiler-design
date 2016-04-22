@@ -367,8 +367,8 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public Type visit(WolfList n) {
-        for (Arg arg : n.list_elements) {
-            arg.accept(this);
+        for (ListElement list_element : n.list_elements) {
+            list_element.accept(this);
         }
         return n.accept(this);
     }
@@ -407,6 +407,25 @@ public class BuildSymbolTable implements Visitor {
             return visit((WolfString) n);
         } else {
             System.err.println("Invalid Arg");
+            System.exit(1);
+            return null;
+        }
+    }
+
+    @Override
+    public Type visit(ListElement n) {
+        if (n instanceof WolfFunction) {
+            return visit((WolfFunction) n);
+        } else if (n instanceof IntLiteral) {
+            return visit((IntLiteral) n);
+        } else if (n instanceof FloatLiteral) {
+            return visit((FloatLiteral) n);
+        } else if (n instanceof Identifier) {
+            return visit((Identifier) n);
+        } else if (n instanceof WolfString) {
+            return visit((WolfString) n);
+        } else {
+            System.err.println("Invalid ListElement");
             System.exit(1);
             return null;
         }

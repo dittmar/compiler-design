@@ -7,14 +7,14 @@ import wolf.analysis.*;
 @SuppressWarnings("nls")
 public final class TFloatType extends Token
 {
-    public TFloatType()
+    public TFloatType(String text)
     {
-        super.setText("float");
+        setText(text);
     }
 
-    public TFloatType(int line, int pos)
+    public TFloatType(String text, int line, int pos)
     {
-        super.setText("float");
+        setText(text);
         setLine(line);
         setPos(pos);
     }
@@ -22,18 +22,12 @@ public final class TFloatType extends Token
     @Override
     public Object clone()
     {
-      return new TFloatType(getLine(), getPos());
+      return new TFloatType(getText(), getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseTFloatType(this);
-    }
-
-    @Override
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TFloatType text.");
     }
 }

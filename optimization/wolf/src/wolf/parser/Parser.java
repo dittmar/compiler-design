@@ -119,12 +119,35 @@ public class Parser {
      */
     private Arg Arg() {
       Arg arg = null;
-      if (isListElement()) {
-        arg = ListElement();
-      } else if (token instanceof TStartList) {
-        arg = List();
-      }
-      log("arg");
+        // The identifier could be a literal or a function call
+        if (token instanceof TIdentifier) {
+            Identifier identifier = new Identifier(
+                (TIdentifier) eat(TIdentifier.class)
+            );
+            // If it starts with a left parenthesis, it's a function call,
+            // not a literal (e.g. float, string, int)
+            if (token instanceof TLParen) {
+                Args arg_list = ArgList();
+                arg = new UserFunc(identifier, arg_list);
+            } else {
+                arg = identifier;
+            }
+        } else if (token instanceof TIntNumber) {
+            arg = new IntLiteral((TIntNumber) eat(TIntNumber.class));
+        } else if (token instanceof TFloatNumber) {
+            arg = new FloatLiteral((TFloatNumber) eat(TFloatNumber.class));
+        } else if (token instanceof TStringStart) {
+            arg = String();
+        } else if (token instanceof TLambdaStart) {
+            arg = new UserFunc(Lambda(), ArgList());
+        } else if (isFunction()) {
+            arg = Function();
+        } else if (token instanceof TStartList) {
+          arg = List();
+        } else {
+          error();
+        }
+      log("Arg");
       return arg;
     }
 
@@ -568,9 +591,9 @@ public class Parser {
             case "TReverse":
                 eat(TReverse.class);
                 return NativeListUnaryOp.REVERSE;
-            case "TFlatten":
-                eat(TFlatten.class);
-                return NativeListUnaryOp.FLATTEN;
+            case "TLast":
+                eat(TLast.class);
+                return NativeListUnaryOp.LAST;
             case "TLength":
                 eat(TLength.class);
                 return NativeListUnaryOp.LENGTH;
@@ -882,7 +905,7 @@ public class Parser {
                 || token instanceof THead
                 || token instanceof TTail
                 || token instanceof TReverse
-                || token instanceof TFlatten;
+                || token instanceof TLast;
     }
 
     /**

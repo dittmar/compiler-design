@@ -5,14 +5,14 @@ package wolf.node;
 import wolf.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TFlatten extends Token
+public final class TInputInt extends Token
 {
-    public TFlatten(String text)
+    public TInputInt(String text)
     {
         setText(text);
     }
 
-    public TFlatten(String text, int line, int pos)
+    public TInputInt(String text, int line, int pos)
     {
         setText(text);
         setLine(line);
@@ -22,12 +22,12 @@ public final class TFlatten extends Token
     @Override
     public Object clone()
     {
-      return new TFlatten(getText(), getLine(), getPos());
+      return new TInputInt(getText(), getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTFlatten(this);
+        ((Analysis) sw).caseTInputInt(this);
     }
 }

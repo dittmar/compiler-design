@@ -7,14 +7,14 @@ import wolf.analysis.*;
 @SuppressWarnings("nls")
 public final class TIntType extends Token
 {
-    public TIntType()
+    public TIntType(String text)
     {
-        super.setText("int");
+        setText(text);
     }
 
-    public TIntType(int line, int pos)
+    public TIntType(String text, int line, int pos)
     {
-        super.setText("int");
+        setText(text);
         setLine(line);
         setPos(pos);
     }
@@ -22,18 +22,12 @@ public final class TIntType extends Token
     @Override
     public Object clone()
     {
-      return new TIntType(getLine(), getPos());
+      return new TIntType(getText(), getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseTIntType(this);
-    }
-
-    @Override
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TIntType text.");
     }
 }

@@ -5,14 +5,14 @@ package wolf.node;
 import wolf.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TListType extends Token
+public final class TLast extends Token
 {
-    public TListType(String text)
+    public TLast(String text)
     {
         setText(text);
     }
 
-    public TListType(String text, int line, int pos)
+    public TLast(String text, int line, int pos)
     {
         setText(text);
         setLine(line);
@@ -22,12 +22,12 @@ public final class TListType extends Token
     @Override
     public Object clone()
     {
-      return new TListType(getText(), getLine(), getPos());
+      return new TLast(getText(), getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTListType(this);
+        ((Analysis) sw).caseTLast(this);
     }
 }

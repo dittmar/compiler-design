@@ -10,6 +10,6 @@ import wolf.Type;
  * @author Joseph Alacqua
  * @version Apr 21, 2016
  */
-public interface ListElement extends Arg {
+public interface ListElement {
   Type accept(Visitor v);
 }

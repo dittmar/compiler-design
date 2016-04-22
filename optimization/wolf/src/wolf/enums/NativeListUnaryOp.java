@@ -1,7 +1,7 @@
 package wolf.enums;
 
-import wolf.node.TFlatten;
 import wolf.node.THead;
+import wolf.node.TLast;
 import wolf.node.TLength;
 import wolf.node.TReverse;
 import wolf.node.TTail;
@@ -15,7 +15,7 @@ public enum NativeListUnaryOp {
     HEAD(THead.class),
     TAIL(TTail.class),
     REVERSE(TReverse.class),
-    FLATTEN(TFlatten.class),
+    LAST(TLast.class),
     LENGTH(TLength.class);
     
     final Class token_class;
