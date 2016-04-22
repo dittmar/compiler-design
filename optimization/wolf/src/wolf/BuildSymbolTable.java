@@ -367,7 +367,7 @@ public class BuildSymbolTable implements Visitor {
      */
     @Override
     public Type visit(WolfList n) {
-        for (Arg arg : n.arg_list) {
+        for (Arg arg : n.list_elements) {
             arg.accept(this);
         }
         return n.accept(this);

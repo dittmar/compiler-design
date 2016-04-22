@@ -9,7 +9,7 @@ import wolf.Type;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public interface WolfFunction extends Arg, ListArgument {
+public interface WolfFunction extends Arg, ListArgument, ListElement {
     @Override
     public Type accept(Visitor v);
 }

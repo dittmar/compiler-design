@@ -1,6 +1,7 @@
 package wolf;
 
 import wolf.interfaces.Arg;
+import wolf.interfaces.ListElement;
 import wolf.interfaces.Visitor;
 import wolf.node.TIntNumber;
 
@@ -11,7 +12,7 @@ import wolf.node.TIntNumber;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public class IntLiteral implements Arg {
+public class IntLiteral implements Arg, ListElement {
     TIntNumber int_literal;
     
     public IntLiteral(TIntNumber int_literal) {

@@ -2,6 +2,7 @@ package wolf;
 
 import java.util.List;
 import wolf.interfaces.Arg;
+import wolf.interfaces.ListElement;
 import wolf.interfaces.StringMiddle;
 import wolf.interfaces.Visitor;
 
@@ -12,7 +13,7 @@ import wolf.interfaces.Visitor;
  * @author Joe Alacqua
  * @version Apr 3, 2016
  */
-public class WolfString implements Arg {
+public class WolfString implements Arg, ListElement {
     List<StringMiddle> string;
     
     public WolfString(List<StringMiddle> string) {

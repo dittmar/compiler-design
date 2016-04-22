@@ -1,0 +1,2 @@
+\((int num) -> +(print(; =(%(num, 3), 0) ? print('FIZZ') : @('')),
+				 print(; =(%(num, 5), 0) ? print('BUZZ') : @(''))))(15)

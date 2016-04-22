@@ -3,6 +3,7 @@ package wolf;
 import java.util.List;
 import wolf.interfaces.Arg;
 import wolf.interfaces.ListArgument;
+import wolf.interfaces.ListElement;
 import wolf.interfaces.Visitor;
 
 /**
@@ -13,10 +14,10 @@ import wolf.interfaces.Visitor;
  * @version Apr 3, 2016
  */
 public class WolfList implements Arg, ListArgument {
-    List<Arg> arg_list;
+    List<ListElement> list_elements;
     
-    public WolfList(List<Arg> arg_list) {
-        this.arg_list = arg_list;
+    public WolfList(List<ListElement> arg_list) {
+        this.list_elements = arg_list;
     }
     
     /**
@@ -27,15 +28,15 @@ public class WolfList implements Arg, ListArgument {
     @Override
     public Type accept(Visitor v) {
         if(v instanceof BuildSymbolTable) {
-            Type type = (Type) this.arg_list.get(0).accept(v);
+            Type type = this.list_elements.get(0).accept(v);
             return new Type(type.flat_type, true);
         }
         else if (v instanceof SemanticTypeCheck) {
-            Type listType = (Type) this.arg_list.get(0).accept(v);
-            for(Arg arg: arg_list) {
-                Type argType = arg.accept(v);
+            Type listType = this.list_elements.get(0).accept(v);
+            for(ListElement list_element: list_elements) {
+                Type argType = list_element.accept(v);
                 if(!argType.equals(listType)) {
-                    TypeErrorReporter.mismatchListItemWithListType(arg, 
+                    TypeErrorReporter.mismatchListItemWithListType(list_element,
                             argType, listType);
                 }
             }

@@ -118,37 +118,14 @@ public class Parser {
      * @return abstract syntax tree for Arg
      */
     private Arg Arg() {
-        Arg arg = null;
-        // The identifier could be a literal or a function call
-        if (token instanceof TIdentifier) {
-            Identifier identifier = new Identifier(
-                (TIdentifier) eat(TIdentifier.class)
-            );
-            // If it starts with a left parenthesis, it's a function call,
-            // not a literal (e.g. float, string, int)
-            if (token instanceof TLParen) {
-                Args arg_list = ArgList();
-                arg = new UserFunc(identifier, arg_list);
-            } else {
-                arg = identifier;
-            }
-        } else if (token instanceof TIntNumber) {
-            arg = new IntLiteral((TIntNumber) eat(TIntNumber.class));
-        } else if (token instanceof TFloatNumber) {
-            arg = new FloatLiteral((TFloatNumber) eat(TFloatNumber.class));
-        } else if (token instanceof TStringStart) {
-            arg = String();
-        } else if (token instanceof TStartList) {
-            arg = List();
-        } else if (token instanceof TLambdaStart) {
-            arg = new UserFunc(Lambda(), ArgList());
-        } else if (isFunction()) {
-            arg = Function();
-        } else {
-            error();
-        }
-        log("Arg");
-        return arg;
+      Arg arg = null;
+      if (isListElement()) {
+        arg = ListElement();
+      } else if (token instanceof TStartList) {
+        arg = List();
+      }
+      log("arg");
+      return arg;
     }
 
     /**
@@ -388,10 +365,10 @@ public class Parser {
      */
     private WolfList List() {
         eat(TStartList.class);
-        List<Arg> args = Args();
+        List<ListElement> list_elements = ListElements();
         eat(TEndList.class);
         log("List");
-        return new WolfList(args);
+        return new WolfList(list_elements);
     }
 
     /**
@@ -422,6 +399,69 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Parse a ListElement.
+     *
+     * @return abstract syntax tree for ListElement
+     */
+    private ListElement ListElement() {
+        ListElement list_element = null;
+        // The identifier could be a literal or a function call
+        if (token instanceof TIdentifier) {
+            Identifier identifier = new Identifier(
+                (TIdentifier) eat(TIdentifier.class)
+            );
+            // If it starts with a left parenthesis, it's a function call,
+            // not a literal (e.g. float, string, int)
+            if (token instanceof TLParen) {
+                Args arg_list = ArgList();
+                list_element = new UserFunc(identifier, arg_list);
+            } else {
+                list_element = identifier;
+            }
+        } else if (token instanceof TIntNumber) {
+            list_element = new IntLiteral((TIntNumber) eat(TIntNumber.class));
+        } else if (token instanceof TFloatNumber) {
+            list_element = new FloatLiteral((TFloatNumber) eat(TFloatNumber.class));
+        } else if (token instanceof TStringStart) {
+            list_element = String();
+        } else if (token instanceof TLambdaStart) {
+            list_element = new UserFunc(Lambda(), ArgList());
+        } else if (isFunction()) {
+            list_element = Function();
+        } else {
+            error();
+        }
+        log("ListElement");
+        return list_element;
+    }
+
+    /**
+     * Parse a ListElementRest.
+     *
+     * @return abstract syntax tree for ListElementRest
+     */
+    private ListElement ListElementRest() {
+        eat(TComma.class);
+        ListElement list_element = ListElement();
+        log("ListElement");
+        return list_element;
+    }
+
+    /**
+     * Parse ListElements.
+     *
+     * @return abstract syntax tree for Args
+     */
+    private List<ListElement> ListElements() {
+        List<ListElement> list_elements = new ArrayList<>();
+        list_elements.add(ListElement());
+        while (token instanceof TComma) {
+            list_elements.add(ListElementRest());
+        }
+        log("Args");
+        return list_elements;
+    }
     /**
      * Parse a Map
      *
@@ -886,6 +926,21 @@ public class Parser {
     }
 
     /**
+     * Decide if the current token indicates a ListElement.
+     *
+     * @return true if the current token is a token that can start a
+     * ListElement, false otherwise.
+     */
+    private boolean isListElement() {
+      return token instanceof TIdentifier
+                || token instanceof TIntNumber
+                || token instanceof TFloatNumber
+                || token instanceof TStringStart
+                || token instanceof TLambdaStart
+                || isFunction();
+    }
+
+    /**
      * @return true if the token corresponds to a type, false otherwise.
      */
     private boolean isType() {
@@ -899,7 +954,6 @@ public class Parser {
      * Log information about the last nonterminal parsed
      *
      * @param nonterminal_name the name of the nonterminal parsed
-     * @param parsed the list of symbols corresponding to the nonterminal.
      */
     private void log(String nonterminal_name) {
         StringBuilder sb = new StringBuilder();
