@@ -22,7 +22,6 @@ public class ArgsList extends Args {
     */
     @Override
     public Type accept(Visitor v) {
-       v.visit(this);
-       return null;
+      return v.visit(this);
     }
 }

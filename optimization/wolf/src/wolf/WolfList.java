@@ -27,6 +27,8 @@ public class WolfList implements Arg, ListArgument {
      */
     @Override
     public Type accept(Visitor v) {
+        return v.visit(this);
+        /*
         if(v instanceof BuildSymbolTable) {
             Type type = this.list_elements.get(0).accept(v);
             return new Type(type.flat_type, true);
@@ -45,6 +47,6 @@ public class WolfList implements Arg, ListArgument {
         else {
             System.exit(1);
             return null;
-        }
+        }*/
     }
 }

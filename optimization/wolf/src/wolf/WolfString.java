@@ -27,7 +27,7 @@ public class WolfString implements Arg, ListElement {
      */
     @Override
     public Type accept(Visitor v) {
-        return new Type(FlatType.STRING);
+        return v.visit(this); //return new Type(FlatType.STRING);
     }
     
     public String toString() {

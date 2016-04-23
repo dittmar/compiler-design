@@ -29,6 +29,8 @@ public class NativeUnary implements WolfFunction, UnaryOp {
      */
     @Override
     public Type accept(Visitor v) {
+        return v.visit(this);
+        /*
         Type argType = (Type) v.visit(arg);
         switch(unary_op) {
             case NEG:
@@ -51,7 +53,7 @@ public class NativeUnary implements WolfFunction, UnaryOp {
             default:
                 System.err.println("Invalid Native Unary Operation");
                 return null;
-        }
+        }*/
     }
     
     /**

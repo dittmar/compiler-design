@@ -55,8 +55,9 @@ public enum NativeBinOp implements BinOp {
     }
     
     @Override
-    public List<Type> accept(Visitor n) {
-        List<Type> valid_types = new ArrayList();
+    public List<Type> accept(Visitor v) {
+        return v.visit(this);
+        /*List<Type> valid_types = new ArrayList();
         valid_types.add(new Type(FlatType.INTEGER));
         if(!token_class.equals(TXor.class) && 
            !token_class.equals(TOr.class) &&
@@ -78,7 +79,7 @@ public enum NativeBinOp implements BinOp {
                 }
             }
         }
-        return valid_types;
+        return valid_types;*/
     }
     
     @Override

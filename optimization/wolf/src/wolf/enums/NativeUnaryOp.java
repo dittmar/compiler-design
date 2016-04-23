@@ -37,6 +37,8 @@ public enum NativeUnaryOp implements UnaryOp {
     
     @Override
     public Object accept(Visitor n) {
+        return v.visit(this);
+        /*
         List<Type> valid_types = new ArrayList<>();
         valid_types.add(new Type(FlatType.INTEGER));
         if (!token_class.equals(TLogicalNot.class)) {
@@ -49,7 +51,7 @@ public enum NativeUnaryOp implements UnaryOp {
                 }
             }
         }
-        return valid_types;
+        return valid_types;*/
     }
     
     @Override

@@ -19,7 +19,7 @@ public class SigArg {
     }
     
     public void visit(Visitor v) {
-        v.visit(this);
+        return v.visit(this);
     }
     
     @Override

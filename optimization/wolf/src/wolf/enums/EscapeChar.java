@@ -59,7 +59,7 @@ public enum EscapeChar implements StringMiddle {
      */
     @Override
     public void accept(Visitor v) {
-        // Do nothing.
+        return v.visit(this);
     }
     
     @Override

@@ -30,6 +30,8 @@ public class NativeListUnary implements WolfFunction, UnaryOp {
      */
     @Override
     public Type accept(Visitor v) {
+        return v.visit(this);
+        /*
         Type argType = (Type) v.visit(list_argument);
         switch(list_unary_op) {
             case HEAD:
@@ -71,6 +73,7 @@ public class NativeListUnary implements WolfFunction, UnaryOp {
                 System.err.println("Invalid Native List Unary Operation");
                 return null;
         }
+        */
     }
     
     /**

@@ -36,7 +36,8 @@ public class NativeListBinary implements WolfFunction {
      */
     @Override
     public Type accept(Visitor v) {
-        Type arg_type = (Type) v.visit(arg);
+        return v.visit(this);
+        /*Type arg_type = (Type) v.visit(arg);
         Type list_type = (Type) v.visit(list_argument);
         switch(binary_op) {
             case APPEND:
@@ -57,7 +58,7 @@ public class NativeListBinary implements WolfFunction {
             default:
                 System.err.println("Invalid Native List Binary Operation!");
                 return null;
-        }
+        }*/
     }
     
     /**

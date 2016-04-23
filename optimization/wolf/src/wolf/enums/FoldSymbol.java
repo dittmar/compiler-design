@@ -31,7 +31,7 @@ public enum FoldSymbol {
      * @param v a visitor
      */ 
     public void accept(Visitor v) {
-        // Do nothing
+        return v.visit(this);
     }
     
     @Override

@@ -20,7 +20,7 @@ public class StringEscapeSeq implements StringMiddle {
      */
     @Override
     public void accept(Visitor v) {
-        // Do nothing
+        return v.visit(this);
     }
     
     public String toString() {

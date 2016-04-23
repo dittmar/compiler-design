@@ -22,7 +22,7 @@ public class Sig {
      * @param v a visitor
      */
     public void accept(Visitor v) {
-        v.visit(this);
+        return v.visit(this);
     }
     
     public String toString() {
