@@ -17,8 +17,9 @@ public class SigArg {
         this.type = type;
         this.identifier = identifier;
     }
-    
-    public Object visit(Visitor v) {
+
+
+    public Object accept(Visitor v) {
         return v.visit(this);
     }
     
