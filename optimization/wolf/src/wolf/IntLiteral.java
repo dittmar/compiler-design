@@ -25,7 +25,7 @@ public class IntLiteral implements Arg, ListElement {
      * @return the type of this IntLiteral, INTEGER
      */
     @Override
-    public Type accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this); //return new Type(FlatType.INTEGER);
     }
     

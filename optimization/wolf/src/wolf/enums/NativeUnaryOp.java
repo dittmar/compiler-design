@@ -36,7 +36,7 @@ public enum NativeUnaryOp implements UnaryOp {
     }
     
     @Override
-    public Object accept(Visitor n) {
+    public Object accept(Visitor v) {
         return v.visit(this);
         /*
         List<Type> valid_types = new ArrayList<>();

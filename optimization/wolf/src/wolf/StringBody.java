@@ -23,7 +23,7 @@ public class StringBody implements StringMiddle {
      * @param v a visitor
      */
     @Override
-    public void accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this);
     }
     

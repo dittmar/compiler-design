@@ -24,7 +24,7 @@ public class FoldBody {
      * @param v a visitor
      * @return the return type of the fold
      */
-    public Type accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this);
     }
 }

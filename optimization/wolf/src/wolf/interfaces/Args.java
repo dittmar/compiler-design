@@ -27,5 +27,5 @@ public abstract class Args {
     * Accept a visitor.
     * @param v a visitor
     */
-    public abstract Type accept(Visitor v);
+    public abstract Object accept(Visitor v);
 }

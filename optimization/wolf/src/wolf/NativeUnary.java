@@ -28,7 +28,7 @@ public class NativeUnary implements WolfFunction, UnaryOp {
      * @return the type returned by this unary op.
      */
     @Override
-    public Type accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this);
         /*
         Type argType = (Type) v.visit(arg);

@@ -11,5 +11,5 @@ import wolf.Type;
  * @version Apr 21, 2016
  */
 public interface ListElement {
-  Type accept(Visitor v);
+  Object accept(Visitor v);
 }

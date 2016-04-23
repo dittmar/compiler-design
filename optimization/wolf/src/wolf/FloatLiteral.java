@@ -24,7 +24,7 @@ public class FloatLiteral implements Arg, ListElement {
      * @return the type of this FloatLiteral, FLOAT
      */
     @Override
-    public Type accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this); //return new Type(FlatType.FLOAT);
     }
 }

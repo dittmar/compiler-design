@@ -21,7 +21,7 @@ public class Sig {
      * Accept a visitor
      * @param v a visitor
      */
-    public void accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this);
     }
     

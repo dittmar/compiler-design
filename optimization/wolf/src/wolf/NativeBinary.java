@@ -30,7 +30,7 @@ public class NativeBinary implements WolfFunction {
      * @return type of the return value of the binary function
      */
     @Override
-    public Type accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this);
         /*Type left_type = (Type) v.visit(arg_left);
         Type right_type = (Type) v.visit(arg_right);

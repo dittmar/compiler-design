@@ -28,7 +28,7 @@ public class Branch implements WolfFunction {
     * @return return type of the branch
     */
     @Override
-    public Type accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this);
     }
 }

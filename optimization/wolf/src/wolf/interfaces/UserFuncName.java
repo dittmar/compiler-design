@@ -10,5 +10,5 @@ import wolf.Type;
  * @version Apr 3, 2016
  */
 public interface UserFuncName {
-    Type accept(Visitor v);
+    Object accept(Visitor v);
 }

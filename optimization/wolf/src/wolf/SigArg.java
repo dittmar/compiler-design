@@ -18,7 +18,7 @@ public class SigArg {
         this.identifier = identifier;
     }
     
-    public void visit(Visitor v) {
+    public Object visit(Visitor v) {
         return v.visit(this);
     }
     

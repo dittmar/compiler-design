@@ -35,7 +35,7 @@ public class NativeListBinary implements WolfFunction {
      * @return the return type of the binary list function
      */
     @Override
-    public Type accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this);
         /*Type arg_type = (Type) v.visit(arg);
         Type list_type = (Type) v.visit(list_argument);

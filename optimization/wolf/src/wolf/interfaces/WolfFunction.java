@@ -11,5 +11,5 @@ import wolf.Type;
  */
 public interface WolfFunction extends Arg, ListArgument, ListElement {
     @Override
-    public Type accept(Visitor v);
+    Object accept(Visitor v);
 }

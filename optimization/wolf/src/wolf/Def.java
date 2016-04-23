@@ -29,7 +29,7 @@ public class Def {
      * @param v a visitor
      * @return the return type of the function defined
      */
-    public Type accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this);
     }
     

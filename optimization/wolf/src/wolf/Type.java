@@ -70,7 +70,7 @@ public class Type {
      * @param v a visitor
      * @return this, which is the type of the parameter
      */
-    public Type accept(Visitor v) {
+    /*public Type accept(Visitor v) {
         return this;
-    }
+    }*/
 }

@@ -55,7 +55,7 @@ public enum NativeBinOp implements BinOp {
     }
     
     @Override
-    public List<Type> accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this);
         /*List<Type> valid_types = new ArrayList();
         valid_types.add(new Type(FlatType.INTEGER));

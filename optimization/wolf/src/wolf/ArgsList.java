@@ -21,7 +21,7 @@ public class ArgsList extends Args {
     * @return type should never be returned from this type of Args
     */
     @Override
-    public Type accept(Visitor v) {
+    public Object accept(Visitor v) {
       return v.visit(this);
     }
 }

@@ -10,5 +10,5 @@ import wolf.Type;
  * @version Apr 3, 2016
  */
 public interface Arg {
-    public Type accept(Visitor v);
+    public Object accept(Visitor v);
 }

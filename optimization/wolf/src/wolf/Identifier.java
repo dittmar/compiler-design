@@ -30,7 +30,7 @@ public class Identifier implements BinOp, UnaryOp, Arg, ListArgument,
      * @return the type of this identifier
      */
     @Override
-    public Type accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this);
         /*TableValue tv = null;
         Binding b = v.getCurrentDefTable().lookup(this);

@@ -26,7 +26,7 @@ public class Fold implements WolfFunction {
      * @return the return type of the fold
      */
     @Override
-    public Type accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this);
     }
 }

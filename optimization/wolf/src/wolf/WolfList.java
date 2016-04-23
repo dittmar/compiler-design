@@ -26,7 +26,7 @@ public class WolfList implements Arg, ListArgument {
      * @return the type of this WolfList, LIST
      */
     @Override
-    public Type accept(Visitor v) {
+    public Object accept(Visitor v) {
         return v.visit(this);
         /*
         if(v instanceof BuildSymbolTable) {

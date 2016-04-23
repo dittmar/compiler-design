@@ -18,7 +18,7 @@ public class ListArgsList extends Args {
     * Accept a visitor.
     * @param v a visitor
     */
-    public Type accept(Visitor v) {
+    public Object accept(Visitor v) {
        return v.visit(this);
     }
 }
