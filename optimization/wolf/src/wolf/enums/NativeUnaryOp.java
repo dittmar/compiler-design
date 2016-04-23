@@ -24,7 +24,7 @@ public enum NativeUnaryOp implements UnaryOp {
     IDENTITY(TIdentity.class),
     PRINT(TPrint.class);
     
-    Class token_class;
+    private Class token_class;
     
     /**
      * Create a NativeUnaryOp
@@ -38,24 +38,14 @@ public enum NativeUnaryOp implements UnaryOp {
     @Override
     public Object accept(Visitor v) {
         return v.visit(this);
-        /*
-        List<Type> valid_types = new ArrayList<>();
-        valid_types.add(new Type(FlatType.INTEGER));
-        if (!token_class.equals(TLogicalNot.class)) {
-            valid_types.add(new Type(FlatType.FLOAT));
-            if (!token_class.equals(TNeg.class)) {
-                valid_types.add(new Type(FlatType.STRING));
-                if (!token_class.equals(TPrint.class) &&
-                    !token_class.equals(TIdentity.class)) {
-                    return null;
-                }
-            }
-        }
-        return valid_types;*/
     }
     
     @Override
     public String toString() {
         return EnumReporter.report(token_class);
+    }
+
+    public Class getTokenClass() {
+        return token_class;
     }
 }

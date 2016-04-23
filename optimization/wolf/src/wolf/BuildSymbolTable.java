@@ -23,6 +23,27 @@ public class BuildSymbolTable implements Visitor {
     List<SymbolTable> lambda_table_list;
     int lambda_count = 0;
 
+  /**
+   * @return the list of all symbol tables
+   */
+  public List<SymbolTable> getTables() {
+        return tables;
+    }
+
+  /**
+   * @return the program table
+   */
+  public SymbolTable getProgramTable() {
+        return program_table;
+    }
+
+  /**
+   * @return the list of lambda tables.
+   */
+  public List<SymbolTable> getLambdaTables() {
+        return lambda_table_list;
+    }
+
     /**
      * Print the list of symbol tables.
      */

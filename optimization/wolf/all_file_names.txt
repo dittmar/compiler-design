@@ -21,6 +21,7 @@ sample_programs/bad_semantic_programs/bad_semantic_program7.wolf
 sample_programs/bad_semantic_programs/bad_semantic_program8.wolf
 sample_programs/bad_semantic_programs/bad_semantic_program9.wolf
 sample_programs/bad_semantic_programs/bad_semantic_program10.wolf
+sample_programs/bad_semantic_programs/bad_semantic_program11.wolf
 
 sample_programs/bad_programs/bad_program1.wolf
 sample_programs/bad_programs/bad_program2.wolf

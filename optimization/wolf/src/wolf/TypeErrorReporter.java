@@ -103,9 +103,9 @@ public final class TypeErrorReporter {
             String op, List<Type> expected)
             throws UnsupportedOperationException {
         StringBuilder sb = new StringBuilder();
-        sb.append(op).append(" can use: ");
+        sb.append("Unary function ").append(op).append(" must be used on ");
         if (expected == null || expected.isEmpty()) {
-            sb.append("any list type");
+            sb.append("any LIST type.");
         } else {
             sb.append("[");
             StringBuilder types = new StringBuilder();
@@ -115,8 +115,7 @@ public final class TypeErrorReporter {
             sb.append(types.toString().trim());
             sb.append("]");
         }
-        sb.append("\n");
-        sb.append(arg.toString()).append(" is of type ").append(type);
+        sb.append(" Argument ").append(arg.toString()).append(" is of type ").append(type);
         throw new UnsupportedOperationException(sb.toString());
     }
     
@@ -200,9 +199,16 @@ public final class TypeErrorReporter {
     public static void mismatchArgTypes(Arg expected, Type e_type,
             Arg actual, Type a_type) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Types must match: \n")
+        sb.append("ERROR - Types must match. ")
           .append(expected).append(" is of type ").append(e_type)
-          .append(",\n").append(actual).append(" is of type ").append(a_type);
+          .append(", ").append(actual).append(" is of type ").append(a_type);
+        throw new UnsupportedOperationException(sb.toString());
+    }
+
+    public static void noListArgument(String function_name, Type arg_type) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ERROR  - ").append(function_name).append(" must have an argument that is ")
+          .append("a LIST. ").append("Given type: ").append(arg_type);
         throw new UnsupportedOperationException(sb.toString());
     }
 }

@@ -32,27 +32,6 @@ public class Identifier implements BinOp, UnaryOp, Arg, ListArgument,
     @Override
     public Object accept(Visitor v) {
         return v.visit(this);
-        /*TableValue tv = null;
-        Binding b = v.getCurrentDefTable().lookup(this);
-        if(b == null) {
-            SymbolTable parent = v.getCurrentDefTable().parent_table;
-            while(parent != null && tv == null) {
-                b = parent.lookup(this);
-                if(b == null) {
-                    parent = parent.parent_table;
-                }
-                else {
-                    tv = b.table_value;
-                }
-            }
-        }
-        else {
-            tv = b.table_value;
-        }
-        if(tv == null) {
-            throw new IllegalArgumentException();
-        }
-        return tv.type;*/
     }
     
     @Override

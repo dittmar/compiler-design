@@ -32,68 +32,6 @@ public class NativeBinary implements WolfFunction {
     @Override
     public Object accept(Visitor v) {
         return v.visit(this);
-        /*Type left_type = (Type) v.visit(arg_left);
-        Type right_type = (Type) v.visit(arg_right);
-        boolean areSameType = (left_type.equals(right_type) ||
-            (left_type.isNumeric() && right_type.isNumeric()));
-        
-        switch(binary_op) {
-            case PLUS:
-            case MINUS:
-            if(!areSameType) {
-                TypeErrorReporter.mismatchArgTypes(
-                    arg_left, left_type,
-                    arg_right, right_type
-                );
-            }
-            return left_type;
-            case MULT:
-            case DIV:
-            case MOD:
-                if (!left_type.isNumeric() || !right_type.isNumeric()) {
-                    ArrayList<Type> types = new ArrayList<>();
-                    types.add(new Type(FlatType.INTEGER));
-                    types.add(new Type(FlatType.FLOAT));
-                    TypeErrorReporter.mismatchErrorBinary(
-                        arg_left, left_type,
-                        arg_right, right_type,
-                        binary_op.toString(), types);
-                }
-                return left_type;
-            case LT:
-            case GT:
-            case LTE:
-            case GTE:
-                if (!left_type.isNumeric() || !right_type.isNumeric()) {
-                    ArrayList<Type> types = new ArrayList<>();
-                    types.add(new Type(FlatType.INTEGER));
-                    types.add(new Type(FlatType.FLOAT));
-                    TypeErrorReporter.mismatchErrorBinary(
-                        arg_left, left_type,
-                        arg_right, right_type,
-                        binary_op.toString(), types);
-                }
-                return new Type(FlatType.INTEGER);
-            case AND:
-            case OR:
-            case XOR:
-                if (left_type.flat_type != FlatType.INTEGER ||
-                    right_type.flat_type != FlatType.INTEGER) {
-                    ArrayList<Type> types = new ArrayList<>();
-                    types.add(new Type(FlatType.INTEGER));
-                    TypeErrorReporter.mismatchErrorBinary(
-                        arg_left, left_type,
-                        arg_right, right_type,
-                        binary_op.toString(), types);
-                }
-                return new Type(FlatType.INTEGER);
-            case EQUAL:
-            case NOT_EQUAL:
-                return new Type(FlatType.INTEGER);
-            default:
-                System.err.println("Invalid Binary Operator!");
-                return null;
-        }*/
     }
     
     /**

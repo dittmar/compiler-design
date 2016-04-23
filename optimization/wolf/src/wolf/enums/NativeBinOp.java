@@ -44,7 +44,7 @@ public enum NativeBinOp implements BinOp {
     OR(TOr.class),
     XOR(TXor.class);
     
-    final Class token_class;
+    private final Class token_class;
     
     /**
      * Create a NativeBinOp
@@ -57,33 +57,14 @@ public enum NativeBinOp implements BinOp {
     @Override
     public Object accept(Visitor v) {
         return v.visit(this);
-        /*List<Type> valid_types = new ArrayList();
-        valid_types.add(new Type(FlatType.INTEGER));
-        if(!token_class.equals(TXor.class) && 
-           !token_class.equals(TOr.class) &&
-           !token_class.equals(TAnd.class) && 
-           !token_class.equals(TNotEqual.class) &&
-           !token_class.equals(TEqual.class) &&
-           !token_class.equals(TGte.class) &&
-           !token_class.equals(TLte.class) &&
-           !token_class.equals(TGt.class) &&
-           !token_class.equals(TLt.class)) {
-            valid_types.add(new Type(FlatType.FLOAT));
-            if(!token_class.equals(TMod.class) && 
-               !token_class.equals(TDiv.class) &&
-               !token_class.equals(TMult.class)) {
-                valid_types.add(new Type(FlatType.STRING));
-                if(!token_class.equals(TPlus.class) &&
-                   !token_class.equals(TMinus.class)) {
-                    return null;
-                }
-            }
-        }
-        return valid_types;*/
     }
     
     @Override
     public String toString() {
         return EnumReporter.report(token_class);
+    }
+
+    public Class getTokenClass() {
+        return token_class;
     }
 }
