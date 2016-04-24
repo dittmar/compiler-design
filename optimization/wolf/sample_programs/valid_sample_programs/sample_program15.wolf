@@ -1,0 +1,2 @@
+def int func(int y, int z) := +(y, z)
+func(\((int y, int z) -> *(+(y, z), "int 0"))(2, 1), "int 1")

@@ -1,7 +1,5 @@
 package wolf.interfaces;
 
-import wolf.Type;
-
 /**
  * An interface for each type of function in WOLF
  * @author Kevin Dittmar

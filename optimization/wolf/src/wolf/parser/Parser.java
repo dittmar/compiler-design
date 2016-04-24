@@ -148,7 +148,9 @@ public class Parser {
             arg = Function();
         } else if (token instanceof TStartList) {
           arg = List();
-        } else {
+        } else if (token instanceof TInputStart) {
+          arg = InputArg();
+        }else {
           error();
         }
       log("Arg");
@@ -370,6 +372,49 @@ public class Parser {
     }
 
     /**
+     * Parse an InputArg.
+     * @return the abstract syntax tree representation of the InputArg
+     */
+    private InputArg InputArg() {
+        Type type = null;
+        TInputArgNumber arg_number = null;
+        eat(TInputStart.class);
+        if (isInputType()) {
+            type = InputType();
+        } else {
+            error();
+        }
+        if (token instanceof TInputArgNumber) {
+            arg_number = (TInputArgNumber) eat(TInputArgNumber.class);
+        } else {
+            error();
+        }
+        eat(TInputEnd.class);
+        log("InputArg");
+        return new InputArg(type, arg_number);
+    }
+    
+    /**
+     * Parse an InputType.
+     * @return the abstract syntax tree representation of the InputArg's type
+     */
+    private Type InputType() {
+        switch(getTokenName()) {
+            case "TInputInt":
+                eat(TInputInt.class);
+                return new Type(FlatType.INTEGER);
+            case "TInputFloat":
+                eat(TInputFloat.class);
+                return new Type(FlatType.FLOAT);
+            case "TInputString":
+                eat(TInputString.class);
+                return new Type(FlatType.STRING);
+            default:
+                error();
+        }
+        return null;
+    }
+    /**
      * Parse a Lambda.
      *
      * @return abstract syntax tree for Lambda
@@ -456,6 +501,8 @@ public class Parser {
             list_element = new UserFunc(Lambda(), ArgList());
         } else if (isFunction()) {
             list_element = Function();
+        } else if (token instanceof TInputStart) {
+            list_element = InputArg();
         } else {
             error();
         }
@@ -799,6 +846,7 @@ public class Parser {
      * match the given class, then an error is thrown.
      *
      * @param klass is the class of the token to be eaten.
+     * @return the parsed token
      */
     private Token eat(Class klass) {
         Token parsed_token = token;
@@ -949,7 +997,8 @@ public class Parser {
                 || token instanceof TStringStart
                 || token instanceof TStartList
                 || token instanceof TLambdaStart
-                || isFunction();
+                || isFunction()
+                || token instanceof TInputStart;
     }
 
     /**
@@ -964,7 +1013,8 @@ public class Parser {
                 || token instanceof TFloatNumber
                 || token instanceof TStringStart
                 || token instanceof TLambdaStart
-                || isFunction();
+                || isFunction()
+                || token instanceof TInputStart;
     }
 
     /**
@@ -975,6 +1025,15 @@ public class Parser {
                 || token instanceof TFloatType
                 || token instanceof TStringType
                 || token instanceof TListType;
+    }
+    
+        /**
+     * @return true if the token corresponds to a type, false otherwise.
+     */
+    private boolean isInputType() {
+        return token instanceof TInputInt
+                || token instanceof TInputFloat
+                || token instanceof TInputString;
     }
     
     /**

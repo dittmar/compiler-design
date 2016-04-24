@@ -1,7 +1,5 @@
 package wolf.interfaces;
 
-import wolf.Type;
-
 /**
  * Interface for UserFuncNames in WOLF
  * @author Kevin Dittmar

@@ -1,7 +1,5 @@
 package wolf.interfaces;
 
-import wolf.Type;
-
 /**
  * Interface for list arguments in WOLF. List Arguments are either a list
  * or a function that returns a list.
