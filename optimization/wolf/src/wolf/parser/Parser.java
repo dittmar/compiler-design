@@ -81,7 +81,13 @@ public class Parser {
                 bst.getProgramTable(),
                 bst.getLambdaTables()
             );
+
             stc.visit(ast);
+
+            Optimizer optimizer = new Optimizer();
+            ast = optimizer.visit(ast);
+
+            System.out.println("Optimized!");
         } catch (UnsupportedOperationException e) {
             System.out.println(e);
         }

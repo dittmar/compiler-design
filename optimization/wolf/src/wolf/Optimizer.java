@@ -1,0 +1,551 @@
+package wolf;
+
+import wolf.interfaces.*;
+import wolf.enums.*;
+import wolf.node.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Optimize a WOLF program.
+ */
+public class Optimizer implements Visitor {
+
+  // 0
+  IntLiteral zero;
+
+  // 1
+  IntLiteral one;
+
+  // @(1)
+  NativeUnary identity_one;
+
+  // @(0)
+  NativeUnary identity_zero;
+
+  //Empty String
+  WolfString empty_string;
+
+  // Integer type
+  Type int_type;
+
+  // String type
+  Type string_type;
+
+  // Float type
+  Type float_type;
+
+  // Don't know if we need these, but just in case.
+  //SymbolTable program_table;
+
+  //SymbolTable current_def_table;
+
+  private Equal equal;
+
+  public Optimizer() {
+    equal = new Equal();
+    one = new IntLiteral(
+        new TIntNumber("1")
+    );
+    zero = new IntLiteral(
+        new TIntNumber("0")
+    );
+    identity_one = new NativeUnary(NativeUnaryOp.IDENTITY,one);
+    identity_zero = new NativeUnary(NativeUnaryOp.IDENTITY,zero);
+
+    int_type = new Type(FlatType.INTEGER);
+    float_type = new Type(FlatType.FLOAT);
+    string_type = new Type(FlatType.STRING);
+
+    ArrayList<StringMiddle> middle = new ArrayList<>();
+    middle.add(new StringBody(new TStringBody("")));
+    empty_string = new WolfString(middle);
+
+    //this.program_table = this.current_def_table = program_table;
+  }
+
+  public Program visit(Program n) {
+    ArrayList<Def> op_def_list = new ArrayList<>();
+    for(Def def:n.def_list) {
+      Def op_def = (Def) def.accept(this);
+      if(op_def != null) {
+        op_def_list.add(op_def);
+      }
+    }
+    WolfFunction op_function = (WolfFunction) n.function.accept(this);
+    return new Program(op_def_list,op_function);
+  }
+
+  /**
+   * Optimize a function definition
+   * @param n a function definition
+   * @return an optimized function definition.
+   */
+  public Def visit(Def n) {
+    Identifier op_def_name = (Identifier) n.def_name.accept(this);
+    Sig op_sig = (Sig) n.sig.accept(this);
+    WolfFunction op_function = (WolfFunction) n.function.accept(this);
+
+    return new Def(n.type,op_def_name,op_sig,op_function);
+  }
+
+  /**
+   * Optimize a function signature
+   * @param n a function signature
+   * @return an optimized function signature.
+   */
+  public Sig visit(Sig n) {
+    List<SigArg> op_sig_args = new ArrayList<>();
+    for(SigArg sig_arg : n.sig_args) {
+      op_sig_args.add((SigArg) sig_arg.accept(this));
+    }
+    return new Sig(op_sig_args);
+  }
+
+  /**
+   * Optimize a function signature argument
+   * @param n a signature argument
+   * @return the given signature argument, it's already optimized.
+   */
+  public SigArg visit(SigArg n) {
+    // for right now just give back what we have, not sure how else to optimize except check the
+    // function for usage.
+    return n;
+  }
+
+  /**
+   * Optimize a user function
+   * @param n a user function
+   * @return an optimized user function.
+   */
+  public UserFunc visit(UserFunc n) {
+    UserFuncName op_user_func_name = (UserFuncName) n.user_func_name.accept(this);
+    Args op_args = (Args) n.arg_list.accept(this);
+    return new UserFunc(op_user_func_name,op_args);
+  }
+
+  /**
+   * Optimize a branch
+   * @param n a branch function
+   * @return the optimize branch or a native unary function.
+   */
+  public Object visit(Branch n) {
+    WolfFunction op_condition = (WolfFunction) n.condition.accept(this);
+    WolfFunction op_true_branch = (WolfFunction) n.true_branch.accept(this);
+    WolfFunction op_false_branch = (WolfFunction) n.false_branch.accept(this);
+
+    if (equal.visit(op_condition, identity_one)) {
+      return new NativeUnary(NativeUnaryOp.IDENTITY,op_true_branch);
+    }
+    if(equal.visit(op_condition,identity_zero)) {
+      return new NativeUnary(NativeUnaryOp.IDENTITY,op_false_branch);
+    }
+    if(equal.visit(op_true_branch,op_false_branch)) {
+      return new NativeUnary(NativeUnaryOp.IDENTITY,op_true_branch);
+    }
+    return new Branch(op_condition,op_true_branch,op_false_branch);
+  }
+
+  public WolfLambda visit(WolfLambda n) {
+    Sig op_sig = (Sig) n.sig.accept(this);
+    WolfFunction op_function = (WolfFunction) n.sig.accept(this);
+    return new WolfLambda(op_sig,op_function);
+  }
+
+  /**
+   * Optimize a fold
+   * @param n a fold
+   * @return an optimized fold
+   */
+  public Fold visit(Fold n) {
+    FoldSymbol op_symbol = (FoldSymbol) n.fold_symbol.accept(this);
+    FoldBody op_body = (FoldBody) n.fold_body.accept(this);
+    return new Fold(op_symbol, op_body);
+  }
+
+  /**
+   * Optimize a fold symbol
+   * @param n a fold symbol
+   * @return the given fold symbol, it's already optimized.
+   */
+  public FoldSymbol visit(FoldSymbol n) {
+    return n;
+  }
+
+  /**
+   * Optimize a fold body
+   * @param n a fold body
+   * @return an optimized fold body
+   */
+  public FoldBody visit(FoldBody n) {
+    BinOp op_operator = (BinOp) n.bin_op.accept(this);
+    ListArgument op_list_argument = (ListArgument) n.list_argument.accept(this);
+    return new FoldBody(op_operator,op_list_argument);
+  }
+
+  /**
+   * Optimize a map function
+   * @param n a map function
+   * @return an optimized map function.
+   */
+  public WolfMap visit(WolfMap n) {
+    UnaryOp op_operator = (UnaryOp) n.unary_op.accept(this);
+    ListArgument op_list_argument = (ListArgument) n.list_argument.accept(this);
+    return new WolfMap(op_operator,op_list_argument);
+  }
+
+  /**
+   * Optimize a list argument list
+   * @param n a list argument list
+   * @return the given list argument list, it's already optimized.
+   */
+  public ListArgsList visit(ListArgsList n) {
+    return n;
+  }
+
+  /**
+   * Optimize an argument list
+   * @param n an argument list
+   * @return the given argument list, it's already optimized.
+   */
+  public ArgsList visit(ArgsList n) {
+    return n;
+  }
+
+  /**
+   * Optimize a native unary.
+   * @param n a native unary
+   * @return an optimized native unary.
+   */
+  public NativeUnary visit(NativeUnary n) {
+    NativeUnaryOp op_operator = (NativeUnaryOp) n.unary_op.accept(this);
+    Arg op_arg = (Arg) n.arg.accept(this);
+    switch (op_operator) {
+      case NEG:
+        if(op_arg instanceof NativeUnary) {
+          NativeUnary nu = (NativeUnary) op_arg;
+          if(nu.unary_op.equals(NativeUnaryOp.NEG)) {
+            return new NativeUnary(NativeUnaryOp.IDENTITY,nu.arg);
+          }
+        }
+        break;
+      case LOGICAL_NOT:
+        if(op_arg instanceof NativeUnary) {
+          NativeUnary nu = (NativeUnary) op_arg;
+          if(nu.unary_op.equals(NativeUnaryOp.LOGICAL_NOT)) {
+            return new NativeUnary(NativeUnaryOp.IDENTITY,nu.arg);
+          }
+        }
+        break;
+      case IDENTITY:
+      case PRINT:
+        break;
+      default:
+        System.err.println("Invalid Native Unary Operation");
+        return null;
+    }
+    return new NativeUnary(op_operator,op_arg);
+  }
+
+  /**
+   * Optimize a native list unary
+   * @param n a native list unary
+   * @return the given native list unary, it's already optimized.
+   */
+  public NativeListUnary visit(NativeListUnary n) {
+    return n;
+  }
+
+  /**
+   * Optimize a native binary
+   * @param n a native binary
+   * @return an optimized native binary or a native unary
+   */
+  public Object visit(NativeBinary n) {
+    NativeBinOp op_operator = (NativeBinOp) n.binary_op.accept(this);
+    Arg op_left = (Arg) n.arg_left.accept(this);
+    Arg op_right = (Arg) n.arg_right.accept(this);
+
+    switch (op_operator) {
+      case PLUS:
+        // Identity (+0, + "")
+        if(equal.visit(op_left,zero) || equal.visit(op_left,empty_string)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,op_left);
+        }
+        if(equal.visit(op_right,zero) || equal.visit(op_right,empty_string)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,op_right);
+        }
+        break;
+      case MINUS:
+        // a-a = 0
+        if(equal.visit(op_left,op_right)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,zero);
+        }
+        break;
+      case MULT:
+        // a*0 or 0*a = 0
+        if(equal.visit(op_left,zero) || equal.visit(op_right,zero)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,zero);
+        }
+        // Identity (*1)
+        if(equal.visit(op_left,one)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,op_left);
+        }
+        if(equal.visit(op_right,one)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,op_right);
+        }
+        break;
+      case DIV:
+        // 0/a = 0
+        if(equal.visit(op_left,zero)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,zero);
+        }
+        // a/0 = undefined
+        if(equal.visit(op_right,zero)) {
+          throw new ArithmeticException("Cannot divide by zero!");
+        }
+
+        // a/1 = a
+        if(equal.visit(op_right,one)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,op_right);
+        }
+
+        // a/a = 1
+        if(equal.visit(op_left,op_right)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,one);
+        }
+        break;
+      case MOD:
+        // 1 % a = 1
+        if(equal.visit(op_left,one)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,one);
+        }
+
+        // a % 1 = 0
+        if(equal.visit(op_right,one)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,zero);
+        }
+
+        // a % a = 0
+        if(equal.visit(op_left,op_right)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,zero);
+        }
+
+        // a % 0 = undefined
+        if(equal.visit(op_right,zero)) {
+          throw new ArithmeticException("Cannot divide by 0.");
+        }
+
+        // 0 % a = 0
+        if(equal.visit(op_left,zero)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,zero);
+        }
+        break;
+      case LT:
+      case GT:
+        // a < a (false)
+        // a > a (false)
+        if(equal.visit(op_left,op_right)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,zero);
+        }
+        break;
+      case LTE:
+      case GTE:
+        // a >= a (true)
+        // a <= a (true)
+        if(equal.visit(op_left,op_right)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,one);
+        }
+        break;
+      case AND:
+        // true && true = true
+        if(!equal.visit(op_left,zero) && !equal.visit(op_right,zero)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,one);
+        }
+
+        // false in an and is false
+        if(equal.visit(op_left,zero) || equal.visit(op_right,zero)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,zero);
+        }
+
+        // a && a = a
+        if(equal.visit(op_left,op_right)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,op_left);
+        }
+        break;
+      case OR:
+        // true || anything = true
+        if(!equal.visit(op_left,zero) || !equal.visit(op_right,zero)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,one);
+        }
+
+        // false || false = false
+        if(equal.visit(op_left,zero) && equal.visit(op_right,zero)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,zero);
+        }
+
+        // a || a = a
+        if(equal.visit(op_left,op_right)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,op_left);
+        }
+
+        // false || a = a
+        if(equal.visit(op_left,zero)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,op_right);
+        }
+
+        // a || false = a
+        if(equal.visit(op_right,zero)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,op_left);
+        }
+        break;
+      case XOR:
+        // 0 xor a = a
+        if(equal.visit(op_left,zero)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,op_right);
+        }
+
+        // a xor 0 = a
+        if(equal.visit(op_right,zero)) {
+          return new NativeUnary(NativeUnaryOp.IDENTITY,op_left);
+        }
+
+        // 1 xor a = !a
+        if(equal.visit(op_left,zero)) {
+          return new NativeUnary(NativeUnaryOp.LOGICAL_NOT,op_right);
+        }
+
+        // a xor 1 = !a
+        if(equal.visit(op_right,zero)) {
+          return new NativeUnary(NativeUnaryOp.LOGICAL_NOT,op_left);
+        }
+        break;
+      case EQUAL:
+        if(equal.visit(op_left,op_right)) {
+          return identity_one;
+        }
+        // same type
+        if(op_left.getClass().equals(op_right.getClass())) {
+          if(!equal.visit(op_left,op_right)) {
+            return identity_zero;
+          }
+        }
+        break;
+      case NOT_EQUAL:
+        if(equal.visit(op_left,op_right)) {
+          return identity_zero;
+        }
+        // same type
+        if(op_left.getClass().equals(op_right.getClass())) {
+          if(!equal.visit(op_left,op_right)) {
+            return identity_one;
+          }
+        }
+        break;
+      default:
+        System.err.println("Invalid Binary Operator!");
+        return null;
+    }
+    return new NativeBinary(op_operator,op_left,op_right);
+  }
+
+  /**
+   * Optimize a native list binary
+   * @param n a native list binary
+   * @return the given native list binary, it's already optimized
+   */
+  public NativeListBinary visit(NativeListBinary n) {
+    return n;
+  }
+
+  /**
+   * Optimize an identifier
+   * @param n an identifier
+   * @return the given identifier, it's already optimized.
+   */
+  public Identifier visit(Identifier n) {
+    return n;
+  }
+
+  /**
+   * Optimize a float literal
+   * @param n the float literal
+   * @return the given float literal, it's already optimized.
+   */
+  public FloatLiteral visit(FloatLiteral n) {
+    return n;
+  }
+
+  /**
+   * Optimize an integer literal
+   * @param n the integer literal
+   * @return the given integer literal, it's already optimized.
+   */
+  public IntLiteral visit(IntLiteral n) {
+    return n;
+  }
+
+  /**
+   * Optimize a WolfList
+   * @param n a WolfList
+   * @return the given WolfList, it's already optimized.
+   */
+  public WolfList visit(WolfList n) {
+    return n;
+  }
+
+  /**
+   * Optimize a WolfString
+   * @param n a WolfString
+   * @return the given WolfString, it's already optimized.
+   */
+  public WolfString visit(WolfString n) {
+    return n;
+  }
+
+  /**
+   * Optimize a string body
+   * @param n a string body
+   * @return the given string body, it's already optimized.
+   */
+  public StringBody visit(StringBody n) {
+    return n;
+  }
+
+  /**
+   * Optimize a given string escape sequence.
+   * @param n a string escape sequence.
+   * @return the given string escape sequence, it's already optimized.
+   */
+  public StringEscapeSeq visit(StringEscapeSeq n) {
+    return n;
+  }
+
+  /**
+   * Optimize a given escape character
+   * @param n an escape character.
+   * @return the given escape character, it's already optimized.
+   */
+  public EscapeChar visit(EscapeChar n) {
+    return n;
+  }
+
+  /**
+   * Optimize a native binary operator.
+   * @param n a native binary operator.
+   * @return the given native binary operator, it's already optimized.
+   */
+  public NativeBinOp visit(NativeBinOp n) {
+    return n;
+  }
+
+  /**
+   * Optimize a native unary operator
+   * @param n a native unary operator.
+   * @return the given native unary operator, it's already optimized.
+   */
+  public NativeUnaryOp visit(NativeUnaryOp n) {
+    return n;
+  }
+}
