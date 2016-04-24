@@ -519,4 +519,20 @@ public class BuildSymbolTable implements Visitor {
     public Type visit(Type n) {
         return null;
     }
+    
+    /**
+     * @param n is an input argument
+     * @return the type of the input argument
+     */
+    @Override
+    public Type visit(InputArg n) {
+        Identifier input_arg = new Identifier(
+            new TIdentifier("arg" + n.arg_number.getText())
+        );
+        program_table.put(
+            input_arg,
+            new Binding(input_arg, new TableValue(n.type))
+        );
+        return n.type;
+    }
 }

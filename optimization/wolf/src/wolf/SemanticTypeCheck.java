@@ -43,6 +43,7 @@ public class SemanticTypeCheck implements Visitor {
       def.accept(this);
       current_def_table = getTableWithName(last_table_names.pop());
     }
+    
     n.function.accept(this);
     System.out.println("Type Checking Completed Successfully!");
     return n;
@@ -725,5 +726,22 @@ public class SemanticTypeCheck implements Visitor {
     @Override
     public Type visit(Type n) {
         return null;
+    }
+    
+    /**
+     * Note:  Actual type of InputArg is not available until runtime, so
+     * there is extra type-checking to do later.
+     * @param n is an input argument
+     * @return the type of the input argument
+     */
+    @Override
+    public Type visit(InputArg n) {
+        if (true) {
+            return n.type;
+        } else {
+            throw new IllegalArgumentException(
+                "Command line arguments can only be used in the main function."
+            );
+        }
     }
 }

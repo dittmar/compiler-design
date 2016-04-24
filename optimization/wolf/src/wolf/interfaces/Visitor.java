@@ -68,4 +68,6 @@ public interface Visitor {
     Object visit(NativeUnaryOp n);
     
     Object visit(Type n);
+    
+    Object visit(InputArg n);
 }

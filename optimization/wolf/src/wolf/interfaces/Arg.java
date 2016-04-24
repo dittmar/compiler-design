@@ -1,7 +1,5 @@
 package wolf.interfaces;
 
-import wolf.Type;
-
 /**
  * Interface for an Arg in WOLF
  * @author William Ezekiel
