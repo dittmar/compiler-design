@@ -717,4 +717,13 @@ public class SemanticTypeCheck implements Visitor {
     current_def_table = getTableWithName(last_table_names.pop());
     return returnType;
   }
+  
+    /**
+     * @param n is the type to visit
+     * @return null because Type has no purpose here.
+     */
+    @Override
+    public Type visit(Type n) {
+        return null;
+    }
 }

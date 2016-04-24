@@ -231,6 +231,7 @@ public class BuildSymbolTable implements Visitor {
      * @param n a fold symbol
      * @return null, never
      */
+    @Override
     public Type visit(FoldSymbol n) {
         // do nothing, return null
         return null;
@@ -298,6 +299,7 @@ public class BuildSymbolTable implements Visitor {
      * @param n a native unary
      * @return the type the native unary should return
      */
+    @Override
     public Type visit(NativeUnary n) {
         Type arg_type = (Type) n.arg.accept(this);
         return arg_type;
@@ -309,6 +311,7 @@ public class BuildSymbolTable implements Visitor {
      * @param n a native list unary
      * @return the type the native list unary should return
      */
+    @Override
     public Type visit(NativeListUnary n) {
         Type list_type = (Type) n.list_argument.accept(this);
         return list_type;
@@ -321,6 +324,7 @@ public class BuildSymbolTable implements Visitor {
      * @param n a native binary
      * @return the type the native binary should return
      */
+    @Override
     public Type visit(NativeBinary n) {
         Type left_type = (Type) n.arg_left.accept(this);
         n.arg_right.accept(this);
@@ -354,6 +358,7 @@ public class BuildSymbolTable implements Visitor {
      * @param n a native list binary
      * @return the type the native list binary should return
      */
+    @Override
     public Type visit(NativeListBinary n) {
         n.arg.accept(this);
         Type list_type = (Type) n.list_argument.accept(this);
@@ -399,6 +404,7 @@ public class BuildSymbolTable implements Visitor {
      * @param n a float literal
      * @return the FLOAT type
      */
+    @Override
     public Type visit(FloatLiteral n) {
         return new Type(FlatType.FLOAT);
     }
@@ -409,6 +415,7 @@ public class BuildSymbolTable implements Visitor {
      * @param n an integer literal
      * @return the INTEGER type
      */
+    @Override
     public Type visit(IntLiteral n) {
         return new Type(FlatType.INTEGER);
     }
@@ -420,6 +427,7 @@ public class BuildSymbolTable implements Visitor {
      * @return the X_LIST type where X is either FLOAT, INTEGER, or STRING, or
      * null if the list is empty.
      */
+    @Override
     public Type visit(WolfList n) {
         Type list_type = null;
         for (ListElement element : n.list_elements) {
@@ -438,6 +446,7 @@ public class BuildSymbolTable implements Visitor {
      * @param n a string object (WolfString)
      * @return the STRING type
      */
+    @Override
     public Type visit(WolfString n) {
         for (StringMiddle sm : n.string) {
             sm.accept(this);
@@ -474,6 +483,7 @@ public class BuildSymbolTable implements Visitor {
    * @param n the escape character
    * @return null, no use in BuildSymbolTable
    */
+    @Override
     public Type visit(EscapeChar n) {
         // do nothing, return null
         return null;
@@ -484,6 +494,7 @@ public class BuildSymbolTable implements Visitor {
    * @param n the native binary operator
    * @return null, no use in BuildSymbolTable
    */
+    @Override
     public Type visit(NativeBinOp n) {
         // do nothing, return null
         return null;
@@ -494,8 +505,18 @@ public class BuildSymbolTable implements Visitor {
      * @param n the native unary operator
      * @return null, no use in BuildSymbolTable
      */
+    @Override
     public Type visit(NativeUnaryOp n) {
         // do nothing, return null
+        return null;
+    }
+    
+    /**
+     * @param n is the type to visit
+     * @return null because Type has no purpose here.
+     */
+    @Override
+    public Type visit(Type n) {
         return null;
     }
 }
