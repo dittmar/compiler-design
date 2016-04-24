@@ -12,7 +12,7 @@ import wolf.interfaces.WolfFunction;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public class WolfMap implements WolfFunction {
+public class WolfMap extends WolfFunction {
     UnaryOp unary_op;
     ListArgument list_argument;
     

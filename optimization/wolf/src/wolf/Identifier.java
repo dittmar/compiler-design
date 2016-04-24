@@ -16,7 +16,7 @@ import wolf.node.TIdentifier;
  * @author Jospeh Alacqua
  * @version Apr 3, 2016
  */
-public class Identifier implements BinOp, UnaryOp, Arg, ListArgument,
+public class Identifier extends Arg implements BinOp, UnaryOp, ListArgument,
     UserFuncName, ListElement {
     TIdentifier identifier;
     

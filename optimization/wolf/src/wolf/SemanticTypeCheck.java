@@ -20,7 +20,8 @@ public class SemanticTypeCheck implements Visitor {
   SymbolTable current_def_table;
   Stack<String> last_table_names;
   List<SymbolTable> lambda_table_list;
-
+  WolfFunction main_function;
+  
   public SemanticTypeCheck(List<SymbolTable> tables,
       SymbolTable program_table, List<SymbolTable> lambda_table_list) {
     this.tables = tables;
@@ -43,7 +44,7 @@ public class SemanticTypeCheck implements Visitor {
       def.accept(this);
       current_def_table = getTableWithName(last_table_names.pop());
     }
-    
+    main_function = n.function;
     n.function.accept(this);
     System.out.println("Type Checking Completed Successfully!");
     return n;
@@ -736,12 +737,15 @@ public class SemanticTypeCheck implements Visitor {
      */
     @Override
     public Type visit(InputArg n) {
-        if (true) {
-            return n.type;
-        } else {
-            throw new IllegalArgumentException(
-                "Command line arguments can only be used in the main function."
-            );
+        WolfFunction owner = n.getOwningFunction();
+        while (owner != null) {
+            if (owner == main_function) {
+                return n.type;
+            }
+            owner = owner.getOwningFunction();
         }
+        throw new IllegalArgumentException(
+            "Command line arguments can only be used in the main function."
+        );
     }
 }

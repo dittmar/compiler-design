@@ -12,7 +12,7 @@ import wolf.node.TFloatNumber;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public class FloatLiteral implements Arg, ListElement {
+public class FloatLiteral extends Arg implements ListElement {
     TFloatNumber float_literal;
     
     public FloatLiteral(TFloatNumber float_literal) {

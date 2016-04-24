@@ -7,7 +7,6 @@ package wolf.interfaces;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public interface WolfFunction extends Arg, ListArgument, ListElement {
-    @Override
-    Object accept(Visitor v);
+public abstract class WolfFunction extends Arg 
+    implements ListArgument, ListElement {
 }

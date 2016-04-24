@@ -1,6 +1,8 @@
 package wolf;
 
 import wolf.interfaces.Args;
+import wolf.interfaces.BinOp;
+import wolf.interfaces.UnaryOp;
 import wolf.interfaces.UserFuncName;
 import wolf.interfaces.Visitor;
 import wolf.interfaces.WolfFunction;
@@ -12,7 +14,7 @@ import wolf.interfaces.WolfFunction;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public class UserFunc implements WolfFunction {
+public class UserFunc extends WolfFunction implements UnaryOp, BinOp {
     UserFuncName user_func_name;
     Args arg_list;
     

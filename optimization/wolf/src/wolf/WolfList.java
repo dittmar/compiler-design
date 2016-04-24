@@ -13,7 +13,7 @@ import wolf.interfaces.Visitor;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public class WolfList implements Arg, ListArgument {
+public class WolfList extends Arg implements ListArgument {
     List<ListElement> list_elements;
     
     public WolfList(List<ListElement> arg_list) {

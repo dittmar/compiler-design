@@ -13,7 +13,8 @@ import wolf.interfaces.WolfFunction;
  * @author (Joseph Alacqua)
  * @version Apr 3, 2016
  */
-public class WolfLambda implements WolfFunction, BinOp, UnaryOp, UserFuncName {
+public class WolfLambda extends WolfFunction 
+    implements BinOp, UnaryOp, UserFuncName {
     Sig sig;
     WolfFunction function;
     private int id_number;
