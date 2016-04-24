@@ -1,9 +1,8 @@
 package wolf;
 
-import java.util.ArrayList;
-import java.util.List;
 import wolf.enums.NativeListBinaryOp;
 import wolf.interfaces.Arg;
+import wolf.interfaces.BinOp;
 import wolf.interfaces.ListArgument;
 import wolf.interfaces.Visitor;
 import wolf.interfaces.WolfFunction;
@@ -17,7 +16,7 @@ import wolf.interfaces.WolfFunction;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public class NativeListBinary implements WolfFunction {
+public class NativeListBinary extends WolfFunction implements BinOp {
     NativeListBinaryOp binary_op;
     Arg arg;
     ListArgument list_argument;

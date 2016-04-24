@@ -10,7 +10,7 @@ import wolf.interfaces.WolfFunction;
  * @author Joe Alacqua
  * @version Apr 3, 2016
  */
-public class Branch implements WolfFunction {
+public class Branch extends WolfFunction {
     WolfFunction condition;
     WolfFunction true_branch;
     WolfFunction false_branch;

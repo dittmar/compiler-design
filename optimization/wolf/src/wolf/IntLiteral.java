@@ -12,7 +12,7 @@ import wolf.node.TIntNumber;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public class IntLiteral implements Arg, ListElement {
+public class IntLiteral extends Arg implements ListElement {
     TIntNumber int_literal;
     
     public IntLiteral(TIntNumber int_literal) {

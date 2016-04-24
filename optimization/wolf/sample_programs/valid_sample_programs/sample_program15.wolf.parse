@@ -1,0 +1,37 @@
+SigArgRest parsed successfully: def int func ( int y , int z 
+SigArgs parsed successfully: def int func ( int y , int z 
+Sig parsed successfully: def int func ( int y , int z ) 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y , z 
+NativeBinary parsed successfully: def int func ( int y , int z ) := + ( y , z ) 
+Def parsed successfully: def int func ( int y , int z ) := + ( y , z ) 
+InputArg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " 
+SigArgRest parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z 
+SigArgs parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z 
+Sig parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z 
+NativeBinary parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 
+NativeBinary parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) 
+Lambda parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 
+ArgRest parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 
+Args parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 
+ArgList parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) 
+InputArg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) , " int 1 " 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) , " int 1 " 
+ArgRest parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) , " int 1 " 
+Args parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) , " int 1 " 
+ArgList parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) , " int 1 " ) 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) , " int 1 " ) 
+NativeBinary parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) , " int 1 " ) ) 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) , " int 1 " ) ) 
+InputArg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) , " int 1 " ) ) , " int 3 " 
+Arg parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) , " int 1 " ) ) , " int 3 " 
+NativeBinary parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) , " int 1 " ) ) , " int 3 " ) 
+Program parsed successfully: def int func ( int y , int z ) := + ( y , z ) / ( + ( " int 2 " , func ( \ ( ( int y , int z ) -> * ( + ( y , z ) , 4 ) ) ( 2 , 1 ) , " int 1 " ) ) , " int 3 " ) 

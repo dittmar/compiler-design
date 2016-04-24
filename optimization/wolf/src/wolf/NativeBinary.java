@@ -1,8 +1,8 @@
 package wolf;
 
-import java.util.ArrayList;
 import wolf.enums.NativeBinOp;
 import wolf.interfaces.Arg;
+import wolf.interfaces.BinOp;
 import wolf.interfaces.Visitor;
 import wolf.interfaces.WolfFunction;
 
@@ -13,7 +13,7 @@ import wolf.interfaces.WolfFunction;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public class NativeBinary implements WolfFunction {
+public class NativeBinary extends WolfFunction implements BinOp {
     NativeBinOp binary_op;
     Arg arg_left;
     Arg arg_right;

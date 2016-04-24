@@ -143,6 +143,9 @@ public class BuildSymbolTable implements Visitor {
     @Override
     public Type visit(UserFunc n) {
         n.arg_list.accept(this);
+        for (Arg arg : n.arg_list.getArgList()) {
+            arg.setOwningFunction(n);
+        }
         return (Type) n.user_func_name.accept(this);
     }
 
@@ -157,6 +160,10 @@ public class BuildSymbolTable implements Visitor {
         n.condition.accept(this);
         Type trueType = (Type) n.true_branch.accept(this);
         n.false_branch.accept(this);
+        n.condition.setOwningFunction(n);
+        n.true_branch.setOwningFunction(n);
+        n.false_branch.setOwningFunction(n);
+        
         return trueType;
     }
 
@@ -188,6 +195,8 @@ public class BuildSymbolTable implements Visitor {
         // Parse the lambda for types
         n.sig.accept(this);
         Type type = (Type) n.function.accept(this);
+        
+        n.function.setOwningFunction(n);
 
         // Make an identifier for the lambda in the symbol tables
         Identifier lambda_id = new Identifier(
@@ -222,6 +231,8 @@ public class BuildSymbolTable implements Visitor {
     @Override
     public Type visit(Fold n) {
         n.fold_symbol.accept(this);
+        n.fold_body.list_argument.setOwningFunction(n);
+        
         return (Type) n.fold_body.accept(this);
     }
 
@@ -259,6 +270,7 @@ public class BuildSymbolTable implements Visitor {
     public Type visit(WolfMap n) {
         n.unary_op.accept(this);
         Type list_type = (Type) n.list_argument.accept(this);
+        n.list_argument.setOwningFunction(n);
         return new Type(list_type.flat_type, true);
     }
 
@@ -302,6 +314,7 @@ public class BuildSymbolTable implements Visitor {
     @Override
     public Type visit(NativeUnary n) {
         Type arg_type = (Type) n.arg.accept(this);
+        n.arg.setOwningFunction(n);
         return arg_type;
     }
 
@@ -314,6 +327,7 @@ public class BuildSymbolTable implements Visitor {
     @Override
     public Type visit(NativeListUnary n) {
         Type list_type = (Type) n.list_argument.accept(this);
+        n.list_argument.setOwningFunction(n);
         return list_type;
     }
 
@@ -328,7 +342,9 @@ public class BuildSymbolTable implements Visitor {
     public Type visit(NativeBinary n) {
         Type left_type = (Type) n.arg_left.accept(this);
         n.arg_right.accept(this);
-
+        n.arg_left.setOwningFunction(n);
+        n.arg_right.setOwningFunction(n);
+        
         switch (n.binary_op) {
             case PLUS:
             case MINUS:
@@ -362,6 +378,9 @@ public class BuildSymbolTable implements Visitor {
     public Type visit(NativeListBinary n) {
         n.arg.accept(this);
         Type list_type = (Type) n.list_argument.accept(this);
+        n.arg.setOwningFunction(n);
+        n.list_argument.setOwningFunction(n);
+        
         return new Type(list_type.flat_type, true);
     }
 

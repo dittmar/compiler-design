@@ -9,5 +9,7 @@ package wolf.interfaces;
  * @version Apr 3, 2016
  */
 public interface ListArgument {
-    Object accept(Visitor v);
+    public Object accept(Visitor v);
+    public void setOwningFunction(WolfFunction owning_function);
+    public WolfFunction getOwningFunction();
 }

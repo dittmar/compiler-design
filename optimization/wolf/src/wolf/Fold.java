@@ -11,7 +11,7 @@ import wolf.interfaces.WolfFunction;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public class Fold implements WolfFunction {
+public class Fold extends WolfFunction {
     FoldSymbol fold_symbol;
     FoldBody fold_body;
     

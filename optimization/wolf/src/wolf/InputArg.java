@@ -10,7 +10,7 @@ import wolf.node.TInputArgNumber;
  * @author Kevin Dittmar
  * @version Apr 24, 2016
  */
-public class InputArg implements Arg, ListElement {
+public class InputArg extends Arg implements ListElement {
     Type type;
     TInputArgNumber arg_number;
     

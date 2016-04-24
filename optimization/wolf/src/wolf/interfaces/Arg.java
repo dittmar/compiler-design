@@ -7,6 +7,17 @@ package wolf.interfaces;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public interface Arg {
-    public Object accept(Visitor v);
+public abstract class Arg {
+    private WolfFunction owning_function;
+    public Object accept(Visitor v) {
+        return null;
+    };
+    
+    public void setOwningFunction(WolfFunction owning_function) {
+        this.owning_function = owning_function;
+    }
+    
+    public WolfFunction getOwningFunction() {
+        return owning_function;
+    }
 }
