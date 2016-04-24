@@ -65,12 +65,7 @@ public class Type {
         return (flat_type == FlatType.FLOAT || flat_type == FlatType.INTEGER);
     }
     
-    /**
-     * Accept a visitor
-     * @param v a visitor
-     * @return this, which is the type of the parameter
-     */
-    /*public Type accept(Visitor v) {
-        return this;
-    }*/
+    public Object accept(Visitor v) {
+        return v.visit(this);
+    }
 }

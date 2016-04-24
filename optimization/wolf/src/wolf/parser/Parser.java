@@ -28,7 +28,7 @@ public class Parser {
     private FileWriter writer;
     private int line_count;
     private Program ast;
-    private List<String> parsed;
+    private final List<String> parsed;
 
     /**
      * Initialize line count.
@@ -82,6 +82,9 @@ public class Parser {
                 bst.getLambdaTables()
             );
             stc.visit(ast);
+            
+            WolfCompiler compiler = new WolfCompiler();
+            compiler.compile(ast);
         } catch (UnsupportedOperationException e) {
             System.out.println(e);
         }

@@ -66,4 +66,6 @@ public interface Visitor {
     Object visit(NativeBinOp n);
 
     Object visit(NativeUnaryOp n);
+    
+    Object visit(Type n);
 }
