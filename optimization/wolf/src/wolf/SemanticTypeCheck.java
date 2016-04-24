@@ -337,6 +337,7 @@ public class SemanticTypeCheck implements Visitor {
    * @param n a native list unary
    * @return the type the native list unary should return
    */
+  @Override
   public Type visit(NativeListUnary n) {
     Type arg_type = (Type) n.list_argument.accept(this);
     switch(n.list_unary_op) {
@@ -388,6 +389,7 @@ public class SemanticTypeCheck implements Visitor {
    * @param n a native binary
    * @return the type the native binary should return
    */
+  @Override
   public Type visit(NativeBinary n) {
     Type left_type = (Type) n.arg_left.accept(this);
     Type right_type = (Type) n.arg_right.accept(this);
@@ -459,6 +461,7 @@ public class SemanticTypeCheck implements Visitor {
    * @param n a native list binary
    * @return the type the native list binary should return
    */
+  @Override
   public Type visit(NativeListBinary n) {
       Type arg_type = (Type) n.arg.accept(this);
       Type list_type = (Type) n.list_argument.accept(this);
@@ -498,6 +501,9 @@ public class SemanticTypeCheck implements Visitor {
     TableValue tv = null;
     Binding binding = current_def_table.lookup(n);
     if (binding == null) {
+        binding = getTableWithName(last_table_names.peek()).lookup(n);
+    }
+    if (binding == null) {
       SymbolTable parent = current_def_table.parent_table;
       while (parent != null && tv == null) {
         binding = parent.lookup(n);
@@ -511,16 +517,6 @@ public class SemanticTypeCheck implements Visitor {
       tv = binding.table_value;
     }
     if (tv == null) {
-      // last check for lambdas (Valid Sample Program 2)
-      SymbolTable lambda_table = getLambdaTableWithName(last_table_names.peek());
-      if(lambda_table != null) {
-        binding = lambda_table.lookup(n);
-        tv = binding.table_value;
-        if(tv == null) {
-          return null;
-        }
-        return tv.type;
-      }
       return null;
     }
     return tv.type;
@@ -542,6 +538,7 @@ public class SemanticTypeCheck implements Visitor {
    * @param n an integer literal
    * @return the INTEGER type
    */
+  @Override
   public Type visit(IntLiteral n) {
     return new Type(FlatType.INTEGER);
   }
@@ -553,6 +550,7 @@ public class SemanticTypeCheck implements Visitor {
    * @return the X_LIST type where X is either FLOAT, INTEGER, or STRING, or
    * null if the list is empty.
    */
+  @Override
   public Type visit(WolfList n) {
     Type list_type = null;
     for (ListElement element : n.list_elements) {
@@ -574,6 +572,7 @@ public class SemanticTypeCheck implements Visitor {
    * @param n a string object (WolfString)
    * @return the STRING type
    */
+  @Override
   public Type visit(WolfString n) {
     for (StringMiddle sm : n.string) {
       sm.accept(this);
@@ -611,6 +610,7 @@ public class SemanticTypeCheck implements Visitor {
    * @param n the escape character
    * @return null, no use in SemanticTypeCheck
    */
+  @Override
   public Type visit(EscapeChar n) {
     // do nothing, return null
     return null;
@@ -622,6 +622,7 @@ public class SemanticTypeCheck implements Visitor {
    * @param n the native binary operator
    * @return a list of valid types for the operator.
    */
+  @Override
   public List<Type> visit(NativeBinOp n) {
     List<Type> valid_types = new ArrayList();
     Class token_class = n.getTokenClass();
@@ -655,6 +656,7 @@ public class SemanticTypeCheck implements Visitor {
    * @param n the native unary operator
    * @return a list of valid types for the operator.
    */
+  @Override
   public List<Type> visit(NativeUnaryOp n) {
     List<Type> valid_types = new ArrayList<>();
     Class token_class = n.getTokenClass();
@@ -703,9 +705,10 @@ public class SemanticTypeCheck implements Visitor {
   }
 
   /**
-   * Not really sure what this does, but k.
+   * Saves current table state, changes to lambda scope, visits lambda,
+   * and then returns to the original scope before returning the type.
    * @param lambda
-   * @return
+   * @return the type of the lambda
    */
   private Type visitLambda(WolfLambda lambda) {
     last_table_names.push(current_def_table.table_name);
