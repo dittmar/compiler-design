@@ -252,11 +252,15 @@ public class Optimizer implements Visitor {
     Arg op_arg = (Arg) n.arg.accept(this);
     switch (op_operator) {
       case NEG:
-        // negation in a negation
         if(op_arg instanceof NativeUnary) {
+          // negation in negation
           NativeUnary nu = (NativeUnary) op_arg;
           if(nu.unary_op.equals(NativeUnaryOp.NEG)) {
             return new NativeUnary(NativeUnaryOp.IDENTITY,nu.arg);
+          }
+          // identity in a negation
+          if(nu.unary_op.equals(NativeUnaryOp.IDENTITY)) {
+            return new NativeUnary(NativeUnaryOp.NEG,nu.arg);
           }
         }
         break;
@@ -266,6 +270,11 @@ public class Optimizer implements Visitor {
           NativeUnary nu = (NativeUnary) op_arg;
           if(nu.unary_op.equals(NativeUnaryOp.LOGICAL_NOT)) {
             return new NativeUnary(NativeUnaryOp.IDENTITY,nu.arg);
+          }
+
+          // identity in a logical not
+          if(nu.unary_op.equals(NativeUnaryOp.IDENTITY)) {
+            return new NativeUnary(NativeUnaryOp.LOGICAL_NOT,nu.arg);
           }
         }
         break;

@@ -67,11 +67,7 @@ public class Parser {
     public void parse(String filename) {
         lexer = new WolfLexing(filename);
         token = nextValidToken();
-        try {
-            writer = new FileWriter(new File(filename + ".parse"));
-        } catch (IOException e) {
-            System.err.println("Could not create log file, writing to stdout");
-        }
+        FileWriter optimized_program_file_writer = null;
         ast = Program();
         try {
             BuildSymbolTable bst = new BuildSymbolTable();
@@ -83,34 +79,54 @@ public class Parser {
             );
 
             stc.visit(ast);
-/*
+
             Optimizer optimizer = new Optimizer();
             Equal equal = new Equal();
             Program op_ast = ast;
+            boolean was_optimized = false;
             while(true) {
                 ast = op_ast;
                 op_ast = optimizer.visit(op_ast);
-                if(!equal.visit(op_ast,ast)) { // change (optimization) occured
+                if(!equal.visit(op_ast,ast)) { // change (optimization) occurred
+                    was_optimized = true;
                     continue;
                 }
                 else {  // no change, fully optimized.
                     break;
                 }
             }
-            System.out.println("--- Optimized Program --- \n");
-            System.out.println(op_ast);
-*/           
-            WolfCompiler compiler = new WolfCompiler(stc, filename);
-            compiler.compile(ast);
+
+            if(was_optimized) {
+                try {
+                    optimized_program_file_writer = new FileWriter(
+                        new File(filename + "_optimized.wolf")
+                    );
+                    optimized_program_file_writer.write(op_ast.toString());
+                    optimized_program_file_writer.close();
+                    System.out.println("Optimized File "+ filename + "_optimized.wolf generated!");
+                }
+                catch(IOException e) {
+                    System.err.println(e);
+                }
+            }
+            else {
+                System.out.println("No optimizations");
+            }
+
+            //WolfCompiler compiler = new WolfCompiler(stc, filename);
+            //compiler.compile(ast);
 
         } catch (UnsupportedOperationException e) {
+            System.out.println(e);
+        } catch (ArithmeticException e) {
             System.out.println(e);
         }
         
         try {
+            writer = new FileWriter(new File(filename + ".parse"));
             writer.close();
         } catch (IOException ex) {
-            // writer already closed
+            System.out.println("Could not create log file, writing to stdout");
         }
     }
 

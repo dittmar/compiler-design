@@ -53,4 +53,8 @@ public class WolfLambda extends WolfFunction
     public String toString() {
         return "\\" + "(" +sig.toString() + " ->" + function.toString() + ")";
     }
+
+    public String getSymbolTableTitleString() {
+        return "\\" + sig.toString();
+    }
 }
