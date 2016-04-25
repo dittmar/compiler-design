@@ -83,7 +83,7 @@ public class Parser {
             );
 
             stc.visit(ast);
-
+/*
             Optimizer optimizer = new Optimizer();
             Equal equal = new Equal();
             Program op_ast = ast;
@@ -99,12 +99,10 @@ public class Parser {
             }
             System.out.println("Optimized!");
             System.out.println(op_ast);
-            
-            WolfCompiler compiler = new WolfCompiler();
+*/           
+            WolfCompiler compiler = new WolfCompiler(stc, filename);
             compiler.compile(ast);
-            
-            WolfCompiler compiler = new WolfCompiler();
-            compiler.compile(ast);
+
         } catch (UnsupportedOperationException e) {
             System.out.println(e);
         }

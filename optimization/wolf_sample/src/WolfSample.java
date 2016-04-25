@@ -1,4 +1,6 @@
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 public class WolfSample {
 
     public static Integer sumList(ArrayDeque<Integer> l) {
@@ -20,6 +22,12 @@ public class WolfSample {
             return argParty.getFirst() * prodList(tail1);
         }
     }
+ 
+    @FunctionalInterface
+    public static interface Lambda1{
+        Integer someMethod(Integer y, Integer z);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -41,5 +49,28 @@ public class WolfSample {
         arg1.add(prodList(list2));
         arg1.add(prodList(list3));
         System.out.println(sumList(arg1));
+        Lambda_1 lambda1 = WolfSample::lambda1;
+        Integer lambda1_result = lambda1.lambda1(5, 12, 0);
+    }
+    /*In main function:
+        Lambda_<number> lambda<number> = <class_name>::lambda_<number>;
+        <return type> lambda<number>_result = lambda<number>.lambda<number>(arg_list);
+     */
+    /*Outside main function in class:
+        private static <return type> lambda<number>(<signature>) {
+            <lambda_function>
+        }
+        @FunctionalInterface
+        public static interface Lambda_<number> {
+            <return type> lambda<number>(<signature>)
+        }
+    */
+    private static Integer lambda1(Integer w, Integer y, Integer z) {
+        return w + y * z;
+    }
+
+    @FunctionalInterface
+    public static interface Lambda_1 {
+        Integer lambda1(Integer w, Integer y, Integer z);
     }
 }
