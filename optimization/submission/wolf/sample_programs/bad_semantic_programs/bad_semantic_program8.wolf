@@ -1,0 +1,5 @@
+`
+ Binary Op + has 2 differing arguments.
+`
+def int giveList(list int nums) := +(2,5)
+giveList([1,'argParty',2])

@@ -1,0 +1,6 @@
+`
+Should fail since def of fivePlus is expecting an integer return type, 
+but the function returns a String.
+`
+def int fivePlus(int num) := @('argParty')
+fivePlus(5)

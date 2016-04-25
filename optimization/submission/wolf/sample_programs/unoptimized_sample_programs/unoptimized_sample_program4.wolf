@@ -1,0 +1,10 @@
+`
+  More Arithmetic Simplifications
+  The definition should simplify to ? @(0) : @(2)
+  The function arguments should simplify to @(1)
+`
+def int arithParty(int a, int b) := ; =(a,b) ? @(+(-(10,10),%(10,1))) : +(2,%(/(0,10),55))
+
+arithParty(%(1,10),/(10,10))
+
+
