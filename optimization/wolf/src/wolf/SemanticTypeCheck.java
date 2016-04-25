@@ -1,6 +1,5 @@
 package wolf;
 
-import wolf.interfaces.EscapeChar;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;

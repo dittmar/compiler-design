@@ -2,7 +2,6 @@ package wolf;
 
 import java.util.ArrayList;
 import java.util.List;
-import wolf.interfaces.EscapeChar;
 import wolf.enums.FoldSymbol;
 import wolf.enums.NativeBinOp;
 import wolf.enums.NativeUnaryOp;
@@ -169,7 +168,15 @@ public class WolfCompiler implements Visitor {
 
     @Override
     public String visit(ArgsList n) {
-        return "";
+        StringBuilder sb = new StringBuilder();
+        List<String> arg_list_strings = new ArrayList<>();
+        sb.append("(");
+        for (Arg arg : n.getArgList()) {
+            arg_list_strings.add((String) arg.accept(this));
+        }
+        return sb.append(String.join(", ", arg_list_strings))
+                 .append(")")
+                 .toString();
     }
 
     @Override
@@ -234,12 +241,23 @@ public class WolfCompiler implements Visitor {
 
     @Override
     public String visit(Branch n) {
-        return "";
+        StringBuilder sb = new StringBuilder();
+        return 
+            sb.append("if (").append(n.condition.accept(this)).append(") {\n")
+              .append(n.true_branch.accept(this)).append(";\n")
+              .append("} else {\n").append(n.false_branch.accept(this))
+              .append(";\n}").toString();
     }
 
     @Override
     public String visit(InputArg n) {
-        return "";
+        if (n.type.flat_type.equals(FlatType.INTEGER)) {
+            return "Integer.parseInt(argv[" + n.arg_number + "])";
+        } else if (n.type.flat_type.equals(FlatType.FLOAT)) {
+            return "Float.parseFloat(argv[" + n.arg_number + "])";
+        } else {
+            return "argv[" + n.arg_number + "]";
+        }
     }
     
     private String buildFoldCode(BinOp bin_op) {
