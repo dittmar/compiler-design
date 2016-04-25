@@ -7,124 +7,14 @@ import wolf.enums.*;
 /**
  * Check for equality among the classes.
  */
-public class Equal implements Visitor {
-
-    @Override
-    public Boolean visit(Program n){ return false; }
-
-    @Override
-    public Boolean visit(Def n){ return false; }
-
-    @Override
-    public Boolean visit(Sig n){ return false; }
-
-    @Override
-    public Boolean visit(SigArg n){ return false; }
-
-    @Override
-    public Boolean visit(UserFunc n){ return false; }
-
-    @Override
-    public Boolean visit(Branch n) { return false; }
-
-    @Override
-    public Boolean visit(WolfLambda n){ return false; }
-
-    @Override
-    public Boolean visit(Fold n){ return false; }
-
-    @Override
-    public Boolean visit(FoldSymbol n){ return false; }
-
-    @Override
-    public Boolean visit(FoldBody n){ return false; }
-
-    @Override
-    public Boolean visit(WolfMap n){ return false; }
-
-    @Override
-    public Boolean visit(ListArgsList n){ return false; }
-
-    @Override
-    public Boolean visit(ArgsList n){ return false; }
-
-    @Override
-    public Boolean visit(NativeUnary n){ return false; }
-
-    @Override
-    public Boolean visit(NativeListUnary n){ return false; }
-
-    @Override
-    public Boolean visit(NativeBinary n){ return false; }
-
-    @Override
-    public Boolean visit(NativeListBinary n){ return false; }
-
-    @Override
-    public Object visit(Identifier n){ return false; }
-
-    @Override
-    public Float visit(FloatLiteral n){
-      return Float.parseFloat(n.float_literal.getText());
-    }
+public class Equal {
 
   /**
-   * Visit an integer
-   * @param n an integer literal
-   * @return this integer literal's value.
+   * Check for equality among all WOL(F) classes.
+   * @param obj1
+   * @param obj2
+   * @return
    */
-    @Override
-    public Integer visit(IntLiteral n){
-      return Integer.parseInt(n.int_literal.getText());
-    }
-
-    @Override
-    public Boolean visit(WolfList n){ return false; }
-
-  /**
-   * Visit a WOLFString
-   * @param n a  WOLFString
-   * @return the string value of this WolfString
-   */
-    @Override
-    public String visit(WolfString n) {
-      return n.toString();
-    }
-
-    @Override
-  public Boolean visit(StringBody n) {
-    return false;
-  }
-
-  /**
-   * Visit a native binary operator.
-   * @param n the native binary operator
-   * @return null, no use in BuildSymbolTable
-   */
-    @Override
-  public Boolean visit(NativeBinOp n) {
-    return false;
-  }
-
-  /**
-   * Visit a native unary operator.
-   * @param n the native unary operator
-   * @return null, no use in BuildSymbolTable
-   */
-    @Override
-  public Boolean visit(NativeUnaryOp n) {
-    return false;
-  }
-
-  @Override
-  public Boolean visit(StringEscapeSeq n) {
-    return false;
-  }
-
-
-// -- this does everything
-
-
     public Boolean visit(Object obj1, Object obj2) {
       if(!obj1.getClass().equals(obj2.getClass())) {
         return false;
@@ -398,18 +288,12 @@ public class Equal implements Visitor {
     }
 
     @Override
-    public Boolean visit(Type n) { return false; }
-
-    @Override
-    public Boolean visit(InputArg n) { return false; }
-
-    @Override
-    public Object visit(NativeListBinaryOp n) {
-        return null;
+    public Boolean visit(NativeListBinaryOp n) {
+        return false;
     }
 
     @Override
-    public Object visit(NativeListUnaryOp n) {
-        return null;
+    public Boolean visit(NativeListUnaryOp n) {
+        return false;
     }
 }
