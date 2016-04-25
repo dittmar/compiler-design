@@ -85,9 +85,20 @@ public class Parser {
             stc.visit(ast);
 
             Optimizer optimizer = new Optimizer();
-            ast = optimizer.visit(ast);
-
+            Equal equal = new Equal();
+            Program op_ast = ast;
+            while(true) {
+                ast = op_ast;
+                op_ast = optimizer.visit(op_ast);
+                if(!equal.visit(op_ast,ast)) { // change (optimization) occured
+                    continue;
+                }
+                else {  // no change, fully optimized.
+                    break;
+                }
+            }
             System.out.println("Optimized!");
+            System.out.println(op_ast);
         } catch (UnsupportedOperationException e) {
             System.out.println(e);
         }

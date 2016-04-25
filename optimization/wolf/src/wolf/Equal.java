@@ -141,7 +141,7 @@ public class Equal implements Visitor {
         Def d1 = (Def) obj1;
         Def d2 = (Def) obj2;
 
-        return  visit(d1.type,d2.type) &&
+        return  d1.type.equals(d2.type) &&
                 visit(d1.def_name,d2.def_name) &&
                 visit(d1.sig, d2.sig) &&
                 visit(d1.function,d2.function);

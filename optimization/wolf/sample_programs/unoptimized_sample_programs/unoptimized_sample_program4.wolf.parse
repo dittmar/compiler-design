@@ -1,4 +1,41 @@
-Arg parsed successfully: - ( 10 
-Arg parsed successfully: - ( 10 , 10 
-NativeBinary parsed successfully: - ( 10 , 10 ) 
-Program parsed successfully: - ( 10 , 10 ) 
+SigArgRest parsed successfully: def int arithParty ( int a , int b 
+SigArgs parsed successfully: def int arithParty ( int a , int b 
+Sig parsed successfully: def int arithParty ( int a , int b ) 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b 
+NativeBinary parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 
+NativeBinary parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 
+NativeBinary parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) 
+NativeBinary parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) 
+NativeUnary parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 
+NativeBinary parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 
+NativeBinary parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) 
+NativeBinary parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) 
+Branch parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) 
+Def parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) 
+UserFunc parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) arithParty 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) arithParty ( % ( 1 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) arithParty ( % ( 1 , 10 
+NativeBinary parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) arithParty ( % ( 1 , 10 ) 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) arithParty ( % ( 1 , 10 ) 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) arithParty ( % ( 1 , 10 ) , / ( 10 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) arithParty ( % ( 1 , 10 ) , / ( 10 , 10 
+NativeBinary parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) arithParty ( % ( 1 , 10 ) , / ( 10 , 10 ) 
+Arg parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) arithParty ( % ( 1 , 10 ) , / ( 10 , 10 ) 
+ArgRest parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) arithParty ( % ( 1 , 10 ) , / ( 10 , 10 ) 
+Args parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) arithParty ( % ( 1 , 10 ) , / ( 10 , 10 ) 
+ArgList parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) arithParty ( % ( 1 , 10 ) , / ( 10 , 10 ) ) 
+Program parsed successfully: def int arithParty ( int a , int b ) := ; = ( a , b ) ? @ ( + ( - ( 10 , 10 ) , % ( 10 , 1 ) ) ) : + ( 2 , % ( / ( 0 , 10 ) , 55 ) ) arithParty ( % ( 1 , 10 ) , / ( 10 , 10 ) ) 
