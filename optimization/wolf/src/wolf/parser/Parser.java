@@ -102,6 +102,9 @@ public class Parser {
             
             WolfCompiler compiler = new WolfCompiler();
             compiler.compile(ast);
+            
+            WolfCompiler compiler = new WolfCompiler();
+            compiler.compile(ast);
         } catch (UnsupportedOperationException e) {
             System.out.println(e);
         }
