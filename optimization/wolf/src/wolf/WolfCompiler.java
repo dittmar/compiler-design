@@ -6,6 +6,10 @@ import wolf.enums.EscapeChar;
 import wolf.enums.FoldSymbol;
 import wolf.enums.NativeBinOp;
 import wolf.enums.NativeUnaryOp;
+import wolf.interfaces.Arg;
+import wolf.interfaces.BinOp;
+import wolf.interfaces.StringMiddle;
+import wolf.interfaces.UnaryOp;
 import wolf.interfaces.Visitor;
 
 /**
@@ -19,6 +23,7 @@ public class WolfCompiler implements Visitor {
     private final StringBuilder post_main_helpers;
     private final SemanticTypeCheck stc;
     private final String class_name;
+    private int list_counter = 0;
     
     public WolfCompiler(SemanticTypeCheck stc, String filename) {
         java_program_builder = new StringBuilder();
@@ -78,22 +83,6 @@ public class WolfCompiler implements Visitor {
     public String visit(Identifier n) {
         return n.toString();
     }
-    
-    private String stringifyType(Type type) {
-        String flat_type = "";
-        if (type.flat_type.equals(FlatType.INTEGER)) {
-            flat_type = "Integer";
-        } else if (type.flat_type.equals(FlatType.FLOAT)) {
-            flat_type = "Float";
-        } else if (type.flat_type.equals(FlatType.STRING)) {
-            flat_type = "String";
-        }
-        if (type.is_list) {
-            return "ArrayDeque<" + flat_type + ">";
-        } else {
-            return flat_type;
-        }
-    }
 
     @Override
     public String visit(UserFunc n) {
@@ -133,17 +122,29 @@ public class WolfCompiler implements Visitor {
 
     @Override
     public String visit(Fold n) {
+        StringBuilder sb = new StringBuilder();
+        String[] fold = (String[]) n.fold_body.accept(this);
+        sb.append(fold[0]);
+        if (n.fold_symbol.equals(FoldSymbol.FOLD_RIGHT)) {
+            // Reverse the list
+            sb.append("Collections.reverse(list")
+              .append(list_counter - 1).append(");\n");
+        }
         
+        return sb.toString();
     }
 
     @Override
     public String visit(FoldSymbol n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
-    public String visit(FoldBody n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String[] visit(FoldBody n) {
+        String[] fold_body = new String[2];
+        fold_body[0] = (String) n.list_argument.accept(this);
+        fold_body[1] = buildFoldCode(n.bin_op);
+        return fold_body;
     }
 
     @Override
@@ -153,86 +154,129 @@ public class WolfCompiler implements Visitor {
 
     @Override
     public String visit(ListArgsList n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder sb = new StringBuilder();
+        String list_name = "list" + list_counter++;
+        sb.append("ArrayList<")
+          .append(stringifyType(n.getArgList().get(0).getType()))
+          .append("> ").append(list_name)
+          .append(" = new ArrayList<>();\n");
+        for (Arg arg : n.getArgList()) {
+            sb.append(list_name)
+              .append(".add(").append(arg.accept(this)).append(");\n");
+        }
+
+        return sb.toString();
     }
 
     @Override
     public String visit(ArgsList n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "";
     }
 
     @Override
     public String visit(NativeUnary n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "";
     }
 
     @Override
     public String visit(NativeListUnary n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "";
     }
 
     @Override
     public String visit(NativeBinary n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "";
     }
 
     @Override
     public String visit(NativeListBinary n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "";
     }
 
     @Override
     public String visit(FloatLiteral n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return n.toString();
     }
 
     @Override
     public String visit(IntLiteral n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return n.toString();
     }
 
     @Override
     public String visit(WolfList n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "";
     }
 
     @Override
     public String visit(WolfString n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return n.toString();
     }
 
     @Override
     public String visit(StringBody n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return n.toString();
     }
 
     @Override
     public String visit(StringEscapeSeq n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "";
     }
 
     @Override
     public String visit(EscapeChar n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "";
     }
 
     @Override
     public String visit(NativeBinOp n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return n.toString();
     }
 
     @Override
     public String visit(NativeUnaryOp n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return n.toString();
     }
 
     @Override
     public String visit(Branch n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "";
     }
 
     @Override
     public String visit(InputArg n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "";
+    }
+    
+    private String buildFoldCode(BinOp bin_op) {
+        return "";
+    }
+    
+    private String buildBinOpCode(BinOp bin_op) {
+        return "";
+    }
+    
+    private String buildMapCode(UnaryOp unary_op) {
+        return "";
+    }
+    
+    private String buildUnaryOpCode(UnaryOp unary_op) {
+        return "";
+    }
+    
+    private String stringifyType(Type type) {
+        String flat_type = "";
+        if (type.flat_type.equals(FlatType.INTEGER)) {
+            flat_type = "Integer";
+        } else if (type.flat_type.equals(FlatType.FLOAT)) {
+            flat_type = "Float";
+        } else if (type.flat_type.equals(FlatType.STRING)) {
+            flat_type = "String";
+        }
+        if (type.is_list) {
+            return "ArrayList<" + flat_type + ">";
+        } else {
+            return flat_type;
+        }
     }
 }

@@ -6,6 +6,7 @@
 package wolf.interfaces;
 
 import java.util.List;
+import wolf.Type;
 
 /**
  *

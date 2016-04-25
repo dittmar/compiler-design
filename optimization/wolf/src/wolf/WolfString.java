@@ -33,7 +33,7 @@ public class WolfString extends Arg implements ListElement {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(StringMiddle middle:string) {
+        for(StringMiddle middle : string) {
             sb.append(middle.toString());
         }
         return sb.toString();
