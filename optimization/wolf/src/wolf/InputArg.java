@@ -19,7 +19,13 @@ public class InputArg extends Arg implements ListElement {
         this.arg_number = arg_number;
     }
     
+    @Override
     public Object accept(Visitor v) {
         return v.visit(this);
+    }
+    
+    @Override
+    public String toString() {
+        return "\"" + type + " " + arg_number + "\"";
     }
 }

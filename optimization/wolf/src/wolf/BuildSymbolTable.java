@@ -453,10 +453,6 @@ public class BuildSymbolTable implements Visitor {
             list_type = (Type) element.accept(this);
         }
         return (list_type == null) ? null : new Type(list_type.flat_type, true);
-       /*
-       Type type = (Type) this.arg_list.get(0).accept(v);
-       return new Type(type.flat_type, true);
-       */
     }
 
     /**

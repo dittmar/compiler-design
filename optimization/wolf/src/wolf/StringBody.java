@@ -21,12 +21,14 @@ public class StringBody implements StringMiddle {
     /**
      * Accept a visitor
      * @param v a visitor
+     * @return the result of the visit
      */
     @Override
     public Object accept(Visitor v) {
         return v.visit(this);
     }
     
+    @Override
     public String toString() {
         return string_body.getText();
     }

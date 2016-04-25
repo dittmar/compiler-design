@@ -97,7 +97,10 @@ public class SymbolTable {
         );
     }
     
-    
+    /**
+     * @return the number of arguments expected for the function associated
+     * with this table.
+     */
     public int getNumberOfArguments() {
         int count = 0;
         for(Binding binding:symbol_table.values()) {
@@ -108,6 +111,9 @@ public class SymbolTable {
         return count;
     }
     
+    /**
+     * @return the arg types for the function associated with this table.
+     */
     public List<Type> getArgFormat() {
         List<Type> argTypes = new ArrayList();
         for(Binding binding:symbol_table.values()) {

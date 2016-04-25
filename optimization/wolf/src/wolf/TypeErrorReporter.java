@@ -12,7 +12,17 @@ import wolf.interfaces.ListElement;
  * @author Joe Alacqua
  * @version Apr 10, 2016
  */
-public final class TypeErrorReporter { 
+public final class TypeErrorReporter {
+    /**
+     * Report an error for an offending binary function
+     * @param left the left argument
+     * @param l the left argument's type
+     * @param right the right argument
+     * @param r the right argument's type
+     * @param op the operation
+     * @param expected_types the types expected
+     * @throws UnsupportedOperationException 
+     */
     public static void mismatchErrorBinary(Arg left, Type l, Arg right, Type r,
             String op, List<Type> expected_types)
             throws UnsupportedOperationException {
@@ -40,6 +50,18 @@ public final class TypeErrorReporter {
         throw new UnsupportedOperationException(sb.toString());
     }
     
+    /**
+     * Report an error for an argument that doesn't match the binary function's
+     * expected arg type
+     * @param arg the offending argument
+     * @param arg_t the offending arg's type
+     * @param op the operation
+     * @param arg_expected the list of expected types for the argument
+     * @param list the list argument
+     * @param list_t the list argument's type
+     * @param list_expected the expected types for the list argument
+     * @throws UnsupportedOperationException 
+     */
     public static void mismatchErrorBinaryList(Arg arg, Type arg_t,
             ListArgument list, Type list_t, String op, List<Type> arg_expected,
             List<Type> list_expected) throws UnsupportedOperationException {
@@ -79,6 +101,15 @@ public final class TypeErrorReporter {
         throw new UnsupportedOperationException(sb.toString());
     }
     
+    /**
+     * Report an error for an argument that doesn't match the unary function's
+     * expected arg type
+     * @param arg the offending argument
+     * @param type the offending type
+     * @param op the operation
+     * @param expected the list of expected types
+     * @throws UnsupportedOperationException 
+     */
     public static void mismatchErrorUnary(Arg arg, Type type, String op,
             List<Type> expected) throws UnsupportedOperationException {
         StringBuilder sb = new StringBuilder();
@@ -99,6 +130,15 @@ public final class TypeErrorReporter {
         throw new UnsupportedOperationException(sb.toString());
     }
     
+    /**
+     * Report an error for an argument that doesn't match the unary function's
+     * expected arg type
+     * @param arg the offending argument
+     * @param type the offending type
+     * @param op the operation
+     * @param expected the list of expected types
+     * @throws UnsupportedOperationException 
+     */
     public static void mismatchErrorListUnary(ListArgument arg, Type type,
             String op, List<Type> expected)
             throws UnsupportedOperationException {
@@ -115,7 +155,10 @@ public final class TypeErrorReporter {
             sb.append(types.toString().trim());
             sb.append("]");
         }
-        sb.append(" Argument ").append(arg.toString()).append(" is of type ").append(type);
+        sb.append(" Argument ")
+          .append(arg.toString())
+          .append(" is of type ")
+          .append(type);
         throw new UnsupportedOperationException(sb.toString());
     }
     
@@ -137,6 +180,14 @@ public final class TypeErrorReporter {
         throw new UnsupportedOperationException(sb.toString());
     }
 
+    /**
+     * Report an error for an argument list whose format differs from the
+     * formal argument list
+     * @param argFormatGiven argument list given
+     * @param argFormatExpected argument list expected
+     * @param funcName offending function's name
+     * @throws UnsupportedOperationException 
+     */
     public static void mismatchArgumentFormat(List<Type> argFormatGiven,
             List<Type> argFormatExpected, String funcName)
             throws UnsupportedOperationException {
@@ -170,32 +221,62 @@ public final class TypeErrorReporter {
         throw new UnsupportedOperationException(sb.toString());
     }
 
+    /**
+     * Error reported when a branch's conditional function doesn't return an
+     * Integer
+     * @param givenType the type that the conditional function returns.
+     * @throws UnsupportedOperationException 
+     */
     public static void mismatchBranchCondition(Type givenType)
             throws UnsupportedOperationException {
         StringBuilder sb = new StringBuilder();
-        sb.append("ERROR - Condition statement in branch requires INTEGER return type")
-                .append("Given Type: ").append(givenType);
+        sb.append("ERROR - Condition statement in branch requires " + 
+                  "INTEGER return type")
+          .append("Given Type: ").append(givenType);
         throw new UnsupportedOperationException(sb.toString());
     }
     
+    /**
+     * Report error for a branch whose true branch choice differs in type from
+     * its false branch type
+     * @param trueType the type returned by the true branch
+     * @param falseType the type returned by the false branch
+     * @throws UnsupportedOperationException 
+     */
     public static void mismatchBranchTrueFalse(Type trueType, Type falseType) 
             throws UnsupportedOperationException {
         StringBuilder sb = new StringBuilder();
-        sb.append("ERROR - Types in branch choices differ. Type 1: ").append(trueType)
-                .append(" Type 2: ").append(falseType);
+        sb.append("ERROR - Types in branch choices differ. Type 1: ")
+          .append(trueType)
+          .append(" Type 2: ").append(falseType);
         throw new UnsupportedOperationException(sb.toString());
     }
     
-    public static void mismatchListItemWithListType(ListElement item, Type itemType,
-            Type listType) 
-            throws UnsupportedOperationException {
+    /**
+     * reports an error for a list item not matching the type of other items
+     * in the list
+     * @param item the offending item
+     * @param itemType the type of the item
+     * @param listType the type of the list
+     * @throws UnsupportedOperationException 
+     */
+    public static void mismatchListItemWithListType(ListElement item,
+        Type itemType, Type listType) throws UnsupportedOperationException {
         StringBuilder sb = new StringBuilder();
-        sb.append("ERROR - \"").append(item.toString()).append("\" is of type ")
-                .append(itemType).append(" in a list of type ")
-                .append(listType).append(".");
+        sb.append("ERROR - \"")
+            .append(item.toString()).append("\" is of type ")
+            .append(itemType).append(" in a list of type ")
+            .append(listType).append(".");
         throw new UnsupportedOperationException(sb.toString());
     }
     
+    /**
+     * report an error for an arg that doesn't match its formal type
+     * @param expected the expected argument
+     * @param e_type the expected type
+     * @param actual the argument given
+     * @param a_type the given argument's type
+     */
     public static void mismatchArgTypes(Arg expected, Type e_type,
             Arg actual, Type a_type) {
         StringBuilder sb = new StringBuilder();
@@ -207,8 +288,10 @@ public final class TypeErrorReporter {
 
     public static void noListArgument(String function_name, Type arg_type) {
         StringBuilder sb = new StringBuilder();
-        sb.append("ERROR  - ").append(function_name).append(" must have an argument that is ")
-          .append("a LIST. ").append("Given type: ").append(arg_type);
+        sb.append("ERROR  - ")
+          .append(function_name).append(" must have an argument that is ")
+          .append("a LIST. ")
+          .append("Given type: ").append(arg_type);
         throw new UnsupportedOperationException(sb.toString());
     }
 }

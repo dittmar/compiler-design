@@ -3,7 +3,6 @@ import wolf.interfaces.Arg;
 import java.util.List;
 import wolf.interfaces.Args;
 import wolf.interfaces.Visitor;
-import wolf.interfaces.WolfFunction;
 /**
  * A list of arguments
  * @author (Kevin Dittmar)

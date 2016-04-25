@@ -30,30 +30,6 @@ public class NativeUnary extends WolfFunction implements UnaryOp {
     @Override
     public Object accept(Visitor v) {
         return v.visit(this);
-        /*
-        Type argType = (Type) v.visit(arg);
-        switch(unary_op) {
-            case NEG:
-                if(!argType.isNumeric()) {
-                    System.err.println("Invalid Argument " + argType + " for "
-                        + "~. Expecting Integer or Float.");
-                    return null;
-                }
-                return argType;
-            case LOGICAL_NOT:
-                if(argType.flat_type != FlatType.INTEGER) {
-                    System.err.println("Invalid Argument " + argType + " for "
-                        + "!. Expecting Integer.");
-                    return null;
-                }
-                return argType;
-            case IDENTITY:
-            case PRINT:
-                return argType;
-            default:
-                System.err.println("Invalid Native Unary Operation");
-                return null;
-        }*/
     }
     
     /**

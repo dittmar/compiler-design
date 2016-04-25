@@ -33,6 +33,7 @@ public class Def {
         return v.visit(this);
     }
     
+    @Override
     public String toString() {
         return def_name.toString();
     }

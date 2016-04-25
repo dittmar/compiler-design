@@ -25,6 +25,7 @@ public class Sig {
         return v.visit(this);
     }
     
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("(");
