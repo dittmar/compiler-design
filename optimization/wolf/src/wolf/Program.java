@@ -23,8 +23,18 @@ public class Program {
     /**
      * Accept a visitor
      * @param v a visitor
+     * @return It doesn't matter.  Program won't be accepted.
      */
     public Object accept(Visitor v) {
         return v.visit(this);
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Def def : def_list) {
+            sb.append(def.toString()).append("\n");
+        }
+        return sb.append(function.toString()).toString();
     }
 }

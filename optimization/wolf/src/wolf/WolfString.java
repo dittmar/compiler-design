@@ -30,6 +30,7 @@ public class WolfString extends Arg implements ListElement {
         return v.visit(this); //return new Type(FlatType.STRING);
     }
     
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for(StringMiddle middle:string) {

@@ -14,10 +14,13 @@ public class ListArgsList extends Args {
    public ListArgsList(List<Arg> arg_list) {
        super(arg_list);
    }
-   /**
-    * Accept a visitor.
-    * @param v a visitor
-    */
+
+    /**
+     * Accept a visitor
+     * @param v a visitor
+     * @return type of the list arguments
+     */
+   @Override
     public Object accept(Visitor v) {
        return v.visit(this);
     }

@@ -17,12 +17,14 @@ public class StringEscapeSeq implements StringMiddle {
     /**
      * Accept a visitor
      * @param v a visitor
+     * @return the result of the visit
      */
     @Override
     public Object accept(Visitor v) {
         return v.visit(this);
     }
     
+    @Override
     public String toString() {
         return "\\" + escape_char.toString();
     }

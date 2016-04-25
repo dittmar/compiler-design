@@ -36,28 +36,6 @@ public class NativeListBinary extends WolfFunction implements BinOp {
     @Override
     public Object accept(Visitor v) {
         return v.visit(this);
-        /*Type arg_type = (Type) v.visit(arg);
-        Type list_type = (Type) v.visit(list_argument);
-        switch(binary_op) {
-            case APPEND:
-            case PREPEND:
-                if(!list_type.is_list ||
-                   !arg_type.flat_type.equals(list_type.flat_type)) {
-                    List<Type> list_types = new ArrayList<>();
-                    list_types.add(list_type);
-                    List<Type> arg_types = new ArrayList<>();
-                    arg_types.add(new Type(list_type.flat_type));
-                    TypeErrorReporter.mismatchErrorBinaryList(
-                        arg, arg_type, 
-                        list_argument, list_type,
-                        binary_op.toString(), arg_types, list_types
-                    );
-                }
-                return list_type;
-            default:
-                System.err.println("Invalid Native List Binary Operation!");
-                return null;
-        }*/
     }
     
     /**

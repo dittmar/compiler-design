@@ -31,49 +31,6 @@ public class NativeListUnary extends WolfFunction implements UnaryOp {
     @Override
     public Object accept(Visitor v) {
         return v.visit(this);
-        /*
-        Type argType = (Type) v.visit(list_argument);
-        switch(list_unary_op) {
-            case HEAD:
-                if(!argType.is_list) {
-                    TypeErrorReporter.mismatchErrorListUnary(
-                        list_argument, argType, list_unary_op.toString(), null
-                    );
-                }
-                return new Type(argType.flat_type);
-            case TAIL:
-                if(!argType.is_list) {
-                    TypeErrorReporter.mismatchErrorListUnary(
-                        list_argument, argType, list_unary_op.toString(), null
-                    );
-                }
-                return argType;
-            case REVERSE:
-                if(!argType.is_list) {
-                    TypeErrorReporter.mismatchErrorListUnary(
-                        list_argument, argType, list_unary_op.toString(), null
-                    );
-                }
-                return argType;
-            case LAST:
-                if(!argType.is_list) {
-                    TypeErrorReporter.mismatchErrorListUnary(
-                        list_argument, argType, list_unary_op.toString(), null
-                    );
-                }
-                return new Type(argType.flat_type);
-            case LENGTH:
-                if(!argType.is_list) {
-                    TypeErrorReporter.mismatchErrorListUnary(
-                        list_argument, argType, list_unary_op.toString(), null
-                    );
-                }
-                return new Type(argType.flat_type);
-            default:
-                System.err.println("Invalid Native List Unary Operation");
-                return null;
-        }
-        */
     }
     
     /**
