@@ -38,8 +38,11 @@ public class Optimizer implements Visitor {
 
   private Equal equal;
 
+  private IdentifierUsage id_use;
+
   public Optimizer() {
     equal = new Equal();
+
     one = new IntLiteral(
         new TIntNumber("1")
     );
@@ -49,27 +52,35 @@ public class Optimizer implements Visitor {
     identity_one = new NativeUnary(NativeUnaryOp.IDENTITY,one);
     identity_zero = new NativeUnary(NativeUnaryOp.IDENTITY,zero);
 
-    int_type = new Type(FlatType.INTEGER);
-    float_type = new Type(FlatType.FLOAT);
-    string_type = new Type(FlatType.STRING);
-
     ArrayList<StringMiddle> middle = new ArrayList<>();
     middle.add(new StringBody(new TStringBody("")));
     empty_string = new WolfString(middle);
-
-    //this.program_table = this.current_def_table = program_table;
   }
 
   @Override
   public Program visit(Program n) {
+    WolfFunction op_function = (WolfFunction) n.function.accept(this);
     ArrayList<Def> op_def_list = new ArrayList<>();
     for(Def def:n.def_list) {
+      ArrayList<Def> clone_def_list = new ArrayList<>(n.def_list);
+      clone_def_list.remove(def); // remove current definition
+
       Def op_def = (Def) def.accept(this);
-      if(op_def != null) {
+      id_use = new IdentifierUsage(op_def.def_name);
+
+      boolean found = (Boolean) op_function.accept(id_use);
+      if(!found) {
+        for(Def d : clone_def_list) {
+          found = (Boolean) d.accept(id_use);
+          if(found) {
+            break;
+          }
+        }
+      }
+      if(found) {
         op_def_list.add(op_def);
       }
     }
-    WolfFunction op_function = (WolfFunction) n.function.accept(this);
     return new Program(op_def_list,op_function);
   }
 
@@ -96,7 +107,10 @@ public class Optimizer implements Visitor {
   public Sig visit(Sig n) {
     List<SigArg> op_sig_args = new ArrayList<>();
     for(SigArg sig_arg : n.sig_args) {
-      op_sig_args.add((SigArg) sig_arg.accept(this));
+      SigArg op_sig_arg = (SigArg) sig_arg.accept(this);
+      if(op_sig_arg != null) {
+        op_sig_args.add(op_sig_arg);
+      }
     }
     return new Sig(op_sig_args);
   }
@@ -108,8 +122,6 @@ public class Optimizer implements Visitor {
    */
   @Override
   public SigArg visit(SigArg n) {
-    // for right now just give back what we have, not sure how else to optimize except check the
-    // function for usage.
     return n;
   }
 
@@ -150,8 +162,8 @@ public class Optimizer implements Visitor {
 
   @Override
   public WolfLambda visit(WolfLambda n) {
+    WolfFunction op_function = (WolfFunction) n.function.accept(this);
     Sig op_sig = (Sig) n.sig.accept(this);
-    WolfFunction op_function = (WolfFunction) n.sig.accept(this);
     return new WolfLambda(op_sig,op_function);
   }
 
@@ -262,11 +274,11 @@ public class Optimizer implements Visitor {
         if(op_arg instanceof NativeUnary) {
           NativeUnary nu = (NativeUnary) op_arg;
           if(nu.unary_op.equals(NativeUnaryOp.IDENTITY)) {
-            if(!(op_arg instanceof IntLiteral) &&
-                !(op_arg instanceof FloatLiteral) &&
-                !(op_arg instanceof WolfList) &&
-                !(op_arg instanceof WolfString) &&
-                !(op_arg instanceof Identifier)) {
+            if(!(nu.arg instanceof IntLiteral) &&
+                !(nu.arg instanceof FloatLiteral) &&
+                !(nu.arg instanceof WolfList) &&
+                !(nu.arg instanceof WolfString) &&
+                !(nu.arg instanceof Identifier)) {
               return nu.arg;
             }
             return new NativeUnary(NativeUnaryOp.IDENTITY,nu.arg);

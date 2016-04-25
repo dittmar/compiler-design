@@ -1,6 +1,5 @@
 `
   Double Negations and Double Identity
-  // Works!
 `
 def int absValue(int num) := ; !(!(<(num,@(@(0))))) ? *(~(1),num) : @(~(~(~(~(num)))))
 absValue(~(~(5)))

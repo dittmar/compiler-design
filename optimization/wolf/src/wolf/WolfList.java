@@ -29,4 +29,14 @@ public class WolfList extends Arg implements ListArgument {
     public Object accept(Visitor v) {
         return v.visit(this);
     }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for(int i = 0; i < list_elements.size()-1; i++) {
+            sb.append(list_elements.get(i)).append(", ");
+        }
+        sb.append(list_elements.get(list_elements.size()-1)).append("]");
+        return sb.toString();
+    }
 }

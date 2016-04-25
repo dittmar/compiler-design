@@ -30,4 +30,8 @@ public class WolfMap extends WolfFunction {
     public Object accept(Visitor v) {
         return v.visit(this);
     }
+
+    public String toString() {
+        return ".(" + unary_op.toString() + "," + list_argument.toString() + ")";
+    }
 }

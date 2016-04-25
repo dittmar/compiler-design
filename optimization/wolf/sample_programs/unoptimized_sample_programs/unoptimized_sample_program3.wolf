@@ -2,9 +2,8 @@
   A branch where the condition always evaluates to true
   and a branch where the condition always evaluates to false.
   Also handle multiplication by 0.
-  // Soon we can use this for unused defs if necessary!
-  // Works for Now!
+  Since multiplication by 0 removes myNegativeNumber, also remove it's definition.
 `
 def int myNumber(int num) := ; =(0,0) ? @(num) : ~(num)
 def int myNegativeNumber(int num) := ; =(0,1) ? @(num) : ~(num)
-myNumber(*(2,0))
+myNumber(*(myNegativeNumber(2),0))

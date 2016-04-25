@@ -35,6 +35,9 @@ public class Def {
     
     @Override
     public String toString() {
-        return def_name.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(" def ").append(type).append(" ").append(def_name).append(sig)
+          .append(" := ").append(function);
+        return sb.toString();
     }
 }

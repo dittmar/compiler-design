@@ -2,7 +2,6 @@
   Arithmetic Simplifications
   The definition should simplify to @(0) : @(2)
   The function arguments should simplify to @(1)
-  // Works!
 `
 def int arithParty(int a, int b) := ; =(a,b) ? @(+(-(10,10),%(10,1))) : +(2,%(/(0,10),55))
 

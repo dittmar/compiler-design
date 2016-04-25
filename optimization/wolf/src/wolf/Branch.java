@@ -31,4 +31,11 @@ public class Branch extends WolfFunction {
     public Object accept(Visitor v) {
         return v.visit(this);
     }
+
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(" ; ").append(condition).append(" ? ").append(true_branch).append(" : ")
+      .append(false_branch);
+    return sb.toString();
+  }
 }

@@ -97,14 +97,14 @@ public class Parser {
                     break;
                 }
             }
-            System.out.println("Optimized!");
+            System.out.println("--- Optimized Program --- \n");
             System.out.println(op_ast);
             
             WolfCompiler compiler = new WolfCompiler();
             compiler.compile(ast);
             
-            WolfCompiler compiler = new WolfCompiler();
-            compiler.compile(ast);
+            //compiler = new WolfCompiler();
+            //compiler.compile(ast);
         } catch (UnsupportedOperationException e) {
             System.out.println(e);
         }
@@ -728,6 +728,9 @@ public class Parser {
         eat(TLParen.class);
         if (isType()) {
             sig = new Sig(SigArgs());
+        }
+        else {
+            sig = new Sig(new ArrayList<>());
         }
         eat(TRParen.class);
         log("Sig");

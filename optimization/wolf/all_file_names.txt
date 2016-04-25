@@ -10,6 +10,8 @@ sample_programs/valid_sample_programs/sample_program9.wolf
 sample_programs/valid_sample_programs/sample_program10.wolf
 sample_programs/valid_sample_programs/sample_program11.wolf
 sample_programs/valid_sample_programs/sample_program12.wolf
+sample_programs/valid_sample_programs/sample_program13.wolf
+
 
 sample_programs/bad_semantic_programs/bad_semantic_program1.wolf
 sample_programs/bad_semantic_programs/bad_semantic_program2.wolf

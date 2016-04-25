@@ -54,7 +54,17 @@ public class Type {
      */
     @Override
     public String toString() {
-        return (is_list) ? "LIST_"+ flat_type.toString() : flat_type.toString();
+        StringBuilder sb = new StringBuilder();
+        if(is_list) {
+            sb.append("list ");
+        }
+        if(flat_type == flat_type.INTEGER) {
+            sb.append("int");
+        }
+        else {
+            sb.append(flat_type);
+        }
+        return sb.toString();
     }
     
     /**
