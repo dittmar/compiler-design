@@ -1,7 +1,6 @@
 package wolf;
 
 import wolf.interfaces.*;
-import wolf.node.*;
 import wolf.enums.*;
 
 /**
@@ -9,45 +8,61 @@ import wolf.enums.*;
  */
 public class Equal implements Visitor {
 
-    public Boolean visit(Program n){ return true; }
+    @Override
+    public Boolean visit(Program n){ return false; }
 
-    public Boolean visit(Def n){ return true; }
+    @Override
+    public Boolean visit(Def n){ return false; }
 
-    public Boolean visit(Sig n){ return true; }
+    @Override
+    public Boolean visit(Sig n){ return false; }
 
-    public Boolean visit(SigArg n){ return true; }
+    @Override
+    public Boolean visit(SigArg n){ return false; }
 
-    public Boolean visit(UserFunc n){ return true; }
+    @Override
+    public Boolean visit(UserFunc n){ return false; }
 
-    public Boolean visit(Branch n) {
+    @Override
+    public Boolean visit(Branch n) { return false; }
 
-      return true;
-    }
+    @Override
+    public Boolean visit(WolfLambda n){ return false; }
 
-    public Boolean visit(WolfLambda n){ return true; }
+    @Override
+    public Boolean visit(Fold n){ return false; }
 
-    public Boolean visit(Fold n){ return true; }
+    @Override
+    public Boolean visit(FoldSymbol n){ return false; }
 
-    public Boolean visit(FoldSymbol n){ return true; }
+    @Override
+    public Boolean visit(FoldBody n){ return false; }
 
-    public Boolean visit(FoldBody n){ return true; }
+    @Override
+    public Boolean visit(WolfMap n){ return false; }
 
-    public Boolean visit(WolfMap n){ return true; }
+    @Override
+    public Boolean visit(ListArgsList n){ return false; }
 
-    public Boolean visit(ListArgsList n){ return true; }
+    @Override
+    public Boolean visit(ArgsList n){ return false; }
 
-    public Boolean visit(ArgsList n){ return true; }
+    @Override
+    public Boolean visit(NativeUnary n){ return false; }
 
-    public Boolean visit(NativeUnary n){ return true; }
+    @Override
+    public Boolean visit(NativeListUnary n){ return false; }
 
-    public Boolean visit(NativeListUnary n){ return true; }
+    @Override
+    public Boolean visit(NativeBinary n){ return false; }
 
-    public Boolean visit(NativeBinary n){ return true; }
+    @Override
+    public Boolean visit(NativeListBinary n){ return false; }
 
-    public Boolean visit(NativeListBinary n){ return true; }
+    @Override
+    public Object visit(Identifier n){ return false; }
 
-    public Object /* ??? */ visit(Identifier n){ return true; }
-
+    @Override
     public Float visit(FloatLiteral n){
       return Float.parseFloat(n.float_literal.getText());
     }
@@ -57,27 +72,32 @@ public class Equal implements Visitor {
    * @param n an integer literal
    * @return this integer literal's value.
    */
+    @Override
     public Integer visit(IntLiteral n){
       return Integer.parseInt(n.int_literal.getText());
     }
 
-    public Boolean visit(WolfList n){ return true; }
+    @Override
+    public Boolean visit(WolfList n){ return false; }
 
   /**
    * Visit a WOLFString
    * @param n a  WOLFString
    * @return the string value of this WolfString
    */
+    @Override
     public String visit(WolfString n) {
       return n.toString();
     }
 
+    @Override
   public Boolean visit(EscapeChar n) {
-    return true;
+    return false;
   }
 
+    @Override
   public Boolean visit(StringBody n) {
-    return true;
+    return false;
   }
 
   /**
@@ -85,9 +105,9 @@ public class Equal implements Visitor {
    * @param n the native binary operator
    * @return null, no use in BuildSymbolTable
    */
-  public Type visit(NativeBinOp n) {
-    // do nothing, return null
-    return null;
+    @Override
+  public Boolean visit(NativeBinOp n) {
+    return false;
   }
 
   /**
@@ -95,13 +115,14 @@ public class Equal implements Visitor {
    * @param n the native unary operator
    * @return null, no use in BuildSymbolTable
    */
-  public Type visit(NativeUnaryOp n) {
-    // do nothing, return null
-    return null;
+    @Override
+  public Boolean visit(NativeUnaryOp n) {
+    return false;
   }
 
-  public Float visit(StringEscapeSeq n) {
-    return new Float(5.5);
+  @Override
+  public Boolean visit(StringEscapeSeq n) {
+    return false;
   }
 
 
@@ -379,4 +400,10 @@ public class Equal implements Visitor {
       System.out.println("No match");
       return false;
     }
+
+    @Override
+    public Boolean visit(Type n) { return false; }
+
+    @Override
+    public Boolean visit(InputArg n) { return false; }
 }

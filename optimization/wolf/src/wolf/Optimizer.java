@@ -60,6 +60,7 @@ public class Optimizer implements Visitor {
     //this.program_table = this.current_def_table = program_table;
   }
 
+  @Override
   public Program visit(Program n) {
     ArrayList<Def> op_def_list = new ArrayList<>();
     for(Def def:n.def_list) {
@@ -77,6 +78,7 @@ public class Optimizer implements Visitor {
    * @param n a function definition
    * @return an optimized function definition.
    */
+  @Override
   public Def visit(Def n) {
     Identifier op_def_name = (Identifier) n.def_name.accept(this);
     Sig op_sig = (Sig) n.sig.accept(this);
@@ -90,6 +92,7 @@ public class Optimizer implements Visitor {
    * @param n a function signature
    * @return an optimized function signature.
    */
+  @Override
   public Sig visit(Sig n) {
     List<SigArg> op_sig_args = new ArrayList<>();
     for(SigArg sig_arg : n.sig_args) {
@@ -103,6 +106,7 @@ public class Optimizer implements Visitor {
    * @param n a signature argument
    * @return the given signature argument, it's already optimized.
    */
+  @Override
   public SigArg visit(SigArg n) {
     // for right now just give back what we have, not sure how else to optimize except check the
     // function for usage.
@@ -114,6 +118,7 @@ public class Optimizer implements Visitor {
    * @param n a user function
    * @return an optimized user function.
    */
+  @Override
   public UserFunc visit(UserFunc n) {
     UserFuncName op_user_func_name = (UserFuncName) n.user_func_name.accept(this);
     Args op_args = (Args) n.arg_list.accept(this);
@@ -125,6 +130,7 @@ public class Optimizer implements Visitor {
    * @param n a branch function
    * @return the optimize branch or a native unary function.
    */
+  @Override
   public Object visit(Branch n) {
     WolfFunction op_condition = (WolfFunction) n.condition.accept(this);
     WolfFunction op_true_branch = (WolfFunction) n.true_branch.accept(this);
@@ -142,6 +148,7 @@ public class Optimizer implements Visitor {
     return new Branch(op_condition,op_true_branch,op_false_branch);
   }
 
+  @Override
   public WolfLambda visit(WolfLambda n) {
     Sig op_sig = (Sig) n.sig.accept(this);
     WolfFunction op_function = (WolfFunction) n.sig.accept(this);
@@ -153,6 +160,7 @@ public class Optimizer implements Visitor {
    * @param n a fold
    * @return an optimized fold
    */
+  @Override
   public Fold visit(Fold n) {
     FoldSymbol op_symbol = (FoldSymbol) n.fold_symbol.accept(this);
     FoldBody op_body = (FoldBody) n.fold_body.accept(this);
@@ -164,6 +172,7 @@ public class Optimizer implements Visitor {
    * @param n a fold symbol
    * @return the given fold symbol, it's already optimized.
    */
+  @Override
   public FoldSymbol visit(FoldSymbol n) {
     return n;
   }
@@ -173,6 +182,7 @@ public class Optimizer implements Visitor {
    * @param n a fold body
    * @return an optimized fold body
    */
+  @Override
   public FoldBody visit(FoldBody n) {
     BinOp op_operator = (BinOp) n.bin_op.accept(this);
     ListArgument op_list_argument = (ListArgument) n.list_argument.accept(this);
@@ -184,6 +194,7 @@ public class Optimizer implements Visitor {
    * @param n a map function
    * @return an optimized map function.
    */
+  @Override
   public WolfMap visit(WolfMap n) {
     UnaryOp op_operator = (UnaryOp) n.unary_op.accept(this);
     ListArgument op_list_argument = (ListArgument) n.list_argument.accept(this);
@@ -195,6 +206,7 @@ public class Optimizer implements Visitor {
    * @param n a list argument list
    * @return the given list argument list, it's already optimized.
    */
+  @Override
   public ListArgsList visit(ListArgsList n) {
     List<Arg> op_arg_list = new ArrayList<>();
     for(Arg arg : n.getArgList()) {
@@ -208,6 +220,7 @@ public class Optimizer implements Visitor {
    * @param n an argument list
    * @return the given argument list, it's already optimized.
    */
+  @Override
   public ArgsList visit(ArgsList n) {
     List<Arg> op_arg_list = new ArrayList<>();
     for(Arg arg : n.getArgList()) {
@@ -221,6 +234,7 @@ public class Optimizer implements Visitor {
    * @param n a native unary
    * @return an optimized native unary.
    */
+  @Override
   public Object visit(NativeUnary n) {
     NativeUnaryOp op_operator = (NativeUnaryOp) n.unary_op.accept(this);
     Arg op_arg = (Arg) n.arg.accept(this);
@@ -281,6 +295,7 @@ public class Optimizer implements Visitor {
    * @param n a native list unary
    * @return the given native list unary, it's already optimized.
    */
+  @Override
   public NativeListUnary visit(NativeListUnary n) {
     return n;
   }
@@ -290,6 +305,7 @@ public class Optimizer implements Visitor {
    * @param n a native binary
    * @return an optimized native binary or a native unary
    */
+  @Override
   public Object visit(NativeBinary n) {
     NativeBinOp op_operator = (NativeBinOp) n.binary_op.accept(this);
     Arg op_left = (Arg) n.arg_left.accept(this);
@@ -490,6 +506,7 @@ public class Optimizer implements Visitor {
    * @param n a native list binary
    * @return the given native list binary, it's already optimized
    */
+  @Override
   public NativeListBinary visit(NativeListBinary n) {
     return n;
   }
@@ -499,6 +516,7 @@ public class Optimizer implements Visitor {
    * @param n an identifier
    * @return the given identifier, it's already optimized.
    */
+  @Override
   public Identifier visit(Identifier n) {
     return n;
   }
@@ -508,6 +526,7 @@ public class Optimizer implements Visitor {
    * @param n the float literal
    * @return the given float literal, it's already optimized.
    */
+  @Override
   public FloatLiteral visit(FloatLiteral n) {
     return n;
   }
@@ -517,6 +536,7 @@ public class Optimizer implements Visitor {
    * @param n the integer literal
    * @return the given integer literal, it's already optimized.
    */
+  @Override
   public IntLiteral visit(IntLiteral n) {
     return n;
   }
@@ -526,6 +546,7 @@ public class Optimizer implements Visitor {
    * @param n a WolfList
    * @return the given WolfList, it's already optimized.
    */
+  @Override
   public WolfList visit(WolfList n) {
     return n;
   }
@@ -535,6 +556,7 @@ public class Optimizer implements Visitor {
    * @param n a WolfString
    * @return the given WolfString, it's already optimized.
    */
+  @Override
   public WolfString visit(WolfString n) {
     return n;
   }
@@ -544,6 +566,7 @@ public class Optimizer implements Visitor {
    * @param n a string body
    * @return the given string body, it's already optimized.
    */
+  @Override
   public StringBody visit(StringBody n) {
     return n;
   }
@@ -553,6 +576,7 @@ public class Optimizer implements Visitor {
    * @param n a string escape sequence.
    * @return the given string escape sequence, it's already optimized.
    */
+  @Override
   public StringEscapeSeq visit(StringEscapeSeq n) {
     return n;
   }
@@ -562,6 +586,7 @@ public class Optimizer implements Visitor {
    * @param n an escape character.
    * @return the given escape character, it's already optimized.
    */
+  @Override
   public EscapeChar visit(EscapeChar n) {
     return n;
   }
@@ -571,6 +596,7 @@ public class Optimizer implements Visitor {
    * @param n a native binary operator.
    * @return the given native binary operator, it's already optimized.
    */
+  @Override
   public NativeBinOp visit(NativeBinOp n) {
     return n;
   }
@@ -580,7 +606,18 @@ public class Optimizer implements Visitor {
    * @param n a native unary operator.
    * @return the given native unary operator, it's already optimized.
    */
+  @Override
   public NativeUnaryOp visit(NativeUnaryOp n) {
     return n;
   }
+
+    @Override
+    public Object visit(Type n) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visit(InputArg n) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
