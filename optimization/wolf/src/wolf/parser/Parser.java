@@ -130,6 +130,7 @@ public class Parser {
         } catch (IOException ex) {
             System.out.println("Could not create log file, writing to stdout");
         }
+        System.out.println(ast);
     }
 
     /**
