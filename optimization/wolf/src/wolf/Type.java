@@ -62,7 +62,7 @@ public class Type {
             sb.append("int");
         }
         else {
-            sb.append(flat_type);
+            sb.append(flat_type.toString().toLowerCase());
         }
         return sb.toString();
     }
