@@ -1,6 +1,6 @@
 package wolf;
 
-import wolf.enums.EscapeChar;
+import wolf.interfaces.EscapeChar;
 import wolf.interfaces.StringMiddle;
 import wolf.interfaces.Visitor;
 

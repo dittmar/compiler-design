@@ -2,13 +2,12 @@ package wolf;
 
 import java.util.ArrayList;
 import java.util.List;
-import wolf.enums.EscapeChar;
+import wolf.interfaces.EscapeChar;
 import wolf.enums.FoldSymbol;
 import wolf.enums.NativeBinOp;
 import wolf.enums.NativeUnaryOp;
 import wolf.interfaces.Arg;
 import wolf.interfaces.BinOp;
-import wolf.interfaces.StringMiddle;
 import wolf.interfaces.UnaryOp;
 import wolf.interfaces.Visitor;
 
@@ -225,7 +224,7 @@ public class WolfCompiler implements Visitor {
 
     @Override
     public String visit(EscapeChar n) {
-        return "";
+        return n.toString();
     }
 
     @Override
@@ -253,6 +252,7 @@ public class WolfCompiler implements Visitor {
     }
     
     private String buildBinOpCode(BinOp bin_op) {
+        String bin_op_code = (String) bin_op.accept(this);
         return "";
     }
     

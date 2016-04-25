@@ -1,5 +1,6 @@
 package wolf;
 
+import wolf.interfaces.EscapeChar;
 import wolf.interfaces.*;
 import wolf.enums.*;
 

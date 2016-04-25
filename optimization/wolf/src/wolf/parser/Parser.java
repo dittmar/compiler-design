@@ -1,5 +1,7 @@
 package wolf.parser;
 
+import wolf.interfaces.EscapeChar;
+import wolf.enums.StandardEscapeChar;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -264,49 +266,53 @@ public class Parser {
         switch (getTokenName()) {
             case "TEscapeAlarm":
                 eat(TEscapeAlarm.class);
-                return EscapeChar.ESCAPE_ALARM;
+                return StandardEscapeChar.ESCAPE_ALARM;
             case "TEscapeBackslash":
                 eat(TEscapeBackslash.class);
-                return EscapeChar.ESCAPE_BACKSLASH;
+                return StandardEscapeChar.ESCAPE_BACKSLASH;
             case "TEscapeBackspace":
                 eat(TEscapeBackspace.class);
-                return EscapeChar.ESCAPE_BACKSPACE;
+                return StandardEscapeChar.ESCAPE_BACKSPACE;
             case "TEscapeCarriageReturn":
                 eat(TEscapeCarriageReturn.class);
-                return EscapeChar.ESCAPE_CARRIAGE_RETURN;
+                return StandardEscapeChar.ESCAPE_CARRIAGE_RETURN;
             case "TEscapeDefault":
-                eat(TEscapeDefault.class);
-                return EscapeChar.ESCAPE_DEFAULT;
+                return new SpecialEscapeChar(
+                    eat(TEscapeDefault.class).getText()
+                );
             case "TEscapeDoubleQuote":
                 eat(TEscapeDoubleQuote.class);
-                return EscapeChar.ESCAPE_DOUBLE_QUOTE;
+                return StandardEscapeChar.ESCAPE_DOUBLE_QUOTE;
             case "TEscapeFormfeed":
                 eat(TEscapeFormfeed.class);
-                return EscapeChar.ESCAPE_FORMFEED;
+                return StandardEscapeChar.ESCAPE_FORMFEED;
             case "TEscapeHexChar":
-                eat(TEscapeHexChar.class);
-                return EscapeChar.ESCAPE_HEX_CHAR;
+                return new SpecialEscapeChar(
+                    eat(TEscapeHexChar.class).getText()
+                );
             case "TEscapeNewline":
                 eat(TEscapeNewline.class);
-                return EscapeChar.ESCAPE_NEWLINE;
+                return StandardEscapeChar.ESCAPE_NEWLINE;
             case "TEscapeOctalChar":
-                eat(TEscapeOctalChar.class);
-                return EscapeChar.ESCAPE_OCTAL_CHAR;
+                return new SpecialEscapeChar(
+                    eat(TEscapeOctalChar.class).getText()
+                );
             case "TEscapeQuestionMark":
                 eat(TEscapeQuestionMark.class);
-                return EscapeChar.ESCAPE_QUESTION_MARK;
+                return StandardEscapeChar.ESCAPE_QUESTION_MARK;
             case "TEscapeSingleQuote":
                 eat(TEscapeSingleQuote.class);
-                return EscapeChar.ESCAPE_SINGLE_QUOTE;
+                return StandardEscapeChar.ESCAPE_SINGLE_QUOTE;
             case "TEscapeTab":
                 eat(TEscapeTab.class);
-                return EscapeChar.ESCAPE_TAB;
+                return StandardEscapeChar.ESCAPE_TAB;
             case "TEscapeUnicodeChar":
-                eat(TEscapeUnicodeChar.class);
-                return EscapeChar.ESCAPE_UNICODE_CHAR;
+                return new SpecialEscapeChar(
+                    eat(TEscapeUnicodeChar.class).getText()
+                );
             case "TEscapeVerticalTab":
                 eat(TEscapeVerticalTab.class);
-                return EscapeChar.ESCAPE_VERTICAL_TAB;
+                return StandardEscapeChar.ESCAPE_VERTICAL_TAB;
             default:
                 error();
         }

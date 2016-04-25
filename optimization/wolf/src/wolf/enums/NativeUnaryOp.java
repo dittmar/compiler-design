@@ -1,9 +1,5 @@
 package wolf.enums;
 
-import java.util.ArrayList;
-import java.util.List;
-import wolf.FlatType;
-import wolf.Type;
 import wolf.interfaces.UnaryOp;
 import wolf.interfaces.Visitor;
 import wolf.node.TIdentity;

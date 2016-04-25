@@ -1,5 +1,6 @@
 package wolf.enums;
 
+import java.lang.reflect.Constructor;
 import wolf.node.Token;
 
 /**
@@ -12,7 +13,7 @@ import wolf.node.Token;
 public final class EnumReporter {    
     public static String report(Class token_class) {
         try {
-            return ((Token)token_class.newInstance()).getText();
+                return ((Token)token_class.newInstance()).getText();
         } catch (InstantiationException | IllegalAccessException e) {
             throw new IllegalArgumentException("Bad class: " + token_class);
         }
