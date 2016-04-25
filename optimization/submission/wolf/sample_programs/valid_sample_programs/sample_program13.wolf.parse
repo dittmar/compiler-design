@@ -1,0 +1,41 @@
+SigArgs parsed successfully: \ ( ( int num 
+Sig parsed successfully: \ ( ( int num ) 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 
+NativeBinary parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 
+NativeBinary parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) 
+String parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' 
+NativeUnary parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) 
+String parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' 
+NativeUnary parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) 
+Branch parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) 
+NativeUnary parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 
+NativeBinary parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 
+NativeBinary parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) 
+String parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' 
+NativeUnary parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) 
+String parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' 
+NativeUnary parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' ) 
+Branch parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' ) 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' ) 
+NativeUnary parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' ) ) 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' ) ) 
+NativeBinary parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' ) ) ) 
+Lambda parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' ) ) ) ) 
+UserFunc parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' ) ) ) ) 
+Arg parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' ) ) ) ) ( 15 
+Args parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' ) ) ) ) ( 15 
+ArgList parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' ) ) ) ) ( 15 ) 
+Program parsed successfully: \ ( ( int num ) -> + ( print ( ; = ( % ( num , 3 ) , 0 ) ? print ( ' FIZZ ' ) : @ ( ' ' ) ) , print ( ; = ( % ( num , 5 ) , 0 ) ? print ( ' BUZZ ' ) : @ ( ' ' ) ) ) ) ( 15 ) 

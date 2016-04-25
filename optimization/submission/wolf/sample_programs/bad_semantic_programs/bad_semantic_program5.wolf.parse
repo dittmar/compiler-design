@@ -1,0 +1,20 @@
+SigArgs parsed successfully: def int fivePlus ( int num 
+Sig parsed successfully: def int fivePlus ( int num ) 
+SigArgs parsed successfully: def int fivePlus ( int num ) := \ ( ( int y 
+Sig parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) 
+Arg parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y 
+Arg parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 
+NativeBinary parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) 
+Lambda parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) ) 
+UserFunc parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) ) 
+Arg parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) ) ( 1 
+Arg parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) ) ( 1 , 2 
+ArgRest parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) ) ( 1 , 2 
+Args parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) ) ( 1 , 2 
+ArgList parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) ) ( 1 , 2 ) 
+Def parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) ) ( 1 , 2 ) 
+UserFunc parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) ) ( 1 , 2 ) fivePlus 
+Arg parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) ) ( 1 , 2 ) fivePlus ( 5 
+Args parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) ) ( 1 , 2 ) fivePlus ( 5 
+ArgList parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) ) ( 1 , 2 ) fivePlus ( 5 ) 
+Program parsed successfully: def int fivePlus ( int num ) := \ ( ( int y ) -> + ( y , 5 ) ) ( 1 , 2 ) fivePlus ( 5 ) 

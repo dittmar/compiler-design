@@ -1,0 +1,20 @@
+`
+  Kevin Dittmar
+  William Ezekiel
+  Joe Alacqua
+`
+`This function adds up all elements in a list`
+def int sumList(list int l) := ; =(#(l),0) ? @(0) : +(h(l), sumList(t(l)))
+
+`This function gets the product
+of all elements in a list`
+def int prodList(list int argParty) := 
+    ; =(#(argParty), 0)
+    ? @(1)
+    : *(h(argParty), prodList(t(argParty)))
+
+`
+returns 76
+I'm a comment
+`
+sumList([prodList([1,2,3]), prodList([5,7,2]), prodList([0,127,9])])
