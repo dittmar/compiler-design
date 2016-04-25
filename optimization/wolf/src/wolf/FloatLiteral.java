@@ -25,6 +25,10 @@ public class FloatLiteral extends Arg implements ListElement {
      */
     @Override
     public Object accept(Visitor v) {
-        return v.visit(this); //return new Type(FlatType.FLOAT);
+        return v.visit(this);
+    }
+
+    public String toString() {
+        return float_literal.toString();
     }
 }

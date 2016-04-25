@@ -27,4 +27,8 @@ public class FoldBody {
     public Object accept(Visitor v) {
         return v.visit(this);
     }
+
+    public String toString() {
+        return bin_op.toString() + ", " + list_argument;
+    }
 }

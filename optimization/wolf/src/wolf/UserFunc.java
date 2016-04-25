@@ -32,4 +32,8 @@ public class UserFunc extends WolfFunction implements UnaryOp, BinOp {
     public Object accept(Visitor v) {
         return v.visit(this);
     }
+
+    public String toString() {
+        return user_func_name.toString() + arg_list.toString();
+    }
 }

@@ -1,7 +1,6 @@
 `
   A branch where both the true
   and false parts do the same thing.
-  // Works!
 `
 def int addFive(int num) := ; =(num,5) ? +(num,5) : +(num,5)
 addFive(10)

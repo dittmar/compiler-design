@@ -51,6 +51,6 @@ public class WolfLambda extends WolfFunction
     
     @Override
     public String toString() {
-        return "\\" + sig.toString();
+        return "\\" + "(" +sig.toString() + " ->" + function.toString() + ")";
     }
 }

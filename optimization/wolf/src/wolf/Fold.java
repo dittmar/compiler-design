@@ -29,4 +29,8 @@ public class Fold extends WolfFunction {
     public Object accept(Visitor v) {
         return v.visit(this);
     }
+
+    public String toString() {
+        return fold_symbol.toString() +  "(" + fold_body.toString() + ")";
+    }
 }
