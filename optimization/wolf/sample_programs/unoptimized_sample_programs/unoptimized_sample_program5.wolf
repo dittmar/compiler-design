@@ -1,0 +1,8 @@
+`
+    A branch where the condition always evaluates to false.
+    Definition should become the false part of the branch
+    Also test optimizations in lambdas.
+`
+def int alwaysFalse(int a) := ; =(0,1) ? @(a) : ~(a)
+alwaysFalse(\((int i) -> +(~(~(~(2))),i))(3))
+

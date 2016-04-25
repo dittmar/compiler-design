@@ -29,10 +29,12 @@ public class ArgsList extends Args {
     public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("(");
-      for(int i = 0; i < getArgList().size()-1; i++) {
-        sb.append(getArgList().get(i)).append(", ");
+      if(getArgList().size() > 0) {
+        for(int i = 0; i < getArgList().size()-1; i++) {
+          sb.append(getArgList().get(i)).append(", ");
+        }
+        sb.append(getArgList().get(getArgList().size()-1));
       }
-      sb.append(getArgList().get(getArgList().size()-1));
       sb.append(")");
       return sb.toString();
     }

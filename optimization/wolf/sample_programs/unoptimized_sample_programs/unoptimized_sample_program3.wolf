@@ -1,9 +1,9 @@
 `
-  A branch where the condition always evaluates to true
-  and a branch where the condition always evaluates to false.
+  A branch where the condition always evaluates to true.
   Also handle multiplication by 0.
-  Since multiplication by 0 removes myNegativeNumber, also remove it's definition.
+  Since multiplication by 0 removes myNegativeNumber in the function, it will be considered
+  unused. It's definition should be removed.
 `
 def int myNumber(int num) := ; =(0,0) ? @(num) : ~(num)
-def int myNegativeNumber(int num) := ; =(0,1) ? @(num) : ~(num)
+def int myNegativeNumber(int num) := ; =(0,num) ? @(num) : ~(num)
 myNumber(*(myNegativeNumber(2),0))

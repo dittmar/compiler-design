@@ -173,8 +173,16 @@ public class IdentifierUsage implements Visitor {
   @Override
   public Boolean visit(IntLiteral n) { return false; }
 
+  // Needs fixing
   @Override
-  public Boolean visit(WolfList n) { return false; }
+  public Boolean visit(WolfList n) {
+    for(ListElement element: n.list_elements) {
+      if((Boolean) element.accept(this)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   @Override
   public Boolean visit(WolfString n) { return false; }
