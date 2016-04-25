@@ -25,7 +25,7 @@ import wolf.node.TEscapeVerticalTab;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public interface EscapeChar extends StringMiddle {
+public interface EscapeChar {
     @Override
     public String toString();
 }

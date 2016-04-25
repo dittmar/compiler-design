@@ -20,17 +20,17 @@ import wolf.node.TEscapeVerticalTab;
  * @version Apr 25, 2016
  */
 public enum StandardEscapeChar implements EscapeChar{
-    ESCAPE_ALARM(TEscapeAlarm.class, "\\a"),
-    ESCAPE_BACKSPACE(TEscapeBackspace.class, "\\b"),
-    ESCAPE_FORMFEED(TEscapeFormfeed.class, "\\f"),
-    ESCAPE_CARRIAGE_RETURN(TEscapeCarriageReturn.class, "\\r"),
-    ESCAPE_NEWLINE(TEscapeNewline.class, "\\n"),
-    ESCAPE_TAB(TEscapeTab.class, "\\t"),
-    ESCAPE_VERTICAL_TAB(TEscapeVerticalTab.class, "\\v"),
-    ESCAPE_BACKSLASH(TEscapeBackslash.class, "\\\\"),
-    ESCAPE_SINGLE_QUOTE(TEscapeSingleQuote.class, "\\'"),
-    ESCAPE_DOUBLE_QUOTE(TEscapeDoubleQuote.class, "\\\""),
-    ESCAPE_QUESTION_MARK(TEscapeQuestionMark.class, "\\?");
+    ESCAPE_ALARM(TEscapeAlarm.class, "a"),
+    ESCAPE_BACKSPACE(TEscapeBackspace.class, "b"),
+    ESCAPE_FORMFEED(TEscapeFormfeed.class, "f"),
+    ESCAPE_CARRIAGE_RETURN(TEscapeCarriageReturn.class, "r"),
+    ESCAPE_NEWLINE(TEscapeNewline.class, "n"),
+    ESCAPE_TAB(TEscapeTab.class, "t"),
+    ESCAPE_VERTICAL_TAB(TEscapeVerticalTab.class, "v"),
+    ESCAPE_BACKSLASH(TEscapeBackslash.class, "\\"),
+    ESCAPE_SINGLE_QUOTE(TEscapeSingleQuote.class, "'"),
+    ESCAPE_DOUBLE_QUOTE(TEscapeDoubleQuote.class, "\""),
+    ESCAPE_QUESTION_MARK(TEscapeQuestionMark.class, "?");
     
     private final Class token_class;
     private final String text;
@@ -42,16 +42,6 @@ public enum StandardEscapeChar implements EscapeChar{
     StandardEscapeChar(Class token_class, String text) {
         this.token_class = token_class;
         this.text = text;
-    }
-    
-    /**
-     * Accept a visitor
-     * @param v a visitor
-     * @return the result of visiting a StandardEscapeChar
-     */
-    @Override
-    public Object accept(Visitor v) {
-        return v.visit(this);
     }
     
     @Override

@@ -61,8 +61,6 @@ public interface Visitor {
 
     Object visit(StringEscapeSeq n);
 
-    Object visit(EscapeChar n);
-
     Object visit(NativeBinOp n);
 
     Object visit(NativeUnaryOp n);

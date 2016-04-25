@@ -604,16 +604,6 @@ public class Optimizer implements Visitor {
   }
 
   /**
-   * Optimize a given escape character
-   * @param n an escape character.
-   * @return the given escape character, it's already optimized.
-   */
-  @Override
-  public EscapeChar visit(EscapeChar n) {
-    return n;
-  }
-
-  /**
    * Optimize a native binary operator.
    * @param n a native binary operator.
    * @return the given native binary operator, it's already optimized.

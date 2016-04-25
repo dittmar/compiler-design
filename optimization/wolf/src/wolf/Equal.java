@@ -92,11 +92,6 @@ public class Equal implements Visitor {
     }
 
     @Override
-  public Boolean visit(EscapeChar n) {
-    return false;
-  }
-
-    @Override
   public Boolean visit(StringBody n) {
     return false;
   }

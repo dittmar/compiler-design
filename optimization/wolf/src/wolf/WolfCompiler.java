@@ -219,11 +219,6 @@ public class WolfCompiler implements Visitor {
 
     @Override
     public String visit(StringEscapeSeq n) {
-        return "";
-    }
-
-    @Override
-    public String visit(EscapeChar n) {
         return n.toString();
     }
 

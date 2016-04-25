@@ -14,6 +14,10 @@ import wolf.interfaces.Visitor;
 public class StringEscapeSeq implements StringMiddle {
     EscapeChar escape_char;
     
+    public StringEscapeSeq(EscapeChar escape_char) {
+        this.escape_char = escape_char;
+    }
+    
     /**
      * Accept a visitor
      * @param v a visitor

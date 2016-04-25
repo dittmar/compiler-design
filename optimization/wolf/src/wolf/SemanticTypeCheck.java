@@ -658,18 +658,6 @@ public class SemanticTypeCheck implements Visitor {
     }
 
     /**
-     * Visit a string escape character.
-     *
-     * @param n the escape character
-     * @return null, no use in SemanticTypeCheck
-     */
-    @Override
-    public Type visit(EscapeChar n) {
-        // do nothing, return null
-        return null;
-    }
-
-    /**
      * Visit a native binary operator.
      *
      * @param n the native binary operator

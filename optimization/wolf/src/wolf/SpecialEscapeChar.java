@@ -16,12 +16,8 @@ public class SpecialEscapeChar implements EscapeChar {
         this.escape_char_text = escape_char_text;
     }
     
+    @Override
     public String toString() {
         return escape_char_text;
-    }
-    
-    @Override
-    public Object accept(Visitor v) {
-        return v.visit(this);
     }
 }

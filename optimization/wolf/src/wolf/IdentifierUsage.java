@@ -3,7 +3,6 @@ package wolf;
 import wolf.interfaces.EscapeChar;
 import wolf.interfaces.*;
 import wolf.enums.*;
-import wolf.node.*;
 
 /**
  * Determines if an identifier is used.
@@ -192,9 +191,6 @@ public class IdentifierUsage implements Visitor {
 
   @Override
   public Boolean visit(StringEscapeSeq n) { return false; }
-
-  @Override
-  public Boolean visit(EscapeChar n) { return false; }
 
   @Override
   public Boolean visit(NativeBinOp n) { return false; }

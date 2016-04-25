@@ -277,58 +277,72 @@ public class Parser {
      *
      * @return abstract syntax tree for Escape
      */
-    private EscapeChar Escape() {
+    private StringEscapeSeq Escape() {
         eat(TStringEscape.class);
         switch (getTokenName()) {
             case "TEscapeAlarm":
                 eat(TEscapeAlarm.class);
-                return StandardEscapeChar.ESCAPE_ALARM;
+                return new StringEscapeSeq(StandardEscapeChar.ESCAPE_ALARM);
             case "TEscapeBackslash":
                 eat(TEscapeBackslash.class);
-                return StandardEscapeChar.ESCAPE_BACKSLASH;
+                return new StringEscapeSeq(
+                    StandardEscapeChar.ESCAPE_BACKSLASH
+                );
             case "TEscapeBackspace":
                 eat(TEscapeBackspace.class);
-                return StandardEscapeChar.ESCAPE_BACKSPACE;
+                return new StringEscapeSeq(
+                    StandardEscapeChar.ESCAPE_BACKSPACE
+                );
             case "TEscapeCarriageReturn":
                 eat(TEscapeCarriageReturn.class);
-                return StandardEscapeChar.ESCAPE_CARRIAGE_RETURN;
-            case "TEscapeDefault":
-                return new SpecialEscapeChar(
-                    eat(TEscapeDefault.class).getText()
+                return new StringEscapeSeq(
+                    StandardEscapeChar.ESCAPE_CARRIAGE_RETURN
                 );
+            case "TEscapeDefault":
+                return new StringEscapeSeq(new SpecialEscapeChar(
+                    eat(TEscapeDefault.class).getText()
+                ));
             case "TEscapeDoubleQuote":
                 eat(TEscapeDoubleQuote.class);
-                return StandardEscapeChar.ESCAPE_DOUBLE_QUOTE;
+                return new StringEscapeSeq(
+                    StandardEscapeChar.ESCAPE_DOUBLE_QUOTE
+                );
             case "TEscapeFormfeed":
                 eat(TEscapeFormfeed.class);
-                return StandardEscapeChar.ESCAPE_FORMFEED;
+                return new StringEscapeSeq(StandardEscapeChar.ESCAPE_FORMFEED);
             case "TEscapeHexChar":
-                return new SpecialEscapeChar(
+                return new StringEscapeSeq(new SpecialEscapeChar(
                     eat(TEscapeHexChar.class).getText()
-                );
+                ));
             case "TEscapeNewline":
                 eat(TEscapeNewline.class);
-                return StandardEscapeChar.ESCAPE_NEWLINE;
+                return new StringEscapeSeq(StandardEscapeChar.ESCAPE_NEWLINE);
             case "TEscapeOctalChar":
-                return new SpecialEscapeChar(
+                return new StringEscapeSeq(new SpecialEscapeChar(
                     eat(TEscapeOctalChar.class).getText()
-                );
+                ));
             case "TEscapeQuestionMark":
                 eat(TEscapeQuestionMark.class);
-                return StandardEscapeChar.ESCAPE_QUESTION_MARK;
+                return new StringEscapeSeq(
+                    StandardEscapeChar.ESCAPE_QUESTION_MARK
+                );
             case "TEscapeSingleQuote":
                 eat(TEscapeSingleQuote.class);
-                return StandardEscapeChar.ESCAPE_SINGLE_QUOTE;
+                return new StringEscapeSeq(
+                    StandardEscapeChar.ESCAPE_SINGLE_QUOTE
+                );
             case "TEscapeTab":
                 eat(TEscapeTab.class);
-                return StandardEscapeChar.ESCAPE_TAB;
+                return new StringEscapeSeq(StandardEscapeChar.ESCAPE_TAB);
             case "TEscapeUnicodeChar":
-                return new SpecialEscapeChar(
+                return new StringEscapeSeq(new SpecialEscapeChar(
                     eat(TEscapeUnicodeChar.class).getText()
-                );
+                ));
             case "TEscapeVerticalTab":
                 eat(TEscapeVerticalTab.class);
-                return StandardEscapeChar.ESCAPE_VERTICAL_TAB;
+                return new StringEscapeSeq(
+                    StandardEscapeChar.ESCAPE_VERTICAL_TAB
+                );
             default:
                 error();
         }
