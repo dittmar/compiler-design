@@ -1,0 +1,3 @@
+ def int fizzBuzz(int num) := =(print(FIZZBUZZ), num)
+ def int main(int num) := +(fizzBuzz(num), main(+(num, 1)))
+main(0)

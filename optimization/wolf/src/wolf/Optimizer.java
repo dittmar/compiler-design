@@ -429,8 +429,8 @@ public class Optimizer implements Visitor {
         break;
       case AND:
         // true && true = true
-        if(!equal.visit(op_left,zero) && !equal.visit(op_right,zero) ||
-            !equal.visit(op_left,identity_zero) && !equal.visit(op_right,identity_zero)) {
+        if(!equal.visit(op_left,zero) && !equal.visit(op_right,zero) &&  op_left instanceof IntLiteral ||
+            !equal.visit(op_left,identity_zero) && !equal.visit(op_right,identity_zero) && op_right instanceof IntLiteral) {
           return identity_one;
         }
 
@@ -623,13 +623,15 @@ public class Optimizer implements Visitor {
     return n;
   }
 
-    @Override
-    public Object visit(Type n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public Object visit(InputArg n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  // For Future Compiler
+  @Override
+  public Object visit(Type n) {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
+
+  @Override
+  public Object visit(InputArg n) {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
 }

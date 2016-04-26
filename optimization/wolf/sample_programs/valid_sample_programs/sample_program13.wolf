@@ -1,2 +1,11 @@
-\((int num) -> +(print(; =(%(num, 3), 0) ? print('FIZZ') : @('')),
-				 print(; =(%(num, 5), 0) ? print('BUZZ') : @(''))))(15)
+def int divThree(int num) := =(%(num, 3), 0)
+def int divFive(int num) := =(%(num, 5), 0)
+def int fizzBuzz(int num) := ; &(divThree(num), divFive(num))
+                             ? =(print('FIZZBUZZ'), num)
+                             :  ; divThree(num)
+                                ? =(print('FIZZ'), '')
+                                :  ; divFive(num)
+                                   ? =(print('BUZZ'), '')
+                                   : print(num)
+def int main(int num) := +(fizzBuzz(num), main(+(num, 1)))
+main(0)
