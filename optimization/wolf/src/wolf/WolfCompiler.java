@@ -1,6 +1,7 @@
 package wolf;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import wolf.enums.FoldSymbol;
 import wolf.enums.NativeBinOp;
@@ -21,6 +22,12 @@ import wolf.interfaces.WolfFunction;
  * @version Apr 23, 2016
  */
 public class WolfCompiler implements Visitor {
+    private final String IMPORTS = 
+        "import java.util.List;\n" +
+        "import java.util.ArrayList;\n" +
+        "import java.util.Collections;\n" +
+        "import java.util.function.BiFunction;\n" +
+        "import java.util.function.Function;\n"; 
     private final StringBuilder user_function_builder;
     private final StringBuilder main_vars_builder;
     private StringBuilder scope_side_effects;
@@ -35,7 +42,17 @@ public class WolfCompiler implements Visitor {
         main_vars_builder = new StringBuilder();
         post_main_helpers = new StringBuilder();
         this.stc = stc;
-        this.class_name = filename;
+        this.class_name = ((filename.contains("_")) ?
+            Arrays.asList(filename.split("_"))
+                .stream()
+                .map(string -> titlecase(string))
+                .reduce("", String::concat) : 
+            titlecase(filename)).split("\\.")[0];
+    }
+    
+    private String titlecase(String string) {
+        return string.substring(0, 1).toUpperCase() +
+               string.substring(1, string.length()).toLowerCase();
     }
     
     public void compile(Program program) {
@@ -49,8 +66,10 @@ public class WolfCompiler implements Visitor {
             user_function_builder.append(def.accept(this));
         }
         String main = buildMain(n.function);
-        return user_function_builder.toString() +
-               main;
+        return IMPORTS + 
+               "public class " + class_name + " {\n" +
+               user_function_builder.toString() +
+               main + "}";
     }
     
     @Override
@@ -277,7 +296,7 @@ public class WolfCompiler implements Visitor {
 
     @Override
     public String visit(WolfString n) {
-        return n.toString();
+        return "\"" + n.toString() + "\"";
     }
 
     @Override

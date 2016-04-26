@@ -1,13 +1,9 @@
-
-import java.util.ArrayList;
 import java.util.List;
-
-/**
- *
- * @author Kevin Dittmar
- * @version Apr 26, 2016
- */
-public class Testing {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+public class SampleProgram1 {
 public static Integer sumList(List<Integer> l){
 ArrayList<Integer>temp0 = new ArrayList<>(l);
 return (l.size() == 0)
