@@ -291,21 +291,15 @@ public class Equal {
       System.out.println("No match");
       return false;
     }
-<<<<<<< 783f99c1df44b2bf9b927fe797a7dff5e2c28476
-=======
 
-    @Override
     public Boolean visit(Type n) { return false; }
 
-    @Override
     public Boolean visit(InputArg n) { return false; }
 
-    @Override
     public Boolean visit(NativeListBinaryOp n) {
         return false;
     }
 
-    @Override
     public Boolean visit(NativeListUnaryOp n) {
         return false;
     }
