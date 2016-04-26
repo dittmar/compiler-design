@@ -51,16 +51,16 @@ public enum NativeBinOp implements BinOp {
     }
     
     @Override
-    public Object accept(Visitor v) {
-        return v.visit(this);
-    }
-    
-    @Override
     public String toString() {
         return EnumReporter.report(token_class);
     }
 
     public Class getTokenClass() {
         return token_class;
+    }
+
+    @Override
+    public Object accept(Visitor v) {
+        return v.visit(this);
     }
 }

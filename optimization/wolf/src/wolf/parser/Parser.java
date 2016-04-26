@@ -228,6 +228,8 @@ public class Parser {
     private BinOp BinOp() {
         if (isNativeBinOp()) {
             return NativeBinOp();
+        } else if (isNativeListBinaryOp()) {
+            return NativeListBinaryOp();
         } else if (token instanceof TIdentifier) {
             return new Identifier((TIdentifier) eat(TIdentifier.class));
         } else if (token instanceof TLambdaStart) {
@@ -869,6 +871,8 @@ public class Parser {
     private UnaryOp UnaryOp() {
         if (isNativeUnaryOp()) {
             return NativeUnaryOp();
+        } else if (isNativeListUnaryOp()) {
+            return NativeListUnaryOp();
         } else if (token instanceof TIdentifier) {
             return new Identifier((TIdentifier) eat(TIdentifier.class));
         } else if (token instanceof TLambdaStart) {

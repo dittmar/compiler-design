@@ -13,7 +13,7 @@ import wolf.interfaces.WolfFunction;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public class NativeListUnary extends WolfFunction implements UnaryOp {
+public class NativeListUnary extends WolfFunction {
     NativeListUnaryOp list_unary_op;
     ListArgument list_argument;
     

@@ -1,6 +1,5 @@
 package wolf;
 
-import wolf.interfaces.EscapeChar;
 import wolf.interfaces.*;
 import wolf.enums.*;
 
@@ -205,4 +204,14 @@ public class IdentifierUsage implements Visitor {
   public Boolean visit(InputArg n) {
     return false;
   }
+
+    @Override
+    public Boolean visit(NativeListBinaryOp n) {
+        return false;
+    }
+
+    @Override
+    public Boolean visit(NativeListUnaryOp n) {
+        return false;
+    }
 }

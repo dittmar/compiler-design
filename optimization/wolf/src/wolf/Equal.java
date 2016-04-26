@@ -402,4 +402,14 @@ public class Equal implements Visitor {
 
     @Override
     public Boolean visit(InputArg n) { return false; }
+
+    @Override
+    public Object visit(NativeListBinaryOp n) {
+        return null;
+    }
+
+    @Override
+    public Object visit(NativeListUnaryOp n) {
+        return null;
+    }
 }

@@ -16,7 +16,7 @@ import wolf.interfaces.WolfFunction;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public class NativeListBinary extends WolfFunction implements BinOp {
+public class NativeListBinary extends WolfFunction {
     NativeListBinaryOp binary_op;
     Arg arg;
     ListArgument list_argument;
