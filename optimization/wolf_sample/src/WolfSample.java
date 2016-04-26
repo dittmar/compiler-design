@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.function.BiFunction;
 public class WolfSample {
 
     public static Integer sumList(ArrayList<Integer> l) {
@@ -29,6 +30,10 @@ public class WolfSample {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        BiFunction<String, String,String> bi = (x, y) -> {      
+            return x + y;
+        };
+
         ArrayList<Integer> list1 = new ArrayList<>();
         list1.add(1);
         list1.add(2);

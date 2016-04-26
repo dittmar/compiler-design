@@ -1,6 +1,5 @@
 package wolf.parser;
 
-import wolf.interfaces.EscapeChar;
 import wolf.enums.StandardEscapeChar;
 import java.io.File;
 import java.io.FileWriter;
@@ -91,7 +90,6 @@ public class Parser {
                 op_ast = optimizer.visit(op_ast);
                 if(!equal.visit(op_ast,ast)) { // change (optimization) occurred
                     was_optimized = true;
-                    continue;
                 }
                 else {  // no change, fully optimized.
                     break;
@@ -115,12 +113,10 @@ public class Parser {
                 System.out.println("No optimizations");
             }
 
-            //WolfCompiler compiler = new WolfCompiler(stc, filename);
-            //compiler.compile(ast);
+            WolfCompiler compiler = new WolfCompiler(stc, filename);
+            compiler.compile(ast);
 
-        } catch (UnsupportedOperationException e) {
-            System.out.println(e);
-        } catch (ArithmeticException e) {
+        } catch (UnsupportedOperationException | ArithmeticException e) {
             System.out.println(e);
         }
         

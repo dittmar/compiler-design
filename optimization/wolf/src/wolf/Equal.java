@@ -281,7 +281,12 @@ public class Equal {
             return false;
           }
         }
-      return true;
+        return true;
+      } else if(obj1 instanceof InputArg) {
+            InputArg ia1 = (InputArg) obj1;
+            InputArg ia2 = (InputArg) obj2;
+            return ia1.arg_number.equals(ia2.arg_number) &&
+                   ia1.type.equals(ia2.type);
       }
       System.out.println("No match");
       return false;
