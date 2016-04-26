@@ -1,0 +1,20 @@
+SigArgs parsed successfully: . ( \ ( ( int a 
+Sig parsed successfully: . ( \ ( ( int a ) 
+Arg parsed successfully: . ( \ ( ( int a ) -> ~ ( a 
+NativeUnary parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) 
+Lambda parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) 
+Foldr parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } 
+ListElement parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 
+ListElement parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 , 2 
+ListElement parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 , 2 
+Arg parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 , 2 , ~ ( 3 
+NativeUnary parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 , 2 , ~ ( 3 ) 
+ListElement parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 , 2 , ~ ( 3 ) 
+ListElement parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 , 2 , ~ ( 3 ) 
+ListElement parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 , 2 , ~ ( 3 ) , 5 
+ListElement parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 , 2 , ~ ( 3 ) , 5 
+Args parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 , 2 , ~ ( 3 ) , 5 
+List parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 , 2 , ~ ( 3 ) , 5 ] 
+FoldBody parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 , 2 , ~ ( 3 ) , 5 ] ) 
+Map parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 , 2 , ~ ( 3 ) , 5 ] ) ) 
+Program parsed successfully: . ( \ ( ( int a ) -> ~ ( a ) ) , } ( + , [ 1 , 2 , ~ ( 3 ) , 5 ] ) ) 

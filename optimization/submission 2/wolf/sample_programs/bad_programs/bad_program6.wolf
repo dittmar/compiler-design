@@ -1,0 +1,2 @@
+def int p(string q, string s) := =(q, s)
++(2, 1, 5)

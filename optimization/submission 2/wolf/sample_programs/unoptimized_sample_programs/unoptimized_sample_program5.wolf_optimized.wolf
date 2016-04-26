@@ -1,0 +1,2 @@
+ def int alwaysFalse(int a) := ~(a)
+alwaysFalse(\((int i) ->+(~(2), i))(3))

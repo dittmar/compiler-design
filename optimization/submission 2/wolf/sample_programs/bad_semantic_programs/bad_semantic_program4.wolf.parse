@@ -1,0 +1,10 @@
+SigArgs parsed successfully: \ ( ( string argParty 
+Sig parsed successfully: \ ( ( string argParty ) 
+Arg parsed successfully: \ ( ( string argParty ) -> @ ( argParty 
+NativeUnary parsed successfully: \ ( ( string argParty ) -> @ ( argParty ) 
+Lambda parsed successfully: \ ( ( string argParty ) -> @ ( argParty ) ) 
+UserFunc parsed successfully: \ ( ( string argParty ) -> @ ( argParty ) ) 
+Arg parsed successfully: \ ( ( string argParty ) -> @ ( argParty ) ) ( 2 
+Args parsed successfully: \ ( ( string argParty ) -> @ ( argParty ) ) ( 2 
+ArgList parsed successfully: \ ( ( string argParty ) -> @ ( argParty ) ) ( 2 ) 
+Program parsed successfully: \ ( ( string argParty ) -> @ ( argParty ) ) ( 2 ) 

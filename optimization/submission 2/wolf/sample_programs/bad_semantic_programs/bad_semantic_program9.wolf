@@ -1,0 +1,6 @@
+`
+While it may look alright, the "LIST" being passed
+to map is actually going to end up being an INTEGER because
+it is folded.
+`
+.(\((int a) -> ~(a)), }(+, [1,2,~(3),5]))
