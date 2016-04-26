@@ -576,6 +576,7 @@ public class SemanticTypeCheck implements Visitor {
         if (tv == null) {
             return null;
         }
+        n.setType(tv.type);
         return tv.type;
     }
 

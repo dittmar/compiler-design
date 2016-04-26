@@ -21,9 +21,9 @@ import wolf.interfaces.WolfFunction;
  * @version Apr 23, 2016
  */
 public class WolfCompiler implements Visitor {
-    
-    private final StringBuilder java_program_builder;
-    private StringBuilder current_function_initializations;
+    private final StringBuilder user_function_builder;
+    private final StringBuilder main_vars_builder;
+    private StringBuilder scope_side_effects;
     private final StringBuilder post_main_helpers;
     private final SemanticTypeCheck stc;
     private final String class_name;
@@ -31,7 +31,8 @@ public class WolfCompiler implements Visitor {
     private int temp_counter = 0;
     
     public WolfCompiler(SemanticTypeCheck stc, String filename) {
-        java_program_builder = new StringBuilder();
+        user_function_builder = new StringBuilder();
+        main_vars_builder = new StringBuilder();
         post_main_helpers = new StringBuilder();
         this.stc = stc;
         this.class_name = filename;
@@ -44,10 +45,12 @@ public class WolfCompiler implements Visitor {
     @Override
     public String visit(Program n) {
         for (Def def : n.def_list) {
-            current_function_initializations = new StringBuilder();
-            java_program_builder.append(def.accept(this));
+            scope_side_effects = new StringBuilder();
+            user_function_builder.append(def.accept(this));
         }
-        return java_program_builder.append(buildMain(n.function)).toString();
+        String main = buildMain(n.function);
+        return user_function_builder.toString() +
+               main;
     }
     
     @Override
@@ -60,9 +63,10 @@ public class WolfCompiler implements Visitor {
           .append(n.sig.accept(this))
           .append("{\n");
         String function_body = (String) n.function.accept(this);
-        sb.append(current_function_initializations.toString())
+        sb.append(scope_side_effects.toString())
+          .append("return ")
           .append(function_body)
-          .append("\n}\n");
+          .append(";\n}\n");
         
         return sb.toString();
     }
@@ -81,7 +85,11 @@ public class WolfCompiler implements Visitor {
     
     @Override
     public String visit(SigArg n) {
-        return (String)n.type.accept(this) + " " +
+        String type = (String) n.type.accept(this);
+        if (n.type.is_list) {
+            type = "List<" + type + ">";
+        }
+        return type + " " +
                (String)n.identifier.accept(this);
     }
     
@@ -98,7 +106,7 @@ public class WolfCompiler implements Visitor {
     public String visit(UserFunc n) {
         String func_name = (String) n.user_func_name.accept(this);
         String arg_list = (String) n.arg_list.accept(this);
-        return func_name + arg_list + ";";
+        return func_name + arg_list;
     }
 
     @Override
@@ -142,7 +150,7 @@ public class WolfCompiler implements Visitor {
         if (n.fold_symbol.equals(FoldSymbol.FOLD_RIGHT)) {
             // Reverse the list to emulate foldr
             // The list we want to reverse is the next one.
-            current_function_initializations.append("Collections.reverse(list")
+            scope_side_effects.append("Collections.reverse(list")
               .append(saved_list_counter + 1).append(");\n");
         }
         
@@ -165,14 +173,16 @@ public class WolfCompiler implements Visitor {
     @Override
     public String visit(WolfMap n) {
         String temp_name = "temp" + temp_counter++;
-        current_function_initializations.append(arrayListDeclare(
+        scope_side_effects.append(arrayListDeclare(
             temp_name, (String) n.getType().accept(this)
         ));
-        current_function_initializations.append("for (")
+        String unary_op_string = (String) n.unary_op.accept(this);
+        String list_argument_string = (String) n.list_argument.accept(this);
+        scope_side_effects.append("for (")
           .append(n.list_argument.getType().accept(this))
-          .append("arg : ").append(n.list_argument.accept(this))
+          .append("arg : ").append(list_argument_string)
           .append(") {\n")
-          .append(temp_name).append(".add(").append(n.unary_op.accept(this))
+          .append(temp_name).append(".add(").append(unary_op_string)
           .append("(arg));\n}\n");
         return temp_name;
     }
@@ -180,12 +190,13 @@ public class WolfCompiler implements Visitor {
     @Override
     public String visit(ListArgsList n) {
         String list_name = "list" + list_counter++;
-        current_function_initializations.append(arrayListDeclare(
+        main_vars_builder.append(arrayListDeclare(
             list_name, (String) n.getArgList().get(0).getType().accept(this)
         ));
         for (Arg arg : n.getArgList()) {
-            current_function_initializations.append(list_name)
-              .append(".add(").append(arg.accept(this)).append(");\n");
+            String arg_string = (String) arg.accept(this);
+            main_vars_builder.append(list_name)
+              .append(".add(").append(arg_string).append(");\n");
         }
 
         return list_name;
@@ -197,7 +208,8 @@ public class WolfCompiler implements Visitor {
         List<String> arg_list_strings = new ArrayList<>();
         sb.append("(");
         for (Arg arg : n.getArgList()) {
-            arg_list_strings.add((String) arg.accept(this));
+            String arg_string = (String) arg.accept(this);
+            arg_list_strings.add(arg_string);
         }
         return sb.append(String.join(", ", arg_list_strings))
                  .append(")")
@@ -214,7 +226,10 @@ public class WolfCompiler implements Visitor {
 
     @Override
     public String visit(NativeListUnary n) {
-        return "";
+        return buildNativeListUnaryOperation(
+            n,
+            (String) n.list_argument.accept(this)
+        );
     }
 
     @Override
@@ -228,7 +243,11 @@ public class WolfCompiler implements Visitor {
 
     @Override
     public String visit(NativeListBinary n) {
-        return "";
+        return buildNativeListBinaryOperation(
+            n,
+            (String) n.arg.accept(this),
+            (String) n.list_argument.accept(this)
+        );
     }
 
     @Override
@@ -245,12 +264,13 @@ public class WolfCompiler implements Visitor {
     public String visit(WolfList n) {
         StringBuilder sb = new StringBuilder();
         String list_name = "list" + list_counter++;
-        current_function_initializations.append(arrayListDeclare(
+        main_vars_builder.append(arrayListDeclare(
             list_name, (String) n.getType().accept(this)
         ));
         for (ListElement le : n.list_elements) {
-            current_function_initializations.append(list_name)
-              .append(".add(").append(le.accept(this)).append(");\n");
+            String le_string = (String) le.accept(this);
+            main_vars_builder.append(list_name)
+              .append(".add(").append(le_string).append(");\n");
         }
         return list_name;
     }
@@ -285,10 +305,9 @@ public class WolfCompiler implements Visitor {
         StringBuilder sb = new StringBuilder();
         return 
             sb.append("(").append(n.condition.accept(this))
-              .append(") ? return\n")
-              .append(n.true_branch.accept(this)).append(";\n")
-              .append(": return\n").append(n.false_branch.accept(this))
-              .append(";\n}\n").toString();
+              .append(")\n? ").append(n.true_branch.accept(this))
+              .append("\n: ").append(n.false_branch.accept(this))
+              .toString();
     }
 
     @Override
@@ -357,6 +376,7 @@ public class WolfCompiler implements Visitor {
     
     private String buildBinaryLambdaCode(WolfLambda lambda, String lambda_temp) {
         StringBuilder sb = new StringBuilder();
+        String function_string = (String) lambda.function.accept(this);
         return sb.append("BiFunction<")
           .append(lambda.getType().accept(this)).append(",")
           .append(lambda.sig.sig_args.get(0).type.accept(this)).append(",")
@@ -365,7 +385,7 @@ public class WolfCompiler implements Visitor {
           .append(lambda.sig.sig_args.get(0).identifier.accept(this))
           .append(", ")
           .append(lambda.sig.sig_args.get(1).identifier.accept(this))
-          .append(") -> {\nreturn ").append(lambda.function.accept(this))
+          .append(") -> {\nreturn ").append(function_string)
           .append(";\n};\n").toString();
     }
     
@@ -378,10 +398,11 @@ public class WolfCompiler implements Visitor {
     
     private String buildListIteratorCode(Type type, String temp_name,
         ListArgument list_argument) {
+        String list_argument_string = (String) list_argument.accept(this);
         return new StringBuilder().append(type.accept(this))
           .append(temp_name).append(";\n")
           .append("for (").append(type.accept(this)).append(" arg : ")
-          .append(list_argument.accept(this))
+          .append(list_argument_string)
           .append(")").toString();
     }
     
@@ -403,20 +424,50 @@ public class WolfCompiler implements Visitor {
             case GT:
             case GTE:
             case LTE:
-            case EQUAL:
-            case NOT_EQUAL:
                 return buildArithmeticOrRelationalBinaryCode(
                     (String) bin.binary_op.accept(this), left, right
                 );
+            case EQUAL:
+                return buildArithmeticOrRelationalBinaryCode(
+                    "==" , left, right
+                );
+            case NOT_EQUAL:
+                return buildArithmeticOrRelationalBinaryCode(
+                    "!=", left, right
+                );
             case AND:
+                return buildLogicalBinaryCode(
+                    "&&", left, right
+                );
             case OR:
+                return buildLogicalBinaryCode(
+                    "||", left, right
+                );
             case XOR:
                 return buildLogicalBinaryCode(
-                    (String) bin.binary_op.accept(this), left, right
+                    "^", left, right
                 );
             default:
                 throw new UnsupportedOperationException(
                     "Unknown binary operator " + bin.binary_op.toString()
+                );
+        }
+    }
+    
+    private String buildNativeListBinaryOperation(
+        NativeListBinary bin, String arg, String list) {
+        switch (bin.binary_op) {
+            case APPEND:
+                scope_side_effects.append(list)
+                    .append(".add(").append(arg).append(")");
+                return list;
+            case PREPEND:
+                scope_side_effects.append(list)
+                    .append(".add(0, ").append(arg).append(")");
+                return list;
+            default:
+                throw new UnsupportedOperationException(
+                    "Unknown list binary operator " + bin.binary_op.toString()
                 );
         }
     }
@@ -428,7 +479,7 @@ public class WolfCompiler implements Visitor {
             case IDENTITY:
                 return arg;
             case PRINT:
-                current_function_initializations.append("System.out.println(")
+                scope_side_effects.append("System.out.println(")
                     .append(arg)
                     .append(");\n");
                 return arg;
@@ -437,6 +488,42 @@ public class WolfCompiler implements Visitor {
             default:
                 throw new UnsupportedOperationException(
                     "Unknown unary operator " + unary.unary_op.toString()
+                );
+        }
+    }
+    
+    private String buildNativeListUnaryOperation(
+        NativeListUnary unary, String list) {
+        String temp_list = "";
+        switch (unary.list_unary_op) {
+            case HEAD:
+                return list + ".get(0)";
+            case TAIL:
+                temp_list = "temp" + temp_counter++;
+                scope_side_effects.append(
+                    makeListTemp(
+                        temp_list,
+                        (String) unary.list_argument.getType().accept(this),
+                        list)
+                );
+                return temp_list + ".subList(1, " + temp_list + ".size())";
+            case LAST:
+                return list + ".get(" + list + ".size() - 1)";
+            case REVERSE:
+                temp_list = "temp" + temp_counter++;
+                scope_side_effects.append(
+                    makeListTemp(
+                        temp_list,
+                        (String) unary.list_argument.getType().accept(this),
+                        list))
+                .append("Collections.reverse(").append(temp_list).append(");");
+                return temp_list;
+            case LENGTH:
+                return list + ".size()";
+            default:
+                throw new UnsupportedOperationException(
+                    "Unknown list unary operator " +
+                    unary.list_unary_op.toString()
                 );
         }
     }
@@ -469,17 +556,22 @@ public class WolfCompiler implements Visitor {
         } else if (type.flat_type.equals(FlatType.STRING)) {
             flat_type = "String";
         }
-        if (type.is_list) {
-            return "ArrayList<" + flat_type + ">";
-        } else {
-            return flat_type;
-        }
+        return flat_type;
+    }
+    
+    private String makeListTemp(String temp, String type, String existing) {
+        return "ArrayList<" + type + ">" + temp +
+               " = new ArrayList<>(" + existing + ");\n";
     }
     
     private String buildMain(WolfFunction function) {
         StringBuilder sb = new StringBuilder();
+        String function_body = (String) function.accept(this);
         return sb.append("public static void main(String[] args) {\n")
-          .append(function.accept(this))
+          .append(main_vars_builder.toString())
+          .append("System.out.println(")
+          .append(function_body)
+          .append(");")
           .append("\n}\n").toString();
     }
 }
