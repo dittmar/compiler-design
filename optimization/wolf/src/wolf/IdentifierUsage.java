@@ -201,6 +201,7 @@ public class IdentifierUsage implements Visitor {
   public Boolean visit(Type n) {
     return false;
   }
+  @Override
   public Boolean visit(InputArg n) {
     return false;
   }
