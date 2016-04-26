@@ -1,0 +1,3 @@
+ def int logical() := !(1)
+ def int relational() := @(1)
+r([logical(), relational()])

@@ -13,7 +13,7 @@ import wolf.interfaces.Visitor;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public class NativeUnary extends WolfFunction implements UnaryOp {
+public class NativeUnary extends WolfFunction {
     NativeUnaryOp unary_op;
     Arg arg;
     

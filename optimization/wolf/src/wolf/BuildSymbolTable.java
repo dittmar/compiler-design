@@ -539,4 +539,14 @@ public class BuildSymbolTable implements Visitor {
         );
         return n.type;
     }
+
+    @Override
+    public Object visit(NativeListBinaryOp n) {
+        return null;
+    }
+
+    @Override
+    public Object visit(NativeListUnaryOp n) {
+        return null;
+    }
 }

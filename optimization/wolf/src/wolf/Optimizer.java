@@ -1,6 +1,5 @@
 package wolf;
 
-import wolf.interfaces.EscapeChar;
 import wolf.interfaces.*;
 import wolf.enums.*;
 import wolf.node.*;
@@ -249,9 +248,8 @@ public class Optimizer implements Visitor {
    */
   @Override
   public Object visit(NativeUnary n) {
-    NativeUnaryOp op_operator = (NativeUnaryOp) n.unary_op.accept(this);
     Arg op_arg = (Arg) n.arg.accept(this);
-    switch (op_operator) {
+    switch (n.unary_op) {
       case NEG:
         if(op_arg instanceof NativeUnary) {
           // negation in negation
@@ -309,7 +307,7 @@ public class Optimizer implements Visitor {
         System.err.println("Invalid Native Unary Operation");
         return null;
     }
-    return new NativeUnary(op_operator,op_arg);
+    return new NativeUnary(n.unary_op, op_arg);
   }
 
   /**
@@ -329,11 +327,10 @@ public class Optimizer implements Visitor {
    */
   @Override
   public Object visit(NativeBinary n) {
-    NativeBinOp op_operator = (NativeBinOp) n.binary_op.accept(this);
     Arg op_left = (Arg) n.arg_left.accept(this);
     Arg op_right = (Arg) n.arg_right.accept(this);
 
-    switch (op_operator) {
+    switch (n.binary_op) {
       case PLUS:
         // Identity (+0, + "")
         if(equal.visit(op_left,zero) || equal.visit(op_left,empty_string) ||
@@ -520,7 +517,7 @@ public class Optimizer implements Visitor {
         System.err.println("Invalid Binary Operator!");
         return null;
     }
-    return new NativeBinary(op_operator,op_left,op_right);
+    return new NativeBinary(n.binary_op, op_left,op_right);
   }
 
   /**
@@ -625,11 +622,21 @@ public class Optimizer implements Visitor {
 
     @Override
     public Object visit(Type n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return n;
     }
 
     @Override
     public Object visit(InputArg n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return n;
+    }
+
+    @Override
+    public Object visit(NativeListBinaryOp n) {
+        return n;
+    }
+
+    @Override
+    public Object visit(NativeListUnaryOp n) {
+        return n;
     }
 }

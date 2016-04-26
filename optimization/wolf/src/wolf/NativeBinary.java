@@ -13,7 +13,7 @@ import wolf.interfaces.WolfFunction;
  * @author Joseph Alacqua
  * @version Apr 3, 2016
  */
-public class NativeBinary extends WolfFunction implements BinOp {
+public class NativeBinary extends WolfFunction {
     NativeBinOp binary_op;
     Arg arg_left;
     Arg arg_right;

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import wolf.enums.FoldSymbol;
 import wolf.enums.NativeBinOp;
+import wolf.enums.NativeListBinaryOp;
+import wolf.enums.NativeListUnaryOp;
 import wolf.enums.NativeUnaryOp;
 import wolf.interfaces.Arg;
 import wolf.interfaces.BinOp;
@@ -22,6 +24,7 @@ public class WolfCompiler implements Visitor {
     private final SemanticTypeCheck stc;
     private final String class_name;
     private int list_counter = 0;
+    private int temp_counter = 0;
     
     public WolfCompiler(SemanticTypeCheck stc, String filename) {
         java_program_builder = new StringBuilder();
@@ -147,7 +150,15 @@ public class WolfCompiler implements Visitor {
 
     @Override
     public String visit(WolfMap n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder sb = new StringBuilder();
+        sb.append("ArrayList<")
+          .append(stringifyType(n.getType()))
+          .append("> temp")
+          .append(temp_counter++)
+          .append(" = new ArrayList<>();\n")
+          .append("for (")
+          .append(stringifyType(n.list_argument.getType()));
+        return sb.toString();
     }
 
     @Override
@@ -291,5 +302,15 @@ public class WolfCompiler implements Visitor {
         } else {
             return flat_type;
         }
+    }
+
+    @Override
+    public Object visit(NativeListBinaryOp n) {
+        return n.toString();
+    }
+
+    @Override
+    public Object visit(NativeListUnaryOp n) {
+        return n.toString();
     }
 }

@@ -1,5 +1,7 @@
 package wolf.enums;
 
+import wolf.interfaces.BinOp;
+import wolf.interfaces.Visitor;
 import wolf.node.TAppend;
 import wolf.node.TPrepend;
 
@@ -8,7 +10,7 @@ import wolf.node.TPrepend;
  * @author Kevin Dittmar
  * @version Apr 5, 2016
  */
-public enum NativeListBinaryOp {
+public enum NativeListBinaryOp implements BinOp {
     APPEND(TAppend.class),
     PREPEND(TPrepend.class);
             
@@ -25,5 +27,10 @@ public enum NativeListBinaryOp {
     @Override
     public String toString() {
         return EnumReporter.report(token_class);
+    }
+
+    @Override
+    public Object accept(Visitor v) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

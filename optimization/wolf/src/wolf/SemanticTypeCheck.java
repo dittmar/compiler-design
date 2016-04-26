@@ -67,6 +67,7 @@ public class SemanticTypeCheck implements Visitor {
             TypeErrorReporter.mismatchDefType(
                     actual_type, expected_type, def_name);
         }
+        n.function.setType(expected_type);
         return expected_type;
     }
 
@@ -142,7 +143,7 @@ public class SemanticTypeCheck implements Visitor {
         if (!cond_type.equals(new Type(FlatType.INTEGER))) {
             TypeErrorReporter.mismatchBranchCondition(cond_type);
         }
-
+        n.condition.setType(cond_type);
         Type trueType = (Type) n.true_branch.accept(this);
         n.true_branch.setType(trueType);
         Type falseType = (Type) n.false_branch.accept(this);
@@ -169,11 +170,12 @@ public class SemanticTypeCheck implements Visitor {
         last_table_names.add(current_def_table.table_name);
         current_def_table = lambda_table;
         if (n.function != null) {
-            n.function.accept(this);
+            Type type = (Type) n.function.accept(this);
+            n.function.setType(type);
         }
         current_def_table = getTableWithName(last_table_names.pop());
         Type type = parent_table.symbol_table.get(
-                lambda_table.table_name
+            lambda_table.table_name
         ).table_value.type;
         n.setType(type);
         return type;
@@ -218,17 +220,20 @@ public class SemanticTypeCheck implements Visitor {
         if (!arg_type.is_list) {
             TypeErrorReporter.noListArgument("Fold", arg_type);
         }
+        n.list_argument.setType(arg_type);
         //There's a single valid type for the operation.
         if (type_object instanceof Type) {
             Type valid_type = (Type) type_object;
-            if (valid_type.equals(new Type(arg_type.flat_type))) {
-                return arg_type;
+            Type found_type = new Type(arg_type.flat_type);
+            if (valid_type.equals(found_type)) {
+                return found_type;
             }
         } //The operation supports several different types
         else if (type_object instanceof List) {
             List<Type> valid_types = (List<Type>) type_object;
-            if (valid_types.contains(new Type(arg_type.flat_type))) {
-                return new Type(arg_type.flat_type);
+            Type found_type = new Type(arg_type.flat_type);
+            if (valid_types.contains(found_type)) {
+                return found_type;
             }
         }
         throw new UnsupportedOperationException(
@@ -245,6 +250,7 @@ public class SemanticTypeCheck implements Visitor {
     public Type visit(WolfMap n) {
         Object type_object = n.unary_op.accept(this);
         Type arg_type = (Type) n.list_argument.accept(this);
+        n.list_argument.setType(arg_type);
         if (!arg_type.is_list) {
             TypeErrorReporter.noListArgument("Map", arg_type);
         }
@@ -322,6 +328,7 @@ public class SemanticTypeCheck implements Visitor {
      * @param n a native unary
      * @return the type the native unary should return
      */
+    @Override
     public Type visit(NativeUnary n) {
         Type arg_type = (Type) n.arg.accept(this);
         n.setType(arg_type);
@@ -363,7 +370,8 @@ public class SemanticTypeCheck implements Visitor {
             case HEAD:
                 if (!arg_type.is_list) {
                     TypeErrorReporter.mismatchErrorListUnary(
-                            n.list_argument, arg_type, n.list_unary_op.toString(), null
+                        n.list_argument, arg_type,
+                        n.list_unary_op.toString(), null
                     );
                 }
                 return_type = new Type(arg_type.flat_type);
@@ -372,7 +380,8 @@ public class SemanticTypeCheck implements Visitor {
             case TAIL:
                 if (!arg_type.is_list) {
                     TypeErrorReporter.mismatchErrorListUnary(
-                            n.list_argument, arg_type, n.list_unary_op.toString(), null
+                        n.list_argument, arg_type,
+                        n.list_unary_op.toString(), null
                     );
                 }
                 n.setType(arg_type);
@@ -380,7 +389,8 @@ public class SemanticTypeCheck implements Visitor {
             case REVERSE:
                 if (!arg_type.is_list) {
                     TypeErrorReporter.mismatchErrorListUnary(
-                            n.list_argument, arg_type, n.list_unary_op.toString(), null
+                        n.list_argument, arg_type,
+                        n.list_unary_op.toString(), null
                     );
                 }
                 n.setType(arg_type);
@@ -388,7 +398,8 @@ public class SemanticTypeCheck implements Visitor {
             case LAST:
                 if (!arg_type.is_list) {
                     TypeErrorReporter.mismatchErrorListUnary(
-                            n.list_argument, arg_type, n.list_unary_op.toString(), null
+                        n.list_argument, arg_type,
+                        n.list_unary_op.toString(), null
                     );
                 }
                 return_type = new Type(arg_type.flat_type);
@@ -422,7 +433,9 @@ public class SemanticTypeCheck implements Visitor {
     @Override
     public Type visit(NativeBinary n) {
         Type left_type = (Type) n.arg_left.accept(this);
+        n.arg_left.setType(left_type);
         Type right_type = (Type) n.arg_right.accept(this);
+        n.arg_right.setType(right_type);
         boolean areSameType = (left_type.equals(right_type)
                 || (left_type.isNumeric() && right_type.isNumeric()));
         Type return_type = null;
@@ -505,7 +518,9 @@ public class SemanticTypeCheck implements Visitor {
     @Override
     public Type visit(NativeListBinary n) {
         Type arg_type = (Type) n.arg.accept(this);
+        n.arg.setType(arg_type);
         Type list_type = (Type) n.list_argument.accept(this);
+        n.list_argument.setType(list_type);
         switch (n.binary_op) {
             case APPEND:
             case PREPEND:
@@ -811,5 +826,15 @@ public class SemanticTypeCheck implements Visitor {
         } else {
             return left;
         }
+    }
+
+    @Override
+    public Object visit(NativeListBinaryOp n) {
+        return null;
+    }
+
+    @Override
+    public Object visit(NativeListUnaryOp n) {
+        return null;
     }
 }
