@@ -81,6 +81,7 @@ public class Parser {
 
             stc.visit(ast);
 
+            /*
             Optimizer optimizer = new Optimizer();
             Equal equal = new Equal();
             Program op_ast = ast;
@@ -112,9 +113,9 @@ public class Parser {
             else {
                 System.out.println("No optimizations");
             }
-
-            WolfCompiler compiler = new WolfCompiler(stc, filename);
-            compiler.compile(ast);
+*/
+            //WolfCompiler compiler = new WolfCompiler(stc, filename);
+            //compiler.compile(ast);
 
         } catch (UnsupportedOperationException | ArithmeticException e) {
             System.out.println(e);
