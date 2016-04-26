@@ -1,0 +1,2 @@
+def int func(int y, int z) := +(y, z)
+/(+("int 2", func(\((int y, int z) -> *(+(y, z), 4))(2, 1), "int 1")), "int 3")

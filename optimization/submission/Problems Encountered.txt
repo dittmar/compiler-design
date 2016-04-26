@@ -1,0 +1,10 @@
+William Ezekiel
+Kevin Dittmar
+Joseph Alacqua
+
+Program 9 Problems Encountered & Unimplemented Optimizations
+
+	We experienced a few issues when implementing the optimization phase. When we started, our visitor was only returning Types. Since future visitors (Optimize and
+IdentifierUsage) required other return types, the entirety of our Visitor Pattern usage had to be refactored. This meant that BuildSymbolTable and SemanticTypeCheck were redone. When testing to toString() methods for class for WOL(F), the Escape Characters were throwing errors. Due to the way sableCC handles constructors for its tokens and our implementation of printing such tokens, two new classes for escape characters were introduced: SpecialEscapeChar and StandardEscapeChar (Enum). 
+
+	One optimization we would have implemented had we had more time is removing signature arguments that are never used in function definitions and lambda functions. 

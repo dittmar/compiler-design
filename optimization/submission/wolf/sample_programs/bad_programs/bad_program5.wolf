@@ -1,0 +1,2 @@
+def int badBranch(int y, string z) := ; >(y, z) ? @(y) : @(z)
+badBranch(1, 3.0)

@@ -1,0 +1,8 @@
+`
+  Double Negations and Double Identity
+  Should Reduce all double logical negations, numeric negations, and identities
+  to the value of the inner negation or identity's argument.
+  ~(~(0)) -> @(0)       @(@(0)) -> @(0)
+`
+def int absValue(int num) := ; !(!(<(num,@(@(0))))) ? *(~(1),num) : @(~(~(~(~(num)))))
+absValue(~(~(~(5))))

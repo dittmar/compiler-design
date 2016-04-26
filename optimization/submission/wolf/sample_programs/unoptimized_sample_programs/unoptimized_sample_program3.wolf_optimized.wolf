@@ -1,0 +1,2 @@
+ def int myNumber(int num) := @(num)
+myNumber(@(0))
