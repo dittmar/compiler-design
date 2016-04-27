@@ -21,3 +21,6 @@ build.xml
 /optimization/wolf/build/
 /optimization/wolf_sample/nbproject/private/
 /optimization/wolf_sample/build/
+/wolf_compiler/wolf/nbproject/private/
+/wolf_compiler/wolf/build/
+/wolf_compiler/wolf/dist/
