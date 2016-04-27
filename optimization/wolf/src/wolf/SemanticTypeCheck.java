@@ -38,7 +38,7 @@ public class SemanticTypeCheck implements Visitor {
      * @return the given program
      */
     @Override
-    public Object visit(Program n) {
+    public Program visit(Program n) {
         for (Def def : n.def_list) {
             last_table_names.push(current_def_table.table_name);
             current_def_table =
@@ -47,7 +47,8 @@ public class SemanticTypeCheck implements Visitor {
             current_def_table = getTableWithName(last_table_names.pop());
         }
         main_function = n.function;
-        n.function.accept(this);
+        Type type = (Type) n.function.accept(this);
+        n.function.setType(type);
         System.out.println("Type Checking Completed Successfully!");
         return n;
     }

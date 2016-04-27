@@ -1,5 +1,10 @@
 package wolf;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +32,16 @@ public class WolfCompiler implements Visitor {
         "import java.util.ArrayList;\n" +
         "import java.util.Collections;\n" +
         "import java.util.function.BiFunction;\n" +
-        "import java.util.function.Function;\n"; 
+        "import java.util.function.Function;\n";
+    private final String PRINT_METHOD =
+      "private static void print(List list) {\n" +
+        "StringBuilder sb = new StringBuilder();\n" +
+        "sb.append(\"[ \");\n" +
+        "list.forEach(element -> sb.append(element).append(\" \"));\n" +
+        "sb.append(\"]\");\n" +
+        "System.out.println(sb.toString());\n" +
+      "}\n";
+
     private final StringBuilder user_function_builder;
     private final StringBuilder main_vars_builder;
     private StringBuilder scope_side_effects;
@@ -56,7 +70,28 @@ public class WolfCompiler implements Visitor {
     }
     
     public void compile(Program program) {
-        System.out.println(visit(program));
+        Writer writer = null;
+
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(class_name + ".java"), "utf-8"));
+            writer.write(visit(program));
+        } catch (IOException ex) {
+            System.err.println("Could not write compiled program");
+        } finally {
+            try {
+                writer.close();
+            } catch (Exception ex) {
+                System.err.println("Error closing writer");
+            }
+        }
+
+        Runtime rt = Runtime.getRuntime();
+        try {
+            Process pr = rt.exec("javac " + class_name + ".java");
+        } catch (IOException e) {
+            System.err.println("Could not run javac");
+        }
     }
     
     @Override
@@ -147,33 +182,36 @@ public class WolfCompiler implements Visitor {
         // Add the lambda helper to the list.
         helper.append("private static ")
               .append(full_lambda_signature)
+              .append(" {\nreturn ")
               .append(lambda_function)
+              .append(";\n}\n")
               .append("\n@FunctionalInterface\npublic static interface Lambda_")
               .append(n.getId())
-              .append("{").append(full_lambda_signature).append("}");
+              .append("{\n").append(full_lambda_signature).append(";\n}");
         
         post_main_helpers.append(helper).append("\n");
-        
-        return "Lambda_" + n.getId() + " " + lambda_name + " = " +
-               this.class_name + "::" + lambda_name + ";\n" +
-               return_type.accept(this) + " " + lambda_name + "_result = " +
-               lambda_name + "." + lambda_name;
+        String func_name = lambda_name + "_func";
+        scope_side_effects.append("Lambda_").append(n.getId()).append(" ").append(lambda_name)
+            .append(" = ").append(this.class_name).append("::").append(lambda_name).append(";\n")
+            .append(return_type.accept(this)).append(" ").append(func_name)
+            .append(" = ").append(lambda_name).append(".").append(lambda_name).append(";\n")
+            .toString();
+        return func_name;
     }
 
     @Override
     public String visit(Fold n) {
-        StringBuilder sb = new StringBuilder();
         String[] fold = (String[]) n.fold_body.accept(this);
         int saved_list_counter = list_counter;
-        sb.append(fold[0]);
+        scope_side_effects.append(fold[0]);
         if (n.fold_symbol.equals(FoldSymbol.FOLD_RIGHT)) {
             // Reverse the list to emulate foldr
             // The list we want to reverse is the next one.
             scope_side_effects.append("Collections.reverse(list")
               .append(saved_list_counter + 1).append(");\n");
         }
-        
-        return sb.toString();
+        scope_side_effects.append(fold[1]);
+        return "";
     }
 
     @Override
@@ -199,7 +237,7 @@ public class WolfCompiler implements Visitor {
         String list_argument_string = (String) n.list_argument.accept(this);
         scope_side_effects.append("for (")
           .append(n.list_argument.getType().accept(this))
-          .append("arg : ").append(list_argument_string)
+          .append(" arg : ").append(list_argument_string)
           .append(") {\n")
           .append(temp_name).append(".add(").append(unary_op_string)
           .append("(arg));\n}\n");
@@ -498,7 +536,12 @@ public class WolfCompiler implements Visitor {
             case IDENTITY:
                 return arg;
             case PRINT:
-                scope_side_effects.append("System.out.println(")
+                String print_method = "System.out.println";
+                if (unary.arg.getType().is_list) {
+                    print_method = "print";
+                }
+                scope_side_effects.append(print_method)
+                    .append("(")
                     .append(arg)
                     .append(");\n");
                 return arg;
@@ -586,11 +629,18 @@ public class WolfCompiler implements Visitor {
     private String buildMain(WolfFunction function) {
         StringBuilder sb = new StringBuilder();
         String function_body = (String) function.accept(this);
+        String print_method = "System.out.println";
+        if (function.getType().is_list) {
+            print_method = "print";
+        }
         return sb.append("public static void main(String[] args) {\n")
           .append(main_vars_builder.toString())
-          .append("System.out.println(")
+          .append(print_method)
+          .append("(")
           .append(function_body)
           .append(");")
-          .append("\n}\n").toString();
+          .append("\n}\n")
+          .append(post_main_helpers.toString())
+          .append(PRINT_METHOD).toString();
     }
 }

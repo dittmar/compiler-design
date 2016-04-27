@@ -27,7 +27,7 @@ public class WolfString extends Arg implements ListElement {
      */
     @Override
     public Object accept(Visitor v) {
-        return v.visit(this); //return new Type(FlatType.STRING);
+        return v.visit(this);
     }
     
     @Override
@@ -36,6 +36,6 @@ public class WolfString extends Arg implements ListElement {
         for(StringMiddle middle : string) {
             sb.append(middle.toString());
         }
-        return sb.toString();
+        return "'" + sb.toString() + "'";
     }
 }

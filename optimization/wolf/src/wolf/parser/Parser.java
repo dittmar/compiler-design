@@ -53,11 +53,6 @@ public class Parser {
         ast = Program();
         BuildSymbolTable bst = new BuildSymbolTable();
         bst.visit(ast);
-        /*SemanticTypeCheck stc = new SemanticTypeCheck(bst.getTables(),
-            bst.getProgramTable(),
-            bst.getLambdaTableList()
-        );
-        stc.visit(ast);*/
     }
 
     /**
@@ -79,20 +74,19 @@ public class Parser {
                 bst.getLambdaTables()
             );
 
-            stc.visit(ast);
+            Program typed_program = stc.visit(ast);
 
-            /*
+
             Optimizer optimizer = new Optimizer();
             Equal equal = new Equal();
-            Program op_ast = ast;
+            Program op_ast = typed_program;
             boolean was_optimized = false;
             while(true) {
-                ast = op_ast;
+                typed_program = op_ast;
                 op_ast = optimizer.visit(op_ast);
-                if(!equal.visit(op_ast,ast)) { // change (optimization) occurred
-                    was_optimized = true;
-                }
-                else {  // no change, fully optimized.
+                if(!optimizer.startedOptimized()) { // change (optimization) occurred
+                  was_optimized = true;
+                } else {  // no change, fully optimized.
                     break;
                 }
             }
@@ -104,7 +98,8 @@ public class Parser {
                     );
                     optimized_program_file_writer.write(op_ast.toString());
                     optimized_program_file_writer.close();
-                    System.out.println("Optimized File "+ filename + "_optimized.wolf generated!");
+                    filename = filename + "_optimized.wolf";
+                    System.out.println("Optimized File "+ filename + " generated!");
                 }
                 catch(IOException e) {
                     System.err.println(e);
@@ -113,9 +108,9 @@ public class Parser {
             else {
                 System.out.println("No optimizations");
             }
-*/
-            //WolfCompiler compiler = new WolfCompiler(stc, filename);
-            //compiler.compile(ast);
+
+            WolfCompiler compiler = new WolfCompiler(stc, filename);
+            compiler.compile(ast);
 
         } catch (UnsupportedOperationException | ArithmeticException e) {
             System.out.println(e);

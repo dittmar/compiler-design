@@ -40,25 +40,32 @@ public class Optimizer implements Visitor {
 
     private IdentifierUsage id_use;
 
+    private boolean started_optimized;
+
     public Optimizer() {
         equal = new Equal();
 
         one = new IntLiteral(
                 new TIntNumber("1")
         );
+        one.setType(new Type(FlatType.INTEGER));
         zero = new IntLiteral(
                 new TIntNumber("0")
         );
+        zero.setType(new Type(FlatType.INTEGER));
         identity_one = new NativeUnary(NativeUnaryOp.IDENTITY, one);
+        identity_one.setType(new Type(FlatType.INTEGER));
         identity_zero = new NativeUnary(NativeUnaryOp.IDENTITY, zero);
-
+        identity_zero.setType(new Type(FlatType.INTEGER));
         ArrayList<StringMiddle> middle = new ArrayList<>();
         middle.add(new StringBody(new TStringBody("")));
         empty_string = new WolfString(middle);
+        empty_string.setType(new Type(FlatType.STRING));
     }
 
     @Override
     public Program visit(Program n) {
+        started_optimized = true;
         WolfFunction op_function = (WolfFunction) n.function.accept(this);
         ArrayList<Def> op_def_list = new ArrayList<>();
         for (Def def : n.def_list) {
@@ -79,9 +86,16 @@ public class Optimizer implements Visitor {
             }
             if (found) {
                 op_def_list.add(op_def);
+            } else {
+              started_optimized = false;
             }
         }
-        return new Program(op_def_list, op_function);
+        if (!op_def_list.equals(n.def_list) || !op_def_list.equals(n.def_list)) {
+          started_optimized = false;
+        }
+        n.def_list = op_def_list;
+        n.function = op_function;
+        return n;
     }
 
     /**
@@ -96,7 +110,15 @@ public class Optimizer implements Visitor {
         Sig op_sig = (Sig) n.sig.accept(this);
         WolfFunction op_function = (WolfFunction) n.function.accept(this);
 
-        return new Def(n.type, op_def_name, op_sig, op_function);
+        if (!n.def_name.equals(op_def_name) ||
+            !n.sig.equals(op_sig) ||
+            !n.function.equals(op_function)) {
+          started_optimized = false;
+        }
+        n.def_name = op_def_name;
+        n.sig = op_sig;
+        n.function = op_function;
+        return n;
     }
 
     /**
@@ -113,8 +135,13 @@ public class Optimizer implements Visitor {
             if (op_sig_arg != null) {
                 op_sig_args.add(op_sig_arg);
             }
+
         }
-        return new Sig(op_sig_args);
+        if (!n.sig_args.equals(op_sig_args)) {
+          started_optimized = false;
+        }
+        n.sig_args = op_sig_args;
+        return n;
     }
 
     /**
@@ -138,7 +165,13 @@ public class Optimizer implements Visitor {
     public UserFunc visit(UserFunc n) {
         UserFuncName op_user_func_name = (UserFuncName) n.user_func_name.accept(this);
         Args op_args = (Args) n.arg_list.accept(this);
-        return new UserFunc(op_user_func_name, op_args);
+        if (!n.user_func_name.equals(op_user_func_name) ||
+            !n.arg_list.equals(op_args)) {
+          started_optimized = false;
+        }
+        n.user_func_name = op_user_func_name;
+        n.arg_list = op_args;
+        return n;
     }
 
     /**
@@ -154,22 +187,45 @@ public class Optimizer implements Visitor {
         WolfFunction op_false_branch = (WolfFunction) n.false_branch.accept(this);
 
         if (equal.visit(op_condition, identity_one)) {
-            return new NativeUnary(NativeUnaryOp.IDENTITY, op_true_branch);
+            started_optimized = false;
+            NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.IDENTITY, op_true_branch);
+            nativeUnary.setType(n.true_branch.getType());
+            return nativeUnary;
         }
         if (equal.visit(op_condition, identity_zero)) {
-            return new NativeUnary(NativeUnaryOp.IDENTITY, op_false_branch);
+            started_optimized = false;
+            NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.IDENTITY, op_false_branch);
+            nativeUnary.setType(n.false_branch.getType());
+            return nativeUnary;
         }
         if (equal.visit(op_true_branch, op_false_branch)) {
-            return new NativeUnary(NativeUnaryOp.IDENTITY, op_true_branch);
+            started_optimized = false;
+            NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.IDENTITY, op_true_branch);
+            nativeUnary.setType(n.true_branch.getType());
+            return nativeUnary;
         }
-        return new Branch(op_condition, op_true_branch, op_false_branch);
+        if (!n.condition.equals(op_condition) ||
+            !n.true_branch.equals(op_true_branch) ||
+            !n.false_branch.equals(op_false_branch)) {
+          started_optimized = false;
+        }
+        n.condition = op_condition;
+        n.true_branch = op_true_branch;
+        n.false_branch = op_false_branch;
+        return n;
     }
 
     @Override
     public WolfLambda visit(WolfLambda n) {
         WolfFunction op_function = (WolfFunction) n.function.accept(this);
         Sig op_sig = (Sig) n.sig.accept(this);
-        return new WolfLambda(op_sig, op_function);
+        if (!n.function.equals(op_function) ||
+            !n.sig.equals(op_sig)) {
+          started_optimized = false;
+        }
+        n.function = op_function;
+        n.sig = op_sig;
+        return n;
     }
 
     /**
@@ -182,7 +238,13 @@ public class Optimizer implements Visitor {
     public Fold visit(Fold n) {
         FoldSymbol op_symbol = (FoldSymbol) n.fold_symbol.accept(this);
         FoldBody op_body = (FoldBody) n.fold_body.accept(this);
-        return new Fold(op_symbol, op_body);
+        if (!n.fold_symbol.equals(op_symbol) ||
+            !n.fold_body.equals(op_body)) {
+          started_optimized = false;
+        }
+        n.fold_symbol = op_symbol;
+        n.fold_body = op_body;
+        return n;
     }
 
     /**
@@ -206,7 +268,13 @@ public class Optimizer implements Visitor {
     public FoldBody visit(FoldBody n) {
         BinOp op_operator = (BinOp) n.bin_op.accept(this);
         ListArgument op_list_argument = (ListArgument) n.list_argument.accept(this);
-        return new FoldBody(op_operator, op_list_argument);
+        if (!n.bin_op.equals(op_operator) ||
+            !n.list_argument.equals(op_list_argument)) {
+          started_optimized = false;
+        }
+        n.bin_op = op_operator;
+        n.list_argument = op_list_argument;
+        return n;
     }
 
     /**
@@ -219,7 +287,13 @@ public class Optimizer implements Visitor {
     public WolfMap visit(WolfMap n) {
         UnaryOp op_operator = (UnaryOp) n.unary_op.accept(this);
         ListArgument op_list_argument = (ListArgument) n.list_argument.accept(this);
-        return new WolfMap(op_operator, op_list_argument);
+        if (!n.unary_op.equals(op_operator) ||
+            !n.list_argument.equals(op_list_argument)) {
+          started_optimized = false;
+        }
+        n.unary_op = op_operator;
+        n.list_argument = op_list_argument;
+        return n;
     }
 
     /**
@@ -230,11 +304,15 @@ public class Optimizer implements Visitor {
      */
     @Override
     public ListArgsList visit(ListArgsList n) {
-        List<Arg> op_arg_list = new ArrayList<>();
-        for (Arg arg : n.getArgList()) {
-            op_arg_list.add((Arg) arg.accept(this));
+        for (int i = 0; i < n.getArgList().size(); i++) {
+            Arg op_arg = (Arg) n.getArgList().get(i).accept(this);
+            if (!op_arg.equals(n.getArgList().get(i))) {
+              started_optimized = false;
+            }
+            n.getArgList().set(i, op_arg);
         }
-        return new ListArgsList(op_arg_list);
+
+        return n;
     }
 
     /**
@@ -245,11 +323,15 @@ public class Optimizer implements Visitor {
      */
     @Override
     public ArgsList visit(ArgsList n) {
-        List<Arg> op_arg_list = new ArrayList<>();
-        for (Arg arg : n.getArgList()) {
-            op_arg_list.add((Arg) arg.accept(this));
+        for (int i = 0; i < n.getArgList().size(); i++) {
+            Arg op_arg = (Arg) n.getArgList().get(i).accept(this);
+            if (!op_arg.equals(n.getArgList().get(i))) {
+              started_optimized = false;
+            }
+            n.getArgList().set(i, op_arg);
         }
-        return new ArgsList(op_arg_list);
+
+        return n;
     }
 
     /**
@@ -268,11 +350,17 @@ public class Optimizer implements Visitor {
                     // negation in negation
                     NativeUnary nu = (NativeUnary) op_arg;
                     if (nu.unary_op.equals(NativeUnaryOp.NEG)) {
-                        return new NativeUnary(NativeUnaryOp.IDENTITY, nu.arg);
+                        started_optimized = false;
+                        n.unary_op = NativeUnaryOp.IDENTITY;
+                        n.arg = nu.arg;
+                        return n;
                     }
                     // identity in a negation
                     if (nu.unary_op.equals(NativeUnaryOp.IDENTITY)) {
-                        return new NativeUnary(NativeUnaryOp.NEG, nu.arg);
+                        started_optimized = false;
+                        n.unary_op = NativeUnaryOp.NEG;
+                        n.arg = nu.arg;
+                        return n;
                     }
                 }
                 break;
@@ -281,12 +369,18 @@ public class Optimizer implements Visitor {
                 if (op_arg instanceof NativeUnary) {
                     NativeUnary nu = (NativeUnary) op_arg;
                     if (nu.unary_op.equals(NativeUnaryOp.LOGICAL_NOT)) {
-                        return new NativeUnary(NativeUnaryOp.IDENTITY, nu.arg);
+                        started_optimized = false;
+                        n.unary_op = NativeUnaryOp.IDENTITY;
+                        n.arg = nu.arg;
+                        return n;
                     }
 
                     // identity in a logical not
                     if (nu.unary_op.equals(NativeUnaryOp.IDENTITY)) {
-                        return new NativeUnary(NativeUnaryOp.LOGICAL_NOT, nu.arg);
+                        started_optimized = false;
+                        n.unary_op = NativeUnaryOp.LOGICAL_NOT;
+                        n.arg = nu.arg;
+                        return n;
                     }
                 }
                 break;
@@ -300,9 +394,12 @@ public class Optimizer implements Visitor {
                                 && !(nu.arg instanceof WolfList)
                                 && !(nu.arg instanceof WolfString)
                                 && !(nu.arg instanceof Identifier)) {
+                            started_optimized = false;
                             return nu.arg;
                         }
-                        return new NativeUnary(NativeUnaryOp.IDENTITY, nu.arg);
+                        n.unary_op = NativeUnaryOp.IDENTITY;
+                        n.arg = nu.arg;
+                        return n;
                     }
                 }
                 // Remove an identity around a function, it's redundant.
@@ -311,6 +408,7 @@ public class Optimizer implements Visitor {
                         && !(op_arg instanceof WolfList)
                         && !(op_arg instanceof WolfString)
                         && !(op_arg instanceof Identifier)) {
+                    started_optimized = false;
                     return op_arg;
                 }
                 break;
@@ -320,7 +418,9 @@ public class Optimizer implements Visitor {
                 System.err.println("Invalid Native Unary Operation");
                 return null;
         }
-        return new NativeUnary(op_operator, op_arg);
+        n.unary_op = op_operator;
+        n.arg = op_arg;
+        return n;
     }
 
     /**
@@ -351,16 +451,23 @@ public class Optimizer implements Visitor {
                 // Identity (+0, + "")
                 if (equal.visit(op_left, zero) || equal.visit(op_left, empty_string)
                         || equal.visit(op_left, identity_zero)) {
-                    return new NativeUnary(NativeUnaryOp.IDENTITY, op_right);
+                    started_optimized = false;
+                    NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.IDENTITY, op_right);
+                    nativeUnary.setType(n.getType());
+                    return nativeUnary;
                 }
                 if (equal.visit(op_right, zero) || equal.visit(op_right, empty_string)
                         || equal.visit(op_right, identity_zero)) {
-                    return new NativeUnary(NativeUnaryOp.IDENTITY, op_left);
+                    started_optimized = false;
+                    NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.IDENTITY, op_left);
+                    nativeUnary.setType(n.getType());
+                    return nativeUnary;
                 }
                 break;
             case MINUS:
                 // a-a = 0
                 if (equal.visit(op_left, op_right)) {
+                    started_optimized = false;
                     return identity_zero;
                 }
                 break;
@@ -368,19 +475,27 @@ public class Optimizer implements Visitor {
                 // a*0 or 0*a = 0
                 if (equal.visit(op_left, zero) || equal.visit(op_right, zero)
                         || equal.visit(op_left, identity_zero) || equal.visit(op_right, identity_zero)) {
+                    started_optimized = false;
                     return identity_zero;
                 }
                 // Identity (*1)
                 if (equal.visit(op_left, one) || equal.visit(op_left, identity_one)) {
-                    return new NativeUnary(NativeUnaryOp.IDENTITY, op_left);
+                    started_optimized = false;
+                    NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.IDENTITY, op_left);
+                    nativeUnary.setType(n.getType());
+                    return nativeUnary;
                 }
                 if (equal.visit(op_right, one) || equal.visit(op_right, identity_one)) {
-                    return new NativeUnary(NativeUnaryOp.IDENTITY, op_right);
+                    started_optimized = false;
+                    NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.IDENTITY, op_right);
+                    nativeUnary.setType(n.getType());
+                    return nativeUnary;
                 }
                 break;
             case DIV:
                 // 0/a = 0
                 if (equal.visit(op_left, zero) || equal.visit(op_left, identity_zero)) {
+                    started_optimized = false;
                     return identity_zero;
                 }
                 // a/0 = undefined
@@ -390,27 +505,32 @@ public class Optimizer implements Visitor {
 
                 // a/1 = a
                 if (equal.visit(op_right, one) || equal.visit(op_right, identity_one)) {
+                    started_optimized = false;
                     return identity_one;
                 }
 
                 // a/a = 1
                 if (equal.visit(op_left, op_right)) {
+                    started_optimized = false;
                     return identity_one;
                 }
                 break;
             case MOD:
                 // 1 % a = 1
                 if (equal.visit(op_left, one) || equal.visit(op_left, identity_one)) {
+                    started_optimized = false;
                     return identity_one;
                 }
 
                 // a % 1 = 0
                 if (equal.visit(op_right, one) || equal.visit(op_right, identity_one)) {
+                    started_optimized = false;
                     return identity_zero;
                 }
 
                 // a % a = 0
                 if (equal.visit(op_left, op_right)) {
+                    started_optimized = false;
                     return identity_zero;
                 }
 
@@ -421,6 +541,7 @@ public class Optimizer implements Visitor {
 
                 // 0 % a = 0 || @(0) % a = 0
                 if (equal.visit(op_left, zero) || equal.visit(op_left, identity_zero)) {
+                    started_optimized = false;
                     return identity_zero;
                 }
                 break;
@@ -429,6 +550,7 @@ public class Optimizer implements Visitor {
         // a < a (false)
                 // a > a (false)
                 if (equal.visit(op_left, op_right)) {
+                    started_optimized = false;
                     return identity_zero;
                 }
                 break;
@@ -437,94 +559,131 @@ public class Optimizer implements Visitor {
         // a >= a (true)
                 // a <= a (true)
                 if (equal.visit(op_left, op_right)) {
+                    started_optimized = false;
                     return identity_one;
                 }
                 break;
             case AND:
                 // true && true = true
-                if (!equal.visit(op_left, zero) && !equal.visit(op_right, zero) && op_left instanceof IntLiteral
-                        || !equal.visit(op_left, identity_zero) && !equal.visit(op_right, identity_zero) && op_right instanceof IntLiteral) {
+                if (!equal.visit(op_left, zero) &&
+                    !equal.visit(op_right, zero) &&
+                    op_left instanceof IntLiteral ||
+                    !equal.visit(op_left, identity_zero) &&
+                    !equal.visit(op_right, identity_zero) &&
+                    op_right instanceof IntLiteral) {
+                    started_optimized = false;
                     return identity_one;
                 }
 
                 // false in an and is false
-                if (equal.visit(op_left, zero) || equal.visit(op_right, zero)
-                        || equal.visit(op_left, identity_zero) || equal.visit(op_right, identity_zero)) {
+                if (equal.visit(op_left, zero) || equal.visit(op_right, zero) ||
+                    equal.visit(op_left, identity_zero) || equal.visit(op_right, identity_zero)) {
+                    started_optimized = false;
                     return identity_zero;
                 }
 
                 // a && a = a
                 if (equal.visit(op_left, op_right)) {
-                    return new NativeUnary(NativeUnaryOp.IDENTITY, op_left);
+                    started_optimized = false;
+                    NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.IDENTITY, op_left);
+                    nativeUnary.setType(n.getType());
+                    return nativeUnary;
                 }
                 break;
             case OR:
                 // true || anything = true
-                if (!equal.visit(op_left, one) || !equal.visit(op_right, one)
-                        || !equal.visit(op_left, identity_one) || !equal.visit(op_right, identity_one)) {
+                if (!equal.visit(op_left, one) || !equal.visit(op_right, one) ||
+                    !equal.visit(op_left, identity_one) || !equal.visit(op_right, identity_one)) {
+                    started_optimized = false;
                     return identity_one;
                 }
 
                 // false || false = false
-                if (equal.visit(op_left, zero) && equal.visit(op_right, zero)
-                        || equal.visit(op_left, identity_zero) && equal.visit(op_right, identity_zero)) {
+                if (equal.visit(op_left, zero) && equal.visit(op_right, zero) ||
+                    equal.visit(op_left, identity_zero) && equal.visit(op_right, identity_zero)) {
+                    started_optimized = false;
                     return identity_zero;
                 }
 
                 // a || a = a
                 if (equal.visit(op_left, op_right)) {
-                    return new NativeUnary(NativeUnaryOp.IDENTITY, op_left);
+                    started_optimized = false;
+                    NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.IDENTITY, op_left);
+                    nativeUnary.setType(n.getType());
+                    return nativeUnary;
                 }
 
                 // false || a = a
                 if (equal.visit(op_left, zero) || equal.visit(op_left, identity_zero)) {
-                    return new NativeUnary(NativeUnaryOp.IDENTITY, op_right);
+                    started_optimized = false;
+                    NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.IDENTITY, op_right);
+                    nativeUnary.setType(n.getType());
+                    return nativeUnary;
                 }
 
                 // a || false = a
                 if (equal.visit(op_right, zero) || equal.visit(op_right, identity_zero)) {
-                    return new NativeUnary(NativeUnaryOp.IDENTITY, op_left);
+                    started_optimized = false;
+                    NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.IDENTITY, op_left);
+                    nativeUnary.setType(n.getType());
+                    return nativeUnary;
                 }
                 break;
             case XOR:
                 // 0 xor a = a
                 if (equal.visit(op_left, zero) || equal.visit(op_left, identity_zero)) {
-                    return new NativeUnary(NativeUnaryOp.IDENTITY, op_right);
+                    started_optimized = false;
+                    NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.IDENTITY, op_right);
+                    nativeUnary.setType(n.getType());
+                    return nativeUnary;
                 }
 
                 // a xor 0 = a
                 if (equal.visit(op_right, zero) || equal.visit(op_right, identity_zero)) {
-                    return new NativeUnary(NativeUnaryOp.IDENTITY, op_left);
+                    started_optimized = false;
+                    NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.IDENTITY, op_left);
+                    nativeUnary.setType(n.getType());
+                    return nativeUnary;
                 }
 
                 // 1 xor a = !a
                 if (equal.visit(op_left, one) || equal.visit(op_left, identity_one)) {
-                    return new NativeUnary(NativeUnaryOp.LOGICAL_NOT, op_right);
+                    started_optimized = false;
+                    NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.LOGICAL_NOT, op_right);
+                    nativeUnary.setType(n.getType());
+                    return nativeUnary;
                 }
 
                 // a xor 1 = !a
                 if (equal.visit(op_right, one) || equal.visit(op_right, identity_one)) {
-                    return new NativeUnary(NativeUnaryOp.LOGICAL_NOT, op_left);
+                    started_optimized = false;
+                    NativeUnary nativeUnary = new NativeUnary(NativeUnaryOp.LOGICAL_NOT, op_left);
+                    nativeUnary.setType(n.getType());
+                    return nativeUnary;
                 }
                 break;
             case EQUAL:
                 if (equal.visit(op_left, op_right)) {
+                    started_optimized = false;
                     return identity_one;
                 }
                 // same type
                 if (op_left.getClass().equals(op_right.getClass()) && !(op_left instanceof Identifier)) {
                     if (!equal.visit(op_left, op_right)) {
+                        started_optimized = false;
                         return identity_zero;
                     }
                 }
                 break;
             case NOT_EQUAL:
                 if (equal.visit(op_left, op_right)) {
+                    started_optimized = false;
                     return identity_zero;
                 }
                 // same type
                 if (op_left.getClass().equals(op_right.getClass())) {
                     if (!equal.visit(op_left, op_right)) {
+                        started_optimized = false;
                         return identity_one;
                     }
                 }
@@ -533,7 +692,10 @@ public class Optimizer implements Visitor {
                 System.err.println("Invalid Binary Operator!");
                 return null;
         }
-        return new NativeBinary(op_operator, op_left, op_right);
+        n.binary_op = op_operator;
+        n.arg_left = op_left;
+        n.arg_right = op_right;
+        return n;
     }
 
     /**
@@ -664,5 +826,9 @@ public class Optimizer implements Visitor {
     @Override
     public Object visit(NativeListUnaryOp n) {
         return n;
+    }
+
+    public boolean startedOptimized() {
+      return started_optimized;
     }
 }
