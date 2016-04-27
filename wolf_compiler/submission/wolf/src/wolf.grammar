@@ -1,0 +1,249 @@
+// Kevin Dittmar
+// William Ezekiel
+// Joe Alacqua
+
+// Lexer for WOL(F) - Write-Only Language (Functional)
+Package wolf;
+
+Helpers
+letter = ['a'..'z'] | ['A'..'Z'];
+digit = ['0'..'9'];
+// one or more digits
+digits = digit+;
+exp = ['e'+'E'] ['+'+'-']? digits;
+single_quote = ''';
+double_quote = '"';
+back_tick = '`';
+underscore = '_';
+backslash = '\';
+question_mark = '?';
+
+// Type keywords
+key_int = 'int';
+key_float = 'float';
+key_string = 'string';
+key_list = 'list';
+
+States
+initial, string, escape, input;
+
+Tokens
+// Strings
+{initial->string} string_start = single_quote;
+
+{string->escape} string_escape = backslash;
+{escape->string} escape_alarm = 'a';
+{escape->string} escape_backspace = 'b';
+{escape->string} escape_formfeed = 'f';
+{escape->string} escape_carriage_return = 'r';
+{escape->string} escape_newline = 'n';
+{escape->string} escape_tab = 't';
+{escape->string} escape_vertical_tab = 'v';
+{escape->string} escape_backslash = backslash;
+{escape->string} escape_single_quote = single_quote;
+{escape->string} escape_double_quote = double_quote;
+{escape->string} escape_question_mark = question_mark;
+{escape->string} escape_octal_char = digit digit digit;
+{escape->string} escape_hex_char = 'x' digit digit;
+{escape->string} escape_unicode_char = 'u' digit digit digit digit;
+{escape->string} escape_default = [0..0xffff];
+
+{string} string_body = [[[0..0xffff] - single_quote] - backslash]*;
+
+{string->initial} string_end = single_quote;
+
+// Input
+{initial->input} input_start = double_quote;
+{input} input_int = key_int;
+{input} input_float = key_float;
+{input} input_string = key_string;
+{input} input_arg_number = digits;
+{input->initial} input_end = double_quote;
+
+//types
+int_type = key_int;
+float_type = key_float;
+list_type = key_list;
+string_type = key_string;
+
+// list operators
+head = 'h';
+tail = 't';
+reverse = 'r';
+append = '$';
+prepend = '^';
+foldl = '{';
+foldr = '}';
+map = '.';
+last = underscore;
+length = '#';
+
+// other operators
+lambda_start = '\';
+lambda_arrow = '->';
+identity = '@';
+print = 'print';
+def = 'def';
+
+comment = back_tick [[0..0xffff] - back_tick]* back_tick;
+space = ' ' | 9;
+newline = [10 + 13];
+assign = ':=';
+
+// relational operators
+equal = '=';
+lt = '<';
+gt = '>';
+not_equal = '!=';
+lte = '<=';
+gte = '>=';
+and = '&';
+or = '|';
+xor = 'x';
+logical_not  = '!';
+
+// arithmetic operators
+plus = '+';
+minus = '-';
+mult = '*';
+div = '/';
+mod = '%';
+neg = '~';
+
+// delimiter characters
+l_paren = '(';
+r_paren = ')';
+start_list = '[';
+end_list = ']';
+comma = ',';
+ternary_semi = ';';
+ternary_question_mark = question_mark;
+ternary_colon = ':';
+
+// constants
+identifier = (letter|underscore)+;
+int_number = digits;
+float_number = (digits '.'? digits? | '.' digits)exp?;
+
+misc = [0..0xffff]; // catch all for any garbage.
+
+Ignored Tokens
+comment, space, newline;
+
+//Productions
+//program = {user_defs} def_list function
+//        | {no_defs} function;
+//
+//def_list = {multiple_defs} def_list def_header
+//         | {one_def} def_header;
+//
+//def_header = def identifier sig assign function;
+//
+//sig = {empty} l_paren r_paren
+//    | {arguments} l_paren sig_args r_paren;
+//    
+//sig_args = {more_ids} identifier sig_arg_rest
+//         | {last_id} identifier;
+//
+//sig_arg_rest = comma sig_args;
+//
+//function = {user_defined} user_func arg_list
+//         | {unary_native} native_unary_op l_paren arg r_paren
+//         | {bin_native} native_bin_op l_paren [a]: arg comma [b]: arg r_paren
+//         | {if_else} branch
+//         | {foldl} foldl fold_body
+//         | {foldr} foldr fold_body
+//         | {map} map l_paren unary_op comma list_argument r_paren;
+//
+//lambda = lambda_start l_paren sig lambda_arrow function r_paren;
+//
+//fold_body = l_paren bin_op comma list_argument r_paren;
+//
+//list_argument = {literal} list
+//              | {user_defined} identifier
+//              | {returned_list} function;
+//
+//bin_op = {native} native_bin_op
+//       | {user_defined} identifier
+//       | {lambda} lambda;
+//       
+//native_bin_op = {plus} plus
+//              | {minus} minus
+//              | {mult} mult
+//              | {div} div
+//              | {mod} mod
+//              | {less} lt
+//              | {greater} gt
+//              | {less_equal} lte
+//              | {greater_equal} gte
+//              | {equal} equal
+//              | {not_equal} not_equal
+//              | {and} and
+//              | {or} or
+//              | {xor} xor
+//              | {append} append
+//              | {prepend} prepend;
+//
+//unary_op = {native} native_unary_op
+//         | {user_defined} identifier
+//         | {lambda} lambda;
+//
+//native_unary_op = {arithmetic_not} neg
+//                | {logical_not} logical_not
+//                | {head} head
+//                | {tail} tail
+//                | {reverse} reverse
+//                | {flatten} flatten
+//                | {identity} identity
+//                | {print} print
+//                | {length} length;
+//                
+//user_func = {user_defined} identifier
+//          | {lambda} lambda;
+//          
+//arg_list = {no_args} l_paren r_paren
+//         | {has_args} l_paren args r_paren;
+//         
+//args = {more_args} arg arg_rest
+//     | {last_arg} arg;
+//     
+//arg_rest = comma args;
+//
+//arg = {function} function
+//    | {list} list
+//    | {int} int_number
+//    | {float} float_number
+//    | {identifier} identifier
+//    | {string} string;
+//    
+//string = {empty_string} string_start string_end
+//       | {string} string_start string_middle string_end;
+//       
+//string_middle = {more_body} string_middle string_body
+//              | {last_body} string_body
+//              | {more_escape} string_middle string_escape_seq
+//              | {last_escape} string_escape_seq;
+//              
+//string_escape_seq = string_escape escape_char;
+//
+//escape_char = {alarm} escape_alarm
+//            | {backspace} escape_backspace
+//            | {formfeed} escape_formfeed
+//            | {cr} escape_carriage_return
+//            | {newline} escape_newline
+//            | {tab} escape_tab
+//            | {vertical_tab} escape_vertical_tab
+//            | {backslash} escape_backslash
+//            | {single_quote} escape_single_quote
+//            | {double_quote} escape_double_quote
+//            | {question_mark} escape_question_mark
+//            | {octal} escape_octal_char
+//            | {hex} escape_hex_char
+//            | {unicode} escape_unicode_char
+//            | {default} escape_default;
+//            
+//branch = ternary_semi [cond]: function
+//         ternary_question_mark [if]: function
+//         ternary_colon [else]: function;
+//list = {empty_list} start_list end_list
+//     | {list} start_list args end_list;

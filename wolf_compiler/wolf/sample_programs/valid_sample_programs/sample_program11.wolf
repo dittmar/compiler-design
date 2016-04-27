@@ -1,0 +1,6 @@
+def float branchLogic(int bool_a, int bool_b) := ; @(bool_a) 
+                                                 ? ; @(bool_b)
+                                                   ? \((float y)->*(y,y))(7.5)
+                                                   : @(2.22)
+                                                 : @(3.333)
+branchLogic(0, ~(12))

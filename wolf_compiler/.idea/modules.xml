@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/wolf/sample_programs/sample_programs.iml" filepath="$PROJECT_DIR$/wolf/sample_programs/sample_programs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wolf/wolf.iml" filepath="$PROJECT_DIR$/wolf/wolf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wolf_sample/wolf_sample.iml" filepath="$PROJECT_DIR$/wolf_sample/wolf_sample.iml" />
+    </modules>
+  </component>
+</project>

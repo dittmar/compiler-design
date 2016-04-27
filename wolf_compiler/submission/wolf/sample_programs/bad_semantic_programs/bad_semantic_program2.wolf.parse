@@ -1,0 +1,11 @@
+SigArgs parsed successfully: def int fivePlus ( int num 
+Sig parsed successfully: def int fivePlus ( int num ) 
+String parsed successfully: def int fivePlus ( int num ) := @ ( ' argParty ' 
+Arg parsed successfully: def int fivePlus ( int num ) := @ ( ' argParty ' 
+NativeUnary parsed successfully: def int fivePlus ( int num ) := @ ( ' argParty ' ) 
+Def parsed successfully: def int fivePlus ( int num ) := @ ( ' argParty ' ) 
+UserFunc parsed successfully: def int fivePlus ( int num ) := @ ( ' argParty ' ) fivePlus 
+Arg parsed successfully: def int fivePlus ( int num ) := @ ( ' argParty ' ) fivePlus ( 5 
+Args parsed successfully: def int fivePlus ( int num ) := @ ( ' argParty ' ) fivePlus ( 5 
+ArgList parsed successfully: def int fivePlus ( int num ) := @ ( ' argParty ' ) fivePlus ( 5 ) 
+Program parsed successfully: def int fivePlus ( int num ) := @ ( ' argParty ' ) fivePlus ( 5 ) 

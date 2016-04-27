@@ -1,0 +1,2 @@
+ def int prodList(list int argParty) :=  ; =(#(argParty), 0) ? @(1) : *(h(argParty), prodList(t(argParty)))
+print([prodList([1, 2, 3]), prodList([5, 7, 2]), prodList([0, 127, 9])])

@@ -1,0 +1,19 @@
+SigArgs parsed successfully: def int giveList ( list int nums 
+Sig parsed successfully: def int giveList ( list int nums ) 
+Arg parsed successfully: def int giveList ( list int nums ) := + ( 2 
+Arg parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 
+NativeBinary parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) 
+Def parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) 
+UserFunc parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) giveList 
+ListElement parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) giveList ( [ 1 
+String parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) giveList ( [ 1 , ' argParty ' 
+ListElement parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) giveList ( [ 1 , ' argParty ' 
+ListElement parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) giveList ( [ 1 , ' argParty ' 
+ListElement parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) giveList ( [ 1 , ' argParty ' , 2 
+ListElement parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) giveList ( [ 1 , ' argParty ' , 2 
+Args parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) giveList ( [ 1 , ' argParty ' , 2 
+List parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) giveList ( [ 1 , ' argParty ' , 2 ] 
+Arg parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) giveList ( [ 1 , ' argParty ' , 2 ] 
+Args parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) giveList ( [ 1 , ' argParty ' , 2 ] 
+ArgList parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) giveList ( [ 1 , ' argParty ' , 2 ] ) 
+Program parsed successfully: def int giveList ( list int nums ) := + ( 2 , 5 ) giveList ( [ 1 , ' argParty ' , 2 ] ) 

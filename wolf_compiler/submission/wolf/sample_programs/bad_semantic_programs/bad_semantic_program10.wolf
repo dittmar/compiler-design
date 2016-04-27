@@ -1,0 +1,2 @@
+def list string insert(int y, list string l) := $(y, l)
+insert(5, ['cat', 'dog', 'wolf'])
