@@ -1,8 +1,9 @@
 package wolf;
 
-import wolf.interfaces.EscapeChar;
-import wolf.interfaces.*;
+import java.util.List;
 import wolf.enums.*;
+import wolf.interfaces.*;
+import wolf.interfaces.EscapeChar;
 
 /**
  * Check for equality among the classes.
@@ -20,6 +21,20 @@ public class Equal {
         return false;
       }
 
+      if (obj1 instanceof List && obj2 instanceof List) {
+          List list1 = (List) obj1;
+          List list2 = (List) obj2;
+          if (list1.size() != list2.size()) {
+              return false;
+          }
+          for (int i = 0; i < list1.size(); i++) {
+              if (!this.visit(list1.get(i), list2.get(i))) {
+                  return false;
+              }
+          }
+          return true;
+      }
+      
       if(obj1 instanceof Args) {
 
         ArgsList args_list1 = (ArgsList) obj1;
