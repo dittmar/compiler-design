@@ -10,5 +10,5 @@ make all of our valid sample programs work.  That probably won't happen, but thi
 is here to remind us just in case.
 
 For future reference, you compile a program by running Parser.  No, it doesn't make sense,
-and yes, it should probably be changed to have WolfCompiler user Parser, but oh well.
+and yes, it should probably be changed to have WolfCompiler use Parser, but oh well.
 -- Kevin Dittmar
